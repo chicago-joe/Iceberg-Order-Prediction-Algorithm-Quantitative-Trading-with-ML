@@ -6,7 +6,7 @@ on:
     paths:
       - './iceberg-prediction-whitepaper-v2.md'
       - 'assets/**'
-      - '.github/workflows/single-md-github-pages.yml'
+      - '.github/workflows/publish-single-markdown-github-pages.yml'
 
 permissions:
   contents: write
