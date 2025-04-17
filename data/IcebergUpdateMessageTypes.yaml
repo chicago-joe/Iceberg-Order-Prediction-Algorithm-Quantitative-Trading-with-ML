@@ -1,0 +1,84 @@
+icebergUpdate: !IcebergUpdate {
+  eventTime: 2023-06-13T19:00:00.048519616-05:00,
+  eventSendingTime: 2023-06-13T19:00:00.048519901-05:00,
+  eventId: MD,
+  securityId: 484790,
+  symbol: ZSX3,
+  exchangeTimeNs: 2023-06-13T19:00:00-05:00,
+  msgSequenceNum: 38252578,
+  bid: false,
+  price: 123825000000,
+  icebergId: 708593664569,
+  orderId: 708593664569,
+  showSize: 1,
+  filledQty: 1,
+  status: D
+}
+
+icebergUpdate: !IcebergUpdate {
+  eventTime: 2023-06-13T19:00:00.138271424-05:00,
+  eventSendingTime: 2023-06-13T19:00:00.138271616-05:00,
+  eventId: MD,
+  securityId: 484790,
+  symbol: ZSX3,
+  exchangeTimeNs: 2023-06-13T19:00:00.123937799-05:00,
+  msgSequenceNum: 38259355,
+  bid: false,
+  price: 123825000000,
+  icebergId: 708593664569,
+  orderId: 708593664569,
+  showSize: 1,
+  filledQty: 2,
+  status: R
+}
+
+icebergUpdate: !IcebergUpdate {
+  eventTime: 2023-06-13T19:00:04.581162912-05:00,
+  eventSendingTime: 2023-06-13T19:00:04.581163317-05:00,
+  eventId: MD,
+  securityId: 484790,
+  symbol: ZSX3,
+  exchangeTimeNs: 2023-06-13T19:00:04.581000853-05:00,
+  msgSequenceNum: 38280510,
+  bid: false,
+  price: 123825000000,
+  icebergId: 708593664569,
+  orderId: 708593664569,
+  showSize: 1,
+  filledQty: 4,
+  status: C
+}
+
+icebergUpdate: !IcebergUpdate {
+  eventTime: 2023-06-13T19:04:14.608259808-05:00,
+  eventSendingTime: 2023-06-13T19:04:14.608260288-05:00,
+  eventId: MD,
+  securityId: 673494,
+  symbol: ZLN3,
+  exchangeTimeNs: 2023-06-13T19:04:14.598520521-05:00,
+  msgSequenceNum: 38414012,
+  bid: true,
+  price: 5550000000,
+  icebergId: 708593654980,
+  orderId: 708593654980,
+  showSize: 1,
+  filledQty: 56,
+  status: P
+}
+
+icebergUpdate: !IcebergUpdate {
+  eventTime: 2023-06-14T05:52:22.412956763-05:00,
+  eventSendingTime: 2023-06-14T05:52:22.412957024-05:00,
+  eventId: MD,
+  securityId: 484790,
+  symbol: ZSX3,
+  exchangeTimeNs: 2023-06-14T05:52:22.412788465-05:00,
+  msgSequenceNum: 41073138,
+  bid: true,
+  price: 123375000000,
+  icebergId: 708594678571,
+  orderId: 708594678571,
+  showSize: 1,
+  filledQty: 6,
+  status: U
+}
