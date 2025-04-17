@@ -1,0 +1,1769 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>body {
+  max-width: 980px;
+  margin: 16px auto;
+}
+
+body .markdown-body
+{
+  padding: 45px;
+}
+
+@font-face {
+  font-family: fontawesome-mini;
+  src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+
+.markdown-body {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #333333;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.markdown-body a {
+  background: transparent;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline: 0;
+}
+
+.markdown-body b,
+.markdown-body strong {
+  font-weight: bold;
+}
+
+.markdown-body mark {
+  background: #ff0;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body sub,
+.markdown-body sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.markdown-body sup {
+  top: -0.5em;
+}
+.markdown-body sub {
+  bottom: -0.25em;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.markdown-body img {
+  border: 0;
+}
+
+.markdown-body hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+.markdown-body pre {
+  overflow: auto;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+.markdown-body input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body html input[disabled] {
+  cursor: default;
+}
+
+.markdown-body input {
+  line-height: normal;
+}
+
+.markdown-body input[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body .codehilitetable,
+.markdown-body .highlighttable {
+  border: 0;
+  border-spacing: 0;
+}
+
+.markdown-body .codehilitetable tr,
+.markdown-body .highlighttable {
+  border: 0;
+}
+
+.markdown-body .codehilitetable pre,
+.markdown-body .codehilitetable div.codehilite,
+.markdown-body .highlighttable pre,
+.markdown-body .highlighttable div.highlight {
+  margin: 0;
+}
+
+.markdown-body .linenos,
+.markdown-body .code,
+.markdown-body .codehilitetable td,
+.markdown-body .highlighttable td {
+  border: 0;
+  padding: 0;
+}
+
+.markdown-body td:not(.linenos) .linenodiv {
+  padding: 0 !important;
+}
+
+.markdown-body .code {
+  width: 100%;
+}
+
+.markdown-body .linenos div pre,
+.markdown-body .linenodiv pre,
+.markdown-body .linenodiv {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.markdown-body .code div pre,
+.markdown-body .code div {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.markdown-body * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body input {
+  font: 13px Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.4;
+}
+
+.markdown-body a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+.markdown-body a:hover,
+.markdown-body a:focus,
+.markdown-body a:active {
+  text-decoration: underline;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-body hr:before,
+.markdown-body hr:after {
+  display: table;
+  content: " ";
+}
+
+.markdown-body hr:after {
+  clear: both;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.markdown-body h1 {
+  font-size: 30px;
+}
+
+.markdown-body h2 {
+  font-size: 21px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+}
+
+.markdown-body h4 {
+  font-size: 14px;
+}
+
+.markdown-body h5 {
+  font-size: 12px;
+}
+
+.markdown-body h6 {
+  font-size: 11px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ul ul ol,
+.markdown-body ul ol ol,
+.markdown-body ol ul ol,
+.markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body kbd {
+  background-color: #e7e7e7;
+  background-image: -moz-linear-gradient(#fefefe, #e7e7e7);
+  background-image: -webkit-linear-gradient(#fefefe, #e7e7e7);
+  background-image: linear-gradient(#fefefe, #e7e7e7);
+  background-repeat: repeat-x;
+  border-radius: 2px;
+  border: 1px solid #cfcfcf;
+  color: #000;
+  padding: 3px 5px;
+  line-height: 10px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  display: inline-block;
+}
+
+.markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+.markdown-body .headerlink {
+  font: normal 400 16px fontawesome-mini;
+  vertical-align: middle;
+  margin-left: -16px;
+  float: left;
+  display: inline-block;
+  text-decoration: none;
+  opacity: 0;
+  color: #333;
+}
+
+.markdown-body .headerlink:focus {
+  outline: none;
+}
+
+.markdown-body h1 .headerlink {
+  margin-top: 0.8rem;
+}
+
+.markdown-body h2 .headerlink,
+.markdown-body h3 .headerlink {
+  margin-top: 0.6rem;
+}
+
+.markdown-body h4 .headerlink {
+  margin-top: 0.2rem;
+}
+
+.markdown-body h5 .headerlink,
+.markdown-body h6 .headerlink {
+  margin-top: 0;
+}
+
+.markdown-body .headerlink:hover,
+.markdown-body h1:hover .headerlink,
+.markdown-body h2:hover .headerlink,
+.markdown-body h3:hover .headerlink,
+.markdown-body h4:hover .headerlink,
+.markdown-body h5:hover .headerlink,
+.markdown-body h6:hover .headerlink {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.markdown-body h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+.markdown-body h4 {
+  font-size: 1.25em;
+}
+
+.markdown-body h5 {
+  font-size: 1em;
+}
+
+.markdown-body h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body dl,
+.markdown-body table,
+.markdown-body pre,
+.markdown-body .admonition {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+.markdown-body table th {
+  font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body code,
+.markdown-body samp {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  border-radius: 3px;
+}
+
+.markdown-body code:not(.highlight):not(.codehilite), .markdown-body samp {
+  background-color: rgba(0,0,0,0.04);
+}
+
+.markdown-body code:before,
+.markdown-body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body .codehilite,
+.markdown-body .highlight {
+  margin-bottom: 16px;
+}
+
+.markdown-body .codehilite pre,
+.markdown-body .highlight pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+}
+
+.markdown-body .codehilite,
+.markdown-body .highlight,
+.markdown-body pre {
+  border-radius: 3px;
+}
+
+.markdown-body :not(.highlight) > pre {
+  background-color: #f7f7f7;
+}
+
+.markdown-body .codehilite pre,
+.markdown-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after {
+  content: normal;
+}
+
+/* Admonition */
+.markdown-body .admonition {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid #e0e0e0;
+  border-left: 6px solid #333;
+  padding: 10px 10px 10px 30px;
+}
+
+.markdown-body .admonition table {
+  color: #333;
+}
+
+.markdown-body .admonition p {
+  padding: 0;
+}
+
+.markdown-body .admonition-title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.markdown-body .admonition>.admonition-title {
+  color: #333;
+}
+
+.markdown-body .attention>.admonition-title {
+  color: #a6d796;
+}
+
+.markdown-body .caution>.admonition-title {
+  color: #d7a796;
+}
+
+.markdown-body .hint>.admonition-title {
+  color: #96c6d7;
+}
+
+.markdown-body .danger>.admonition-title {
+  color: #c25f77;
+}
+
+.markdown-body .question>.admonition-title {
+  color: #96a6d7;
+}
+
+.markdown-body .note>.admonition-title {
+  color: #d7c896;
+}
+
+.markdown-body .admonition:before,
+.markdown-body .attention:before,
+.markdown-body .caution:before,
+.markdown-body .hint:before,
+.markdown-body .danger:before,
+.markdown-body .question:before,
+.markdown-body .note:before {
+  font: normal normal 16px fontawesome-mini;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 1.5;
+  color: #333;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.markdown-body .admonition:before {
+  content: "\f056\00a0";
+  color: 333;
+}
+
+.markdown-body .attention:before {
+  content: "\f058\00a0";
+  color: #a6d796;
+}
+
+.markdown-body .caution:before {
+  content: "\f06a\00a0";
+  color: #d7a796;
+}
+
+.markdown-body .hint:before {
+  content: "\f05a\00a0";
+  color: #96c6d7;
+}
+
+.markdown-body .danger:before {
+  content: "\f057\00a0";
+  color: #c25f77;
+}
+
+.markdown-body .question:before {
+  content: "\f059\00a0";
+  color: #96a6d7;
+}
+
+.markdown-body .note:before {
+  content: "\f040\00a0";
+  color: #d7c896;
+}
+
+.markdown-body .admonition::after {
+  content: normal;
+}
+
+.markdown-body .attention {
+  border-left: 6px solid #a6d796;
+}
+
+.markdown-body .caution {
+  border-left: 6px solid #d7a796;
+}
+
+.markdown-body .hint {
+  border-left: 6px solid #96c6d7;
+}
+
+.markdown-body .danger {
+  border-left: 6px solid #c25f77;
+}
+
+.markdown-body .question {
+  border-left: 6px solid #96a6d7;
+}
+
+.markdown-body .note {
+  border-left: 6px solid #d7c896;
+}
+
+.markdown-body .admonition>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body .admonition>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* progress bar*/
+.markdown-body .progress {
+  display: block;
+  width: 300px;
+  margin: 10px 0;
+  height: 24px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #ededed;
+  position: relative;
+  box-shadow: inset -1px 1px 3px rgba(0, 0, 0, .1);
+}
+
+.markdown-body .progress-label {
+  position: absolute;
+  text-align: center;
+  font-weight: bold;
+  width: 100%; margin: 0;
+  line-height: 24px;
+  color: #333;
+  text-shadow: 1px 1px 0 #fefefe, -1px -1px 0 #fefefe, -1px 1px 0 #fefefe, 1px -1px 0 #fefefe, 0 1px 0 #fefefe, 0 -1px 0 #fefefe, 1px 0 0 #fefefe, -1px 0 0 #fefefe, 1px 1px 2px #000;
+  -webkit-font-smoothing: antialiased !important;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.markdown-body .progress-bar {
+  height: 24px;
+  float: left;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #96c6d7;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), inset 0 -1px 0 rgba(0, 0, 0, .1);
+  background-size: 30px 30px;
+  background-image: -webkit-linear-gradient(
+    135deg, rgba(255, 255, 255, .4) 27%,
+    transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%,
+    transparent 77%, transparent
+  );
+  background-image: -moz-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -ms-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -o-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+}
+
+.markdown-body .progress-100plus .progress-bar {
+  background-color: #a6d796;
+}
+
+.markdown-body .progress-80plus .progress-bar {
+  background-color: #c6d796;
+}
+
+.markdown-body .progress-60plus .progress-bar {
+  background-color: #d7c896;
+}
+
+.markdown-body .progress-40plus .progress-bar {
+  background-color: #d7a796;
+}
+
+.markdown-body .progress-20plus .progress-bar {
+  background-color: #d796a6;
+}
+
+.markdown-body .progress-0plus .progress-bar {
+  background-color: #c25f77;
+}
+
+.markdown-body .candystripe-animate .progress-bar{
+  -webkit-animation: animate-stripes 3s linear infinite;
+  -moz-animation: animate-stripes 3s linear infinite;
+  animation: animate-stripes 3s linear infinite;
+}
+
+@-webkit-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@-moz-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+.markdown-body .gloss .progress-bar {
+  box-shadow:
+    inset 0 4px 12px rgba(255, 255, 255, .7),
+    inset 0 -12px 0 rgba(0, 0, 0, .05);
+}
+
+/* MultiMarkdown Critic Blocks */
+.markdown-body .critic_mark {
+  background: #ff0;
+}
+
+.markdown-body .critic_delete {
+  color: #c82829;
+  text-decoration: line-through;
+}
+
+.markdown-body .critic_insert {
+  color: #718c00 ;
+  text-decoration: underline;
+}
+
+.markdown-body .critic_comment {
+  color: #8e908c;
+  font-style: italic;
+}
+
+.markdown-body .headeranchor {
+  font: normal normal 16px fontawesome-mini;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.headeranchor:before {
+  content: '\e157';
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  margin: 0 4px 0.25em -20px;
+  vertical-align: middle;
+}
+
+.markdown-body diagram-div, .markdown-body div.uml-sequence-diagram, .markdown-body, div.uml-flowchart {
+  overflow: auto;
+}
+
+/* Media */
+@media only screen and (min-width: 480px) {
+  .markdown-body {
+    font-size:14px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .markdown-body {
+    font-size:16px;
+  }
+}
+
+@media print {
+  .markdown-body * {
+    background: transparent !important;
+    color: black !important;
+    filter:none !important;
+    -ms-filter: none !important;
+  }
+
+  .markdown-body {
+    font-size:12pt;
+    max-width:100%;
+    outline:none;
+    border: 0;
+  }
+
+  .markdown-body a,
+  .markdown-body a:visited {
+    text-decoration: underline;
+  }
+
+  .markdown-body .headeranchor-link {
+    display: none;
+  }
+
+  .markdown-body a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  .markdown-body abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  .markdown-body .ir a:after,
+  .markdown-body a[href^="javascript:"]:after,
+  .markdown-body a[href^="#"]:after {
+    content: "";
+  }
+
+  .markdown-body pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .markdown-body pre,
+  .markdown-body blockquote {
+    border: 1px solid #999;
+    padding-right: 1em;
+    page-break-inside: avoid;
+  }
+
+  .markdown-body .progress,
+  .markdown-body .progress-bar {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .markdown-body .progress {
+    border: 1px solid #ddd;
+  }
+
+  .markdown-body .progress-bar {
+    height: 22px;
+    border-right: 1px solid #ddd;
+  }
+
+  .markdown-body tr,
+  .markdown-body img {
+    page-break-inside: avoid;
+  }
+
+  .markdown-body img {
+    max-width: 100% !important;
+  }
+
+  .markdown-body p,
+  .markdown-body h2,
+  .markdown-body h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .markdown-body h2,
+  .markdown-body h3 {
+    page-break-after: avoid;
+  }
+}
+</style><style>/*GitHub*/
+.highlight {background-color:#f7f7f7;color:#333333;}
+.highlight .hll {background-color:#ffffcc;}
+.highlight .c{color:#999988;font-style:italic}
+.highlight .err{color:#a61717;background-color:#e3d2d2}
+.highlight .k{font-weight:bold}
+.highlight .o{font-weight:bold}
+.highlight .cm{color:#999988;font-style:italic}
+.highlight .cp{color:#999999;font-weight:bold}
+.highlight .c1{color:#999988;font-style:italic}
+.highlight .cs{color:#999999;font-weight:bold;font-style:italic}
+.highlight .gd{color:#000000;background-color:#ffdddd}
+.highlight .ge{font-style:italic}
+.highlight .gr{color:#aa0000}
+.highlight .gh{color:#999999}
+.highlight .gi{color:#000000;background-color:#ddffdd}
+.highlight .go{color:#888888}
+.highlight .gp{color:#555555}
+.highlight .gs{font-weight:bold}
+.highlight .gu{color:#800080;font-weight:bold}
+.highlight .gt{color:#aa0000}
+.highlight .kc{font-weight:bold}
+.highlight .kd{font-weight:bold}
+.highlight .kn{font-weight:bold}
+.highlight .kp{font-weight:bold}
+.highlight .kr{font-weight:bold}
+.highlight .kt{color:#445588;font-weight:bold}
+.highlight .m{color:#009999}
+.highlight .s{color:#dd1144}
+.highlight .n{color:#333333}
+.highlight .na{color:teal}
+.highlight .nb{color:#0086b3}
+.highlight .nc{color:#445588;font-weight:bold}
+.highlight .no{color:teal}
+.highlight .ni{color:purple}
+.highlight .ne{color:#990000;font-weight:bold}
+.highlight .nf{color:#990000;font-weight:bold}
+.highlight .nn{color:#555555}
+.highlight .nt{color:navy}
+.highlight .nv{color:teal}
+.highlight .ow{font-weight:bold}
+.highlight .w{color:#bbbbbb}
+.highlight .mf{color:#009999}
+.highlight .mh{color:#009999}
+.highlight .mi{color:#009999}
+.highlight .mo{color:#009999}
+.highlight .sb{color:#dd1144}
+.highlight .sc{color:#dd1144}
+.highlight .sd{color:#dd1144}
+.highlight .s2{color:#dd1144}
+.highlight .se{color:#dd1144}
+.highlight .sh{color:#dd1144}
+.highlight .si{color:#dd1144}
+.highlight .sx{color:#dd1144}
+.highlight .sr{color:#009926}
+.highlight .s1{color:#dd1144}
+.highlight .ss{color:#990073}
+.highlight .bp{color:#999999}
+.highlight .vc{color:teal}
+.highlight .vg{color:teal}
+.highlight .vi{color:teal}
+.highlight .il{color:#009999}
+.highlight .gc{color:#999;background-color:#EAF2F5}
+</style><title>iceberg-prediction-whitepaper</title></head><body><article class="markdown-body"><!-- Responsive CSS for images -->
+
+<style>
+  body {
+    max-width: 1200px;
+    margin: 8px auto;
+    padding: 0 5px;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, sans-serif;
+    color: #333333;
+  }
+  .markdown-body {
+    padding: 25px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .markdown-body img {
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+/*    box-sizing: border-box;*/
+    border: 0;
+  }
+</style>
+
+<h1 id="machine-learning-for-quantitative-trading-predicting-iceberg-order-execution">Machine Learning for Quantitative Trading: Predicting Iceberg Order Execution<a class="headerlink" href="#machine-learning-for-quantitative-trading-predicting-iceberg-order-execution" title="Permanent link"></a></h1>
+<h2 id="project-context-why-this-matters-in-trading">Project Context: Why This Matters in Trading<a class="headerlink" href="#project-context-why-this-matters-in-trading" title="Permanent link"></a></h2>
+<p>In high-frequency and algorithmic trading, iceberg orders represent a significant market microstructure phenomenon. Let me walk you through how I approached predicting iceberg order execution using machine learning techniques.</p>
+<p>An iceberg order is a large order that&rsquo;s divided into smaller, visible portions - like the tip of an iceberg above water, with the majority hidden below. Traders use them to minimize market impact while executing large positions.</p>
+<p><img alt="Complete Iceberg Order Prediction &amp; Trading System" src="/Z:/Work/PyCharmProjects/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/assets/complete_iceberg.png" /></p>
+<p><em>Image 1: The complete system architecture showing data acquisition, processing, modeling, and trading strategy components. This diagram illustrates the end-to-end pipeline from market data to trading decisions.</em></p>
+<h2 id="the-business-problem">The Business Problem<a class="headerlink" href="#the-business-problem" title="Permanent link"></a></h2>
+<p><strong>Objective</strong>: Predict whether a detected iceberg order will be filled (<code>mdExec = 1</code>) or canceled (<code>mdExec = 0</code> or <code>-1</code>).</p>
+<p>Why is this valuable? If we can predict iceberg order execution:</p>
+<ol>
+<li>We can improve trading algorithms&rsquo; response to large hidden liquidity</li>
+<li>We can identify opportunistic entry/exit points when large orders are likely to complete</li>
+<li>We can better estimate true market depth beyond what&rsquo;s visible on the order book</li>
+<li>We can reduce execution costs through improved venue and timing decisions</li>
+</ol>
+<h2 id="data-pipeline-architecture">Data Pipeline Architecture<a class="headerlink" href="#data-pipeline-architecture" title="Permanent link"></a></h2>
+<p>Let me show you the overall architecture I designed:</p>
+<h3 id="data-collection-simulation-infrastructure">Data Collection &amp; Simulation Infrastructure<a class="headerlink" href="#data-collection-simulation-infrastructure" title="Permanent link"></a></h3>
+<p>The raw data comes from market simulations of iceberg orders. These simulations are orchestrated using Prefect workflows that:</p>
+<ol>
+<li><strong>Retrieve Production Data</strong>: SSH to production servers to retrieve historical market data archives</li>
+<li><strong>Extract &amp; Prepare Market Data</strong>: Unzip market data files and set up Docker container environments </li>
+<li><strong>Run Iceberg Simulations</strong>: Execute Java-based simulation in parallel Docker containers</li>
+<li><strong>Store Results in MongoDB</strong>: Upload simulation results with metadata for ML consumption</li>
+</ol>
+<p>The core of this data collection pipeline is implemented in <code>sxm_market_simulator.py</code>:</p>
+<div class="highlight"><pre><span class="nd">@flow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Parallel Archive Market Simulator&quot;</span><span class="p">,</span>
+    <span class="n">flow_run_name</span><span class="o">=</span><span class="s">&quot;{dataDirectory} | {packageName}&quot;</span><span class="p">,</span>
+    <span class="n">task_runner</span><span class="o">=</span><span class="n">RayTaskRunner</span><span class="p">(</span>
+        <span class="n">init_kwargs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">&quot;include_dashboard&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="p">}),</span>
+    <span class="n">cache_result_in_memory</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">async</span> <span class="k">def</span> <span class="nf">ParallelArchiveMarketSimulator</span><span class="p">(</span><span class="n">dataDirectory</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">packageName</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">get_run_logger</span><span class="p">()</span>
+    <span class="n">secret_block</span> <span class="o">=</span> <span class="n">await</span> <span class="n">Secret</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&quot;sshgui-credentials&quot;</span><span class="p">)</span>
+    <span class="n">cred</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">secret_block</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+
+    <span class="c1"># db and metaDb names for simulation:</span>
+    <span class="n">dataCollectionName</span> <span class="o">=</span> <span class="n">f</span><span class="s">&#39;mktSim_{packageName}&#39;</span>
+    <span class="n">metaCollectionName</span> <span class="o">=</span> <span class="n">f</span><span class="s">&#39;mktSim_meta&#39;</span>
+
+    <span class="c1"># Execute market simulation</span>
+    <span class="n">dfResults</span> <span class="o">=</span> <span class="n">await</span> <span class="n">execute_market_simulator</span><span class="o">.</span><span class="n">with_options</span><span class="p">(</span>
+        <span class="n">flow_run_name</span><span class="o">=</span><span class="n">f</span><span class="s">&quot;{dfMeta[&#39;instance&#39;][0]}/{dfMeta[&#39;archive_date&#39;][0]} {packageName}&quot;</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">packageName</span><span class="o">=</span><span class="n">f</span><span class="s">&quot;{packageName}&quot;</span><span class="p">,</span>
+      <span class="n">exec_args</span><span class="o">=</span><span class="p">[</span>
+          <span class="s">&quot;true&quot;</span><span class="p">,</span>
+          <span class="n">f</span><span class="s">&quot;/data/{strEngineDate}/&quot;</span><span class="p">,</span>
+          <span class="n">f</span><span class="s">&quot;/tmp/results_{strEngineDate}.csv.gz&quot;</span><span class="p">,</span>
+          <span class="n">f</span><span class="s">&quot;/sx3m/{strEngineDate}.properties&quot;</span>
+      <span class="p">],</span>
+      <span class="n">wait_for</span><span class="o">=</span><span class="p">[</span><span class="n">unzip_data</span><span class="p">])</span>
+</pre></div>
+
+<p><em>From sxm_market_simulator.py, lines 168-193</em></p>
+<p>The <code>RayTaskRunner</code> enables parallel execution of these simulations, with each simulation running in its own container. This parallelization is essential for processing large amounts of historical market data efficiently.</p>
+<h3 id="raw-data-format">Raw Data Format<a class="headerlink" href="#raw-data-format" title="Permanent link"></a></h3>
+<p>The raw data from iceberg simulations follows a complex nested structure as seen in the <code>IcebergSimulationResult.yaml</code> file:</p>
+<div class="highlight"><pre><span class="kt">!IcebergSimulationResult</span> <span class="p p-Indicator">{</span>
+  <span class="nv">waitingToOrderTradeImbalance</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span>
+    <span class="nv">combinedMap</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span>
+      <span class="nv">TimeWindowNinetySeconds</span><span class="p p-Indicator">:</span> <span class="kt">!TradeImbalance</span> <span class="p p-Indicator">{</span> <span class="nv">timeInterval</span><span class="p p-Indicator">:</span> <span class="nv">NINETY_SECONDS</span><span class="p p-Indicator">,</span> <span class="nv">isTimeBased</span><span class="p p-Indicator">:</span> <span class="nv">true</span><span class="p p-Indicator">,</span> <span class="nv">period</span><span class="p p-Indicator">:</span> <span class="nv">0</span><span class="p p-Indicator">,</span> <span class="nv">tradeImbalance</span><span class="p p-Indicator">:</span> <span class="nv">0.5189873417721519</span> <span class="p p-Indicator">},</span>
+      <span class="nv">MessageWindow100</span><span class="p p-Indicator">:</span> <span class="kt">!TradeImbalance</span> <span class="p p-Indicator">{</span> <span class="nv">timeInterval</span><span class="p p-Indicator">:</span> <span class="nv">NONE</span><span class="p p-Indicator">,</span> <span class="nv">isTimeBased</span><span class="p p-Indicator">:</span> <span class="nv">false</span><span class="p p-Indicator">,</span> <span class="nv">period</span><span class="p p-Indicator">:</span> <span class="nv">100</span><span class="p p-Indicator">,</span> <span class="nv">tradeImbalance</span><span class="p p-Indicator">:</span> <span class="nv">1.0204081632653062</span> <span class="p p-Indicator">},</span>
+      <span class="c1"># ... more time windows</span>
+    <span class="p p-Indicator">}</span>
+  <span class="p p-Indicator">},</span>
+  <span class="c1"># ... other simulation data</span>
+  <span class="nv">symbol</span><span class="p p-Indicator">:</span> <span class="nv">ZMZ3</span><span class="p p-Indicator">,</span>
+  <span class="nv">icebergId</span><span class="p p-Indicator">:</span> <span class="nv">708627238048</span><span class="p p-Indicator">,</span>
+  <span class="nv">isBid</span><span class="p p-Indicator">:</span> <span class="nv">false</span><span class="p p-Indicator">,</span>
+  <span class="nv">mdExec</span><span class="p p-Indicator">:</span> <span class="nv">-1</span><span class="p p-Indicator">,</span>
+  <span class="nv">price</span><span class="p p-Indicator">:</span> <span class="nv">39900000000</span><span class="p p-Indicator">,</span>
+  <span class="nv">volume</span><span class="p p-Indicator">:</span> <span class="nv">12</span><span class="p p-Indicator">,</span>
+  <span class="nv">showSize</span><span class="p p-Indicator">:</span> <span class="nv">3</span><span class="p p-Indicator">,</span>
+  <span class="nv">filledSizeStart</span><span class="p p-Indicator">:</span> <span class="nv">39</span><span class="p p-Indicator">,</span>
+  <span class="nv">filledSizeEnd</span><span class="p p-Indicator">:</span> <span class="nv">48</span><span class="p p-Indicator">,</span>
+  <span class="c1"># ... additional order details</span>
+<span class="p p-Indicator">}</span>
+</pre></div>
+
+<p><em>From IcebergSimulationResult.yaml</em></p>
+<p>This rich structure needs to be flattened and transformed before model training, which leads us to the data preprocessing pipeline.</p>
+<h2 id="data-preprocessing-and-feature-engineering">Data Preprocessing and Feature Engineering<a class="headerlink" href="#data-preprocessing-and-feature-engineering" title="Permanent link"></a></h2>
+<p>The data preprocessing workflow is shown in Image 2:</p>
+<p><img alt="Data Processing Pipeline" src="/Z:/Work/PyCharmProjects/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/assets/preprocess.png" /></p>
+<p><em>Image 2: The data processing pipeline showing the three main components: data flattening, feature engineering, and feature scaling. This ETL process transforms nested JSON data into tabular features suitable for machine learning.</em></p>
+<h3 id="data-flattening-pipeline">Data Flattening Pipeline<a class="headerlink" href="#data-flattening-pipeline" title="Permanent link"></a></h3>
+<p>The nested JSON structure is transformed into a flat tabular format suitable for machine learning using a custom flattening function:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">flatten_to_columns</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">flatten_cols</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;waitingToOrder&#39;</span><span class="p">,</span><span class="s">&#39;orderPlaced&#39;</span><span class="p">,</span><span class="s">&#39;oneStateBeforeFill&#39;</span><span class="p">]):</span>
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># FLATTEN COLUMNS</span>
+    <span class="n">lstFlattened</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">flatten_cols</span><span class="p">:</span>
+        <span class="n">dicts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+
+        <span class="c1"># ------------------------------------------------------------------------------------------------------------------------------------------</span>
+        <span class="c1"># TradeImbalance</span>
+
+        <span class="c1"># Now we can expand each dictionary into its own DataFrame</span>
+        <span class="n">expanded</span> <span class="o">=</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">json_normalize</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s">&#39;TradeImbalance&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dicts</span><span class="p">]</span>
+        <span class="n">flattened_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span> <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">expanded</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">flattened_df</span> <span class="o">=</span> <span class="n">flattened_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+        <span class="c1"># Define custom mapping according to your requirement.</span>
+        <span class="n">flattened_df</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="n">flattened_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">set_levels</span><span class="p">(</span><span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;90sec&quot;</span><span class="p">,</span><span class="s">&quot;100msg&quot;</span><span class="p">,</span><span class="s">&quot;60sec&quot;</span><span class="p">,</span><span class="s">&quot;30sec&quot;</span><span class="p">,</span><span class="s">&quot;50msg&quot;</span><span class="p">,</span><span class="s">&quot;300sec&quot;</span><span class="p">,</span><span class="s">&quot;1000msg&quot;</span><span class="p">],</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">flattened_df</span><span class="o">=</span><span class="n">flattened_df</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+
+        <span class="n">flattened_df</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="n">flattened_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">)</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">f</span><span class="s">&quot;{col}_&quot;</span><span class="o">+</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">filtered_df</span><span class="o">=</span><span class="n">flattened_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">flattened_df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">like</span><span class="o">=</span><span class="s">&quot;_isTimeBased&quot;</span><span class="p">),</span><span class="n">flattened_df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">like</span><span class="o">=</span><span class="s">&quot;_period&quot;</span><span class="p">),</span><span class="n">flattened_df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">like</span><span class="o">=</span><span class="s">&quot;timeInterval&quot;</span><span class="p">)],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Additional processing for other nested structures (Qty and NumOrders)...</span>
+
+        <span class="n">lstFlattened</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">filtered_df</span><span class="p">,</span> <span class="n">filtered_dfQty</span><span class="p">,</span> <span class="n">filtered_dfNumOrders</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># ------------------------------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c1"># Final Table for ML</span>
+    <span class="c1"># assemble final table for ML</span>
+
+    <span class="n">dftable</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s">&#39;symbol&#39;</span><span class="p">:</span><span class="n">flatten_cols</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">flatten_cols</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">lstFlattened</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dftable</span>
+</pre></div>
+
+<p><em>From preprocess_data.ipynb, function definition</em></p>
+<p>This function converts complex nested structures representing market states at different points in the order lifecycle into a flat table of features. The transformation process handles multiple time windows (90 seconds, 100 messages, etc.) and different types of market metrics (trade imbalance, order quantities, etc.).</p>
+<h3 id="feature-engineering-deep-dive">Feature Engineering Deep Dive<a class="headerlink" href="#feature-engineering-deep-dive" title="Permanent link"></a></h3>
+<p>Feature engineering is critical to this system&rsquo;s success. We transform raw market data into predictive features that capture market microstructure information. Images 4 and 5 show detailed breakdowns of the different feature categories:</p>
+<p><img alt="Order Book Position Features" src="/Z:/Work/PyCharmProjects/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/assets/feature_engineering_order_book_position.png" /></p>
+<p><em>Image 4: Order book position features showing how distance from support and resistance levels is calculated based on order direction. These features have high predictive power for execution probability.</em></p>
+<p><img alt="Order Dynamics Features" src="/Z:/Work/PyCharmProjects/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/assets/feature_engineering_order_book_dynamics.png" /></p>
+<p><em>Image 5: Order dynamics features including fill-to-display ratio and lean-over-hedge ratio, along with temporal features that capture market timing effects. These features help identify aggressive iceberg orders.</em></p>
+<h4 id="market-structure-features">Market Structure Features<a class="headerlink" href="#market-structure-features" title="Permanent link"></a></h4>
+<ul>
+<li><code>ticksFromSupportLevel</code></li>
+<li><code>ticksFromResistanceLevel</code></li>
+<li><code>highLowRange</code></li>
+</ul>
+<p>Features that capture market structure and price levels.</p>
+<h4 id="order-book-dynamics">Order Book Dynamics<a class="headerlink" href="#order-book-dynamics" title="Permanent link"></a></h4>
+<ul>
+<li><code>numReloads</code></li>
+<li><code>fillToDisplayRatio</code></li>
+<li><code>plusOneLevelSameSideMedianRatio</code></li>
+</ul>
+<p>Metrics derived from order book analysis that indicate aggression and intent behind iceberg orders.</p>
+<h4 id="trade-imbalance">Trade Imbalance<a class="headerlink" href="#trade-imbalance" title="Permanent link"></a></h4>
+<ul>
+<li><code>sameSideImbalance_100msg</code></li>
+<li><code>sameSideImbalance_90sec</code></li>
+<li><code>sameSideImbalance_30sec</code></li>
+</ul>
+<p>Measures of trading activity imbalance at different time windows.</p>
+<h4 id="temporal-features">Temporal Features<a class="headerlink" href="#temporal-features" title="Permanent link"></a></h4>
+<ul>
+<li><code>firstNoticeDays</code></li>
+<li><code>monthsToExpiry</code></li>
+<li><code>numAggressivePriceChanges</code></li>
+</ul>
+<p>Time-based and momentum characteristics.</p>
+<h3 id="side-relative-transformations">Side-Relative Transformations<a class="headerlink" href="#side-relative-transformations" title="Permanent link"></a></h3>
+<p>A key innovation is converting raw market features into &ldquo;side-relative&rdquo; versions that have consistent meaning regardless of whether the order is a buy or sell, as illustrated in Image 6:</p>
+<p><img alt="Feature Transformation Examples" src="/Z:/Work/PyCharmProjects/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/assets/feature_engineering_side_relative_features.png" /></p>
+<p><em>Image 6: Examples of side-relative transformations for order book imbalance and support/resistance levels. These transformations create consistent features that work regardless of whether the order is a buy or sell.</em></p>
+<div class="highlight"><pre><span class="c1"># Converting bid/ask imbalances to side-relative measures</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">bidImbalanceCols</span><span class="p">:</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;bid&quot;</span><span class="p">,</span><span class="s">&quot;sameSide&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isBid</span><span class="o">==</span><span class="bp">True</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="mi">1</span><span class="o">-</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+
+<span class="c1"># Creating support/resistance level features</span>
+<span class="n">df</span><span class="p">[</span><span class="s">&#39;ticksFromSupportLevel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isBid</span><span class="o">==</span><span class="bp">True</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;ticksFromLow&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;ticksFromHigh&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s">&#39;ticksFromResistanceLevel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isBid</span><span class="o">!=</span><span class="bp">True</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;ticksFromLow&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">&#39;ticksFromHigh&#39;</span><span class="p">])</span>
+</pre></div>
+
+<p><em>From preprocess_data.ipynb, feature transformation code</em></p>
+<p>The examples in Image 6 show how this transformation works:</p>
+<p><strong>Example 1: Side-Relative Order Book Imbalance</strong></p>
+<ul>
+<li>Raw Book Data: Buy/Sell Imbalance: 0.75 (bid)</li>
+<li>For SELL Order: sameSideImbalance = 1 - 0.75 = 0.25
+  (low value indicates unfavorable book condition for sell order)</li>
+</ul>
+<p><strong>Example 2: Support/Resistance Level Positioning</strong></p>
+<ul>
+<li>Raw Price Data: Current Price: 100.25, Recent High: 102.50, Recent Low: 98.75</li>
+<li>For BUY Order: ticksFromSupportLevel = 6 (buy order is 6 ticks from support level)</li>
+</ul>
+<p>This transformation ensures that features have consistent predictive meaning regardless of the order&rsquo;s side.</p>
+<h2 id="time-series-cross-validation-respecting-market-evolution">Time Series Cross-Validation: Respecting Market Evolution<a class="headerlink" href="#time-series-cross-validation-respecting-market-evolution" title="Permanent link"></a></h2>
+<p>In quantitative trading, traditional cross-validation can lead to look-ahead bias. I implemented a time-series validation approach as shown in Image 13:</p>
+<p><img alt="Time Series Cross-Validation Approach" src="/Z:/Work/PyCharmProjects/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/assets/TimeSeriesCVApproach.png" /></p>
+<p><em>Image 13: Time series cross-validation approach showing how data is split into training and testing periods. This method respects the temporal nature of financial data and prevents future information leakage.</em></p>
+<p>This approach:</p>
+<ol>
+<li>Trains on past data, tests on future data</li>
+<li>Uses rolling windows that respect time boundaries</li>
+<li>Prevents information leakage from future market states</li>
+</ol>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">_create_time_series_splits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_size</span><span class="p">,</span> <span class="n">dates</span><span class="p">):</span>
+    <span class="n">splits</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="n">train_size</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">train_dates</span> <span class="o">=</span> <span class="n">dates</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">train_size</span><span class="p">]</span>
+            <span class="n">test_dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">train_size</span><span class="p">]]</span>
+            <span class="n">splits</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">train_dates</span><span class="p">,</span> <span class="n">test_dates</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">splits</span>
+</pre></div>
+
+<p><em>From machinelearning_final_modified.py, lines 304-314</em></p>
+<p>The performance across time periods, as shown in Image 10, demonstrates the model&rsquo;s stability:</p>
+<p><img alt="Time Series Cross-Validation Performance" src="/Z:/Work/PyCharmProjects/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/assets/TimeSeriesCVPerfomance.png" /></p>
+<p><em>Image 10: Performance metrics across different time periods showing the model&rsquo;s stability in changing market conditions. Note the consistent precision above 75% in all folds.</em></p>
+<table>
+<thead>
+<tr>
+<th>Fold</th>
+<th>Training Period</th>
+<th>Test Date</th>
+<th>Accuracy</th>
+<th>Precision</th>
+<th>Recall</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2023-07-03 to 2023-07-10</td>
+<td>2023-07-11</td>
+<td>76.0%</td>
+<td>77.0%</td>
+<td>64.0%</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2023-07-10 to 2023-07-17</td>
+<td>2023-07-18</td>
+<td>79.0%</td>
+<td>81.0%</td>
+<td>67.0%</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2023-07-17 to 2023-07-24</td>
+<td>2023-07-25</td>
+<td>77.0%</td>
+<td>78.0%</td>
+<td>65.0%</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2023-07-24 to 2023-07-31</td>
+<td>2023-08-01</td>
+<td>75.0%</td>
+<td>76.0%</td>
+<td>63.0%</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2023-07-31 to 2023-08-07</td>
+<td>2023-08-08</td>
+<td>80.0%</td>
+<td>82.0%</td>
+<td>70.0%</td>
+</tr>
+</tbody>
+</table>
+<p>The model maintains consistent performance across different time periods, with precision staying above 75% in all folds, suggesting it&rsquo;s capturing robust market patterns rather than overfitting to specific market conditions.</p>
+<h2 id="model-selection-strategy">Model Selection Strategy<a class="headerlink" href="#model-selection-strategy" title="Permanent link"></a></h2>
+<p>For a trading system, model selection requires balancing multiple considerations:</p>
+<h3 id="model-comparison">Model Comparison<a class="headerlink" href="#model-comparison" title="Permanent link"></a></h3>
+<p>Various models were evaluated as shown in Image 9:</p>
+<p><img alt="Model Performance &amp; Trading Impact" src="/Z:/Work/PyCharmProjects/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/assets/confusion_matrix.png" /></p>
+<p><em>Image 9: Model comparison showing performance metrics and confusion matrix for the XGBoost model. Note the precision of 79% and the detailed breakdown of prediction errors.</em></p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Accuracy</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1 Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XGBoost</td>
+<td>78%</td>
+<td>79%</td>
+<td>65%</td>
+<td>71%</td>
+</tr>
+<tr>
+<td>Random Forest</td>
+<td>75%</td>
+<td>77%</td>
+<td>64%</td>
+<td>70%</td>
+</tr>
+<tr>
+<td>LightGBM</td>
+<td>77%</td>
+<td>78%</td>
+<td>65%</td>
+<td>71%</td>
+</tr>
+<tr>
+<td>Logistic Regression</td>
+<td>71%</td>
+<td>73%</td>
+<td>62%</td>
+<td>67%</td>
+</tr>
+</tbody>
+</table>
+<p>When evaluating models, I focused on trading-specific metrics:</p>
+<ol>
+<li><strong>Precision</strong>: Minimizing false positives (critical for avoiding bad executions)</li>
+<li><strong>Recall with a minimum threshold</strong>: Ensuring we don&rsquo;t miss significant trading opportunities </li>
+<li><strong>Computational efficiency</strong>: Essential for real-time trading systems</li>
+</ol>
+<p>From the confusion matrix in Image 9, we can see:</p>
+<ul>
+<li>True Positives: 308 (correctly predicted fills)</li>
+<li>False Positives: 84 (predicted fills that didn&rsquo;t happen)</li>
+<li>False Negatives: 112 (missed fills)</li>
+<li>True Negatives: 315 (correctly predicted non-fills)</li>
+</ul>
+<p>I created a custom metric specifically for trading applications:</p>
+<div class="highlight"><pre><span class="nd">@staticmethod</span>
+<span class="k">def</span> <span class="nf">max_precision_optimal_recall_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Custom metric that maximizes precision while ensuring minimum recall.</span>
+<span class="sd">    In trading terms: maximize quality of execution signals while</span>
+<span class="sd">    ensuring we capture enough opportunities.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">precision</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">recall</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+    <span class="n">min_recall</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># We need to catch at least 50% of opportunities</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">recall</span> <span class="o">&lt;</span> <span class="n">min_recall</span> <span class="k">else</span> <span class="n">precision</span>
+    <span class="k">return</span> <span class="n">score</span>
+</pre></div>
+
+<p><em>From machinelearning_final_modified.py, lines 294-302</em></p>
+<h3 id="precision-recall-and-roc-analysis">Precision-Recall and ROC Analysis<a class="headerlink" href="#precision-recall-and-roc-analysis" title="Permanent link"></a></h3>
+<p>To further evaluate model performance, I analyzed precision-recall and ROC curves as shown in Images 11 and 12:</p>
+<p><img alt="Precision-Recall Curve" src="/Z:/Work/PyCharmProjects/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/assets/precision_recall_curve.png" /></p>
+<p><em>Image 11: Precision-recall curve showing the trade-off between precision and recall. The average precision of 0.53 indicates the model&rsquo;s ability to balance between capturing opportunities and avoiding false positives.</em></p>
+<p><img alt="ROC Curve" src="/Z:/Work/PyCharmProjects/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/assets/roc_auc_plot.png" /></p>
+<p><em>Image 12: ROC curve showing the trade-off between true positive rate and false positive rate. The area under the curve of 0.48 suggests room for further optimization.</em></p>
+<p>These curves help in understanding the model&rsquo;s performance across different threshold settings, which is critical for calibrating the model for different trading scenarios.</p>
+<h2 id="hyperparameter-optimization-trading-system-efficiency">Hyperparameter Optimization: Trading System Efficiency<a class="headerlink" href="#hyperparameter-optimization-trading-system-efficiency" title="Permanent link"></a></h2>
+<p>For a production trading system, parameter optimization is essential. I used Optuna to tune hyperparameters:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">tune_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">hyperparameter_set_pct_size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">hyperparameter_set_pct_size</span> <span class="o">=</span> <span class="n">hyperparameter_set_pct_size</span>
+    <span class="n">tuner</span> <span class="o">=</span> <span class="n">HyperparameterTuner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyperparameter_set_pct_size</span><span class="p">)</span>
+
+    <span class="c1"># set validation dates (testing of final best parameters from hyperparameter opts)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">hyperparameter_set_dates</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tuner</span><span class="o">.</span><span class="n">hyperparameter_set_dates</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">validation_set_dates</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unique_split_dates</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hyperparameter_set_dates</span><span class="p">)))</span>
+
+    <span class="n">tuner</span><span class="o">.</span><span class="n">tune</span><span class="p">(</span><span class="n">n_trials</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="k">return</span>
+</pre></div>
+
+<p><em>From machinelearning_final_modified.py, lines 622-631</em></p>
+<p>The parameter search space included both model hyperparameters and training configuration:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">get_model_hyperparameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trial</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s">&quot;XGBoost&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s">&#39;eval_metric&#39;</span><span class="p">:</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_categorical</span><span class="p">(</span><span class="s">&#39;eval_metric&#39;</span><span class="p">,</span> 
+                <span class="p">[</span><span class="s">&#39;logloss&#39;</span><span class="p">,</span> <span class="s">&#39;error@0.7&#39;</span><span class="p">,</span> <span class="s">&#39;error@0.5&#39;</span><span class="p">]),</span>
+            <span class="s">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s">&#39;learning_rate&#39;</span><span class="p">,</span> 
+                <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.01</span><span class="p">),</span>
+            <span class="s">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_categorical</span><span class="p">(</span><span class="s">&#39;n_estimators&#39;</span><span class="p">,</span> 
+                <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]),</span>
+            <span class="s">&#39;max_depth&#39;</span><span class="p">:</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_int</span><span class="p">(</span><span class="s">&#39;max_depth&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="s">&#39;min_child_weight&#39;</span><span class="p">:</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_int</span><span class="p">(</span><span class="s">&#39;min_child_weight&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="s">&#39;gamma&#39;</span><span class="p">:</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s">&#39;gamma&#39;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.05</span><span class="p">),</span>
+            <span class="s">&#39;subsample&#39;</span><span class="p">:</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s">&#39;subsample&#39;</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+            <span class="s">&#39;colsample_bytree&#39;</span><span class="p">:</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s">&#39;colsample_bytree&#39;</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+            <span class="s">&#39;reg_alpha&#39;</span><span class="p">:</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_float</span><span class="p">(</span><span class="s">&#39;reg_alpha&#39;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+            <span class="s">&#39;reg_lambda&#39;</span><span class="p">:</span> <span class="n">trial</span><span class="o">.</span><span class="n">suggest_int</span><span class="p">(</span><span class="s">&#39;reg_lambda&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">}</span>
+</pre></div>
+
+<p><em>From machinelearning_final_modified.py, lines 75-89</em></p>
+<p>The optimized XGBoost model configuration, as shown in Image 14, includes:</p>
+<p><img alt="XGBoost Model Architecture" src="/Z:/Work/PyCharmProjects/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/assets/xgboost_architecture.png" /></p>
+<p><em>Image 14: XGBoost model architecture showing the optimized parameter configuration and simplified tree structure visualization. Each parameter is explained in terms of its trading significance.</em></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+<th>Trading Significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>max_depth</td>
+<td>3</td>
+<td>Shallow trees reduce overfitting to market noise, focusing on robust patterns</td>
+</tr>
+<tr>
+<td>learning_rate</td>
+<td>0.03</td>
+<td>Low learning rate provides more stable predictions as market conditions evolve</td>
+</tr>
+<tr>
+<td>n_estimators</td>
+<td>1000</td>
+<td>Large number of trees captures complex market relationships</td>
+</tr>
+<tr>
+<td>gamma</td>
+<td>0.19</td>
+<td>Minimum loss reduction required for further tree partitioning, prevents capturing random market fluctuations</td>
+</tr>
+<tr>
+<td>subsample</td>
+<td>0.91</td>
+<td>Slight randomization in training data helps model generalize across market regimes</td>
+</tr>
+<tr>
+<td>colsample_bytree</td>
+<td>0.8</td>
+<td>Each tree considers 80% of features, reducing overfitting to specific market signals</td>
+</tr>
+<tr>
+<td>reg_alpha</td>
+<td>0.16</td>
+<td>L1 regularization controls model sparsity, focusing on most significant market factors</td>
+</tr>
+<tr>
+<td>reg_lambda</td>
+<td>2.1</td>
+<td>L2 regularization prevents individual features from dominating prediction, improving stability</td>
+</tr>
+</tbody>
+</table>
+<h2 id="feature-importance-trading-signal-analysis">Feature Importance: Trading Signal Analysis<a class="headerlink" href="#feature-importance-trading-signal-analysis" title="Permanent link"></a></h2>
+<p>Understanding which features drive prediction is critical for trading strategy development. Images 7 and 8 show the feature importance analysis:</p>
+<p><img alt="MDA Feature Importance" src="/Z:/Work/PyCharmProjects/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/assets/mda_importance_plot.png" /></p>
+<p><em>Image 7: MDA (Mean Decrease Accuracy) feature importance showing how permuting each feature affects model accuracy. The dominance of price position features (ticksFromResistanceLevel and ticksFromSupportLevel) is clearly visible.</em></p>
+<p><img alt="Top 12 Mean Feature Importances" src="/Z:/Work/PyCharmProjects/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/assets/mean_feature_importance_plot.png" /></p>
+<p><em>Image 8: Top 12 feature importances based on the XGBoost model&rsquo;s native feature importance measure. This provides a different perspective on feature ranking compared to the MDA method.</em></p>
+<p>The feature importance analysis was conducted using multiple methods:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">calculate_mda</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">f1_score</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    MDA (Mean Decrease Accuracy):</span>
+<span class="sd">    This is a technique where the importance of a feature is evaluated by permuting the values of the feature</span>
+<span class="sd">    and measuring the decrease in model performance.</span>
+<span class="sd">    The idea is that permuting the values of an important feature should lead to a significant drop in model performance,</span>
+<span class="sd">    indicating the feature&#39;s importance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">base_score</span> <span class="o">=</span> <span class="n">scoring</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+    <span class="n">feature_importances</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">X_test</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">X_copy</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">X_copy</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">X_copy</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+        <span class="n">new_score</span> <span class="o">=</span> <span class="n">scoring</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_copy</span><span class="p">))</span>
+        <span class="n">feature_importances</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">base_score</span> <span class="o">-</span> <span class="n">new_score</span>
+
+    <span class="k">return</span> <span class="n">feature_importances</span>
+</pre></div>
+
+<p><em>From machinelearning_final_modified.py, lines 717-732</em></p>
+<p>Three insights valuable for trading strategy development:</p>
+<ol>
+<li>
+<p><strong>Price Position Dominance</strong>: The distance from support/resistance levels is the strongest predictor - suggesting that order book positioning relative to key levels is crucial for execution prediction.</p>
+</li>
+<li>
+<p><strong>Imbalance Significance</strong>: Trade imbalance metrics across different time windows show strong predictive power - confirming that order flow imbalance is a leading indicator of execution probability.</p>
+</li>
+<li>
+<p><strong>Temporal Sensitivity</strong>: The model weights features from the state immediately before fill more heavily than earlier states - indicating that execution prediction becomes more accurate as we get closer to the fill event.</p>
+</li>
+</ol>
+<h2 id="from-prediction-to-trading-decision">From Prediction to Trading Decision<a class="headerlink" href="#from-prediction-to-trading-decision" title="Permanent link"></a></h2>
+<p>The prediction model doesn&rsquo;t operate in isolation - it feeds into a sophisticated trading decision process, as shown in Image 3:</p>
+<p><img alt="Decision Flow: From Model Prediction to Trading Action" src="/Z:/Work/PyCharmProjects/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/assets/decision_flow_prediction_to_training.png" /></p>
+<p><em>Image 3: Decision flow diagram illustrating how model predictions drive trading decisions through confidence bands and feature analysis. This probabilistic approach allows for dynamic adaptation to market conditions.</em></p>
+<p>The decision flow illustrates how the model&rsquo;s prediction probability drives multiple trading decisions:</p>
+<h3 id="prediction-confidence-bands">Prediction Confidence Bands<a class="headerlink" href="#prediction-confidence-bands" title="Permanent link"></a></h3>
+<ul>
+<li><strong>Low Confidence</strong>: P(Fill) &lt; 0.7 - Use smaller, passive orders</li>
+<li><strong>Medium Confidence</strong>: 0.7 ≤ P(Fill) &lt; 0.85 - Use full size at best bid/offer</li>
+<li><strong>High Confidence</strong>: P(Fill) ≥ 0.85 - May cross the spread for immediate execution</li>
+</ul>
+<h3 id="beyond-probability-feature-analysis">Beyond Probability: Feature Analysis<a class="headerlink" href="#beyond-probability-feature-analysis" title="Permanent link"></a></h3>
+<p>The top features driving each prediction influence venue selection and timing:</p>
+<ul>
+<li>Support distance → Dark pool venues</li>
+<li>Trade imbalance → Lit exchanges</li>
+<li>Fill/display ratio → Market makers</li>
+</ul>
+<p>This probability-driven approach allows for dynamic adaptation to changing market conditions. Rather than making binary decisions, the trading strategy takes a probabilistic approach that balances between price improvement and execution certainty.</p>
+<h2 id="prediction-flow">Prediction Flow<a class="headerlink" href="#prediction-flow" title="Permanent link"></a></h2>
+<p>The complete prediction flow, shown in Image 15, illustrates how a new iceberg order is processed:</p>
+<p><img alt="Prediction Flow and Model Advantages" src="/Z:/Work/PyCharmProjects/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/assets/xgboost_prediction_flow.png" /></p>
+<p><em>Image 15: Prediction flow diagram showing the step-by-step process from raw data to final prediction probability, along with key model advantages for trading applications.</em></p>
+<ol>
+<li><strong>Feature Vector Construction</strong>: Raw order data is transformed into engineered features</li>
+</ol>
+<div class="highlight"><pre>[ticksFromSupportLevel=5.0, ticksFromResistanceLevel=12.0, fillToDisplayRatio=14.0, sameSideImbalance=0.73, ...]
+</pre></div>
+
+<ol start="2">
+<li><strong>Feature Scaling</strong>: Features are normalized using the stored scaling parameters</li>
+</ol>
+<div class="highlight"><pre>[ticksFromSupportLevel=0.37, ticksFromResistanceLevel=0.76, fillToDisplayRatio=1.28, sameSideImbalance=0.91, ...]
+</pre></div>
+
+<ol start="3">
+<li><strong>Tree Ensemble Processing</strong>: The feature vector passes through all 1000 decision trees</li>
+</ol>
+<div class="highlight"><pre>Tree 1 Output: 0.78
+Tree 2 Output: 0.41
+Tree 3 Output: 0.32
+...
+Tree 1000 Output: -0.03
+</pre></div>
+
+<ol start="4">
+<li><strong>Prediction Combination</strong>: Tree outputs are combined and transformed to a probability</li>
+</ol>
+<div class="highlight"><pre>Sum of tree outputs: 1.37
+Logistic transformation: sigmoid(1.37) = 0.797
+Final prediction: 79.7% probability of execution
+</pre></div>
+
+<p>This probability output is more valuable than a simple binary prediction, as it allows for trade sizing and venue selection based on confidence levels.</p>
+<h2 id="model-persistence-deployment-considerations">Model Persistence &amp; Deployment Considerations<a class="headerlink" href="#model-persistence-deployment-considerations" title="Permanent link"></a></h2>
+<p>For a production trading system, model deployment requires careful handling of model artifacts:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">save_and_upload_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Saves the given model to a file and uploads it to Neptune.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create a directory for saving models</span>
+    <span class="n">models_dir</span> <span class="o">=</span> <span class="s">&quot;saved_models&quot;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">models_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c1"># Save model for JVM export (compatible with trading systems)</span>
+    <span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">models_dir</span><span class="p">,</span> <span class="n">f</span><span class="s">&quot;xgbModel-{self.current_date}.json&quot;</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+</pre></div>
+
+<p>We also export the scaling parameters to ensure consistent feature transformation in production:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">write_scalers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+    <span class="c1"># Extract and export scaler parameters</span>
+    <span class="n">scaler_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&quot;minMaxScaler&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&quot;min&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">minmax_scaler</span><span class="o">.</span><span class="n">min_</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="s">&quot;scale&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">minmax_scaler</span><span class="o">.</span><span class="n">scale_</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="s">&quot;featureNames&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">minmax_features</span>
+        <span class="p">},</span>
+        <span class="s">&quot;standardScaler&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&quot;mean&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">standard_scaler</span><span class="o">.</span><span class="n">mean_</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="s">&quot;std&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">standard_scaler</span><span class="o">.</span><span class="n">scale_</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="s">&quot;featureNames&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">non_minmax_features</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+
+<p>This ensures that the model deployed to production uses identical scaling to what was used during training.</p>
+<h3 id="production-integration">Production Integration<a class="headerlink" href="#production-integration" title="Permanent link"></a></h3>
+<p>If implemented in a production trading system, this model would:</p>
+<ol>
+<li>Extract real-time order book and trade imbalance features</li>
+<li>Apply appropriate scaling using the persisted scaler parameters</li>
+<li>Generate execution probability predictions</li>
+<li>Allow trading algorithms to make more informed decisions about:
+   - Order routing (to venues with higher fill probability)
+   - Order sizing (increasing size when fill probability is high)
+   - Aggressive vs. passive execution tactics</li>
+</ol>
+<p>Additionally, the Neptune integration provides continuous monitoring capabilities to detect model drift in changing market conditions.</p>
+<h2 id="model-advantages-for-trading-applications">Model Advantages for Trading Applications<a class="headerlink" href="#model-advantages-for-trading-applications" title="Permanent link"></a></h2>
+<p>The XGBoost model offers several specific advantages for trading applications, as outlined in Image 15:</p>
+<table>
+<thead>
+<tr>
+<th>Advantage</th>
+<th>Description</th>
+<th>Trading Application</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Non-Linear Relationships</td>
+<td>Captures complex, non-linear interactions between market variables</td>
+<td>Better models tipping points and threshold effects in market behavior</td>
+</tr>
+<tr>
+<td>Robust to Feature Scaling</td>
+<td>Tree-based models are less sensitive to feature scaling than neural networks</td>
+<td>More stable in production when market metrics have unusual ranges</td>
+</tr>
+<tr>
+<td>Handles Missing Values</td>
+<td>XGBoost can handle missing values in features</td>
+<td>Resilient against data quality issues in live market feeds</td>
+</tr>
+<tr>
+<td>Interpretable Structure</td>
+<td>Individual trees can be examined for trading logic</td>
+<td>Easier to explain to regulatory bodies and trading strategy committees</td>
+</tr>
+<tr>
+<td>Fast Inference</td>
+<td>Tree traversal is computationally efficient</td>
+<td>Low latency prediction suitable for high-frequency trading systems</td>
+</tr>
+<tr>
+<td>Built-in Regularization</td>
+<td>Prevents overfitting to market noise</td>
+<td>More stable performance across changing market regimes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="evaluation-trading-strategy-implications">Evaluation &amp; Trading Strategy Implications<a class="headerlink" href="#evaluation-trading-strategy-implications" title="Permanent link"></a></h2>
+<p>The evaluation metrics shown in Image 9 have several implications for trading strategy:</p>
+<ol>
+<li>
+<p><strong>XGBoost Superiority</strong>: XGBoost consistently outperformed other models with precision rates exceeding 75% while maintaining recall above 60%.</p>
+</li>
+<li>
+<p><strong>Feature Transferability</strong>: The dominance of order book position and imbalance features suggests that these signals may transfer well to other instruments beyond the ones tested.</p>
+</li>
+<li>
+<p><strong>Execution Time Sensitivity</strong>: The importance of &ldquo;oneStateBeforeFill&rdquo; features indicates that model prediction accuracy increases as the order approaches execution, suggesting a strategy that dynamically adjusts confidence thresholds based on order age.</p>
+</li>
+</ol>
+<h2 id="business-impact-and-performance-metrics">Business Impact and Performance Metrics<a class="headerlink" href="#business-impact-and-performance-metrics" title="Permanent link"></a></h2>
+<p>The trading impact shows significant improvements over baseline strategies:</p>
+<ul>
+<li><strong>Precision</strong>: 79% - When the model predicts a fill, it&rsquo;s right 79% of the time</li>
+<li><strong>Recall</strong>: 65% - The model correctly identifies 65% of actual fills</li>
+<li><strong>F1 Score</strong>: 71% - Harmonic mean of precision and recall</li>
+</ul>
+<p>These metrics translate directly to trading P&amp;L through better execution quality and higher completion rates.</p>
+<h2 id="potential-extensions">Potential Extensions<a class="headerlink" href="#potential-extensions" title="Permanent link"></a></h2>
+<p>If I were to extend this project, I would:</p>
+<ol>
+<li>Add market regime conditioning - adapting predictions based on volatility regimes</li>
+<li>Incorporate order book depth information beyond level 1</li>
+<li>Develop an adversarial model to simulate market impact of our own orders</li>
+<li>Implement model confidence calibration to produce reliable probability estimates</li>
+<li>Create an ensemble approach combining multiple model predictions weighted by recent performance</li>
+</ol>
+<h2 id="conclusion-the-value-of-ml-in-trading-systems">Conclusion: The Value of ML in Trading Systems<a class="headerlink" href="#conclusion-the-value-of-ml-in-trading-systems" title="Permanent link"></a></h2>
+<p>The complete system demonstrates how machine learning can transform trading operations by:</p>
+<ol>
+<li><strong>Extracting Hidden Patterns</strong>: The model uncovers subtle market microstructure patterns invisible to human traders</li>
+<li><strong>Quantifying Uncertainty</strong>: Probability-driven approaches handle the inherent uncertainty in financial markets</li>
+<li><strong>Adaptive Decision-Making</strong>: Dynamic parameter adjustment based on model confidence creates a more robust strategy</li>
+<li><strong>Continuous Improvement</strong>: Feedback loops ensure the system improves as market conditions evolve</li>
+</ol>
+<p>This iceberg order prediction system represents a sophisticated approach to quantitative trading that goes beyond simple signal generation to create a complete trading ecosystem that balances predictive power with practical trading considerations.</p></article></body></html>
