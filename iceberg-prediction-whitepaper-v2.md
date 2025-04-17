@@ -1,6 +1,6 @@
 ---
 title: "Machine Learning for Quantitative Trading: Predicting Iceberg Order Execution"
-author: "Quantitative Research Team"
+author: "Joseph Loss"
 date: "April 17, 2025"
 ---
 
