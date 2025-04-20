@@ -39,6 +39,9 @@ jobs:
       - name: Copy project assets into build output
         run: cp -R assets _build/html/assets
 
+      - name: Copy root entry
+        run: cp _build/html/iceberg-prediction-whitepaper-v2/index.html _build/html/index.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
