@@ -39,8 +39,15 @@ jobs:
       - name: Copy project assets into build output
         run: cp -R assets _build/html/assets
 
-      - name: Copy root entry
-        run: cp _build/html/iceberg-prediction-whitepaper-v2/index.html _build/html/index.html
+      - name: Copy root entry if nested
+        run: |
+          NESTED="_build/html/iceberg-prediction-whitepaper-v2/index.html"
+          if [ -f "$NESTED" ]; then
+            echo "Copying nested index to root..."
+            cp "$NESTED" _build/html/index.html
+          else
+            echo "Root index.html already in place."
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
