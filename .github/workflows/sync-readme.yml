@@ -1,0 +1,30 @@
+name: Sync README with Whitepaper
+on:
+  push:
+    paths:
+      - 'iceberg-prediction-whitepaper-v2.md'
+
+jobs:
+  sync-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      # Allow this job to commit back to the repo
+      contents: write
+    steps:
+      # 1) Check out your repo
+      - uses: actions/checkout@v4
+        # Pull full history so the commit action can push correctly :contentReference[oaicite:0]{index=0}
+
+      # 2) Overwrite README.md with your paper
+      - name: Generate README
+        run: |
+          echo "<!-- THIS FILE IS AUTO-GENERATED; DO NOT EDIT DIRECTLY -->" > README.md
+          cat iceberg-prediction-whitepaper-v2.md >> README.md
+
+      # 3) Commit & push the new README
+      - name: Commit README update
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: sync README with iceberg-prediction-whitepaper-v2.md"
+          # By default this uses the built-in GITHUB_TOKEN to push
+          # (which needs contents: write above) :contentReference[oaicite:1]{index=1}
