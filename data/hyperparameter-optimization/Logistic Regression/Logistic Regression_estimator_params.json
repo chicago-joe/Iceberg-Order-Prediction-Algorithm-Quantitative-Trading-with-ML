@@ -1,0 +1,17 @@
+{
+  "C": 1.0,
+  "class_weight": "None",
+  "dual": false,
+  "fit_intercept": true,
+  "intercept_scaling": 1,
+  "l1_ratio": "None",
+  "max_iter": 100,
+  "multi_class": "auto",
+  "n_jobs": -1,
+  "penalty": "l2",
+  "random_state": "None",
+  "solver": "lbfgs",
+  "tol": 0.0001,
+  "verbose": 0,
+  "warm_start": false
+}
