@@ -5,5 +5,6 @@ iceberg-prediction-whitepaper.html
 iceberg-prediction-whitepaper.md
 /iceberg-prediction-whitepaper.html
 "instructions for claude.md"
+src/neptune-ml-hyperopt-loader
 # MyST build outputs
 _build
