@@ -10,7 +10,8 @@ project:
   # To autogenerate a Table of Contents, run "myst init --write-toc"
   title: "Iceberg Order Execution Predictions - ML for Quantitative Trading"
   file: iceberg-prediction-whitepaper-v2.md
-
+  toc:
+    - file: iceberg-prediction-whitepaper-v2.md
 site:
   template: article-theme
   # options:
