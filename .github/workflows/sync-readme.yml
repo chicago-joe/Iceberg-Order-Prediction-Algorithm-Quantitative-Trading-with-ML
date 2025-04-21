@@ -1,5 +1,6 @@
 name: Sync README with Whitepaper
 on:
+  workflow_dispatch:  
   push:
     paths:
       - 'iceberg-prediction-whitepaper-v2.md'
