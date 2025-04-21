@@ -5,4 +5,5 @@ _(This repository’s full whitepaper is published as a static site.)_
 
 Click the badge above or visit the [GitHub Pages site](https://chicago-joe.github.io/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/).
 
-## v2.0 is coming - analysis and walkthrough of HyperParameter Optimization with Optuna and comparing LightGBM, XGBoost, LogisticRegression, and RandomForest models for our chosen model!
+### v2.0 is coming
+*analysis and walkthrough of HyperParameter Optimization with Optuna and comparing LightGBM, XGBoost, LogisticRegression, and RandomForest models for our chosen model!*
