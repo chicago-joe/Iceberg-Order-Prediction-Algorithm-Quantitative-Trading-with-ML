@@ -6,3 +6,5 @@ _build
 .env
 
 !.env.template
+.TODO/
+SXM-762/
