@@ -1,19 +1,70 @@
-# See docs at: https://mystmd.org/guide/frontmatter
 version: 1
 project:
-  id: 6c027761-aee9-46fb-bd30-035a138000e8
-  # title:
-  # description:
-  # keywords: []
+  id: 3c9eb6f2-cbd3-4cd3-b15a-8c31dc798cd0
+  title: "Machine Learning Research - Joseph Loss"
+  description: "Collection of papers on machine learning applications in quantitative trading and hyperparameter optimization."
+  keywords: [machine learning, quantitative trading, hyperparameter optimization, XGBoost, LightGBM]
   authors: [Joseph Loss]
-  github: https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML
-  # To autogenerate a Table of Contents, run "myst init --write-toc"
-  title: "Iceberg Order Execution Predictions - ML for Quantitative Trading"
-  file: iceberg-prediction-whitepaper-v2.md
+  github: https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/
+  repository:
+    url: https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/
+    path_to_book: /
+    branch: main
+  jupyter:
+    server: 
+      url: http://127.0.0.1:8265
+      token: my-jupyterlab-token
   toc:
-    - file: iceberg-prediction-whitepaper-v2.md
+    - title: Home
+      file: README.md
+    - title: Iceberg Order Prediction
+      file: iceberg-prediction-whitepaper-v2.md
+    - title: Hyperparameter Optimization
+      sections:
+        - file: index.md
+        - file: hyperparameter-optimization-whitepaper.md
+        - file: XGBoost_hpo_report.md
+        - file: LightGBM_hpo_report.md
+        - file: Random Forest_hpo_report.md
+        - file: Logistic Regression_hpo_report.md
+        - file: hpo_plots.ipynb
+  downloads:
+    - file: exports/HPO-Iceberg-Order-Execution-Model-Joseph-Loss.pdf
+      title: HPO Study (PDF)
+    - file: exports/iceberg-prediction-whitepaper.pdf
+      title: Iceberg Order Prediction (PDF)
+  
 site:
-  template: article-theme
-  # options:
-  #   favicon: favicon.ico
-  #   logo: site_logo.png
+  template: book-theme
+  title: "Joseph Loss - ML Research"
+  logo: 
+    url: https://josephjloss.com/assets/img/logo.png
+    alt: Joseph Loss Logo
+  nav: 
+    - title: My Website
+      url: https://josephjloss.com
+    - title: LinkedIn
+      url: https://linkedin.com/in/josephjl
+    - title: GitHub
+      url: https://github.com/chicago-joe
+  actions:
+    - title: Download HPO Study
+      url: exports/HPO-Iceberg-Order-Execution-Model-Joseph-Loss.pdf
+    - title: Download Iceberg Paper
+      url: exports/iceberg-prediction-whitepaper.pdf
+    - title: Share on LinkedIn
+      url: https://www.linkedin.com/shareArticle?mini=true&url=https://chicago-joe.github.io/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML&title=Machine%20Learning%20Research%20-%20Joseph%20Loss
+  options:
+    scripts:
+      - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
+      - https://cdn.plot.ly/plotly-latest.min.js
+    analytics_google: UA-XXXXXXXXX-X
+    show_source: true
+    show_toc: true
+    numbered_headers: true
+    folders: true
+  parts:
+    footer: |
+      © 2025 Joseph Loss. All rights reserved. 
+      [Connect with me on LinkedIn](https://linkedin.com/in/josephjl) | 
+      [View on GitHub](https://github.com/chicago-joe)

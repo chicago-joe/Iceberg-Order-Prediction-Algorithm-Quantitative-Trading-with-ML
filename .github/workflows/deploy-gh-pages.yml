@@ -2,9 +2,10 @@ name: MyST GitHub Pages Deploy
 on:
   push:
     paths:
-      - 'iceberg-prediction-whitepaper-v2.md'
+      - '*.md'
       - 'assets/**'
       - '.github/workflows/deploy-gh-pages.yml'
+      - 'myst.yml'
 
 env:
   BASE_URL: /${{ github.event.repository.name }}
@@ -39,16 +40,6 @@ jobs:
       - name: Copy project assets into build output
         run: cp -R assets _build/html/assets
 
-      - name: Copy root entry if nested
-        run: |
-          NESTED="_build/html/iceberg-prediction-whitepaper-v2/index.html"
-          if [ -f "$NESTED" ]; then
-            echo "Copying nested index to root..."
-            cp "$NESTED" _build/html/index.html
-          else
-            echo "Root index.html already in place."
-          fi
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -59,4 +50,3 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           github_token: ${{ secrets.PAGES_TOKEN }}
-        
