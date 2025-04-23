@@ -2,6 +2,11 @@
 title: "Machine Learning for Quantitative Trading: Predicting Iceberg Order Execution"
 author: "Joseph Loss"
 date: "April 17, 2025"
+exports:
+  - format: pdf
+    template: lapreprint-typst
+    output: exports/iceberg-prediction-whitepaper.pdf
+    id: iceberg-paper
 ---
 
 # Machine Learning for Quantitative Trading: Predicting Iceberg Order Execution

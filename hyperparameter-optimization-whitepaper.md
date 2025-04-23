@@ -1,7 +1,7 @@
 ```markdown
 ---
 title: "Hyperparameter Optimization for Iceberg Order Prediction"
-author: "SX3M Trading Research Team"
+author: "Joseph Loss"
 date: "April 21, 2025"
 ---
 
