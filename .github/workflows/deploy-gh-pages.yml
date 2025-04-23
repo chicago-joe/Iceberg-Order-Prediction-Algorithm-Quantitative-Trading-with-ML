@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - '*.md'
+      - '*.ipynb'
       - 'assets/**'
       - '.github/workflows/deploy-gh-pages.yml'
       - 'myst.yml'
@@ -34,8 +35,21 @@ jobs:
       - name: Install MyST Markdown
         run: npm install -g mystmd
 
+      - name: Prepare Directories
+        run: mkdir -p exports
+
+      - name: Build PDF Assets
+        run: |
+          myst build iceberg-prediction-whitepaper-v2.md --pdf
+          myst build index.md --pdf
+
       - name: Build HTML Assets
         run: myst build --html
+
+      - name: Ensure PDFs are in HTML output
+        run: |
+          mkdir -p _build/html/exports
+          cp exports/*.pdf _build/html/exports/
 
       - name: Copy project assets into build output
         run: cp -R assets _build/html/assets
