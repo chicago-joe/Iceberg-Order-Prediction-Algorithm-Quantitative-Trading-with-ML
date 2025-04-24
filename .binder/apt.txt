@@ -1,0 +1,6 @@
+build-essential
+graphviz
+cargo/stable 
+xclip 
+ack 
+typst
