@@ -1,11 +1,24 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.17.0
+kernelspec:
+  name: python3
+  language: python
+  display_name: Python 3 (ipykernel)
+---
+
 ```markdown
 ---
 title: "Hyperparameter Optimization for Iceberg Order Prediction"
 author: "Joseph Loss"
 date: "2025-04-21"
 kernelspec:
-  name: ipykernel
-  display_name: 'Python 3'
+  name: python3
+  display_name: 'Python 3 (ipykernel)'
 ---
 
 # Hyperparameter Optimization for Iceberg Order Prediction
@@ -94,8 +107,9 @@ Our hyperparameter optimization system consists of two key components:
 
 Figure 1 illustrates the optimization workflow:
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-input]
+
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
@@ -310,9 +324,9 @@ This method:
 2. Trains on past data, tests on future data
 3. Prevents information leakage from future market states
 
-
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-input]
+
 import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
@@ -509,9 +523,9 @@ Our optimization process generated detailed results for each model type, which w
 
 The optimization trials reveal patterns in parameter importance and model behavior:
 
-
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-input]
+
 import plotly.graph_objects as go
 import numpy as np
 import pandas as pd
@@ -578,8 +592,9 @@ fig.update_layout(
 fig.show()
 ```
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-input]
+
 import plotly.graph_objects as go
 import numpy as np
 
@@ -732,8 +747,9 @@ This has profound implications for trading system design, suggesting frequent re
 
 The optimization process improved all models significantly, with XGBoost showing the best overall performance:
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-input]
+
 import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
@@ -816,9 +832,9 @@ Notably, while XGBoost, LightGBM, and Logistic Regression achieved similar best 
 
 To understand which parameters most significantly impact model performance, we analyze the parameter importance across optimization trials:
 
-
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-input]
+
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
@@ -885,9 +901,9 @@ These visualizations provide crucial insights for trading system design:
 
 To better understand parameter interactions, we analyze parallel coordinate plots showing the relationship between parameters and model performance:
 
-
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-input]
+
 import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
@@ -969,9 +985,9 @@ This visualization reveals:
 
 To understand how individual parameters impact performance, we examine parameter slice plots:
 
-
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-input]
+
 import plotly.graph_objects as go
 import numpy as np
 import pandas as pd

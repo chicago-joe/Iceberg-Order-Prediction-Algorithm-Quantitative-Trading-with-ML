@@ -1,12 +1,12 @@
 ---
 title: Hyperparameter Optimization and Model Evaluation - Iceberg Order Execution Model
-parts:
-  abstract: |
+abstract: |
     This HPO Tuning paper brings together reports on XGBoost, LightGBM,
     Random Forest, and Logistic Regression hyperparameter optimizations,
     along with accompanying notebook analyses. We compare performance
     metrics, runtime trade‑offs, and best practices for grid vs. Bayesian
     search approaches.
+parts:
   supplemental_materials: |
     The following HPO reports provide detailed analyses of hyperparameter optimization 
     for various machine learning algorithms. Each report contains the best trial parameters, 
