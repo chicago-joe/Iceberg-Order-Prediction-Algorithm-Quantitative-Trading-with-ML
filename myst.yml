@@ -29,7 +29,7 @@ toc:
     - url: /exports/HPO-Iceberg-Order-Execution-Model-Joseph-Loss.pdf
       title: HPO Study (PDF)  
 site:
-  template: article-theme
+  template: book-theme
   title: "Joseph Loss - ML Research"
   nav: 
     - title: My Website

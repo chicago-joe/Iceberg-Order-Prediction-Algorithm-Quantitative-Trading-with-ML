@@ -4,7 +4,7 @@ title: "Hyperparameter Optimization for Iceberg Order Prediction"
 author: "Joseph Loss"
 date: "2025-04-21"
 kernelspec:
-  name: python3
+  name: ipykernel
   display_name: 'Python 3'
 ---
 
