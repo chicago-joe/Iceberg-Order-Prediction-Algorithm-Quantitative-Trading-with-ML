@@ -6,10 +6,17 @@ project:
   keywords: [machine learning, quantitative trading, hyperparameter optimization, XGBoost, LightGBM]
   authors: [Joseph Loss]
   github: https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/
-  repository_url: https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/
-  repository_branch: main
-  jupyter: 'binder'
-toc:
+  jupyter: 
+    binder:
+      # url: string (url)
+      provider: github
+      repo: "https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/"
+      ref: main
+    server:  
+      url: "https://127.0.0.1:9000"
+      token: "my-notebook-token"
+    kernelName: 'python3'
+  toc:
   - title: Home
     file: README.md
   - title: Iceberg Order Prediction
@@ -23,11 +30,12 @@ toc:
       - file: Random Forest_hpo_report.md
       - file: Logistic Regression_hpo_report.md
       - file: hpo_plots.ipynb
-    downloads:
-    - url: /exports/iceberg-prediction-whitepaper.pdf
-      title: Iceberg Order Prediction (PDF)
-    - url: /exports/HPO-Iceberg-Order-Execution-Model-Joseph-Loss.pdf
-      title: HPO Study (PDF)  
+  downloads:
+  - url: /exports/iceberg-prediction-whitepaper.pdf
+    title: Iceberg Order Prediction (PDF)
+  - url: /exports/HPO-Iceberg-Order-Execution-Model-Joseph-Loss.pdf
+    title: HPO Study (PDF)  
+    
 site:
   template: book-theme
   title: "Joseph Loss - ML Research"

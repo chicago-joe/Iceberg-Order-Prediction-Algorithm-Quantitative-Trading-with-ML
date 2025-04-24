@@ -297,4 +297,5 @@ dependencies = [
     "nbdime>=4.0.2",
     "prettytable>=3.16.0",
     "pytest>=8.3.5",
+    "jupytext>=1.17.0",
 ]
