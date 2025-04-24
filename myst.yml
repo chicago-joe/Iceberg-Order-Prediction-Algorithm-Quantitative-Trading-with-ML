@@ -8,10 +8,7 @@ project:
   github: https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/
   repository_url: https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/
   repository_branch: main
-  jupyter:
-    server: 
-      url: http://127.0.0.1:8265
-      token: my-jupyterlab-token
+  jupyter: 'binder'
 toc:
   - title: Home
     file: README.md
@@ -32,7 +29,7 @@ toc:
     - url: /exports/HPO-Iceberg-Order-Execution-Model-Joseph-Loss.pdf
       title: HPO Study (PDF)  
 site:
-  template: book-theme
+  template: article-theme
   title: "Joseph Loss - ML Research"
   nav: 
     - title: My Website
@@ -52,11 +49,11 @@ site:
     scripts:
       - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
       - https://cdn.plot.ly/plotly-latest.min.js
-    analytics_google: UA-XXXXXXXXX-X
-    show_source: true
+    # analytics_google: UA-XXXXXXXXX-X
+    show_source: false
     show_toc: true
-    numbered_headers: true
-    folders: true
+    numbered_headers: false
+    folders: false
   parts:
     footer: |
       © 2025 Joseph Loss. All rights reserved. 

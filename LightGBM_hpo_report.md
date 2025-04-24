@@ -61,6 +61,8 @@
 <!-- :label: -->
 <!-- ::: -->
 
+![](#LightGBM_plot_param_importances) - This will embed the output of a notebook cell
+
 :::{figure} #LightGBM_plot_param_importances
 :label:
 :::
