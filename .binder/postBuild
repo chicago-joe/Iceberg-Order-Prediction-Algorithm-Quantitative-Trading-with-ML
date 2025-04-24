@@ -1,0 +1,14 @@
+#!bin/bash
+set -e
+
+# Install Jupyter extensions
+jupyter labextension install jupyterlab-plotly
+
+# Initialize MyST environment
+myst init
+
+# Convert notebooks to MyST Markdown (if needed)
+# jupytext --to myst *.ipynb
+
+# Precompile assets
+mkdir -p _build
