@@ -2,8 +2,8 @@ name: MyST GitHub Pages Deploy
 on:
   push:
     paths:
-      - '*.md'
-      - '*.ipynb'
+      - '/*.md'
+      - '/hpo_plots.ipynb'
       - 'assets/**'
       - '.github/workflows/deploy-gh-pages.yml'
       - 'myst.yml'
