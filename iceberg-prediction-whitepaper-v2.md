@@ -2,6 +2,11 @@
 title: "Machine Learning for Quantitative Trading: Predicting Iceberg Order Execution"
 author: "Joseph Loss"
 date: "April 17, 2025"
+parts:
+  abstract: |
+    This paper presents a machine learning approach for predicting iceberg order execution in quantitative trading. 
+    We analyze market microstructure patterns to predict whether detected iceberg orders will be filled or 
+    canceled, providing valuable signals for algorithmic trading strategies.
 exports:
   - format: pdf
     template: lapreprint-typst

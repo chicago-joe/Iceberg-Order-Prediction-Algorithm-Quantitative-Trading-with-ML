@@ -35,6 +35,12 @@ jobs:
       - name: Install MyST Markdown
         run: npm install -g mystmd
 
+      - name: Install Typst
+        run: |
+          curl -L -o typst.tar.xz https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz
+          tar -xf typst.tar.xz
+          mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/
+
       - name: Prepare Directories
         run: mkdir -p exports
 
