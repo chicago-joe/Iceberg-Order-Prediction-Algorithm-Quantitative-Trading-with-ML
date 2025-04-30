@@ -1,17 +1,63 @@
-#!bin/bash
+#!/usr/bin/env bash
 set -e
 
-#install typst
-snap install typst
+# 1) Install system-level dependencies via apt
+#    - pandoc: required by MyST-NB / Jupyter-Book to convert Markdown → HTML/PDF
+#    - build-essential: for any native Python wheels or Rust builds
+#    - curl: for fetching Typst installer or data
+sudo apt-get update \  
+ && sudo apt-get install -y --no-install-recommends \
+      pandoc build-essential curl \
+ && sudo rm -rf /var/lib/apt/lists/*  
+# ───────────────────────────────────────────────────────────────────────────  
+# Binder will run postBuild after your apt.txt; if you prefer, you can
+# put ‘pandoc’ and ‘build-essential’ into .binder/apt.txt instead :contentReference[oaicite:0]{index=0}  
 
-# Install Jupyter extensions
-jupyter labextension install jupyterlab-plotly
 
-# Initialize MyST environment
-myst init
+# 2) Install Typst via the official installer (avoids snapd issues in containers)
+#    The curl|sh installer drops the binary into ~/.typst and updates PATH :contentReference[oaicite:1]{index=1}  
+curl -fsSL https://typst.community/typst-install/install.sh | sh  
 
-# Convert notebooks to MyST Markdown (if needed)
-# jupytext --to myst *.ipynb
 
-# Precompile assets
-mkdir -p _build
+# 3) (Optional) If you really want snap, be aware its confinement can block imports :contentReference[oaicite:2]{index=2}  
+#    snap install typst  
+
+
+# 4) Install Python requirements
+#    - jupytext: open & sync .md/.ipynb :contentReference[oaicite:3]{index=3}  
+#    - myst-parser & myst-nb: support MyST Markdown & Markdown-notebooks :contentReference[oaicite:4]{index=4}  
+#    - jupyter-book: build static site :contentReference[oaicite:5]{index=5}  
+#    - jupyterlab-myst: rich MyST rendering in Lab :contentReference[oaicite:6]{index=6}  
+#    - any other libs your notebooks import (e.g. in requirements.txt)
+pip install \
+    jupytext \
+    myst-parser myst-nb \
+    jupyter-book \
+    jupyterlab-myst \
+    -r requirements.txt  
+
+
+# 5) Rebuild JupyterLab so extensions (jupytext, myst) take effect :contentReference[oaicite:7]{index=7}  
+jupyter lab build  
+
+
+# 6) (You had this) Install JupyterLab Plotly extension for interactive charts  
+jupyter labextension install jupyterlab-plotly  
+
+
+# 7) Initialize MyST environment (creates myst.yml, etc.)  
+myst init  
+
+
+# 8) Sync .ipynb ↔ MyST-Markdown if you keep both formats in repo  
+#    Uncomment if you want to convert all notebooks to myst on build  
+# jupytext --to myst *.ipynb  
+
+
+# 9) Pre-build your Jupyter-Book so users land on HTML directly  
+#    This runs Sphinx under the hood, outputs into _build/html by default  
+jupyter-book build .  
+
+
+# 10) Ensure your build artifacts directory exists  
+mkdir -p _build  
