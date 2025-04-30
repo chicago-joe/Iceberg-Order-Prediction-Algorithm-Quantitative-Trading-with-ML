@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Install JupyterLab extensions
+jupyter labextension install jupyterlab-plotly
+
+# Convert any notebooks to MyST if needed
+jupytext --to myst *.ipynb || echo "No notebooks to convert or conversion failed"
+
+# Initialize MyST environment
+myst init || echo "MyST already initialized or initialization failed"
+
+# Build JupyterLab
+jupyter lab build
+
+# Make the postBuild script executable
+chmod +x .binder/postBuild
