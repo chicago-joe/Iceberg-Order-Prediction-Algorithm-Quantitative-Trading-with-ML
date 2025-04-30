@@ -1,16 +1,21 @@
 #!/bin/bash
 
-# Install JupyterLab extensions
-jupyter labextension install jupyterlab-plotly
+# Ensure the script is executable
+chmod +x "${0}"
 
-# Convert any notebooks to MyST if needed
-jupytext --to myst *.ipynb || echo "No notebooks to convert or conversion failed"
+# Set paths
+export PATH="${HOME}/.local/bin:${PATH}"
 
-# Initialize MyST environment
-myst init || echo "MyST already initialized or initialization failed"
+# Install Plotly JupyterLab extension
+jupyter labextension install jupyterlab-plotly --no-build || echo "Failed to install Plotly extension"
 
-# Build JupyterLab
-jupyter lab build
+# Find and convert notebooks to MyST if needed
+find . -name "*.ipynb" -not -path "*/\.*" -exec jupytext --to myst {} \; || echo "No notebooks to convert"
 
-# Make the postBuild script executable
-chmod +x .binder/postBuild
+# Initialize MyST environment (with error handling)
+myst init || echo "MyST initialization failed"
+
+# Build JupyterLab (with error handling)
+jupyter lab build || echo "JupyterLab build failed"
+
+echo "postBuild script completed"
