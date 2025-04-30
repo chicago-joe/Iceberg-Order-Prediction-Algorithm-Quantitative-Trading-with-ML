@@ -5,10 +5,10 @@ set -e
 #    - pandoc: required by MyST-NB / Jupyter-Book to convert Markdown → HTML/PDF
 #    - build-essential: for any native Python wheels or Rust builds
 #    - curl: for fetching Typst installer or data
-sudo apt-get update \  
- && sudo apt-get install -y --no-install-recommends \
+apt-get update \  
+ && apt-get install -y --no-install-recommends \
       pandoc build-essential curl \
- && sudo rm -rf /var/lib/apt/lists/*  
+ && rm -rf /var/lib/apt/lists/*  
 # ───────────────────────────────────────────────────────────────────────────  
 # Binder will run postBuild after your apt.txt; if you prefer, you can
 # put ‘pandoc’ and ‘build-essential’ into .binder/apt.txt instead :contentReference[oaicite:0]{index=0}  
