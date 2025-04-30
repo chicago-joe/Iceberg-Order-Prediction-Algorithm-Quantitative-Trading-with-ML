@@ -298,4 +298,5 @@ dependencies = [
     "prettytable>=3.16.0",
     "pytest>=8.3.5",
     "jupytext>=1.17.0",
+    "kaleido<=0.2.1",
 ]
