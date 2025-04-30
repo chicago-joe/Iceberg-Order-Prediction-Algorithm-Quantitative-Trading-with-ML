@@ -15,7 +15,7 @@ project:
     server:
       url: "https://127.0.0.1:9000"
       token: 1234
-#    kernelName: 'python3'
+    kernelName: 'python3'
   toc:
   - title: Home
     file: README.md
