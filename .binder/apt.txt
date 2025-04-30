@@ -3,7 +3,7 @@ graphviz
 cargo
 xclip 
 ack 
-typst
+#typst
 ripgrep
 texinfo
 apt-utils
