@@ -1,6 +1,9 @@
 #!bin/bash
 set -e
 
+#install typst
+snap install typst
+
 # Install Jupyter extensions
 jupyter labextension install jupyterlab-plotly
 
