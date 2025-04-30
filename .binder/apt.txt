@@ -1,9 +1,10 @@
 build-essential
 graphviz
-cargo/stable 
+cargo
 xclip 
 ack 
 typst
 ripgrep
 texinfo
 apt-utils
+snapd
