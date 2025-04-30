@@ -4,3 +4,6 @@ cargo/stable
 xclip 
 ack 
 typst
+ripgrep
+texinfo
+apt-utils
