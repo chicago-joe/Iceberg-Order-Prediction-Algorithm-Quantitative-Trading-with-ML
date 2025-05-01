@@ -49,27 +49,30 @@
 
 ## Embedded Visualizations
 
-:::{figure} #XGBoost_plot_slice
-:label:
-:::
+```{include} "data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_param_importances.html"
 
-:::{figure} #XGBoost_plot_param_importances
-:label:
-:::
+```
 
-:::{figure} #XGBoost_plot_parallel_coordinate
-:label:
-:::
+```{include} "data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_plot_slice.html"
 
-:::{figure} #XGBoost_plot_optimization_history
-:label:
-:::
+```
 
-:::{figure} #XGBoost_plot_edf
-:label:
-:::
+```{include} "data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_parallel_coordinates.html"
 
-:::{figure} #XGBoost_plot_contour
-:label:
-:::
+```
 
+```{include} "data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_rank.html"
+
+```
+
+```{include} "data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_contour.html"
+
+```
+
+```{include} "data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_edf.html"
+
+```
+
+```{include} "data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_optimization_history.html"
+
+```

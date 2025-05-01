@@ -37,26 +37,30 @@
 
 ## Embedded Visualizations
 
-:::{figure} #Random Forest_plot_slice
-:label:
-:::
+```{include} "data/hyperparameter-optimization/Random Forest/visualizations/random_forest_plot_param_importances.html"
 
-:::{figure} #Random Forest_plot_param_importances
-:label:
-:::
+```
 
-:::{figure} #Random Forest_plot_parallel_coordinate
-:label:
-:::
+```{include} "data/hyperparameter-optimization/Random Forest/visualizations/random_forest_plot_plot_slice.html"
 
-:::{figure} #Random Forest_plot_optimization_history
-:label:
-:::
+```
 
-:::{figure} #Random Forest_plot_edf
-:label:
-:::
+```{include} "data/hyperparameter-optimization/Random Forest/visualizations/random_forest_plot_parallel_coordinates.html"
 
-:::{figure} #Random Forest_plot_contour
-:label:
-:::
+```
+
+```{include} "data/hyperparameter-optimization/Random Forest/visualizations/random_forest_plot_rank.html"
+
+```
+
+```{include} "data/hyperparameter-optimization/Random Forest/visualizations/random_forest_plot_contour.html"
+
+```
+
+```{include} "data/hyperparameter-optimization/Random Forest/visualizations/random_forest_plot_edf.html"
+
+```
+
+```{include} "data/hyperparameter-optimization/Random Forest/visualizations/random_forest_plot_optimization_history.html"
+
+```

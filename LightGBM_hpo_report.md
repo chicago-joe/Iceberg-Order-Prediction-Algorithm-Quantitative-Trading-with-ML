@@ -57,29 +57,37 @@
 
 ## Embedded Visualizations
 
+
+```{include} "data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_param_importances.html"
+
+```
+
+```{include} "data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_plot_slice.html"
+
+```
+
+```{include} "data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_parallel_coordinates.html"
+
+```
+
+```{include} "data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_rank.html"
+
+```
+
+```{include} "data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_contour.html"
+
+```
+
+```{include} "data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_edf.html"
+
+```
+
+```{include} "data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_optimization_history.html"
+
+```
+
 <!-- :::{figure} #LightGBM_plot_slice -->
 <!-- :label: -->
 <!-- ::: -->
 
-![](#LightGBM_plot_param_importances) - This will embed the output of a notebook cell
-
-:::{figure} #LightGBM_plot_param_importances
-:label:
-:::
-
-:::{figure} #LightGBM_plot_parallel_coordinate
-:label:
-:::
-
-:::{figure} #LightGBM_plot_optimization_history
-:label:
-:::
-
-:::{figure} #LightGBM_plot_edf
-:label:
-:::
-
-:::{figure} #LightGBM_plot_contour
-:label:
-:::
-
+<!-- ![](#LightGBM_plot_param_importances) - This will embed the output of a notebook cell -->

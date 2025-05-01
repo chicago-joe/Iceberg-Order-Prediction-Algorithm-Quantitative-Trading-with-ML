@@ -15,14 +15,16 @@ author: "Joseph Loss"
 date: "2025-04-21"
 ---
 
-# Hyperparameter Optimization for Iceberg Order Prediction
-
 ```{code-cell} ipython3
 :tags: [remove-input]
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
 import pandas as pd
+
+import plotly.io as pio
+pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+# pio.renderers.default = 'notebook'      # interactive HTML widget
 
 # Create system architecture diagram
 fig = go.Figure()
@@ -108,6 +110,10 @@ Figure 1 illustrates the optimization workflow:
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
+
+import plotly.io as pio
+pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+# pio.renderers.default = 'notebook'      # interactive HTML widget
 
 # Create optimization workflow diagram
 fig = go.Figure()
@@ -326,6 +332,10 @@ import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
 
+import plotly.io as pio
+pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+# pio.renderers.default = 'notebook'      # interactive HTML widget
+
 # Simulate time series data
 dates = pd.date_range(start='2023-01-01', periods=15, freq='D')
 dates_str = [d.strftime('%Y-%m-%d') for d in dates]
@@ -525,6 +535,10 @@ import plotly.graph_objects as go
 import numpy as np
 import pandas as pd
 
+import plotly.io as pio
+pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+# pio.renderers.default = 'notebook'      # interactive HTML widget
+
 # Simulate XGBoost optimization history
 trials = pd.DataFrame({
     'number': range(50),
@@ -592,6 +606,10 @@ fig.show()
 
 import plotly.graph_objects as go
 import numpy as np
+
+import plotly.io as pio
+pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+# pio.renderers.default = 'notebook'      # interactive HTML widget
 
 # Create a grid for the contour plot
 feature_fraction = np.linspace(0.6, 1.0, 20)
@@ -749,6 +767,10 @@ import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
 
+import plotly.io as pio
+pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+# pio.renderers.default = 'notebook'      # interactive HTML widget
+
 # Create parameter importance data
 parameters = [
     'eval_metric', 'train_size', 'min_child_weight', 'max_depth', 
@@ -833,6 +855,10 @@ To understand which parameters most significantly impact model performance, we a
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
+import plotly.io as pio
+pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+# pio.renderers.default = 'notebook'      # interactive HTML widget
+
 # Create a 1x2 subplot
 fig = make_subplots(rows=1, cols=2, 
                     subplot_titles=('XGBoost Parameter Importance', 
@@ -902,6 +928,10 @@ To better understand parameter interactions, we analyze parallel coordinate plot
 import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
+
+import plotly.io as pio
+pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+# pio.renderers.default = 'notebook'      # interactive HTML widget
 
 # Create simulated trial data
 n_trials = 30
@@ -986,6 +1016,10 @@ To understand how individual parameters impact performance, we examine parameter
 import plotly.graph_objects as go
 import numpy as np
 import pandas as pd
+
+import plotly.io as pio
+pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+# pio.renderers.default = 'notebook'      # interactive HTML widget
 
 # Create simulated data for parameter slice analysis
 n_estimators_values = [100, 250, 500, 1000]
