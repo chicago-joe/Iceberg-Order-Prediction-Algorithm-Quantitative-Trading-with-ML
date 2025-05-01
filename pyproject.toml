@@ -3,7 +3,7 @@ name = "app"
 version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.12,<3.13"
-prerelease-mode = "allow"
+prerelease-mode = "if-necessary-or-explicit"
 dependencies = [
     "aiofiles",
     "aiohttp",
@@ -270,7 +270,6 @@ dependencies = [
     "python-lsp-ruff>=2.2.2",
     "jupyterlab>=4.4.0",
     "anywidget",
-    "jupyter-server>=2.15.0",
     "dockerfile-kernel>=0.1.2",
     "iniconfig>=2.1.0",
     "ipylab>=1.0.0",
@@ -279,7 +278,6 @@ dependencies = [
     "jupyter-resource-usage>=1.1.1",
     "jupyter-server-fileid>=0.9.3",
     "jupyter-server-mathjax>=0.2.6",
-    "jupyter-server-ydoc>=2.0.1",
     "jupyter-ydoc>=3.0.4",
     "jupyterlab-git>=0.51.1",
     "jupyterlab-github>=4.0.0",
@@ -299,9 +297,7 @@ dependencies = [
     "jupytext>=1.17.0",
     "kaleido<=0.2.1",
     "jupyterlite-core>=0.5.1",
-    "jupyterlite-xeus>=3.1.7",
     "jupyterlite-pyodide-kernel>=0.5.2",
-    "repo2jupyterlite>=0.2",
     "thebe>=0.0.4.6",
     "jupyter-server-proxy>=4.4.0",
     "jupyterlab-tour>=4.0.1",
@@ -312,3 +308,12 @@ dependencies = [
     "jupyter-shared-drive>=0.2.1",
     "dtreeviz[all]>=2.2.2",
 ]
+
+[tool.uv]
+environments = [
+#    "implementation_name == 'cpython'"
+    "sys_platform == 'linux'",
+]
+
+[tool.uv.pip]
+python-platform = "linux"
