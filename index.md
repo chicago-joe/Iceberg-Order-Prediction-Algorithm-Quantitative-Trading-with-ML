@@ -1,40 +1,28 @@
 ---
-title: Hyperparameter Optimization and Model Evaluation - Iceberg Order Execution Model
+title: Machine Learning for Quantitative Trading
 abstract: |
-    This HPO Tuning paper brings together reports on XGBoost, LightGBM,
-    Random Forest, and Logistic Regression hyperparameter optimizations,
-    along with accompanying notebook analyses. We compare performance
-    metrics, runtime trade‑offs, and best practices for grid vs. Bayesian
-    search approaches.
-parts:
-  supplemental_materials: |
-    The following HPO reports provide detailed analyses of hyperparameter optimization 
-    for various machine learning algorithms. Each report contains the best trial parameters, 
-    performance metrics, and visualizations of the optimization process.
-exports:
-  - format: pdf
-    template: lapreprint-typst
-    output: exports/HPO-Iceberg-Order-Execution-Model-Joseph-Loss.pdf
-    id: my-paper
-    articles:
-      - file: hyperparameter-optimization-whitepaper.md
-        title: "Hyperparameter Optimization Whitepaper"
-      - file: XGBoost_hpo_report.md
-        title: "Appendix A: XGBoost HPO Report"
-      - file: LightGBM_hpo_report.md
-        title: "Appendix B: LightGBM HPO Report"
-      - file: Random Forest_hpo_report.md
-        title: "Appendix C: Random Forest HPO Report"
-      - file: Logistic Regression_hpo_report.md
-        title: "Appendix D: Logistic Regression HPO Report"
+    A collection of research papers on machine learning applications in 
+    quantitative trading, focusing on iceberg order prediction and 
+    hyperparameter optimization for trading models.
 ---
 
-{toctree}
-:caption: "HPO Tuning Paper Contents"
-:maxdepth: 2
-- hyperparameter-optimization-whitepaper.md
-- XGBoost_hpo_report.md
-- LightGBM_hpo_report.md
-- Random Forest_hpo_report.md
-- Logistic Regression_hpo_report.md
-- hpo_plots.ipynb
+# Machine Learning for Quantitative Trading
+
+Welcome to my research repository, where I explore applications of machine learning to quantitative trading challenges. This site contains two major research papers:
+
+## [Iceberg Order Prediction](./iceberg-prediction-whitepaper-v2.md)
+
+This paper presents a machine learning approach for predicting iceberg order execution in quantitative trading. We analyze market microstructure patterns to predict whether detected iceberg orders will be filled or canceled, providing valuable signals for algorithmic trading strategies.
+
+[![Iceberg Order Prediction](./assets/complete_iceberg.png)](./iceberg-prediction-whitepaper-v2.md)
+
+## [Hyperparameter Optimization](./hyperparameter-optimization-whitepaper.md)
+
+This comprehensive study examines hyperparameter optimization for machine learning models that predict iceberg order execution. The paper includes model comparison and detailed optimization results for several algorithms:
+
+- [XGBoost](./XGBoost_hpo_report.md)
+- [LightGBM](./LightGBM_hpo_report.md)
+- [Random Forest](./Random Forest_hpo_report.md)
+- [Logistic Regression](./Logistic Regression_hpo_report.md)
+
+[![HPO Overview](./assets/TimeSeriesCVApproach.png)](./hyperparameter-optimization-whitepaper.md)

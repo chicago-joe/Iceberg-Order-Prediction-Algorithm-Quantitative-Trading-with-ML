@@ -16,23 +16,23 @@ project:
       token: 1234
     kernelName: 'python3'
   toc:
-# CREATE LANDING PAGE TITLE AND FILE HERE!
-  - title: Iceberg Order Prediction                #article 1
-    file: iceberg-prediction-whitepaper-v2.md
-  - title: Hyperparameter Optimization             
-    file: index.md                                 #should be renamed
-    children:                                   
-      - file: hyperparameter-optimization-whitepaper.md # article 2
-      - file: XGBoost_hpo_report.md                 #supplemental materials to article 2
-      - file: LightGBM_hpo_report.md
-      - file: Random Forest_hpo_report.md
-      - file: Logistic Regression_hpo_report.md
-
-  # downloads:
-  # - url: exports/iceberg-prediction-whitepaper.pdf
-  #   title: Iceberg Order Prediction (PDF)
-  # - url: exports/HPO-Iceberg-Order-Execution-Model-Joseph-Loss.pdf
-  #   title: HPO Study (PDF)
+    - file: index.md
+      title: Home
+    - title: Iceberg Order Prediction
+      file: iceberg-prediction-whitepaper-v2.md
+    - title: Hyperparameter Optimization
+      file: hyperparameter-optimization-whitepaper.md
+      children:
+        - file: XGBoost_hpo_report.md
+          title: XGBoost HPO Report
+        - file: LightGBM_hpo_report.md
+          title: LightGBM HPO Report
+        - file: Random Forest_hpo_report.md
+          title: Random Forest HPO Report
+        - file: Logistic Regression_hpo_report.md
+          title: Logistic Regression HPO Report
+        - file: hpo_plots.ipynb
+          title: HPO Plots
 
 site:
   template: book-theme
@@ -47,7 +47,7 @@ site:
   actions:
     - title: Share on LinkedIn
       url: https://www.linkedin.com/shareArticle?mini=true&url=https://chicago-joe.github.io/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML&title=Machine%20Learning%20Research%20-%20Joseph%20Loss
-	- title: Download Iceberg Paper
+    - title: Download Iceberg Paper
       url: exports/iceberg-prediction-whitepaper.pdf
     - title: Download HPO Study
       url: exports/HPO-Iceberg-Order-Execution-Model-Joseph-Loss.pdf
@@ -55,7 +55,6 @@ site:
     scripts:
       - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
       - https://cdn.plot.ly/plotly-latest.min.js
-    # analytics_google: UA-XXXXXXXXX-X
     show_source: false
     show_toc: true
     numbered_headers: false
