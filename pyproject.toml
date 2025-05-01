@@ -2,7 +2,7 @@
 name = "app"
 version = "0.1.0"
 description = "Add your description here"
-requires-python = ">=3.12"
+requires-python = ">=3.12,<3.13"
 prerelease-mode = "allow"
 dependencies = [
     "aiofiles",
@@ -259,7 +259,7 @@ dependencies = [
     "chartpy",
     "bqplot",
     "shap",
-    "cysimdjson",
+    "cysimdjson<24",
     "feature-engine",
     "deepchecks-client",
     "deepchecks-installer",
@@ -271,7 +271,6 @@ dependencies = [
     "jupyterlab>=4.4.0",
     "anywidget",
     "jupyter-server>=2.15.0",
-    "dtreeviz[tensorflow-decision-trees]>=2.2.2",
     "dockerfile-kernel>=0.1.2",
     "iniconfig>=2.1.0",
     "ipylab>=1.0.0",
@@ -311,4 +310,5 @@ dependencies = [
     "jupyterlab-open-url-parameter>=0.3.0",
     "jupyterlab-webrtc-docprovider>=0.1.1",
     "jupyter-shared-drive>=0.2.1",
+    "dtreeviz[all]>=2.2.2",
 ]
