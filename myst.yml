@@ -10,10 +10,10 @@ project:
     binder:
       provider: github
       repo: "https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/"
-      ref: v2-hpo
+      ref: "v2-hpo"
     server:
       url: "https://127.0.0.1:9000"
-      token: 1234
+      token: "1234"
     kernelName: 'python3'
   toc:
     - file: index.md
@@ -31,8 +31,6 @@ project:
           title: Random Forest HPO Report
         - file: Logistic Regression_hpo_report.md
           title: Logistic Regression HPO Report
-        - file: hpo_plots.ipynb
-          title: HPO Plots
 
 site:
   template: book-theme

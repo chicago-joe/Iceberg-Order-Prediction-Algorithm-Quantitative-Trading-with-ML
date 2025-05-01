@@ -5,18 +5,16 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.17.0
+    jupytext_version: 1.17.1
 kernelspec:
-  name: python3
   display_name: Python 3 (ipykernel)
   language: python
-title: "Hyperparameter Optimization for Iceberg Order Prediction"
-author: "Joseph Loss"
-date: "2025-04-21"
+  name: python3
 ---
 
 ```{code-cell} ipython3
 :tags: [remove-input]
+
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
@@ -78,7 +76,6 @@ fig.update_layout(
 
 fig.show()
 ```
-
 
 *The complete system architecture showing data acquisition, preprocessing, model optimization, and trading integration.*
 
