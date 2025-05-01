@@ -44,7 +44,7 @@
   "num_leaves": 31,
   "min_sum_hessian_in_leaf": 10,
   "extra_trees": true,
-  "min_data_in_leaf": 100,
+  "min_./data_in_leaf": 100,
   "feature_fraction": 1.0,
   "bagging_fraction": 0.8,
   "bagging_freq": 0,
@@ -58,31 +58,31 @@
 ## Embedded Visualizations
 
 
-```{include} "data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_param_importances.html"
+```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_param_importances.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_plot_slice.html"
+```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_plot_slice.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_parallel_coordinates.html"
+```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_parallel_coordinates.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_rank.html"
+```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_rank.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_contour.html"
+```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_contour.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_edf.html"
+```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_edf.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_optimization_history.html"
+```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_optimization_history.html"
 
 ```
 

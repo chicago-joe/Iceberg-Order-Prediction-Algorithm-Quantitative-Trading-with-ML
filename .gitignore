@@ -2,7 +2,7 @@
 MarkText/*
 .ipynb_checkpoints
 # MyST build outputs
-_build
+_build/*
 .env
 
 !.env.template

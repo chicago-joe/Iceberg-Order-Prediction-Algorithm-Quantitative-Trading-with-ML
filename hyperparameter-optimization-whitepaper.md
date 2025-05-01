@@ -10,6 +10,7 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+date: "2025-05-01"
 ---
 
 ```{code-cell} ipython3

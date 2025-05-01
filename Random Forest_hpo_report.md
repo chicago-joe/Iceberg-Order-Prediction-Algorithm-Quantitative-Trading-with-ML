@@ -1,4 +1,4 @@
-# HPO Report: `Random Forest`
+# HPO Report: `RandomForest`
 
 ## Best Trial
 ```json
@@ -37,30 +37,30 @@
 
 ## Embedded Visualizations
 
-```{include} "data/hyperparameter-optimization/Random Forest/visualizations/random_forest_plot_param_importances.html"
+```{include} "./data/hyperparameter-optimization/RandomForest/visualizations/random_forest_plot_param_importances.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/Random Forest/visualizations/random_forest_plot_plot_slice.html"
+```{include} "./data/hyperparameter-optimization/RandomForest/visualizations/random_forest_plot_plot_slice.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/Random Forest/visualizations/random_forest_plot_parallel_coordinates.html"
+```{include} "./data/hyperparameter-optimization/RandomForest/visualizations/random_forest_plot_parallel_coordinates.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/Random Forest/visualizations/random_forest_plot_rank.html"
+```{include} "./data/hyperparameter-optimization/RandomForest/visualizations/random_forest_plot_rank.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/Random Forest/visualizations/random_forest_plot_contour.html"
+```{include} "./data/hyperparameter-optimization/RandomForest/visualizations/random_forest_plot_contour.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/Random Forest/visualizations/random_forest_plot_edf.html"
+```{include} "./data/hyperparameter-optimization/RandomForest/visualizations/random_forest_plot_edf.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/Random Forest/visualizations/random_forest_plot_optimization_history.html"
+```{include} "./data/hyperparameter-optimization/RandomForest/visualizations/random_forest_plot_optimization_history.html"
 
 ```
