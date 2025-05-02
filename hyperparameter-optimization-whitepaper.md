@@ -9,21 +9,15 @@ kernelspec:
   name: python3
   language: python
   display_name: Python 3 (ipykernel)
----
-
-```markdown {full-width}
----
-title: "Hyperparameter Optimization for Iceberg Order Prediction"
+title: "Hyperparameter Optimization Tuning for Iceberg Order Prediction"
 author: "Joseph Loss"
 date: "2025-04-21"
-kernelspec:
-  name: python3
-  display_name: 'Python 3 (ipykernel)'
+exports:
+  - format: pdf
+    template: lapreprint-typst
+    output: exports/JLOSS-hyperparameter-tuning-whitepaper.pdf
+    id: hpo-tuning-paper
 ---
-
-+++
-
-# Hyperparameter Optimization for Iceberg Order Prediction
 
 +++
 
@@ -89,9 +83,11 @@ fig.update_layout(
     showlegend=False
 )
 
-fig.show()
-```
+fig.show()```
+
+
 +++
+
 
 *The complete system architecture showing data acquisition, preprocessing, model optimization, and trading integration.*
 
@@ -1359,5 +1355,3 @@ The most surprising finding across all models is that shorter training windows (
     </a>
   </div>
 </div>
-
-```

@@ -55,102 +55,33 @@
 }
 ```
 
++++
+
 ## Embedded Visualizations
 
 ### Parameter Importances
-:::{figure} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_param_importances.png
-:width: 80%
-:class: with-shadow
-:name: lightgbm_param_importances
+![lightgbm_param_importances](/assets/lightgbm_plot_param_importances.png)
 
-Parameter importance visualization
-:::
-
-[](xref:spec/lightgbm_hpo#Parameter_Importances)
-```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_param_importances.html
-:width: 100%
-```
 
 ### Slice Plot
-:::{figure} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_slice.png
-:width: 80%
-:class: with-shadow
-:name: lightgbm_slice_plot
+![lightgbm_slice_plot](/assets/lightgbm_plot_slice.png)
 
-Slice plot visualization
-:::
-
-[](xref:spec/lightgbm_hpo#Slice_Plot)
-```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_slice.html
-:width: 100%
-```
 
 ### Parallel Coordinates Plot
-:::{figure} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_parallel_coordinate.png
-:width: 80%
-:class: with-shadow
-:name: lightgbm_parallel_coordinates
+![lightgbm_parallel_coordinates](/assets/lightgbm_plot_parallel_coordinate.png)
 
-Parallel coordinates visualization
-:::
-
-[](xref:spec/lightgbm_hpo#Parallel_Coordinate)
-```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_parallel_coordinate.html
-:width: 100%
-```
 
 ### Rank Plot
-:::{figure} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_rank.png
-:width: 80%
-:class: with-shadow
-:name: lightgbm_rank_plot
+![lightgbm_rank_plot](/assets/lightgbm_plot_rank.png)
 
-Rank plot visualization
-:::
-
-[](xref:spec/lightgbm_hpo#Rank_Plot)
-```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_rank.html
-:width: 100%
-```
 
 ### Contour Plot
-:::{figure} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_contour.png
-:width: 80%
-:class: with-shadow
-:name: lightgbm_contour_plot
+![lightgbm_contour_plot](/assets/lightgbm_plot_contour.png)
 
-Contour plot visualization
-:::
-
-[](xref:spec/lightgbm_hpo#Contour_Plot)
-```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_contour.html
-:width: 100%
-```
 
 ### EDF Plot
-:::{figure} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_edf.png
-:width: 80%
-:class: with-shadow
-:name: lightgbm_edf_plot
+![lightgbm_edf_plot](/assets/lightgbm_plot_edf.png)
 
-EDF plot visualization
-:::
-
-[](xref:spec/lightgbm_hpo#EDF_Plot)
-```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_edf.html
-:width: 100%
-```
 
 ### Optimization History
-:::{figure} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_optimization_history.png
-:width: 80%
-:class: with-shadow
-:name: lightgbm_optimization_history
-
-Optimization history visualization
-:::
-
-[](xref:spec/lightgbm_hpo#Optimization_History)
-```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_optimization_history.html
-:width: 100%
-```
+![lightgbm_optimization_history](/assets/lightgbm_plot_optimization_history.png)

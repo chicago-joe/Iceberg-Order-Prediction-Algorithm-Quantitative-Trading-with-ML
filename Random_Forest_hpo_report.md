@@ -35,102 +35,33 @@
 }
 ```
 
++++
+
 ## Embedded Visualizations
 
 ### Parameter Importances
-:::{figure} _references/hyperparameter-tuning/RandomForest/random_forest_plot_param_importances.png
-:width: 80%
-:class: with-shadow
-:name: random_forest_param_importances
+![random_forest_param_importances](/assets/random_forest_plot_param_importances.png)
 
-Parameter importance visualization
-:::
-
-[](xref:spec/randomforest_hpo#Parameter_Importances)
-```{iframe} _references/hyperparameter-tuning/RandomForest/random_forest_plot_param_importances.html
-:width: 100%
-```
 
 ### Slice Plot
-:::{figure} _references/hyperparameter-tuning/RandomForest/random_forest_plot_slice.png
-:width: 80%
-:class: with-shadow
-:name: random_forest_slice_plot
+![random_forest_slice_plot](/assets/random_forest_plot_slice.png)
 
-Slice plot visualization
-:::
-
-[](xref:spec/randomforest_hpo#Slice_Plot)
-```{iframe} _references/hyperparameter-tuning/RandomForest/random_forest_plot_slice.html
-:width: 100%
-```
 
 ### Parallel Coordinates Plot
-:::{figure} _references/hyperparameter-tuning/RandomForest/random_forest_plot_parallel_coordinate.png
-:width: 80%
-:class: with-shadow
-:name: random_forest_parallel_coordinates
+![random_forest_parallel_coordinates](/assets/random_forest_plot_parallel_coordinate.png)
 
-Parallel coordinates visualization
-:::
-
-[](xref:spec/randomforest_hpo#Parallel_Coordinate)
-```{iframe} _references/hyperparameter-tuning/RandomForest/random_forest_plot_parallel_coordinate.html
-:width: 100%
-```
 
 ### Rank Plot
-:::{figure} _references/hyperparameter-tuning/RandomForest/random_forest_plot_rank.png
-:width: 80%
-:class: with-shadow
-:name: random_forest_rank_plot
+![random_forest_rank_plot](/assets/random_forest_plot_rank.png)
 
-Rank plot visualization
-:::
-
-[](xref:spec/randomforest_hpo#Rank_Plot)
-```{iframe} _references/hyperparameter-tuning/RandomForest/random_forest_plot_rank.html
-:width: 100%
-```
 
 ### Contour Plot
-:::{figure} _references/hyperparameter-tuning/RandomForest/random_forest_plot_contour.png
-:width: 80%
-:class: with-shadow
-:name: random_forest_contour_plot
+![random_forest_contour_plot](/assets/random_forest_plot_contour.png)
 
-Contour plot visualization
-:::
-
-[](xref:spec/randomforest_hpo#Contour_Plot)
-```{iframe} _references/hyperparameter-tuning/RandomForest/random_forest_plot_contour.html
-:width: 100%
-```
 
 ### EDF Plot
-:::{figure} _references/hyperparameter-tuning/RandomForest/random_forest_plot_edf.png
-:width: 80%
-:class: with-shadow
-:name: random_forest_edf_plot
+![random_forest_edf_plot](/assets/random_forest_plot_edf.png)
 
-EDF plot visualization
-:::
-
-[](xref:spec/randomforest_hpo#EDF_Plot)
-```{iframe} _references/hyperparameter-tuning/RandomForest/random_forest_plot_edf.html
-:width: 100%
-```
 
 ### Optimization History
-:::{figure} _references/hyperparameter-tuning/RandomForest/random_forest_plot_optimization_history.png
-:width: 80%
-:class: with-shadow
-:name: random_forest_optimization_history
-
-Optimization history visualization
-:::
-
-[](xref:spec/randomforest_hpo#Optimization_History)
-```{iframe} _references/hyperparameter-tuning/RandomForest/random_forest_plot_optimization_history.html
-:width: 100%
-```
+![random_forest_optimization_history](/assets/random_forest_plot_optimization_history.png)
