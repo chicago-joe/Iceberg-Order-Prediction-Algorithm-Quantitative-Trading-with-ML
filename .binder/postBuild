@@ -6,6 +6,15 @@ chmod +x "${0}"
 # Set paths
 export PATH="${HOME}/.local/bin:${PATH}"
 
+
+# for pdf image exports
+wget --output-document ~/.local/bin/magick.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-7.1.1-47.x86_64.rpm
+wget --output-document ~/.local/bin/magick-libs.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-libs-7.1.1-47.x86_64.rpm
+
+alien ~/.local/bin/magick.rpm && alien ~/.local/bin/magick-libs.rpm
+rm -rf ~/.local/bin/*.rpm && dpkg -i ~/.local/bin/*.deb
+
+
 # Install Plotly JupyterLab extension
 jupyter labextension install jupyterlab-plotly --no-build || echo "Failed to install Plotly extension"
 

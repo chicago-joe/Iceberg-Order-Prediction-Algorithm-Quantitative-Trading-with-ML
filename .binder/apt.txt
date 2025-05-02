@@ -5,3 +5,6 @@ latexmk
 pandoc
 build-essential
 webp
+inkscape
+rpm
+alien
