@@ -29,7 +29,16 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          pip install jupyter jupyter-client ipykernel myst-nb jupytext   # installs execution environment :contentReference[oaicite:12]{index=12}
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install system dependencies from .binder/apt.txt
+        run: |
+          sudo apt-get update
+          < .binder/apt.txt xargs sudo apt-get install -y
+
+      - name: Run Binder postBuild
+        run: bash .binder/postBuild
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
