@@ -7,7 +7,7 @@ project:
   authors: [Joseph Loss]
   github: https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/
   references: references.yml
-    
+
   jupyter: true
     binder:
       url: https://mybinder.org/v2/gh/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/v2-hpo
@@ -19,21 +19,21 @@ project:
       token: "1234"
     kernelName: 'python3'
   toc:
-    - title: Home
+    - title: index
       file: index.md
-    - title: Iceberg Order Prediction
+    - title: Iceberg Order Prediction Model
       file: iceberg-prediction-whitepaper-v2.md
-    - title: Hyperparameter Optimization
+    - title: Hyperparameter Tuning & Optimization
       file: hyperparameter-optimization-whitepaper.md
       children:
-        - file: XGBoost_hpo_report.md
-          title: XGBoost HPO Report
-        - file: LightGBM_hpo_report.md
-          title: LightGBM HPO Report
-        - file: Random_Forest_hpo_report.md
-          title: Random Forest HPO Report
-        - file: Logistic_Regression_hpo_report.md
-          title: Logistic Regression HPO Report
+        - title: XGBoost HPO Report
+          file: XGBoost_hpo_report.md
+        - title: LightGBM HPO Report
+          file: LightGBM_hpo_report.md
+        - title: Random Forest HPO Report
+          file: Random_Forest_hpo_report.md
+        - title: Logistic Regression HPO Report
+          file: Logistic_Regression_hpo_report.md
   downloads:
   - url: exports/iceberg-prediction-whitepaper.pdf
     title: Iceberg Order Prediction (PDF)
