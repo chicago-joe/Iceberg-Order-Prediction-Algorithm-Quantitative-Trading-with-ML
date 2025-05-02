@@ -10,6 +10,19 @@ kernelspec:
   language: python
   display_name: Python 3 (ipykernel)
 title: "Hyperparameter Optimization Tuning for Iceberg Order Prediction"
+abstract: |
+	This paper presents a systematic approach to hyperparameter optimization for machine learning models that predict iceberg order execution in quantitative 
+	trading. We develop a comprehensive optimization framework that respects the unique challenges of financial time series data, implementing custom 
+	trading-specific evaluation metrics and time-series cross-validation to prevent look-ahead bias. 
+	Our experiments compare four model types—XGBoost, LightGBM, Random Forest, and Logistic Regression—across extensive parameter spaces 
+	defined by domain knowledge. The results demonstrate that carefully optimized models achieve significant performance improvements, 
+	with the best Logistic Regression configuration reaching a score of 0.6899 using an elasticnet penalty and strong regularization. 
+	Most notably, we discover that shorter training windows (just two time periods) consistently outperform longer historical datasets across all model types, 
+	challenging the conventional assumption that more data leads to better predictive performance in financial markets. This finding suggests that recent market 
+	patterns hold greater predictive value than extended historical data, with important implications for trading system design: 
+	frequent retraining on recent data should be prioritized over accumulating larger historical datasets. 
+	We provide practical optimization strategies for trading applications and discuss future directions including adaptive optimization and multi-objective 
+	approaches to balance competing trading metrics.
 author: "Joseph Loss"
 date: "2025-05-02"
 exports:
