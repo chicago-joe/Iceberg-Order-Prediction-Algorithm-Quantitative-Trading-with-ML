@@ -22,6 +22,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Python and Jupyter
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          pip install jupyter jupyter-client ipykernel myst-nb jupytext   # installs execution environment :contentReference[oaicite:12]{index=12}
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
 
@@ -29,25 +38,26 @@ jobs:
         with:
           node-version: 18.x
 
-      - name: Install MyST Markdown
+      - name: Install MyST Markdown CLI
         run: npm install -g mystmd
 
       - name: Install Typst
         run: |
-          curl -L -o typst.tar.xz https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz
+          curl -L -o typst.tar.xz \
+            https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz
           tar -xf typst.tar.xz
           mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/
 
       - name: Prepare Directories
         run: mkdir -p exports
 
-      - name: Build PDF Assets
+      - name: Build PDF Assets (with execution)
         run: |
-          myst build iceberg-prediction-whitepaper-v2.md --pdf
-          myst build index.md --pdf
+          myst build iceberg-prediction-whitepaper-v2.md --pdf --execute
+          myst build index.md --pdf --execute
 
-      - name: Build HTML Assets
-        run: myst build --html
+      - name: Build HTML Assets (with execution)
+        run: myst build --execute --html
 
       - name: Ensure PDFs are in HTML output
         run: |
