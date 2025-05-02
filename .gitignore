@@ -9,3 +9,4 @@ _build/*
 .TODO/
 SXM-762/
 .binder/pb.bk
+src/neptune-optuna-hpo/optuna_plot_exporter.ipynb
