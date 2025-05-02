@@ -3,18 +3,18 @@ title: "Machine Learning for Quantitative Trading: Predicting Iceberg Order Exec
 author: "Joseph Loss"
 date: "2025-04-17"
 abstract: |
-    This paper presents a comprehensive machine learning approach for predicting iceberg order 
-    execution in quantitative trading. By analyzing market microstructure patterns through an 
-    XGBoost-based model, we achieve 79% precision in predicting whether detected iceberg orders 
-    will be filled or canceled. Our system integrates real-time order book data, trade 
-    imbalance metrics, and innovative side-relative feature transformations to capture 
-    execution dynamics. The model is validated using time-series cross-validation to prevent 
-    look-ahead bias, maintaining consistent performance across market regimes with precision 
-    consistently above 75%. We demonstrate how prediction probabilities can be translated into 
-    actionable trading decisions through confidence bands, creating a sophisticated execution 
-    strategy that adapts to changing market conditions. The resulting system provides valuable 
-    signals for algorithmic trading strategies, improving response to hidden liquidity, 
-    identifying opportunistic entry/exit points, and reducing execution costs.
+  This paper presents a comprehensive machine learning approach for predicting iceberg order 
+  execution in quantitative trading. By analyzing market microstructure patterns through an 
+  XGBoost-based model, we achieve 79% precision in predicting whether detected iceberg orders 
+  will be filled or canceled. Our system integrates real-time order book data, trade    
+  imbalance metrics, and innovative side-relative feature transformations to capture 
+  execution dynamics. The model is validated using time-series cross-validation to prevent 
+  look-ahead bias, maintaining consistent performance across market regimes with precision
+  consistently above 75%. We demonstrate how prediction probabilities can be translated into 
+  actionable trading decisions through confidence bands, creating a sophisticated execution 
+  strategy that adapts to changing market conditions. The resulting system provides valuable 
+  signals for algorithmic trading strategies, improving response to hidden liquidity, 
+  identifying opportunistic entry/exit points, and reducing execution costs.
 exports:
   - format: pdf
     template: lapreprint-typst
@@ -22,12 +22,10 @@ exports:
     id: iceberg-paper
 ---
 
-# Machine Learning for Quantitative Trading: Predicting Iceberg Order Execution
 
 ## Project Context: Why This Matters in Trading
 
 In high-frequency and algorithmic trading, iceberg orders represent a significant market microstructure phenomenon. Let me walk you through how I approached predicting iceberg order execution using machine learning techniques.
-
 An iceberg order is a large order that's divided into smaller, visible portions - like the tip of an iceberg above water, with the majority hidden below. Traders use them to minimize market impact while executing large positions.
 
 ![Complete Iceberg Order Prediction & Trading System](/assets/complete_iceberg.png)
