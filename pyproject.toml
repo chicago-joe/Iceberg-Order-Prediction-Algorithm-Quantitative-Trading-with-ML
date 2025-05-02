@@ -307,6 +307,7 @@ dependencies = [
     "jupyterlab-webrtc-docprovider>=0.1.1",
     "jupyter-shared-drive>=0.2.1",
     "dtreeviz[all]>=2.2.2",
+    "jupyter-server>=2.15.0",
 ]
 
 [tool.uv]

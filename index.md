@@ -20,9 +20,9 @@ This paper presents a machine learning approach for predicting iceberg order exe
 
 This comprehensive study examines hyperparameter optimization for machine learning models that predict iceberg order execution. The paper includes model comparison and detailed optimization results for several algorithms:
 
-- [XGBoost](./XGBoost_hpo_report.md)
+#- [XGBoost](./XGBoost_hpo_report.md)
 - [LightGBM](./LightGBM_hpo_report.md)
-- [Random Forest](./Random_Forest_hpo_report.md)
-- [Logistic Regression](./Logistic_Regression_hpo_report.md)
+#- [Random Forest](./Random_Forest_hpo_report.md)
+#- [Logistic Regression](./Logistic_Regression_hpo_report.md)
 
 [![HPO Overview](../assets/TimeSeriesCVApproach.png)](./hyperparameter-optimization-whitepaper.md)

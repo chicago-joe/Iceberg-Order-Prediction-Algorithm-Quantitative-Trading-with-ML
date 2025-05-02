@@ -11,7 +11,7 @@ kernelspec:
   display_name: Python 3 (ipykernel)
 ---
 
-```markdown
+```markdown {full-width}
 ---
 title: "Hyperparameter Optimization for Iceberg Order Prediction"
 author: "Joseph Loss"
@@ -21,18 +21,23 @@ kernelspec:
   display_name: 'Python 3 (ipykernel)'
 ---
 
++++
+
 # Hyperparameter Optimization for Iceberg Order Prediction
+
++++
 
 ```{code-cell} ipython3
 :tags: [remove-input]
+
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
 import pandas as pd
 
 import plotly.io as pio
-pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
-# pio.renderers.default = 'notebook'      # interactive HTML widget
+#pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+pio.renderers.default = 'notebook'      # interactive HTML widget
 
 # Create system architecture diagram
 fig = go.Figure()
@@ -86,6 +91,7 @@ fig.update_layout(
 
 fig.show()
 ```
++++
 
 *The complete system architecture showing data acquisition, preprocessing, model optimization, and trading integration.*
 
@@ -102,6 +108,8 @@ Hyperparameters are configuration settings that govern the training process and 
 - **Computational Efficiency vs. Predictive Power**: Vital for real-time trading decisions
 :::
 
++++
+
 ## Optimization Framework Architecture
 
 Our hyperparameter optimization system consists of two key components:
@@ -109,17 +117,20 @@ Our hyperparameter optimization system consists of two key components:
 1. **ModelEvaluator**: Manages model training, evaluation, and performance tracking
 2. **HyperparameterTuner**: Conducts systematic search for optimal parameters
 
++++
+
 Figure 1 illustrates the optimization workflow:
 
 ```{code-cell} ipython3
 :tags: [remove-input]
+
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
 
 import plotly.io as pio
-pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
-# pio.renderers.default = 'notebook'      # interactive HTML widget
+#pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+pio.renderers.default = 'notebook'      # interactive HTML widget
 
 # Create optimization workflow diagram
 fig = go.Figure()
@@ -200,7 +211,11 @@ fig.update_layout(
 fig.show()
 ```
 
++++
+
 *The optimization flow showing component interactions and data flow between ModelEvaluator and HyperparameterTuner classes.*
+
++++
 
 ### Model Evaluator Design
 
@@ -257,6 +272,8 @@ The class provides several core capabilities:
 
 :::{tip} Trading-Specific Evaluation
 
++++
+
 Our custom scoring function optimizes for trading use cases:
 
 ```python
@@ -279,6 +296,8 @@ This metric:
 2. Maximizes precision (minimize false positives that could lead to unprofitable trades)
 3. Creates a hard constraint rather than a soft trade-off
 :::
+
++++
 
 ### Hyperparameter Tuner Implementation
 
@@ -308,6 +327,8 @@ The tuner performs several critical functions:
 3. **Optimization Coordination**: Manages the Optuna study for each model
 4. **Hyperparameter Logging**: Records all trial information for analysis
 
++++
+
 ## Time Series Cross-Validation Strategy
 
 Financial data requires special handling to prevent look-ahead bias. Our system implements a time-series cross-validation approach that respects temporal boundaries:
@@ -331,6 +352,8 @@ This method:
 2. Trains on past data, tests on future data
 3. Prevents information leakage from future market states
 
++++
+
 ```{code-cell} ipython3
 :tags: [remove-input]
 
@@ -339,8 +362,8 @@ import pandas as pd
 import numpy as np
 
 import plotly.io as pio
-pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
-# pio.renderers.default = 'notebook'      # interactive HTML widget
+#pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+pio.renderers.default = 'notebook'      # interactive HTML widget
 
 # Simulate time series data
 dates = pd.date_range(start='2023-01-01', periods=15, freq='D')
@@ -434,9 +457,12 @@ fig.show()
 
 *Visualization of time series cross-validation showing rolling windows respecting temporal boundaries.*
 
++++
+
 ## Hyperparameter Search Spaces
 
-For each model type, we define specific parameter search spaces based on trading domain knowledge. The `get_model_hyperparameters` method dynamically generates these spaces:
+For each model type, we define specific parameter search spaces based on trading domain knowledge. 
+The `get_model_hyperparameters` method dynamically generates these spaces:
 
 ```python
 def get_model_hyperparameters(self, trial, model_name):
@@ -468,6 +494,8 @@ Key design considerations for these search spaces include:
 
 :::{note} Train Size as a Hyperparameter
 
++++
+
 One innovative aspect of our approach is treating `train_size` as a hyperparameter:
 
 ```python
@@ -476,6 +504,8 @@ train_size = trial.suggest_categorical('train_size', [2, 3, 4, 5, 6, 7, 8, 9, 10
 
 This recognizes that in financial markets, more historical data isn't always better. Market regimes change, and different models may perform optimally with different historical windows. By optimizing this alongside model parameters, we find the ideal balance between historical data relevance and sample size.
 :::
+
++++
 
 ## The Optimization Objective Function
 
@@ -526,13 +556,17 @@ This function:
 4. Calculates the custom trading-specific scoring metric
 5. Returns the score for Optuna to optimize
 
++++
+
 ## Optimization Results
 
-Our optimization process generated detailed results for each model type, which we can analyze and visualize.
+<!-- Our optimization process generated detailed results for each model type, which we can analyze and visualize. -->
 
 ### Parameter Optimization Analysis
 
 The optimization trials reveal patterns in parameter importance and model behavior:
+
++++
 
 ```{code-cell} ipython3
 :tags: [remove-input]
@@ -542,8 +576,8 @@ import numpy as np
 import pandas as pd
 
 import plotly.io as pio
-pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
-# pio.renderers.default = 'notebook'      # interactive HTML widget
+#pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+pio.renderers.default = 'notebook'      # interactive HTML widget
 
 # Simulate XGBoost optimization history
 trials = pd.DataFrame({
@@ -607,6 +641,9 @@ fig.update_layout(
 fig.show()
 ```
 
++++
+
+
 ```{code-cell} ipython3
 :tags: [remove-input]
 
@@ -614,8 +651,8 @@ import plotly.graph_objects as go
 import numpy as np
 
 import plotly.io as pio
-pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
-# pio.renderers.default = 'notebook'      # interactive HTML widget
+#pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+pio.renderers.default = 'notebook'      # interactive HTML widget
 
 # Create a grid for the contour plot
 feature_fraction = np.linspace(0.6, 1.0, 20)
@@ -671,12 +708,15 @@ fig.update_layout(
 
 fig.show()
 ```
++++
 
 These visualizations reveal:
 
 1. **Convergence Patterns**: XGBoost optimization shows rapid improvement, achieving its best score of 0.6746 at trial 21
 2. **Parameter Interactions**: LightGBM performance depends on complex interactions between feature_fraction and min_data_in_leaf
 3. **Trade-offs**: Models with train_size=2 consistently outperform those with longer training windows
+
++++
 
 ### Best Parameters by Model
 
@@ -736,7 +776,7 @@ Our optimization identified different optimal configurations for each model type
       "train_size": 2
     }
     ```
-  - Fast training with leaf-wise growth; heavy regularization through min_data_in_leaf
+  - Fast training with leaf-wise growth; heavy regularization through `min_data_in_leaf`
 * - Logistic Regression
   - ```json
     {
@@ -751,6 +791,8 @@ Our optimization identified different optimal configurations for each model type
   - Strong feature selection (l1) with stability (l2); high regularization (C=0.01)
 :::
 
++++
+
 :::{important} Pattern: Optimal Train Size = 2
 
 A striking result across all models was the consistent selection of a short training window (train_size = 2). This suggests:
@@ -762,9 +804,13 @@ A striking result across all models was the consistent selection of a short trai
 This has profound implications for trading system design, suggesting frequent retraining on recent data rather than accumulating larger historical datasets.
 :::
 
++++
+
 ### Performance Comparison
 
 The optimization process improved all models significantly, with XGBoost showing the best overall performance:
+
++++
 
 ```{code-cell} ipython3
 :tags: [remove-input]
@@ -774,8 +820,8 @@ import pandas as pd
 import numpy as np
 
 import plotly.io as pio
-pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
-# pio.renderers.default = 'notebook'      # interactive HTML widget
+#pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+pio.renderers.default = 'notebook'      # interactive HTML widget
 
 # Create parameter importance data
 parameters = [
@@ -809,6 +855,8 @@ fig.update_layout(
 
 fig.show()
 ```
+
++++
 
 :::{list-table} Optimized Model Performance
 :header-rows: 1
@@ -851,9 +899,13 @@ Notably, while XGBoost, LightGBM, and Logistic Regression achieved similar best 
 2. Different model strengths for different market patterns
 3. Potential for ensemble approaches combining complementary models
 
++++
+
 ## Parameter Importance Analysis
 
 To understand which parameters most significantly impact model performance, we analyze the parameter importance across optimization trials:
+
++++
 
 ```{code-cell} ipython3
 :tags: [remove-input]
@@ -862,8 +914,8 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 import plotly.io as pio
-pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
-# pio.renderers.default = 'notebook'      # interactive HTML widget
+#pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+pio.renderers.default = 'notebook'      # interactive HTML widget
 
 # Create a 1x2 subplot
 fig = make_subplots(rows=1, cols=2, 
@@ -916,6 +968,8 @@ fig.update_yaxes(title_text='Importance', range=[0, 0.35], row=1, col=2)
 fig.show()
 ```
 
++++
+
 These visualizations provide crucial insights for trading system design:
 
 1. **Regularization Dominance**: Parameters controlling model complexity (like `min_child_weight` and `max_depth`) have high impact across models, emphasizing the importance of preventing overfitting to market noise
@@ -924,9 +978,13 @@ These visualizations provide crucial insights for trading system design:
 
 3. **Training Window Impact**: The consistent importance of `train_size` across models confirms that temporal window selection is a critical design choice for trading systems
 
++++
+
 ## Parallel Coordinate Analysis
 
 To better understand parameter interactions, we analyze parallel coordinate plots showing the relationship between parameters and model performance:
+
++++
 
 ```{code-cell} ipython3
 :tags: [remove-input]
@@ -936,8 +994,8 @@ import pandas as pd
 import numpy as np
 
 import plotly.io as pio
-pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
-# pio.renderers.default = 'notebook'      # interactive HTML widget
+#pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+pio.renderers.default = 'notebook'      # interactive HTML widget
 
 # Create simulated trial data
 n_trials = 30
@@ -1012,9 +1070,13 @@ This visualization reveals:
 2. **Interaction Patterns**: Certain parameter combinations consistently perform well, particularly when train_size=2
 3. **Sensitivity Variations**: Some parameters like learning_rate show wide variation in high-performing models, suggesting lower sensitivity
 
++++
+
 ## Hyperparameter Slice Analysis
 
 To understand how individual parameters impact performance, we examine parameter slice plots:
+
++++
 
 ```{code-cell} ipython3
 :tags: [remove-input]
@@ -1024,8 +1086,8 @@ import numpy as np
 import pandas as pd
 
 import plotly.io as pio
-pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
-# pio.renderers.default = 'notebook'      # interactive HTML widget
+#pio.renderers.default = 'png'           # options: 'notebook', 'notebook_connected', 'svg', 'png', 'iframe', etc.
+pio.renderers.default = 'notebook'      # interactive HTML widget
 
 # Create simulated data for parameter slice analysis
 n_estimators_values = [100, 250, 500, 1000]
@@ -1102,6 +1164,8 @@ Key insights from slice analysis:
 2. **Learning Rate Sweet Spot**: For XGBoost, learning rates around 0.03 consistently outperform both lower and higher values
 3. **Depth Limitations**: Performance decreases with max_depth values above 4, suggesting overfitting to market noise
 
++++
+
 ## Time Series Evaluation
 
 After identifying optimal parameters, we evaluate model performance across time periods to assess temporal stability:
@@ -1159,6 +1223,8 @@ The time series evaluation demonstrates:
 1. **Model Consistency**: Top-performing models maintain consistent scores across different trials
 2. **Parameter Robustness**: Similar performance across different parameter configurations suggests robustness
 3. **Training Window Stability**: The consistent performance with train_size=2 confirms the advantage of recent data
+
++++
 
 ## Implementation for Production
 
@@ -1238,6 +1304,8 @@ This integration enables:
 3. Parameter evolution analysis
 4. Model comparison
 
++++
+
 ## Optimization Strategies for Trading Systems
 
 From our experiments, we can extract several key strategies for optimizing trading models:
@@ -1251,6 +1319,8 @@ From our experiments, we can extract several key strategies for optimizing tradi
 4. **Parameter Boundaries Matter**: Constrained search spaces based on domain knowledge (like learning_rate between 0.01-0.05) lead to better performance
 
 5. **Monitor Across Trials**: Performance stability across trials indicates model robustness
+
++++
 
 ## Conclusion and Future Directions
 
@@ -1270,6 +1340,8 @@ By systematically optimizing model hyperparameters, we transform raw market data
 
 The most surprising finding across all models is that shorter training windows (train_size=2) consistently outperform longer ones. This challenges the common assumption that more data always leads to better models, and suggests that in rapidly evolving markets, recent patterns matter more than historical ones. Trading systems should therefore focus on frequent retraining with recent data rather than accumulating larger historical datasets.
 :::
+
++++
 
 **TL;DR –** Hyperparameter optimization significantly improves model performance for iceberg order prediction, with the best Logistic Regression configuration achieving a score of 0.6899, while revealing that recent market data (just 2 time periods) is more valuable than longer history.
 

@@ -58,31 +58,7 @@
 ## Embedded Visualizations
 
 
-```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_param_importances.html"
-   :raw: html
-```
-
-```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_plot_slice.html"
-
-```
-
-```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_parallel_coordinates.html"
-
-```
-
-```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_rank.html"
-
-```
-
-```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_contour.html"
-
-```
-
-```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_edf.html"
-
-```
-
-```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_optimization_history.html"
+```{iframe} 
 
 ```
 
