@@ -10,3 +10,6 @@ _build/*
 SXM-762/
 .binder/pb.bk
 src/neptune-optuna-hpo/optuna_plot_exporter.ipynb
+src/neptune-optuna-hpo/refactor_optuna_data.ipynb
+
+**/.claude/settings.local.json
