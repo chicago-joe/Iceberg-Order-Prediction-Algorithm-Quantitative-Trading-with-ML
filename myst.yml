@@ -6,7 +6,7 @@ project:
   keywords: [machine learning, quantitative trading, hyperparameter optimization, XGBoost, LightGBM]
   authors: [Joseph Loss]
   github: https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/
-  references:
+  references: references.yml
     
   jupyter: true
     binder:
