@@ -46,9 +46,9 @@
 Parameter importance visualization
 :::
 
+[](xref:spec/randomforest_hpo#Parameter_Importances)
 ```{iframe} _references/hyperparameter-tuning/RandomForest/random_forest_plot_param_importances.html
 :width: 100%
-:height: 500px
 ```
 
 ### Slice Plot
@@ -60,9 +60,9 @@ Parameter importance visualization
 Slice plot visualization
 :::
 
+[](xref:spec/randomforest_hpo#Slice_Plot)
 ```{iframe} _references/hyperparameter-tuning/RandomForest/random_forest_plot_slice.html
 :width: 100%
-:height: 500px
 ```
 
 ### Parallel Coordinates Plot
@@ -74,9 +74,9 @@ Slice plot visualization
 Parallel coordinates visualization
 :::
 
+[](xref:spec/randomforest_hpo#Parallel_Coordinate)
 ```{iframe} _references/hyperparameter-tuning/RandomForest/random_forest_plot_parallel_coordinate.html
 :width: 100%
-:height: 500px
 ```
 
 ### Rank Plot
@@ -88,9 +88,9 @@ Parallel coordinates visualization
 Rank plot visualization
 :::
 
+[](xref:spec/randomforest_hpo#Rank_Plot)
 ```{iframe} _references/hyperparameter-tuning/RandomForest/random_forest_plot_rank.html
 :width: 100%
-:height: 500px
 ```
 
 ### Contour Plot
@@ -102,9 +102,9 @@ Rank plot visualization
 Contour plot visualization
 :::
 
+[](xref:spec/randomforest_hpo#Contour_Plot)
 ```{iframe} _references/hyperparameter-tuning/RandomForest/random_forest_plot_contour.html
 :width: 100%
-:height: 500px
 ```
 
 ### EDF Plot
@@ -116,9 +116,9 @@ Contour plot visualization
 EDF plot visualization
 :::
 
+[](xref:spec/randomforest_hpo#EDF_Plot)
 ```{iframe} _references/hyperparameter-tuning/RandomForest/random_forest_plot_edf.html
 :width: 100%
-:height: 500px
 ```
 
 ### Optimization History
@@ -130,7 +130,7 @@ EDF plot visualization
 Optimization history visualization
 :::
 
+[](xref:spec/randomforest_hpo#Optimization_History)
 ```{iframe} _references/hyperparameter-tuning/RandomForest/random_forest_plot_optimization_history.html
 :width: 100%
-:height: 500px
 ```

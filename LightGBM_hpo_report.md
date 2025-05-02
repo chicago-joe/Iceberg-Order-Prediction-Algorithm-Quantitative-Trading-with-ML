@@ -44,7 +44,7 @@
   "num_leaves": 31,
   "min_sum_hessian_in_leaf": 10,
   "extra_trees": true,
-  "min_./data_in_leaf": 100,
+  "min_data_in_leaf": 100,
   "feature_fraction": 1.0,
   "bagging_fraction": 0.8,
   "bagging_freq": 0,
@@ -66,9 +66,9 @@
 Parameter importance visualization
 :::
 
+[](xref:spec/lightgbm_hpo#Parameter_Importances)
 ```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_param_importances.html
 :width: 100%
-:height: 500px
 ```
 
 ### Slice Plot
@@ -80,9 +80,9 @@ Parameter importance visualization
 Slice plot visualization
 :::
 
+[](xref:spec/lightgbm_hpo#Slice_Plot)
 ```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_slice.html
 :width: 100%
-:height: 500px
 ```
 
 ### Parallel Coordinates Plot
@@ -94,9 +94,9 @@ Slice plot visualization
 Parallel coordinates visualization
 :::
 
+[](xref:spec/lightgbm_hpo#Parallel_Coordinate)
 ```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_parallel_coordinate.html
 :width: 100%
-:height: 500px
 ```
 
 ### Rank Plot
@@ -108,9 +108,9 @@ Parallel coordinates visualization
 Rank plot visualization
 :::
 
+[](xref:spec/lightgbm_hpo#Rank_Plot)
 ```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_rank.html
 :width: 100%
-:height: 500px
 ```
 
 ### Contour Plot
@@ -122,9 +122,9 @@ Rank plot visualization
 Contour plot visualization
 :::
 
+[](xref:spec/lightgbm_hpo#Contour_Plot)
 ```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_contour.html
 :width: 100%
-:height: 500px
 ```
 
 ### EDF Plot
@@ -136,9 +136,9 @@ Contour plot visualization
 EDF plot visualization
 :::
 
+[](xref:spec/lightgbm_hpo#EDF_Plot)
 ```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_edf.html
 :width: 100%
-:height: 500px
 ```
 
 ### Optimization History
@@ -150,7 +150,7 @@ EDF plot visualization
 Optimization history visualization
 :::
 
+[](xref:spec/lightgbm_hpo#Optimization_History)
 ```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_optimization_history.html
 :width: 100%
-:height: 500px
 ```

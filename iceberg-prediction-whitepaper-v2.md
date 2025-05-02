@@ -9,7 +9,7 @@ abstract: |
 exports:
   - format: pdf
     template: lapreprint-typst
-    output: exports/iceberg-prediction-whitepaper.pdf
+    output: iceberg-prediction-whitepaper.pdf
     id: iceberg-paper
 ---
 
@@ -21,7 +21,7 @@ In high-frequency and algorithmic trading, iceberg orders represent a significan
 
 An iceberg order is a large order that's divided into smaller, visible portions - like the tip of an iceberg above water, with the majority hidden below. Traders use them to minimize market impact while executing large positions.
 
-![Complete Iceberg Order Prediction & Trading System](./assets/complete_iceberg.png)
+![Complete Iceberg Order Prediction & Trading System](/assets/complete_iceberg.png)
 
 *Image 1: The complete system architecture showing data acquisition, processing, modeling, and trading strategy components. This diagram illustrates the end-to-end pipeline from market data to trading decisions.*
 
@@ -362,7 +362,7 @@ The simulation results produced by this engine form the dataset for our machine 
 
 The data preprocessing workflow is shown in Image 2:
 
-![Data Processing Pipeline](./assets/preprocess.png)
+![Data Processing Pipeline](/assets/preprocess.png)
 
 *Image 2: The data processing pipeline showing the three main components: data flattening, feature engineering, and feature scaling. This ETL process transforms nested JSON data into tabular features suitable for machine learning.*
 
@@ -414,11 +414,11 @@ This function converts complex nested structures representing market states at d
 
 Feature engineering is critical to this system's success. We transform raw market data into predictive features that capture market microstructure information. Images 4 and 5 show detailed breakdowns of the different feature categories:
 
-![Order Book Position Features](./assets/feature_engineering_order_book_position.png)
+![Order Book Position Features](/assets/feature_engineering_order_book_position.png)
 
 *Image 4: Order book position features showing how distance from support and resistance levels is calculated based on order direction. These features have high predictive power for execution probability.*
 
-![Order Dynamics Features](./assets/feature_engineering_order_book_dynamics.png)
+![Order Dynamics Features](/assets/feature_engineering_order_book_dynamics.png)
 
 *Image 5: Order dynamics features including fill-to-display ratio and lean-over-hedge ratio, along with temporal features that capture market timing effects. These features help identify aggressive iceberg orders.*
 
@@ -458,7 +458,7 @@ Time-based and momentum characteristics.
 
 A key innovation is converting raw market features into "side-relative" versions that have consistent meaning regardless of whether the order is a buy or sell, as illustrated in Image 6:
 
-![Feature Transformation Examples](./assets/feature_engineering_side_relative_features.png)
+![Feature Transformation Examples](/assets/feature_engineering_side_relative_features.png)
 
 *Image 6: Examples of side-relative transformations for order book imbalance and support/resistance levels. These transformations create consistent features that work regardless of whether the order is a buy or sell.*
 
@@ -493,7 +493,7 @@ This transformation ensures that features have consistent predictive meaning reg
 
 In quantitative trading, traditional cross-validation can lead to look-ahead bias. I implemented a time-series validation approach as shown in Image 13:
 
-![Time Series Cross-Validation Approach](./assets/TimeSeriesCVApproach.png)
+![Time Series Cross-Validation Approach](/assets/TimeSeriesCVApproach.png)
 
 *Image 13: Time series cross-validation approach showing how data is split into training and testing periods. This method respects the temporal nature of financial data and prevents future information leakage.*
 
@@ -521,7 +521,7 @@ def _create_time_series_splits(self, train_size, dates):
 
 The performance across time periods, as shown in Image 10, demonstrates the model's stability:
 
-![Time Series Cross-Validation Performance](./assets/TimeSeriesCVPerfomance.png)
+![Time Series Cross-Validation Performance](/assets/TimeSeriesCVPerfomance.png)
 
 *Image 10: Performance metrics across different time periods showing the model's stability in changing market conditions. Note the consistent precision above 75% in all folds.*
 
@@ -543,7 +543,7 @@ For a trading system, model selection requires balancing multiple considerations
 
 Various models were evaluated as shown in Image 9:
 
-![Model Performance & Trading Impact](./assets/confusion_matrix.png)
+![Model Performance & Trading Impact](/assets/confusion_matrix.png)
 
 *Image 9: Model comparison showing performance metrics and confusion matrix for the XGBoost model. Note the precision of 79% and the detailed breakdown of prediction errors.*
 
@@ -591,11 +591,11 @@ def max_precision_optimal_recall_score(y_true, y_pred):
 
 To further evaluate model performance, I analyzed precision-recall and ROC curves as shown in Images 11 and 12:
 
-![Precision-Recall Curve](./assets/precision_recall_curve.png)
+![Precision-Recall Curve](/assets/precision_recall_curve.png)
 
 *Image 11: Precision-recall curve showing the trade-off between precision and recall. The average precision of 0.53 indicates the model's ability to balance between capturing opportunities and avoiding false positives.*
 
-![ROC Curve](./assets/roc_auc_plot.png)
+![ROC Curve](/assets/roc_auc_plot.png)
 
 *Image 12: ROC curve showing the trade-off between true positive rate and false positive rate. The area under the curve of 0.48 suggests room for further optimization.*
 
@@ -646,7 +646,7 @@ def get_model_hyperparameters(self, trial, model_name):
 
 The optimized XGBoost model configuration, as shown in Image 14, includes:
 
-![XGBoost Model Architecture](./assets/xgboost_architecture.png)
+![XGBoost Model Architecture](/assets/xgboost_architecture.png)
 
 *Image 14: XGBoost model architecture showing the optimized parameter configuration and simplified tree structure visualization. Each parameter is explained in terms of its trading significance.*
 
@@ -665,11 +665,11 @@ The optimized XGBoost model configuration, as shown in Image 14, includes:
 
 Understanding which features drive prediction is critical for trading strategy development. Images 7 and 8 show the feature importance analysis:
 
-![MDA Feature Importance](./assets/mda_importance_plot.png)
+![MDA Feature Importance](/assets/mda_importance_plot.png)
 
 *Image 7: MDA (Mean Decrease Accuracy) feature importance showing how permuting each feature affects model accuracy. The dominance of price position features (ticksFromResistanceLevel and ticksFromSupportLevel) is clearly visible.*
 
-![Top 12 Mean Feature Importances](./assets/mean_feature_importance_plot.png)
+![Top 12 Mean Feature Importances](/assets/mean_feature_importance_plot.png)
 
 *Image 8: Top 12 feature importances based on the XGBoost model's native feature importance measure. This provides a different perspective on feature ranking compared to the MDA method.*
 
@@ -710,7 +710,7 @@ Three insights valuable for trading strategy development:
 
 The prediction model doesn't operate in isolation - it feeds into a sophisticated trading decision process, as shown in Image 3:
 
-![Decision Flow: From Model Prediction to Trading Action](./assets/decision_flow_prediction_to_training.png)
+![Decision Flow: From Model Prediction to Trading Action](/assets/decision_flow_prediction_to_training.png)
 
 *Image 3: Decision flow diagram illustrating how model predictions drive trading decisions through confidence bands and feature analysis. This probabilistic approach allows for dynamic adaptation to market conditions.*
 
@@ -736,7 +736,7 @@ This probability-driven approach allows for dynamic adaptation to changing marke
 
 The complete prediction flow, shown in Image 15, illustrates how a new iceberg order is processed:
 
-![Prediction Flow and Model Advantages](./assets/xgboost_prediction_flow.png)
+![Prediction Flow and Model Advantages](/assets/xgboost_prediction_flow.png)
 
 *Image 15: Prediction flow diagram showing the step-by-step process from raw data to final prediction probability, along with key model advantages for trading applications.*
 
