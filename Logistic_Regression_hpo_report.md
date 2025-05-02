@@ -39,30 +39,100 @@
 
 ## Embedded Visualizations
 
-```{include} "./data/hyperparameter-optimization/Logistic Regression/visualizations/logistic_regression_plot_param_importances.html"
+### Parameter Importances
+:::{figure} _references/hyperparameter-tuning/LogisticRegression/logistic_regression_plot_param_importances.png
+:width: 80%
+:class: with-shadow
+:name: logistic_regression_param_importances
 
+Parameter importance visualization
+:::
+
+```{iframe} _references/hyperparameter-tuning/LogisticRegression/logistic_regression_plot_param_importances.html
+:width: 100%
+:height: 500px
 ```
 
-```{include} "./data/hyperparameter-optimization/Logistic Regression/visualizations/logistic_regression_plot_plot_slice.html"
+### Slice Plot
+:::{figure} _references/hyperparameter-tuning/LogisticRegression/logistic_regression_plot_slice.png
+:width: 80%
+:class: with-shadow
+:name: logistic_regression_slice_plot
 
+Slice plot visualization
+:::
+
+```{iframe} _references/hyperparameter-tuning/LogisticRegression/logistic_regression_plot_slice.html
+:width: 100%
+:height: 500px
 ```
 
-```{include} "./data/hyperparameter-optimization/Logistic Regression/visualizations/logistic_regression_plot_parallel_coordinates.html"
+### Parallel Coordinates Plot
+:::{figure} _references/hyperparameter-tuning/LogisticRegression/logistic_regression_plot_parallel_coordinate.png
+:width: 80%
+:class: with-shadow
+:name: logistic_regression_parallel_coordinates
 
+Parallel coordinates visualization
+:::
+
+```{iframe} _references/hyperparameter-tuning/LogisticRegression/logistic_regression_plot_parallel_coordinate.html
+:width: 100%
+:height: 500px
 ```
 
-```{include} "./data/hyperparameter-optimization/Logistic Regression/visualizations/logistic_regression_plot_rank.html"
+### Rank Plot
+:::{figure} _references/hyperparameter-tuning/LogisticRegression/logistic_regression_plot_rank.png
+:width: 80%
+:class: with-shadow
+:name: logistic_regression_rank_plot
 
+Rank plot visualization
+:::
+
+```{iframe} _references/hyperparameter-tuning/LogisticRegression/logistic_regression_plot_rank.html
+:width: 100%
+:height: 500px
 ```
 
-```{include} "./data/hyperparameter-optimization/Logistic Regression/visualizations/logistic_regression_plot_contour.html"
+### Contour Plot
+:::{figure} _references/hyperparameter-tuning/LogisticRegression/logistic_regression_plot_contour.png
+:width: 80%
+:class: with-shadow
+:name: logistic_regression_contour_plot
 
+Contour plot visualization
+:::
+
+```{iframe} _references/hyperparameter-tuning/LogisticRegression/logistic_regression_plot_contour.html
+:width: 100%
+:height: 500px
 ```
 
-```{include} "./data/hyperparameter-optimization/Logistic Regression/visualizations/logistic_regression_plot_edf.html"
+### EDF Plot
+:::{figure} _references/hyperparameter-tuning/LogisticRegression/logistic_regression_plot_edf.png
+:width: 80%
+:class: with-shadow
+:name: logistic_regression_edf_plot
 
+EDF plot visualization
+:::
+
+```{iframe} _references/hyperparameter-tuning/LogisticRegression/logistic_regression_plot_edf.html
+:width: 100%
+:height: 500px
 ```
 
-```{include} "./data/hyperparameter-optimization/Logistic Regression/visualizations/logistic_regression_plot_optimization_history.html"
+### Optimization History
+:::{figure} _references/hyperparameter-tuning/LogisticRegression/logistic_regression_plot_optimization_history.png
+:width: 80%
+:class: with-shadow
+:name: logistic_regression_optimization_history
 
+Optimization history visualization
+:::
+
+```{iframe} _references/hyperparameter-tuning/LogisticRegression/logistic_regression_plot_optimization_history.html
+:width: 100%
+:height: 500px
 ```

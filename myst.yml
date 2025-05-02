@@ -26,14 +26,14 @@ project:
     - title: Hyperparameter Optimization
       file: hyperparameter-optimization-whitepaper.md
       children:
-#        - file: XGBoost_hpo_report.md
- #         title: XGBoost HPO Report
+        - file: XGBoost_hpo_report.md
+          title: XGBoost HPO Report
         - file: LightGBM_hpo_report.md
           title: LightGBM HPO Report
-  #      - file: Random_Forest_hpo_report.md
-   #       title: Random Forest HPO Report
-    #    - file: Logistic_Regression_hpo_report.md
-     #     title: Logistic Regression HPO Report
+        - file: Random_Forest_hpo_report.md
+          title: Random Forest HPO Report
+        - file: Logistic_Regression_hpo_report.md
+          title: Logistic Regression HPO Report
   downloads:
   - url: exports/iceberg-prediction-whitepaper.pdf
     title: Iceberg Order Prediction (PDF)

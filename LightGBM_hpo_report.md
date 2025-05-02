@@ -57,13 +57,100 @@
 
 ## Embedded Visualizations
 
+### Parameter Importances
+:::{figure} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_param_importances.png
+:width: 80%
+:class: with-shadow
+:name: lightgbm_param_importances
 
-```{iframe} 
+Parameter importance visualization
+:::
 
+```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_param_importances.html
+:width: 100%
+:height: 500px
 ```
 
-<!-- :::{figure} #LightGBM_plot_slice -->
-<!-- :label: -->
-<!-- ::: -->
+### Slice Plot
+:::{figure} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_slice.png
+:width: 80%
+:class: with-shadow
+:name: lightgbm_slice_plot
 
-<!-- ![](#LightGBM_plot_param_importances) - This will embed the output of a notebook cell -->
+Slice plot visualization
+:::
+
+```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_slice.html
+:width: 100%
+:height: 500px
+```
+
+### Parallel Coordinates Plot
+:::{figure} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_parallel_coordinate.png
+:width: 80%
+:class: with-shadow
+:name: lightgbm_parallel_coordinates
+
+Parallel coordinates visualization
+:::
+
+```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_parallel_coordinate.html
+:width: 100%
+:height: 500px
+```
+
+### Rank Plot
+:::{figure} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_rank.png
+:width: 80%
+:class: with-shadow
+:name: lightgbm_rank_plot
+
+Rank plot visualization
+:::
+
+```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_rank.html
+:width: 100%
+:height: 500px
+```
+
+### Contour Plot
+:::{figure} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_contour.png
+:width: 80%
+:class: with-shadow
+:name: lightgbm_contour_plot
+
+Contour plot visualization
+:::
+
+```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_contour.html
+:width: 100%
+:height: 500px
+```
+
+### EDF Plot
+:::{figure} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_edf.png
+:width: 80%
+:class: with-shadow
+:name: lightgbm_edf_plot
+
+EDF plot visualization
+:::
+
+```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_edf.html
+:width: 100%
+:height: 500px
+```
+
+### Optimization History
+:::{figure} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_optimization_history.png
+:width: 80%
+:class: with-shadow
+:name: lightgbm_optimization_history
+
+Optimization history visualization
+:::
+
+```{iframe} _references/hyperparameter-tuning/LightGBM/lightgbm_plot_optimization_history.html
+:width: 100%
+:height: 500px
+```
