@@ -19,13 +19,13 @@ cargo install --locked typst-cli
 # Install Plotly JupyterLab extension
 jupyter labextension install jupyterlab-plotly --no-build || echo "Failed to install Plotly extension"
 
-# Find and convert notebooks to MyST if needed
-find . -name "*.ipynb" -not -path "*/\.*" -exec jupytext --to myst {} \; || echo "No notebooks to convert"
+## Find and convert notebooks to MyST if needed
+#find . -name "*.ipynb" -not -path "*/\.*" -exec jupytext --to myst {} \; || echo "No notebooks to convert"
 
-# Initialize MyST environment (with error handling)
-myst init || echo "MyST initialization failed"
+## Initialize MyST environment (with error handling)
+#myst init || echo "MyST initialization failed"
 
-# Build JupyterLab (with error handling)
-jupyter lab build || echo "JupyterLab build failed"
+## Build JupyterLab (with error handling)
+#jupyter lab build || echo "JupyterLab build failed"
 
 echo "postBuild script completed"

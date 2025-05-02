@@ -83,8 +83,8 @@ fig.update_layout(
     showlegend=False
 )
 
-fig.show()```
-
+fig.show()
+```
 
 +++
 
