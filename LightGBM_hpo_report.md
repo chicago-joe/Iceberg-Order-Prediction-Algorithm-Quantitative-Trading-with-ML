@@ -59,7 +59,7 @@
 
 
 ```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_param_importances.html"
-
+   :raw: html
 ```
 
 ```{include} "./data/hyperparameter-optimization/LightGBM/visualizations/lightgbm_plot_plot_slice.html"

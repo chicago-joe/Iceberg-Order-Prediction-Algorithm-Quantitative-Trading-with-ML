@@ -49,30 +49,30 @@
 
 ## Embedded Visualizations
 
-```{include} "data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_param_importances.html"
+```{include} "./data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_param_importances.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_plot_slice.html"
+```{include} "./data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_plot_slice.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_parallel_coordinates.html"
+```{include} "./data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_parallel_coordinates.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_rank.html"
+```{include} "./data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_rank.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_contour.html"
+```{include} "./data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_contour.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_edf.html"
+```{include} "./data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_edf.html"
 
 ```
 
-```{include} "data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_optimization_history.html"
+```{include} "./data/hyperparameter-optimization/XGBoost/visualizations/xgboost_plot_optimization_history.html"
 
 ```

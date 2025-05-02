@@ -1,0 +1,7 @@
+texlive-xetex 
+texlive-fonts-recommended 
+texlive-plain-generic 
+latexmk 
+pandoc
+build-essential
+webp

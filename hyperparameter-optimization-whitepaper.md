@@ -1,21 +1,30 @@
 ---
 jupytext:
-  formats: ipynb,md:myst,py:percent
   text_representation:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.17.1
+    jupytext_version: 1.17.0
 kernelspec:
-  display_name: Python 3 (ipykernel)
-  language: python
   name: python3
-date: "2025-05-01"
+  language: python
+  display_name: Python 3 (ipykernel)
 ---
+
+```markdown
+---
+title: "Hyperparameter Optimization for Iceberg Order Prediction"
+author: "Joseph Loss"
+date: "2025-04-21"
+kernelspec:
+  name: python3
+  display_name: 'Python 3 (ipykernel)'
+---
+
+# Hyperparameter Optimization for Iceberg Order Prediction
 
 ```{code-cell} ipython3
 :tags: [remove-input]
-
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
@@ -104,7 +113,6 @@ Figure 1 illustrates the optimization workflow:
 
 ```{code-cell} ipython3
 :tags: [remove-input]
-
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np

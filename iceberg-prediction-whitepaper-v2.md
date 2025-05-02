@@ -21,7 +21,7 @@ In high-frequency and algorithmic trading, iceberg orders represent a significan
 
 An iceberg order is a large order that's divided into smaller, visible portions - like the tip of an iceberg above water, with the majority hidden below. Traders use them to minimize market impact while executing large positions.
 
-![Complete Iceberg Order Prediction & Trading System](./assets/complete_iceberg.png)
+![Complete Iceberg Order Prediction & Trading System](../assets/complete_iceberg.png)
 
 *Image 1: The complete system architecture showing data acquisition, processing, modeling, and trading strategy components. This diagram illustrates the end-to-end pipeline from market data to trading decisions.*
 
