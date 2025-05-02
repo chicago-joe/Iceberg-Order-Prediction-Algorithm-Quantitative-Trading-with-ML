@@ -3,63 +3,108 @@ title: "LightGBM Optuna HPO Results"
 author: "Joseph Loss"
 date: "2025-04-21"
 ---
-
-# HPO Report: `LightGBM`
++++
 
 ## Best Trial
-```json
-{
-  "_number": 49,
-  "state": 1,
-  "_values": [
-    0.6745654203529987
-  ],
-  "_datetime_start": "2023-11-18 01:42:25.240274",
-  "datetime_complete": "2023-11-18 01:42:59.724692",
-  "_user_attrs": {},
-  "_system_attrs": {},
-  "intermediate_values": {},
-  "_distributions": {
-    "objective": "CategoricalDistribution(choices=('binary', 'regression'))",
-    "learning_rate": "FloatDistribution(high=0.05, log=False, low=0.01, step=0.01)",
-    "n_estimators": "CategoricalDistribution(choices=(100, 250, 500, 1000))",
-    "max_depth": "IntDistribution(high=5, log=False, low=3, step=1)",
-    "num_leaves": "CategoricalDistribution(choices=(2, 3, 7, 15, 31))",
-    "min_sum_hessian_in_leaf": "CategoricalDistribution(choices=(0.001, 0.01, 0.1, 1, 10))",
-    "extra_trees": "CategoricalDistribution(choices=(True, False))",
-    "min_data_in_leaf": "IntDistribution(high=100, log=False, low=25, step=25)",
-    "feature_fraction": "FloatDistribution(high=1.0, log=False, low=0.6, step=0.2)",
-    "bagging_fraction": "FloatDistribution(high=1.0, log=False, low=0.6, step=0.2)",
-    "bagging_freq": "CategoricalDistribution(choices=(0, 5, 10))",
-    "lambda_l1": "CategoricalDistribution(choices=(0, 0.1, 1, 2))",
-    "lambda_l2": "CategoricalDistribution(choices=(0, 0.1, 1, 2))",
-    "min_gain_to_split": "CategoricalDistribution(choices=(0, 0.1, 0.5))",
-    "train_size": "CategoricalDistribution(choices=(2, 3, 4, 5, 6, 7, 8, 9, 10))"
-  },
-  "_trial_id": 50
-}
-```
+:label: lightgbm-best-trial
+<table>
+   <tr>
+      <th colspan="2" style="background: linear-gradient(90deg, #3a4a7b, #6f8dbd); color: white; text-align: center; padding: 8px;">Best Trial Performance</th>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; width: 40%;">Trial Number</td>
+      <td style="text-align: right; font-family: monospace;">49</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Performance Score</td>
+      <td style="text-align: right; font-family: monospace; background: linear-gradient(90deg, #fdf6ec, #f9d29d); font-weight: bold;">0.6746</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Start Time</td>
+      <td style="text-align: right; font-family: monospace;">2023-11-18 01:42:25</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Completion Time</td>
+      <td style="text-align: right; font-family: monospace;">2023-11-18 01:42:59</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Execution Duration</td>
+      <td style="text-align: right; font-family: monospace; font-style: italic;">34.48 seconds</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Trial ID</td>
+      <td style="text-align: right; font-family: monospace;">50</td>
+   </tr>
+</table>
 
 ## Best Parameters
-```json
-{
-  "objective": "regression",
-  "learning_rate": 0.05,
-  "n_estimators": 100,
-  "max_depth": 4,
-  "num_leaves": 31,
-  "min_sum_hessian_in_leaf": 10,
-  "extra_trees": true,
-  "min_data_in_leaf": 100,
-  "feature_fraction": 1.0,
-  "bagging_fraction": 0.8,
-  "bagging_freq": 0,
-  "lambda_l1": 2,
-  "lambda_l2": 0,
-  "min_gain_to_split": 0.1,
-  "train_size": 2
-}
-```
+:label: lightgbm-best-parameters
+<table>
+   <tr>
+      <th colspan="2" style="background: linear-gradient(90deg, #3a4a7b, #6f8dbd); color: white; text-align: center; padding: 8px;">Optimized Hyperparameters</th>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; width: 40%;">objective</td>
+      <td style="text-align: right; font-family: monospace; background-color: #e8f4f8;">regression</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">learning_rate</td>
+      <td style="text-align: right; font-family: monospace;">0.05</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">n_estimators</td>
+      <td style="text-align: right; font-family: monospace;">100</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">max_depth</td>
+      <td style="text-align: right; font-family: monospace;">4</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">num_leaves</td>
+      <td style="text-align: right; font-family: monospace; background-color: #f0f8e8;">31</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">min_sum_hessian_in_leaf</td>
+      <td style="text-align: right; font-family: monospace;">10</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">extra_trees</td>
+      <td style="text-align: right; font-family: monospace;">true</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">min_data_in_leaf</td>
+      <td style="text-align: right; font-family: monospace; background-color: #f2f8e8; font-weight: bold;">100</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">feature_fraction</td>
+      <td style="text-align: right; font-family: monospace;">1.0</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">bagging_fraction</td>
+      <td style="text-align: right; font-family: monospace;">0.8</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">bagging_freq</td>
+      <td style="text-align: right; font-family: monospace;">0</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">lambda_l1</td>
+      <td style="text-align: right; font-family: monospace; background-color: #f2e8f8; font-weight: bold;">2</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">lambda_l2</td>
+      <td style="text-align: right; font-family: monospace;">0</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">min_gain_to_split</td>
+      <td style="text-align: right; font-family: monospace;">0.1</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; background-color: #f9f0e8;">train_size</td>
+      <td style="text-align: right; font-family: monospace; background-color: #f9d29d; font-weight: bold;">2</td>
+   </tr>
+</table>
+
 
 +++
 

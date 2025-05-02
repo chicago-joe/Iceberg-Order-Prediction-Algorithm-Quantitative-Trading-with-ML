@@ -1,5 +1,5 @@
 ---
-title: "Machine Learning for Quantitative Trading: Predicting Iceberg Order Execution![Complete Iceberg Order Prediction & Trading System](/assets/complete_iceberg.png)"
+title: "Machine Learning for Quantitative Trading: Predicting Iceberg Order Execution"
 author: "Joseph Loss"
 date: "2025-04-17"
 abstract: |

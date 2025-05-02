@@ -3,45 +3,74 @@ title: "Logistic Regression Optuna HPO Results"
 author: "Joseph Loss"
 date: "2025-04-21"
 ---
++++
 
-# HPO Report: `Logistic Regression`
 
 ## Best Trial
-```json
-{
-  "_number": 26,
-  "state": 1,
-  "_values": [
-    0.6899342878280169
-  ],
-  "_datetime_start": "2023-11-17 15:55:06.658366",
-  "datetime_complete": "2023-11-17 15:56:22.403761",
-  "_user_attrs": {},
-  "_system_attrs": {},
-  "intermediate_values": {},
-  "_distributions": {
-    "penalty": "CategoricalDistribution(choices=('l1', 'l2', 'elasticnet'))",
-    "C": "CategoricalDistribution(choices=(0.01, 0.1, 1, 10, 100))",
-    "solver": "CategoricalDistribution(choices=('saga',))",
-    "max_iter": "CategoricalDistribution(choices=(100, 500, 1000))",
-    "l1_ratio": "CategoricalDistribution(choices=(0, 0.5, 1))",
-    "train_size": "CategoricalDistribution(choices=(2, 3, 4, 5, 6, 7, 8, 9, 10))"
-  },
-  "_trial_id": 177
-}
-```
+:label: logistic-regression-best-trial
+<table>
+   <tr>
+      <th colspan="2" style="background: linear-gradient(90deg, #4a3a7b, #8d6fbd); color: white; text-align: center; padding: 8px;">Best Trial Performance</th>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; width: 40%;">Trial Number</td>
+      <td style="text-align: right; font-family: monospace;">26</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Performance Score</td>
+      <td style="text-align: right; font-family: monospace; background: linear-gradient(90deg, #e8f8e8, #b8e0b8); font-weight: bold; font-size: 110%;">0.6899</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Start Time</td>
+      <td style="text-align: right; font-family: monospace;">2023-11-17 15:55:06</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Completion Time</td>
+      <td style="text-align: right; font-family: monospace;">2023-11-17 15:56:22</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Execution Duration</td>
+      <td style="text-align: right; font-family: monospace; font-style: italic;">1:15.74 (minutes:seconds)</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Trial ID</td>
+      <td style="text-align: right; font-family: monospace;">177</td>
+   </tr>
+</table>
+
 
 ## Best Parameters
-```json
-{
-  "penalty": "elasticnet",
-  "C": 0.01,
-  "solver": "saga",
-  "max_iter": 1000,
-  "l1_ratio": 0.5,
-  "train_size": 2
-}
-```
+:label: logistic-regression-best-trial
+<table>
+   <tr>
+      <th colspan="2" style="background: linear-gradient(90deg, #4a3a7b, #8d6fbd); color: white; text-align: center; padding: 8px;">Best Trial Performance</th>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; width: 40%;">Trial Number</td>
+      <td style="text-align: right; font-family: monospace;">26</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Performance Score</td>
+      <td style="text-align: right; font-family: monospace; background: linear-gradient(90deg, #e8f8e8, #b8e0b8); font-weight: bold; font-size: 110%;">0.6899</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Start Time</td>
+      <td style="text-align: right; font-family: monospace;">2023-11-17 15:55:06</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Completion Time</td>
+      <td style="text-align: right; font-family: monospace;">2023-11-17 15:56:22</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Execution Duration</td>
+      <td style="text-align: right; font-family: monospace; font-style: italic;">1:15.74 (minutes:seconds)</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Trial ID</td>
+      <td style="text-align: right; font-family: monospace;">177</td>
+   </tr>
+</table>
+
 
 +++
 

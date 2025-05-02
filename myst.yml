@@ -4,10 +4,15 @@ project:
   title: "Machine Learning Research - Joseph Loss"
   description: "Collection of papers on machine learning applications in quantitative trading and hyperparameter optimization."
   keywords: [machine learning, quantitative trading, hyperparameter optimization, XGBoost, LightGBM]
-  authors: [Joseph Loss]
+  authors:
+    - name: Joseph Loss
+      corresponding: true
+      email: connect@josephjloss.com
+      url: https://josephjloss.com
+      github: chicago-joe
+      linkedin: https://linkedin.com/in/josephjl
+      note: MS Financial Engineering Alumn
   github: https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/
-#  references:
-#    spec: https://raw.githubusercontent.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/refs/heads/v2-hpo/references.yml
   jupyter:
     binder:
       url: https://mybinder.org/v2/gh/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/v2-hpo
@@ -26,14 +31,14 @@ project:
     - title: Hyperparameter Tuning & Optimization
       file: hyperparameter-optimization-whitepaper.md
       children:
-        - title: XGBoost HPO Report
-          file: XGBoost_hpo_report.md
-        - title: LightGBM HPO Report
-          file: LightGBM_hpo_report.md
-        - title: Random Forest HPO Report
-          file: Random_Forest_hpo_report.md
         - title: Logistic Regression HPO Report
           file: Logistic_Regression_hpo_report.md
+        - title: Random Forest HPO Report
+          file: Random_Forest_hpo_report.md
+        - title: LightGBM HPO Report
+          file: LightGBM_hpo_report.md
+        - title: XGBoost HPO Report
+          file: XGBoost_hpo_report.md
 #  downloads:
 #  - url: exports/JLOSS-iceberg-prediction-whitepaper.pdf
 #    title: Iceberg Order Prediction (PDF)

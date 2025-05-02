@@ -11,12 +11,22 @@ kernelspec:
   display_name: Python 3 (ipykernel)
 title: "Hyperparameter Optimization Tuning for Iceberg Order Prediction"
 author: "Joseph Loss"
-date: "2025-04-21"
+date: "2025-05-02"
 exports:
   - format: pdf
-    template: lapreprint-typst
+	template: lapreprint-typst
+    title: Hyperparameter Tuning Whitepaper
     output: exports/JLOSS-hyperparameter-tuning-whitepaper.pdf
     id: hpo-tuning-paper
+    articles:
+    - file: Logistic_Regression_hpo_report.md
+      title: Logistic Regression Optuna HPO Results
+    - file: Random_Forest_hpo_report.md
+      title: Random Forest Optuna HPO Results
+    - file: LightGBM_hpo_report.md
+      title: LightGBM Optuna HPO Results   
+    - file: XGBoost_hpo_report.md      
+      title: XGBoost Optuna HPO Results
 ---
 
 +++
