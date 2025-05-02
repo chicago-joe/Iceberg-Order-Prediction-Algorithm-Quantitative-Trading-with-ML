@@ -1,3 +1,9 @@
+---
+title: "XGBoost Optuna HPO Results"
+author: "Joseph Loss"
+date: "2025-04-21"
+---
+
 # HPO Report: `XGBoost`
 
 ## Best Trial
