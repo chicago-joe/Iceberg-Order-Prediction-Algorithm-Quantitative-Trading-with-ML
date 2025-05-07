@@ -3,7 +3,9 @@
 [![View Live Site](https://img.shields.io/badge/Live%20Site-Visit-blue)](https://chicago-joe.github.io/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/) 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/HEAD?urlpath=lab)
 [![GitHub Stars](https://img.shields.io/github/stars/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML?style=social)](https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/stargazers)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<!-- 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
+-->
 
 ## 📋 Overview
 
@@ -67,11 +69,13 @@ My research offers significant implications for trading system design:
 
 ## 👨‍💻 About the Author
 
-[Joseph Loss](https://github.com/chicago-joe) - Quantitative Trading Researcher
+[Joseph Loss](https://github.com/chicago-joe) - Quantitative Developer
 
+<!-- 
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+-->
 
 ## 🔗 Citation
 
