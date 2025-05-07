@@ -15,10 +15,10 @@ project:
   github: https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/
   jupyter:
     binder:
-      url: https://mybinder.org/v2/gh/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/v2-hpo
+      url: https://mybinder.org/v2/gh/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/HEAD
       provider: github
       repo: chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML
-      ref: v2-hpo
+      ref: HEAD
     server:
       url: "http://localhost:9090"
       token: "1234"
