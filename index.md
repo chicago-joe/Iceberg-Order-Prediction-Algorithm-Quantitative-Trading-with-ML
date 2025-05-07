@@ -20,7 +20,7 @@ abstract: |
 
 This paper presents a machine learning approach for predicting iceberg order execution in quantitative trading. We analyze market microstructure patterns to predict whether detected iceberg orders will be filled or canceled, providing valuable signals for algorithmic trading strategies.
 
-### [![Iceberg Order Prediction](assets/complete_iceberg.png)](./iceberg-prediction-whitepaper-v2.md)
+### [Iceberg Order Prediction Whitepaper](./iceberg-prediction-whitepaper-v2.md)
 
 ### [Hyperparameter Optimization](./hyperparameter-optimization-whitepaper.md)
 
