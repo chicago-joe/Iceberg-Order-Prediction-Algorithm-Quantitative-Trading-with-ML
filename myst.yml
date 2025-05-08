@@ -66,6 +66,9 @@ site:
     scripts:
       - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
       - https://cdn.plot.ly/plotly-latest.min.js
+      - scripts/iframe-resizer.js
+    style:
+     - .css/component-iframes.css
     show_source: false
     show_toc: true
     numbered_headers: false

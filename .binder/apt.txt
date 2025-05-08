@@ -2,11 +2,13 @@ texlive-xetex
 texlive-fonts-recommended 
 texlive-plain-generic 
 latexmk 
+gcc
+cmake
 pandoc
 build-essential
 webp
 inkscape
 rpm
 alien
-cargo/stable
+"cargo/stable"
 
