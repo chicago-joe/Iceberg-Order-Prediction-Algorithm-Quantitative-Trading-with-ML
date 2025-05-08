@@ -1,6 +1,5 @@
 ---
 title: "Random Forest Optuna HPO Results"
-author: "Joseph Loss"
 date: "2025-04-21"
 ---
 +++
@@ -72,28 +71,28 @@ date: "2025-04-21"
 ## Embedded Visualizations
 
 ### Parameter Importances
-![random_forest_param_importances](/assets/random_forest_plot_param_importances.png)
+![random_forest_param_importances](/assets/random_forest_plot_param_importances.*)
 
 
 ### Slice Plot
-![random_forest_slice_plot](/assets/random_forest_plot_slice.png)
+![random_forest_slice_plot](/assets/random_forest_plot_slice.*)
 
 
 ### Parallel Coordinates Plot
-![random_forest_parallel_coordinates](/assets/random_forest_plot_parallel_coordinate.png)
+![random_forest_parallel_coordinates](/assets/random_forest_plot_parallel_coordinate.*)
 
 
 ### Rank Plot
-![random_forest_rank_plot](/assets/random_forest_plot_rank.png)
+![random_forest_rank_plot](/assets/random_forest_plot_rank.*)
 
 
 ### Contour Plot
-![random_forest_contour_plot](/assets/random_forest_plot_contour.png)
+![random_forest_contour_plot](/assets/random_forest_plot_contour.*)
 
 
 ### EDF Plot
-![random_forest_edf_plot](/assets/random_forest_plot_edf.png)
+![random_forest_edf_plot](/assets/random_forest_plot_edf.*)
 
 
 ### Optimization History
-![random_forest_optimization_history](/assets/random_forest_plot_optimization_history.png)
+![random_forest_optimization_history](/assets/random_forest_plot_optimization_history.*)

@@ -111,28 +111,28 @@ date: "2025-04-21"
 ## Embedded Visualizations
 
 ### Parameter Importances
-![lightgbm_param_importances](/assets/lightgbm_plot_param_importances.png)
+![lightgbm_param_importances](/assets/lightgbm_plot_param_importances.*)
 
 
 ### Slice Plot
-![lightgbm_slice_plot](/assets/lightgbm_plot_slice.png)
+![lightgbm_slice_plot](/assets/lightgbm_plot_slice.*)
 
 
 ### Parallel Coordinates Plot
-![lightgbm_parallel_coordinates](/assets/lightgbm_plot_parallel_coordinate.png)
+![lightgbm_parallel_coordinates](/assets/lightgbm_plot_parallel_coordinate.*)
 
 
 ### Rank Plot
-![lightgbm_rank_plot](/assets/lightgbm_plot_rank.png)
+![lightgbm_rank_plot](/assets/lightgbm_plot_rank.*)
 
 
 ### Contour Plot
-![lightgbm_contour_plot](/assets/lightgbm_plot_contour.png)
+![lightgbm_contour_plot](/assets/lightgbm_plot_contour.*)
 
 
 ### EDF Plot
-![lightgbm_edf_plot](/assets/lightgbm_plot_edf.png)
+![lightgbm_edf_plot](/assets/lightgbm_plot_edf.*)
 
 
 ### Optimization History
-![lightgbm_optimization_history](/assets/lightgbm_plot_optimization_history.png)
+![lightgbm_optimization_history](/assets/lightgbm_plot_optimization_history.*)
