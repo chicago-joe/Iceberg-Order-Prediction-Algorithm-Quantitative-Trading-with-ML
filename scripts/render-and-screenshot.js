@@ -24,8 +24,8 @@ const componentHeights = {
   TimeSeriesCVDiagram: 800,
 };
 
-const htmlDir = path.resolve(__dirname, '../static-html');
-const outputDir = path.resolve(__dirname, '../output');
+const htmlDir = path.resolve(__dirname, '../components/static-html');
+const outputDir = path.resolve(__dirname, '../assets');
 
 // Ensure output directories exist
 fs.mkdirSync(htmlDir, { recursive: true });
@@ -49,28 +49,29 @@ for (const [name, Component] of Object.entries(components)) {
   console.log(`✓ Rendered ${name}.html`);
 }
 
+
 // Step 2: Serve HTML locally
-const app = express();
-app.use(express.static(htmlDir));
-const server = app.listen(3000, async () => {
-  console.log('HTTP server running on port 3000');
+// const app = express();
+// app.use(express.static(htmlDir));
+// const server = app.listen(3000, async () => {
+//   console.log('HTTP server running on port 3000');
 
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+//   const browser = await puppeteer.launch();
+//   const page = await browser.newPage();
 
-  for (const name of Object.keys(components)) {
-    const height = componentHeights[name] || 800;
-    await page.setViewport({ width: 1200, height, deviceScaleFactor: 2 });
+//   for (const name of Object.keys(components)) {
+//     const height = componentHeights[name] || 800;
+//     await page.setViewport({ width: 1200, height, deviceScaleFactor: 2 });
 
-    const url = `http://localhost:3000/${name}.html`;
-    await page.goto(url, { waitUntil: 'networkidle0' });
+//     const url = `http://localhost:3000/${name}.html`;
+//     await page.goto(url, { waitUntil: 'networkidle0' });
 
-    const screenshotPath = path.join(outputDir, `${name}.png`);
-    await page.screenshot({ path: screenshotPath });
-    console.log(`✓ Screenshot saved: ${screenshotPath}`);
-  }
+//     const screenshotPath = path.join(outputDir, `${name}.png`);
+//     await page.screenshot({ path: screenshotPath });
+//     console.log(`✓ Screenshot saved: ${screenshotPath}`);
+//   }
 
-  await browser.close();
-  server.close();
-  console.log('All done!');
-});
+//   await browser.close();
+//   server.close();
+  // console.log('All done!');
+// });

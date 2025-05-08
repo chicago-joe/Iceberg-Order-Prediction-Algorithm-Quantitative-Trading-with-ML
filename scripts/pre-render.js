@@ -13,7 +13,7 @@ const ModelResults = require('../components/common-js/ModelResults');
 const TimeSeriesCVDiagram = require('../components/common-js/TimeSeriesCVDiagram');
 
 // Define the output directory
-const outputDir = path.join('../components/', 'html-components');
+const outputDir = path.join('./components/', 'html-components');
 
 // Create the output directory if it doesn't exist
 if (!fs.existsSync(outputDir)) {
