@@ -300,7 +300,6 @@ dependencies = [
     "jupyter-shared-drive>=0.2.1",
     "dtreeviz[all]>=2.2.2",
     "jupyter-server>=2.15.0",
-    "jupyter-react>=0.8.0",
 ]
 
 [tool.uv]
