@@ -10,4 +10,12 @@ webp
 inkscape
 rpm
 alien
-
+chromium 
+fonts-liberation 
+libatk-bridge2.0-0 
+libgtk-3-0 
+libx11-xcb1 
+libxcomposite1 
+libxdamage1 
+libxrandr2 
+xdg-utils 

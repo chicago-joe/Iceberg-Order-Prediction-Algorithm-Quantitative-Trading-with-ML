@@ -5,17 +5,15 @@ const fs = require('fs');
 const path = require('path');
 
 // Import all your components (using the paths you provided)
-const ModelComparisonDiagram = require('./components/common-js/ModelComparisonDiagram');
-const FeatureEngineeringVisual = require('./components/common-js/FeatureEngineeringVisual');
-const FeatureImportanceDiagram = require('./components/common-js/FeatureImportanceDiagram');
-const ModelArchitecture = require('./components/common-js/ModelArchitecture');
-const ModelResults = require('./components/common-js/ModelResults');
-const TimeSeriesCVDiagram = require('./components/common-js/TimeSeriesCVDiagram');
-const ConstrainedExplorationChart = require('./components/common-js/ConstrainedExplorationChart');
-const OptimizationVisualizer = require('./components/common-js/OptimizationVisualizer');
+const ModelComparisonDiagram = require('../components/common-js/ModelComparisonDiagram');
+const FeatureEngineeringVisual = require('../components/common-js/FeatureEngineeringVisual');
+// const FeatureImportanceDiagram = require('.../components/common-js/FeatureImportanceDiagram');
+const ModelArchitecture = require('../components/common-js/ModelArchitecture');
+const ModelResults = require('../components/common-js/ModelResults');
+const TimeSeriesCVDiagram = require('../components/common-js/TimeSeriesCVDiagram');
 
 // Define the output directory
-const outputDir = path.join('./components/', 'html-components');
+const outputDir = path.join('../components/', 'html-components');
 
 // Create the output directory if it doesn't exist
 if (!fs.existsSync(outputDir)) {
@@ -29,9 +27,7 @@ const componentHeights = {
   'FeatureImportanceDiagram': 1000,
   'ModelArchitecture': 1300,
   'ModelResults': 1600,
-  'TimeSeriesCVDiagram': 800,
-  'ConstrainedExplorationChart': 700,
-  'OptimizationVisualizer': 900
+  'TimeSeriesCVDiagram': 800
 };
 
 // Function to render component to HTML and save
@@ -205,11 +201,9 @@ function renderComponentToHTML(Component, componentName) {
 // Render each component
 renderComponentToHTML(ModelComparisonDiagram, 'ModelComparisonDiagram');
 renderComponentToHTML(FeatureEngineeringVisual, 'FeatureEngineeringVisual');
-renderComponentToHTML(FeatureImportanceDiagram, 'FeatureImportanceDiagram');
+// renderComponentToHTML(FeatureImportanceDiagram, 'FeatureImportanceDiagram');
 renderComponentToHTML(ModelArchitecture, 'ModelArchitecture');
 renderComponentToHTML(ModelResults, 'ModelResults');
 renderComponentToHTML(TimeSeriesCVDiagram, 'TimeSeriesCVDiagram');
-renderComponentToHTML(ConstrainedExplorationChart, 'ConstrainedExplorationChart');
-renderComponentToHTML(OptimizationVisualizer, 'OptimizationVisualizer');
 
 console.log('All components rendered successfully!');
