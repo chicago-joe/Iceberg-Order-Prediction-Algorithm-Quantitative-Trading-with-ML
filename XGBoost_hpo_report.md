@@ -97,28 +97,28 @@ date: "2025-04-21"
 ## Embedded Visualizations
 
 ### Parameter Importances
-![xgboost_param_importances](/assets/xgboost_plot_param_importances.png)
+![xgboost_param_importances](/assets/xgboost_plot_param_importances.*)
 
 
 ### Slice Plot
-![xgboost_slice_plot](/assets/xgboost_plot_slice.png)
+![xgboost_slice_plot](/assets/xgboost_plot_slice.*)
 
 
 ### Parallel Coordinates Plot
-![xgboost_parallel_coordinates](/assets/xgboost_plot_parallel_coordinate.png)
+![xgboost_parallel_coordinates](/assets/xgboost_plot_parallel_coordinate.*)
 
 
 ### Rank Plot
-![xgboost_rank_plot](/assets/xgboost_plot_rank.png)
+![xgboost_rank_plot](/assets/xgboost_plot_rank.*)
 
 
 ### Contour Plot
-![xgboost_contour_plot](/assets/xgboost_plot_contour.png)
+![xgboost_contour_plot](/assets/xgboost_plot_contour.*)
 
 
 ### EDF Plot
-![xgboost_edf_plot](/assets/xgboost_plot_edf.png)
+![xgboost_edf_plot](/assets/xgboost_plot_edf.*)
 
 
 ### Optimization History
-![xgboost_optimization_history](/assets/xgboost_plot_optimization_history.png)
+![xgboost_optimization_history](/assets/xgboost_plot_optimization_history.*)

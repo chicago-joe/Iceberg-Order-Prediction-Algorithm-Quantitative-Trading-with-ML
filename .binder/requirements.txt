@@ -730,11 +730,9 @@ jupyterlab-git<=0.51.1 ; sys_platform <= 'linux'
     # via app
 jupyterlab-github<=4.0.0 ; sys_platform <= 'linux'
     # via app
-jupyterlab-image-editor<=0.1.0 ; sys_platform <= 'linux'
     # via app
 jupyterlab-latex<=4.3.0 ; sys_platform <= 'linux'
     # via app
-jupyterlab-link-share<=0.3.0 ; sys_platform <= 'linux'
     # via app
 jupyterlab-lsp<=5.1.0 ; sys_platform <= 'linux'
     # via app
@@ -746,19 +744,14 @@ jupyterlab-night<=0.5.1 ; sys_platform <= 'linux'
     # via app
 jupyterlab-open-url-parameter<=0.3.0 ; sys_platform <= 'linux'
     # via app
-jupyterlab-plugin-playground<=0.4.0 ; sys_platform <= 'linux'
     # via app
 jupyterlab-pygments<=0.3.0 ; sys_platform <= 'linux'
     # via nbconvert
-jupyterlab-search-replace<=1.1.0 ; sys_platform <= 'linux'
     # via app
 jupyterlab-server<=2.27.3 ; sys_platform <= 'linux'
     # via
     #   jupyterlab
     #   notebook
-jupyterlab-tour<=4.0.1 ; sys_platform <= 'linux'
-    # via app
-jupyterlab-webrtc-docprovider<=0.1.1 ; sys_platform <= 'linux'
     # via app
 jupyterlab-widgets<=3.0.14 ; sys_platform <= 'linux'
     # via ipywidgets

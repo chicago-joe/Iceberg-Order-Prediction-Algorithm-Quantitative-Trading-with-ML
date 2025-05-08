@@ -26,9 +26,10 @@ exports:
 ## Project Context: Why This Matters in Trading
 
 In high-frequency and algorithmic trading, iceberg orders represent a significant market microstructure phenomenon. Let me walk you through how I approached predicting iceberg order execution using machine learning techniques.
+
 An iceberg order is a large order that's divided into smaller, visible portions - like the tip of an iceberg above water, with the majority hidden below. Traders use them to minimize market impact while executing large positions.
 
-![Complete Iceberg Order Prediction & Trading System](/assets/complete_iceberg.png)
+![Complete Iceberg Order Prediction & Trading System](/assets/complete_iceberg.*)
 
 *Image 1: The complete system architecture showing data acquisition, processing, modeling, and trading strategy components. This diagram illustrates the end-to-end pipeline from market data to trading decisions.*
 
@@ -369,7 +370,7 @@ The simulation results produced by this engine form the dataset for our machine 
 
 The data preprocessing workflow is shown in Image 2:
 
-![Data Processing Pipeline](/assets/preprocess.png)
+![Data Processing Pipeline](/assets/preprocess.*)
 
 *Image 2: The data processing pipeline showing the three main components: data flattening, feature engineering, and feature scaling. This ETL process transforms nested JSON data into tabular features suitable for machine learning.*
 
@@ -419,15 +420,23 @@ This function converts complex nested structures representing market states at d
 
 ### Feature Engineering Deep Dive
 
-Feature engineering is critical to this system's success. We transform raw market data into predictive features that capture market microstructure information. Images 4 and 5 show detailed breakdowns of the different feature categories:
+Feature engineering is critical to this system's success. We transform raw market data into predictive features that capture market microstructure information. 
 
-![Order Book Position Features](/assets/feature_engineering_order_book_position.png)
+There are several different categories of features:
 
-*Image 4: Order book position features showing how distance from support and resistance levels is calculated based on order direction. These features have high predictive power for execution probability.*
+1. **Order book position features** showing how distance from support and resistance levels is calculated based on order direction. These features have high predictive power for execution probability.
+2. **Order dynamics features** including fill-to-display ratio and lean-over-hedge ratio, along with temporal features that capture market timing effects. These features help identify aggressive iceberg orders.
+3. **Side-relative transformations** for order book imbalance and support/resistance levels. These transformations create consistent features that work regardless of whether the order is a buy or sell.
 
-![Order Dynamics Features](/assets/feature_engineering_order_book_dynamics.png)
+<!-- ![Order Book Position Features](/assets/feature_engineering_order_book_position.*) -->
 
-*Image 5: Order dynamics features including fill-to-display ratio and lean-over-hedge ratio, along with temporal features that capture market timing effects. These features help identify aggressive iceberg orders.*
+![Feature Engineering Deep Dive](/components/png/FeatureEngineeringVisual.*)
+
+<!-- *Image 4: * -->
+
+<!-- ![Order Dynamics Features](/assets/feature_engineering_order_book_dynamics.*) -->
+
+<!-- *Image 5: .* -->
 
 #### Market Structure Features
 
@@ -465,9 +474,9 @@ Time-based and momentum characteristics.
 
 A key innovation is converting raw market features into "side-relative" versions that have consistent meaning regardless of whether the order is a buy or sell, as illustrated in Image 6:
 
-![Feature Transformation Examples](/assets/feature_engineering_side_relative_features.png)
+<!-- ![Feature Transformation Examples](/assets/feature_engineering_side_relative_features.*) -->
 
-*Image 6: Examples of side-relative transformations for order book imbalance and support/resistance levels. These transformations create consistent features that work regardless of whether the order is a buy or sell.*
+<!-- *Image 6: Examples of * -->
 
 ```python
 # Converting bid/ask imbalances to side-relative measures
@@ -481,7 +490,7 @@ df['ticksFromResistanceLevel'] = np.where(df.isBid!=True, df['ticksFromLow'], df
 
 *From preprocess_data.ipynb, feature transformation code*
 
-The examples in Image 6 show how this transformation works:
+<!-- The examples in Image 6 show how this transformation works: -->
 
 **Example 1: Side-Relative Order Book Imbalance**
 
@@ -500,7 +509,7 @@ This transformation ensures that features have consistent predictive meaning reg
 
 In quantitative trading, traditional cross-validation can lead to look-ahead bias. I implemented a time-series validation approach as shown in Image 13:
 
-![Time Series Cross-Validation Approach](/assets/TimeSeriesCVApproach.png)
+![Time Series Cross-Validation Approach](/components/png/TimeSeriesCVDiagram.*)
 
 *Image 13: Time series cross-validation approach showing how data is split into training and testing periods. This method respects the temporal nature of financial data and prevents future information leakage.*
 
@@ -523,86 +532,74 @@ def _create_time_series_splits(self, train_size, dates):
 
     return splits
 ```
-
 *From machinelearning_final_modified.py, lines 304-314*
 
-The performance across time periods, as shown in Image 10, demonstrates the model's stability:
-
-![Time Series Cross-Validation Performance](/assets/TimeSeriesCVPerfomance.png)
-
-*Image 10: Performance metrics across different time periods showing the model's stability in changing market conditions. Note the consistent precision above 75% in all folds.*
-
-| Fold | Training Period          | Test Date  | Accuracy | Precision | Recall |
-| ---- | ------------------------ | ---------- | -------- | --------- | ------ |
-| 1    | 2023-07-03 to 2023-07-10 | 2023-07-11 | 76.0%    | 77.0%     | 64.0%  |
-| 2    | 2023-07-10 to 2023-07-17 | 2023-07-18 | 79.0%    | 81.0%     | 67.0%  |
-| 3    | 2023-07-17 to 2023-07-24 | 2023-07-25 | 77.0%    | 78.0%     | 65.0%  |
-| 4    | 2023-07-24 to 2023-07-31 | 2023-08-01 | 75.0%    | 76.0%     | 63.0%  |
-| 5    | 2023-07-31 to 2023-08-07 | 2023-08-08 | 80.0%    | 82.0%     | 70.0%  |
-
-The model maintains consistent performance across different time periods, with precision staying above 75% in all folds, suggesting it's capturing robust market patterns rather than overfitting to specific market conditions.
+The hyperparameter optimization process conducted 50 trials for each model type, systematically evaluating different parameter combinations across the entire dataset. Each trial represents a complete train-test evaluation with specific parameter settings.
 
 ## Model Selection Strategy
 
 For a trading system, model selection requires balancing multiple considerations:
 
-### Model Comparison
+### Model Comparison & Theory
 
-Various models were evaluated as shown in Image 9:
+![Model Comparison](/components/png/ModelComparisonDiagram.*)
 
-![Model Performance & Trading Impact](/assets/confusion_matrix.png)
 
-*Image 9: Model comparison showing performance metrics and confusion matrix for the XGBoost model. Note the precision of 79% and the detailed breakdown of prediction errors.*
+#### Custom Evaluation Scoring Metric - Max Precision / Optimal (minimum required) Recall
 
-| Model               | Accuracy | Precision | Recall | F1 Score |
-| ------------------- | -------- | --------- | ------ | -------- |
-| XGBoost             | 78%      | 79%       | 65%    | 71%      |
-| Random Forest       | 75%      | 77%       | 64%    | 70%      |
-| LightGBM            | 77%      | 78%       | 65%    | 71%      |
-| Logistic Regression | 71%      | 73%       | 62%    | 67%      |
-
-When evaluating models, I focused on trading-specific metrics:
-
-1. **Precision**: Minimizing false positives (critical for avoiding bad executions)
-2. **Recall with a minimum threshold**: Ensuring we don't miss significant trading opportunities 
-3. **Computational efficiency**: Essential for real-time trading systems
-
-From the confusion matrix in Image 9, we can see:
-
-- True Positives: 308 (correctly predicted fills)
-- False Positives: 84 (predicted fills that didn't happen)
-- False Negatives: 112 (missed fills)
-- True Negatives: 315 (correctly predicted non-fills)
-
-I created a custom metric specifically for trading applications:
+The custom evaluation metric focuses on trading-specific considerations:
 
 ```python
 @staticmethod
 def max_precision_optimal_recall_score(y_true, y_pred):
     """
-    Custom metric that maximizes precision while ensuring minimum recall.
-    In trading terms: maximize quality of execution signals while
-    ensuring we capture enough opportunities.
+    This is a custom scoring function that maximizes precision while optimizing to the best possible recall.
     """
     precision = precision_score(y_true, y_pred)
     recall = recall_score(y_true, y_pred)
 
-    min_recall = 0.5  # We need to catch at least 50% of opportunities
+    min_recall = 0.5
     score = 0 if recall < min_recall else precision
     return score
 ```
 
-*From machinelearning_final_modified.py, lines 294-302*
+This metric prioritizes:
+
+1. **Precision**: Minimizing false positives (critical for avoiding bad executions)
+2. **Recall with a minimum threshold**: Ensuring we don't miss significant trading opportunities (at least 50%)
+3. **Balance**: The model must achieve both good precision and sufficient recall
+
+
+#### Best Hyperparameter Tuning Trial per Model
+
+Based on the hyperparameter optimization trials, the best performances across models were:
+
+| Model               | Best Trial Score | Trial Number | Best Parameters |
+| ------------------- | ---------------- | ------------ | --------------- |
+| Logistic Regression | 0.6899342878280169 | 26 | penalty: elasticnet, C: 0.01, solver: saga, max_iter: 1000, l1_ratio: 0.5, train_size: 2 |
+| XGBoost             | 0.6746555095729683 | 21 | eval_metric: error@0.5, learning_rate: 0.03, n_estimators: 250, max_depth: 4, min_child_weight: 8, gamma: 0.2, subsample: 1.0, colsample_bytree: 0.8, reg_alpha: 0.2, reg_lambda: 2, train_size: 2 |
+| LightGBM            | 0.6745654203529987 | 49 | objective: regression, learning_rate: 0.05, n_estimators: 100, max_depth: 4, num_leaves: 31, min_sum_hessian_in_leaf: 10, extra_trees: true, min_data_in_leaf: 100, feature_fraction: 1.0, bagging_fraction: 0.8, bagging_freq: 0, lambda_l1: 2, lambda_l2: 0, min_gain_to_split: 0.1, train_size: 2 |
+| Random Forest       | 0.6648064178583886 | 46 | n_estimators: 500, max_depth: 4, min_samples_split: 7, min_samples_leaf: 3, train_size: 2 |
+
+The trials consistently show that a smaller training window (train_size = 2) performs better across all models, suggesting that recent market conditions are more predictive than longer historical periods.
+
+Interestingly, while tree-based models (XGBoost, LightGBM, Random Forest) performed well, Logistic Regression achieved the highest overall score, suggesting that many of the predictive relationships in the dataset may be effectively linear once the features are properly engineered.
+
+
+### Model HPO Results
+
+![Model Results & Trading Impact](/components/png/ModelResults.*)
+
 
 ### Precision-Recall and ROC Analysis
 
 To further evaluate model performance, I analyzed precision-recall and ROC curves as shown in Images 11 and 12:
 
-![Precision-Recall Curve](/assets/precision_recall_curve.png)
+![Precision-Recall Curve](/assets/precision_recall_curve.*)
 
 *Image 11: Precision-recall curve showing the trade-off between precision and recall. The average precision of 0.53 indicates the model's ability to balance between capturing opportunities and avoiding false positives.*
 
-![ROC Curve](/assets/roc_auc_plot.png)
+![ROC Curve](/assets/roc_auc_plot.*)
 
 *Image 12: ROC curve showing the trade-off between true positive rate and false positive rate. The area under the curve of 0.48 suggests room for further optimization.*
 
@@ -651,32 +648,35 @@ def get_model_hyperparameters(self, trial, model_name):
 
 *From machinelearning_final_modified.py, lines 75-89*
 
-The optimized XGBoost model configuration, as shown in Image 14, includes:
 
-![XGBoost Model Architecture](/assets/xgboost_architecture.png)
+#### Optimized XGBoost Model Configuration
 
-*Image 14: XGBoost model architecture showing the optimized parameter configuration and simplified tree structure visualization. Each parameter is explained in terms of its trading significance.*
+The table below contains the optimized XGBoost model configuration:
 
-| Parameter        | Value | Trading Significance                                                                                         |
+| Parameter | Value | Trading Significance |
 | ---------------- | ----- | ------------------------------------------------------------------------------------------------------------ |
-| max_depth        | 3     | Shallow trees reduce overfitting to market noise, focusing on robust patterns                                |
-| learning_rate    | 0.03  | Low learning rate provides more stable predictions as market conditions evolve                               |
-| n_estimators     | 1000  | Large number of trees captures complex market relationships                                                  |
-| gamma            | 0.19  | Minimum loss reduction required for further tree partitioning, prevents capturing random market fluctuations |
-| subsample        | 0.91  | Slight randomization in training data helps model generalize across market regimes                           |
-| colsample_bytree | 0.8   | Each tree considers 80% of features, reducing overfitting to specific market signals                         |
-| reg_alpha        | 0.16  | L1 regularization controls model sparsity, focusing on most significant market factors                       |
-| reg_lambda       | 2.1   | L2 regularization prevents individual features from dominating prediction, improving stability               |
+| max_depth | 4 | Shallow trees reduce overfitting to market noise, focusing on robust patterns |
+| learning_rate | 0.03 | Low learning rate provides more stable predictions as market conditions evolve |
+| n_estimators | 250 | Moderate number of trees balances complexity with execution speed |
+| gamma | 0.2 | Minimum loss reduction required for further tree partitioning, prevents capturing random market fluctuations |
+| subsample | 1.0 | Using full dataset for each tree, maximizing information when training data is limited |
+| colsample_bytree | 0.8 | Each tree considers 80% of features, reducing overfitting to specific market signals |
+| reg_alpha | 0.2 | L1 regularization controls model sparsity, focusing on most significant market factors |
+| reg_lambda | 2 | L2 regularization prevents individual features from dominating prediction, improving stability |
+| eval_metric | error@0.5 | Optimizes classification performance at the 0.5 probability threshold |
+| min_child_weight | 8 | Controls complexity of each tree node, preventing overfitting to noise |
+
+*XGBoost model architecture table showing the optimized parameter configuration and simplified tree structure visualization. Each parameter is explained in terms of its trading significance.*
 
 ## Feature Importance: Trading Signal Analysis
 
 Understanding which features drive prediction is critical for trading strategy development. Images 7 and 8 show the feature importance analysis:
 
-![MDA Feature Importance](/assets/mda_importance_plot.png)
+![MDA Feature Importance](/assets/mda_importance_plot.*)
 
 *Image 7: MDA (Mean Decrease Accuracy) feature importance showing how permuting each feature affects model accuracy. The dominance of price position features (ticksFromResistanceLevel and ticksFromSupportLevel) is clearly visible.*
 
-![Top 12 Mean Feature Importances](/assets/mean_feature_importance_plot.png)
+![Top 12 Mean Feature Importances](/assets/mean_feature_importance_plot.*)
 
 *Image 8: Top 12 feature importances based on the XGBoost model's native feature importance measure. This provides a different perspective on feature ranking compared to the MDA method.*
 
@@ -717,7 +717,7 @@ Three insights valuable for trading strategy development:
 
 The prediction model doesn't operate in isolation - it feeds into a sophisticated trading decision process, as shown in Image 3:
 
-![Decision Flow: From Model Prediction to Trading Action](/assets/decision_flow_prediction_to_training.png)
+![Decision Flow: From Model Prediction to Trading Action](/assets/decision_flow_prediction_to_training.*)
 
 *Image 3: Decision flow diagram illustrating how model predictions drive trading decisions through confidence bands and feature analysis. This probabilistic approach allows for dynamic adaptation to market conditions.*
 
@@ -743,7 +743,7 @@ This probability-driven approach allows for dynamic adaptation to changing marke
 
 The complete prediction flow, shown in Image 15, illustrates how a new iceberg order is processed:
 
-![Prediction Flow and Model Advantages](/assets/xgboost_prediction_flow.png)
+![XGBoost Model Architecture & Prediction Flow](/components/png/ModelArchitecture.*)
 
 *Image 15: Prediction flow diagram showing the step-by-step process from raw data to final prediction probability, along with key model advantages for trading applications.*
 
@@ -759,14 +759,14 @@ The complete prediction flow, shown in Image 15, illustrates how a new iceberg o
    [ticksFromSupportLevel=0.37, ticksFromResistanceLevel=0.76, fillToDisplayRatio=1.28, sameSideImbalance=0.91, ...]
    ```
 
-3. **Tree Ensemble Processing**: The feature vector passes through all 1000 decision trees
+3. **Tree Ensemble Processing**: The feature vector passes through all 250 decision trees
    
    ```
    Tree 1 Output: 0.78
    Tree 2 Output: 0.41
    Tree 3 Output: 0.32
    ...
-   Tree 1000 Output: -0.03
+   Tree 250 Output: -0.03
    ```
 
 4. **Prediction Combination**: Tree outputs are combined and transformed to a probability
@@ -849,7 +849,7 @@ The XGBoost model offers several specific advantages for trading applications, a
 
 The evaluation metrics shown in Image 9 have several implications for trading strategy:
 
-1. **XGBoost Superiority**: XGBoost consistently outperformed other models with precision rates exceeding 75% while maintaining recall above 60%.
+1. **XGBoost Superiority**: XGBoost consistently outperformed other models, especially taking into account the speed in which it is able to make a prediction and the flexibility it has regarding parameter optimization. 
 
 2. **Feature Transferability**: The dominance of order book position and imbalance features suggests that these signals may transfer well to other instruments beyond the ones tested.
 
@@ -857,13 +857,10 @@ The evaluation metrics shown in Image 9 have several implications for trading st
 
 ## Business Impact and Performance Metrics
 
-The trading impact shows significant improvements over baseline strategies:
+The optimization trials demonstrate the model's effectiveness, with the best XGBoost configuration achieving a score of 0.6746555095729683 on the custom evaluation metric. The trial data reveals that shorter training windows (train_size = 2) consistently perform better across all models, indicating that recent market conditions are more predictive of execution outcomes than longer historical periods.
 
-- **Precision**: 79% - When the model predicts a fill, it's right 79% of the time
-- **Recall**: 65% - The model correctly identifies 65% of actual fills
-- **F1 Score**: 71% - Harmonic mean of precision and recall
+The custom evaluation metric (max_precision_optimal_recall_score) was specifically designed to balance precision (minimizing false positives) with sufficient recall (at least 50%), making it directly relevant to trading performance where both accuracy of execution signals and capturing enough opportunities are critical.
 
-These metrics translate directly to trading P&L through better execution quality and higher completion rates.
 
 ## Potential Extensions
 

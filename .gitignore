@@ -11,5 +11,6 @@ SXM-762/
 .binder/pb.bk
 src/neptune-optuna-hpo/optuna_plot_exporter.ipynb
 Untitled.md
+node_modules/
 
 **/.claude/settings.local.json

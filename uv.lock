@@ -293,7 +293,6 @@ dependencies = [
     { name = "boto3", marker = "sys_platform == 'linux'" },
     { name = "botocore", marker = "sys_platform == 'linux'" },
     { name = "bottleneck", marker = "sys_platform == 'linux'" },
-    { name = "bqplot", marker = "sys_platform == 'linux'" },
     { name = "bravado", marker = "sys_platform == 'linux'" },
     { name = "bravado-core", marker = "sys_platform == 'linux'" },
     { name = "cachelib", marker = "sys_platform == 'linux'" },
@@ -392,25 +391,18 @@ dependencies = [
     { name = "jupyterlab-filesystem-access", marker = "sys_platform == 'linux'" },
     { name = "jupyterlab-git", marker = "sys_platform == 'linux'" },
     { name = "jupyterlab-github", marker = "sys_platform == 'linux'" },
-    { name = "jupyterlab-image-editor", marker = "sys_platform == 'linux'" },
     { name = "jupyterlab-latex", marker = "sys_platform == 'linux'" },
-    { name = "jupyterlab-link-share", marker = "sys_platform == 'linux'" },
     { name = "jupyterlab-lsp", marker = "sys_platform == 'linux'" },
     { name = "jupyterlab-mathjax2", marker = "sys_platform == 'linux'" },
     { name = "jupyterlab-myst", marker = "sys_platform == 'linux'" },
     { name = "jupyterlab-night", marker = "sys_platform == 'linux'" },
     { name = "jupyterlab-open-url-parameter", marker = "sys_platform == 'linux'" },
-    { name = "jupyterlab-plugin-playground", marker = "sys_platform == 'linux'" },
-    { name = "jupyterlab-search-replace", marker = "sys_platform == 'linux'" },
-    { name = "jupyterlab-tour", marker = "sys_platform == 'linux'" },
-    { name = "jupyterlab-webrtc-docprovider", marker = "sys_platform == 'linux'" },
     { name = "jupyterlite-core", marker = "sys_platform == 'linux'" },
     { name = "jupyterlite-pyodide-kernel", marker = "sys_platform == 'linux'" },
     { name = "jupytext", marker = "sys_platform == 'linux'" },
     { name = "kaleido", marker = "sys_platform == 'linux'" },
     { name = "kiwisolver", marker = "sys_platform == 'linux'" },
     { name = "latex", marker = "sys_platform == 'linux'" },
-    { name = "lckr-jupyterlab-variableinspector", marker = "sys_platform == 'linux'" },
     { name = "lightgbm", marker = "sys_platform == 'linux'" },
     { name = "lolviz", marker = "sys_platform == 'linux'" },
     { name = "lsp", marker = "sys_platform == 'linux'" },
@@ -599,7 +591,6 @@ requires-dist = [
     { name = "boto3" },
     { name = "botocore" },
     { name = "bottleneck" },
-    { name = "bqplot" },
     { name = "bravado" },
     { name = "bravado-core" },
     { name = "cachelib" },
@@ -698,25 +689,18 @@ requires-dist = [
     { name = "jupyterlab-filesystem-access", specifier = ">=0.6.0" },
     { name = "jupyterlab-git", specifier = ">=0.51.1" },
     { name = "jupyterlab-github", specifier = ">=4.0.0" },
-    { name = "jupyterlab-image-editor", specifier = ">=0.1.0" },
     { name = "jupyterlab-latex", specifier = ">=4.3.0" },
-    { name = "jupyterlab-link-share", specifier = ">=0.3.0" },
     { name = "jupyterlab-lsp", specifier = ">=5.1.0" },
     { name = "jupyterlab-mathjax2", specifier = ">=4.0.0" },
     { name = "jupyterlab-myst", specifier = ">=2.4.2" },
     { name = "jupyterlab-night", specifier = ">=0.5.1" },
     { name = "jupyterlab-open-url-parameter", specifier = ">=0.3.0" },
-    { name = "jupyterlab-plugin-playground", specifier = ">=0.4.0" },
-    { name = "jupyterlab-search-replace", specifier = ">=1.1.0" },
-    { name = "jupyterlab-tour", specifier = ">=4.0.1" },
-    { name = "jupyterlab-webrtc-docprovider", specifier = ">=0.1.1" },
     { name = "jupyterlite-core", specifier = ">=0.5.1" },
     { name = "jupyterlite-pyodide-kernel", specifier = ">=0.5.2" },
     { name = "jupytext", specifier = ">=1.17.0" },
     { name = "kaleido", specifier = "<=0.2.1" },
     { name = "kiwisolver" },
     { name = "latex" },
-    { name = "lckr-jupyterlab-variableinspector", specifier = ">=3.2.4" },
     { name = "lightgbm" },
     { name = "lolviz" },
     { name = "lsp" },
@@ -1228,21 +1212,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/82/2b/c6fea2bb048d04c13b8564052818a198d50ce58d5f439ec69c2b0c458703/Bottleneck-1.4.2-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1fc4e7645bd425c05e05acd5541e9e09cb4179e71164e862f082561bf4509eac", size = 361844 },
     { url = "https://files.pythonhosted.org/packages/8f/4c/811475885bd60cf0cb28822568d0c0c3c7d7de4fbccd2ebb66863e7dc726/Bottleneck-1.4.2-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:037315c56605128a39f77d19af6a6019dc8c21a63694a4bfef3c026ed963be2e", size = 370369 },
     { url = "https://files.pythonhosted.org/packages/fd/ee/0a8157e6bbd2168bf6171811534a5a73a35f54c453dd7d86a323773b5bd7/Bottleneck-1.4.2-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:99778329331d5fae8df19772a019e8b73ba4d9d1650f110cd995ab7657114db0", size = 361786 },
-]
-
-[[package]]
-name = "bqplot"
-version = "0.12.44"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "ipywidgets", marker = "sys_platform == 'linux'" },
-    { name = "numpy", marker = "sys_platform == 'linux'" },
-    { name = "pandas", marker = "sys_platform == 'linux'" },
-    { name = "traitlets", marker = "sys_platform == 'linux'" },
-    { name = "traittypes", marker = "sys_platform == 'linux'" },
-]
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/92/bf/2ebe83bc691f5f7e68702caa38cca78d74f8a03b87eb962b62382d38490c/bqplot-0.12.44-py2.py3-none-any.whl", hash = "sha256:cad65bf5c4ce7ea7b03e1c674340f9274c0975941e63057831b29f7c2c37f144", size = 1237151 },
 ]
 
 [[package]]
@@ -3237,15 +3206,6 @@ wheels = [
 ]
 
 [[package]]
-name = "jupyterlab-image-editor"
-version = "0.1.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/58/93/d449a165361636d239ed4b92d22244c2b2189463014717e0b51ebda0fed5/jupyterlab_image_editor-0.1.0.tar.gz", hash = "sha256:8962da985b610c0229e8ba493dc1caaa74b0a1e99f55b31bce23a105219018cf", size = 423078 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/f7/f2/9025f5d6c898f86265df2be06faa5cded012164d7d461890c9e3d4459449/jupyterlab_image_editor-0.1.0-py3-none-any.whl", hash = "sha256:51cb6c2d06a4c8ddfb5a64cb0411d34d7f0e5148958f596635d03695d78efe38", size = 607296 },
-]
-
-[[package]]
 name = "jupyterlab-latex"
 version = "4.3.0"
 source = { registry = "https://pypi.org/simple" }
@@ -3255,18 +3215,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/9e/9a/cf492f0b9278f4aaa70199433c5940b47f294c34d9dc5c6bd4cd91239bbc/jupyterlab_latex-4.3.0.tar.gz", hash = "sha256:66074da4e5f2d5ca856d0da342196fe517e0055d15afc288c5859ba4fe15f2f6", size = 1573587 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/60/10/2281b23c25b3e8680ceafb768302d6361ec6dda668876264583ac1e172d5/jupyterlab_latex-4.3.0-py3-none-any.whl", hash = "sha256:d5c383d217855f1fb65c9155951ef2ce8b61cca14059e65c3e7a5baef6e689e1", size = 382528 },
-]
-
-[[package]]
-name = "jupyterlab-link-share"
-version = "0.3.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "jupyter-server", marker = "sys_platform == 'linux'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/5f/63/037eef5db99816206935fe491e6cd8b8a72f6933895ec8c1af44eda8eab9/jupyterlab-link-share-0.3.0.tar.gz", hash = "sha256:f0de426aae08da0e18aa9ad32b40f62dcbb007c08509336ac58c994048a7a341", size = 72924 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/51/67/57d83f8e1b0b4bb952b8ac2ffa8beb6e74b8e4eedfab060ded472de63071/jupyterlab_link_share-0.3.0-py3-none-any.whl", hash = "sha256:840b901706da75b67d2c1a107106998c58ee19e7391cbc60ae3d7603b0281a00", size = 146538 },
 ]
 
 [[package]]
@@ -3322,33 +3270,12 @@ wheels = [
 ]
 
 [[package]]
-name = "jupyterlab-plugin-playground"
-version = "0.4.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/30/92/f9582475d6b30542a7e1c99f07ac99d9b845c62ac4e7e2ecba2d4b7370ba/jupyterlab_plugin_playground-0.4.0.tar.gz", hash = "sha256:81783712c286f334af46b55b912635671b68e1fe445439e7f8c817242f702d2f", size = 3904939 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/d6/cd/58207b1120b120ea32cfad3f7c4a429ccaf5f8fdb3f9290cacd76f8b2c00/jupyterlab_plugin_playground-0.4.0-py3-none-any.whl", hash = "sha256:883e71b20ad899570ffc68d3235dc970671d6d3090af30e463cb38f1060a1dd0", size = 7658479 },
-]
-
-[[package]]
 name = "jupyterlab-pygments"
 version = "0.3.0"
 source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/90/51/9187be60d989df97f5f0aba133fa54e7300f17616e065d1ada7d7646b6d6/jupyterlab_pygments-0.3.0.tar.gz", hash = "sha256:721aca4d9029252b11cfa9d185e5b5af4d54772bb8072f9b7036f4170054d35d", size = 512900 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b1/dd/ead9d8ea85bf202d90cc513b533f9c363121c7792674f78e0d8a854b63b4/jupyterlab_pygments-0.3.0-py3-none-any.whl", hash = "sha256:841a89020971da1d8693f1a99997aefc5dc424bb1b251fd6322462a1b8842780", size = 15884 },
-]
-
-[[package]]
-name = "jupyterlab-search-replace"
-version = "1.1.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "jupyter-server", marker = "sys_platform == 'linux'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/dd/a6/ca5b0f711e56a12ebadc347302bc73e288f182094b647c37807371f6481d/jupyterlab_search_replace-1.1.0.tar.gz", hash = "sha256:f139bd7de9aa9b9c67a6fa4e0354ade4d9c07e8458e32f0287661c30db91723f", size = 2126510 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/92/aa/2376b2324e33ad87631138fed42b57d5ca61bc6d0f5c52ad3cf4f94ea663/jupyterlab_search_replace-1.1.0-py3-none-any.whl", hash = "sha256:fae97cbf9de818c8b93601a4e929f76843a195e63a21452058a7cc6d41d8c85e", size = 151500 },
 ]
 
 [[package]]
@@ -3367,24 +3294,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/0a/c9/a883ce65eb27905ce77ace410d83587c82ea64dc85a48d1f7ed52bcfa68d/jupyterlab_server-2.27.3.tar.gz", hash = "sha256:eb36caca59e74471988f0ae25c77945610b887f777255aa21f8065def9e51ed4", size = 76173 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/54/09/2032e7d15c544a0e3cd831c51d77a8ca57f7555b2e1b2922142eddb02a84/jupyterlab_server-2.27.3-py3-none-any.whl", hash = "sha256:e697488f66c3db49df675158a77b3b017520d772c6e1548c7d9bcc5df7944ee4", size = 59700 },
-]
-
-[[package]]
-name = "jupyterlab-tour"
-version = "4.0.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/61/fa/a512426916ca282b7b486d3ed8be290abde9e21ef4d0eec7bb90f5be1a4f/jupyterlab_tour-4.0.1.tar.gz", hash = "sha256:51d860f872775ce7d85dbfd215fbab1d2c79f5c0c1a902a1d46e4bb642090cbd", size = 565212 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/54/e2/f95b8a2cb88f8c48feabb77529f06534c5ef7eb27821b8f9d69cb6df8d20/jupyterlab_tour-4.0.1-py3-none-any.whl", hash = "sha256:a1590e6b5e206ff29869ac2020833f61d74074bde2f6739515280a76511b3b54", size = 103993 },
-]
-
-[[package]]
-name = "jupyterlab-webrtc-docprovider"
-version = "0.1.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/dc/e4/382328f20d352a3c8bbc0c7eb7e17e78a51cb747a2536a590e10b4a2bda2/jupyterlab-webrtc-docprovider-0.1.1.tar.gz", hash = "sha256:a1578d88ed8e46c0b74af39df364eb73be60d494ab5ff7bad486c0ef9c04b668", size = 387178 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/7c/e7/dbca4569e933d95e5a6252cb2ec94ab45d781805d0dba9dc5e4444ba8e6a/jupyterlab_webrtc_docprovider-0.1.1-py3-none-any.whl", hash = "sha256:f71e4720528adf44c437b5bf31a47fc493d06f1a7c59f5c2e2ae5e77bca90235", size = 517759 },
 ]
 
 [[package]]
@@ -3504,15 +3413,6 @@ dependencies = [
     { name = "tempdir", marker = "sys_platform == 'linux'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/e3/f3/c2562ee509faadaaf4f9d5b9491de146c6522ed2843dcecfd4f8e1a72f1d/latex-0.7.0.tar.gz", hash = "sha256:bf10c3fe27e9f3adccebc12e90ec239c86dcba101b89221f6775918211482a79", size = 6523 }
-
-[[package]]
-name = "lckr-jupyterlab-variableinspector"
-version = "3.2.4"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/50/1d/4f0ee3ee9cfafdedf94ea8ac9b67081e708806ef420531a80c5e7143534d/lckr_jupyterlab_variableinspector-3.2.4.tar.gz", hash = "sha256:9bad61401ef24cbdd4bc000d882038bbdd9d79550f624bd1930978dd56dddf7b", size = 1438538 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/48/71/6bdb50567c5255ae9f641bee00d2f9573cca9b195a3ef856a472411d1b89/lckr_jupyterlab_variableinspector-3.2.4-py3-none-any.whl", hash = "sha256:36c529dc07f258f66ebcbb4fb4551e410ccc039a6ecc7ad693bbedc79f4e4b12", size = 140378 },
-]
 
 [[package]]
 name = "libclang"

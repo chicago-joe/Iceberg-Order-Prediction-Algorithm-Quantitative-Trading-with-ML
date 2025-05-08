@@ -77,28 +77,28 @@ date: "2025-04-21"
 ## Embedded Visualizations
 
 ### Parameter Importances
-![logistic_regression_param_importances](/assets/logistic_regression_plot_param_importances.png)
+![logistic_regression_param_importances](/assets/logistic_regression_plot_param_importances.*)
 
 
 ### Slice Plot
-![logistic_regression_slice_plot](/assets/logistic_regression_plot_slice.png)
+![logistic_regression_slice_plot](/assets/logistic_regression_plot_slice.*)
 
 
 ### Parallel Coordinates Plot
-![logistic_regression_parallel_coordinates](/assets/logistic_regression_plot_parallel_coordinate.png)
+![logistic_regression_parallel_coordinates](/assets/logistic_regression_plot_parallel_coordinate.*)
 
 
 ### Rank Plot
-![logistic_regression_rank_plot](/assets/logistic_regression_plot_rank.png)
+![logistic_regression_rank_plot](/assets/logistic_regression_plot_rank.*)
 
 
 ### Contour Plot
-![logistic_regression_contour_plot](/assets/logistic_regression_plot_contour.png)
+![logistic_regression_contour_plot](/assets/logistic_regression_plot_contour.*)
 
 
 ### EDF Plot
-![logistic_regression_edf_plot](/assets/logistic_regression_plot_edf.png)
+![logistic_regression_edf_plot](/assets/logistic_regression_plot_edf.*)
 
 
 ### Optimization History
-![logistic_regression_optimization_history](/assets/logistic_regression_plot_optimization_history.png)
+![logistic_regression_optimization_history](/assets/logistic_regression_plot_optimization_history.*)

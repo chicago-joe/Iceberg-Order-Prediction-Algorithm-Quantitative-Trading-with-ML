@@ -1,0 +1,55 @@
+/* Make images larger */
+.myst-content img {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+  margin: 1.5rem 0;
+}
+
+/* For figures with captions */
+.myst-content figure {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 2rem 0;
+}
+
+/* Layout for left TOC */
+.myst-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-gap: 2rem;
+}
+
+/* TOC styling */
+.myst-toc {
+  grid-column: 1;
+  position: sticky;
+  top: 2rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+/* Main content area */
+.myst-content {
+  grid-column: 2;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 1024px) {
+  .myst-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .myst-toc {
+    grid-column: 1;
+    position: relative;
+    max-height: none;
+  }
+  
+  .myst-content {
+    grid-column: 1;
+  }
+}
