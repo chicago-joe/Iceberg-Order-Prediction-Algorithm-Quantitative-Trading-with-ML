@@ -101,7 +101,8 @@ const TimeSeriesCVDiagram = () => {
     '2023-07-31', '2023-08-07', '2023-08-14', '2023-08-21'
   ];
 
-  // Time series CV fold configurations
+  // Time series CV fold configurations using train_size=2 days
+  // This matches the optimal train_size found in hyperparameter optimization
   const folds = [
     {
       trainStart: 0,
@@ -236,7 +237,7 @@ const TimeSeriesCVDiagram = () => {
       React.createElement('div', { style: styles.notes },
         React.createElement('p', null, React.createElement('strong', null, 'Implementation Details:')),
         React.createElement('ul', null,
-          React.createElement('li', null, 'Each fold uses a fixed window size for training (typically 2 days in the project)'),
+          React.createElement('li', null, 'Each fold uses a fixed window size of 2 days for training (optimal as found in hyperparameter optimization)'),
           React.createElement('li', null, 'Test window is 1 day immediately following the training period'),
           React.createElement('li', null, 'Windows "roll forward" in time for each fold'),
           React.createElement('li', null, 'This approach respects the temporal nature of financial data - prevents future information leakage'),

@@ -68,7 +68,6 @@ const ModelArchitecture = () => {
       justifyContent: 'center',
       borderRadius: '5px',
       fontSize: '12px',
-//      align: 'center',
       position: 'relative',
       margin: '5px 0'
     },
@@ -185,8 +184,8 @@ const ModelArchitecture = () => {
             React.createElement('td', { style: styles.tableCell }, 
               React.createElement('span', { style: styles.code }, 'max_depth')
             ),
-            React.createElement('td', { style: styles.tableCell }, '3'),
-            React.createElement('td', { style: styles.tableCell }, 'Shallow trees reduce overfitting to market noise, focusing on robust patterns')
+            React.createElement('td', { style: styles.tableCell }, '4'),
+            React.createElement('td', { style: styles.tableCell }, 'Moderate tree depth balances detail capture and generalization')
           ),
           React.createElement('tr', null,
             React.createElement('td', { style: styles.tableCell }, 
@@ -199,29 +198,36 @@ const ModelArchitecture = () => {
             React.createElement('td', { style: styles.tableCell }, 
               React.createElement('span', { style: styles.code }, 'n_estimators')
             ),
-            React.createElement('td', { style: styles.tableCell }, '1000'),
-            React.createElement('td', { style: styles.tableCell }, 'Large number of trees captures complex market relationships')
+            React.createElement('td', { style: styles.tableCell }, '250'),
+            React.createElement('td', { style: styles.tableCell }, 'Sufficient number of trees to capture market relationships without overfitting')
           ),
           React.createElement('tr', null,
             React.createElement('td', { style: styles.tableCell }, 
-              React.createElement('span', { style: styles.code }, 'objective')
+              React.createElement('span', { style: styles.code }, 'eval_metric')
             ),
-            React.createElement('td', { style: styles.tableCell }, '\'binary:logistic\''),
-            React.createElement('td', { style: styles.tableCell }, 'Optimized for binary classification (fill vs. no fill) with probability outputs')
+            React.createElement('td', { style: styles.tableCell }, '\'error@0.5\''),
+            React.createElement('td', { style: styles.tableCell }, 'Optimized for error rate at 0.5 threshold, balanced for trading decisions')
+          ),
+          React.createElement('tr', null,
+            React.createElement('td', { style: styles.tableCell }, 
+              React.createElement('span', { style: styles.code }, 'min_child_weight')
+            ),
+            React.createElement('td', { style: styles.tableCell }, '8'),
+            React.createElement('td', { style: styles.tableCell }, 'Controls model complexity and reduces overfitting to market noise')
           ),
           React.createElement('tr', null,
             React.createElement('td', { style: styles.tableCell }, 
               React.createElement('span', { style: styles.code }, 'gamma')
             ),
-            React.createElement('td', { style: styles.tableCell }, '0.19'),
+            React.createElement('td', { style: styles.tableCell }, '0.2'),
             React.createElement('td', { style: styles.tableCell }, 'Minimum loss reduction required for further tree partitioning, prevents capturing random market fluctuations')
           ),
           React.createElement('tr', null,
             React.createElement('td', { style: styles.tableCell }, 
               React.createElement('span', { style: styles.code }, 'subsample')
             ),
-            React.createElement('td', { style: styles.tableCell }, '0.91'),
-            React.createElement('td', { style: styles.tableCell }, 'Slight randomization in training data helps model generalize across market regimes')
+            React.createElement('td', { style: styles.tableCell }, '1.0'),
+            React.createElement('td', { style: styles.tableCell }, 'Uses all training data for each tree, maximizing information capture in this case')
           ),
           React.createElement('tr', null,
             React.createElement('td', { style: styles.tableCell }, 
@@ -234,14 +240,14 @@ const ModelArchitecture = () => {
             React.createElement('td', { style: styles.tableCell }, 
               React.createElement('span', { style: styles.code }, 'reg_alpha')
             ),
-            React.createElement('td', { style: styles.tableCell }, '0.16'),
+            React.createElement('td', { style: styles.tableCell }, '0.2'),
             React.createElement('td', { style: styles.tableCell }, 'L1 regularization controls model sparsity, focusing on most significant market factors')
           ),
           React.createElement('tr', null,
             React.createElement('td', { style: styles.tableCell }, 
               React.createElement('span', { style: styles.code }, 'reg_lambda')
             ),
-            React.createElement('td', { style: styles.tableCell }, '2.1'),
+            React.createElement('td', { style: styles.tableCell }, '2'),
             React.createElement('td', { style: styles.tableCell }, 'L2 regularization prevents individual features from dominating prediction, improving stability')
           )
         )
@@ -320,7 +326,7 @@ const ModelArchitecture = () => {
           
           // Tree N
           React.createElement('div', { style: styles.tree },
-            React.createElement('div', { style: styles.treeLabel }, 'Tree N (of 1000)'),
+            React.createElement('div', { style: styles.treeLabel }, 'Tree N (of 250)'),
             React.createElement('div', { style: styles.node }, 
               'firstNoticeDays', 
               React.createElement('br'), 
@@ -381,14 +387,14 @@ const ModelArchitecture = () => {
       React.createElement('div', { style: styles.flowStep },
         React.createElement('div', { style: styles.flowBox },
           React.createElement('strong', null, '3. Tree Ensemble Processing'),
-          React.createElement('p', null, 'The feature vector passes through all 1000 decision trees'),
+          React.createElement('p', null, 'The feature vector passes through all 250 decision trees'),
           React.createElement('div', null,
             React.createElement('ul', { style: {margin: '5px 0', paddingLeft: '20px'} },
               React.createElement('li', null, 'Tree 1 Output: 0.78'),
               React.createElement('li', null, 'Tree 2 Output: 0.41'),
               React.createElement('li', null, 'Tree 3 Output: 0.32'),
               React.createElement('li', null, '...'),
-              React.createElement('li', null, 'Tree 1000 Output: -0.03')
+              React.createElement('li', null, 'Tree 250 Output: -0.03')
             )
           )
         )
@@ -401,12 +407,12 @@ const ModelArchitecture = () => {
           React.createElement('strong', null, '4. Prediction Combination'),
           React.createElement('p', null, 'Tree outputs are combined and transformed to a probability'),
           React.createElement('div', null,
-            React.createElement('p', null, 'Sum of tree outputs (weighted by learning rate): 1.37'),
+            React.createElement('p', null, 'Sum of tree outputs (weighted by learning rate): 1.25'),
             React.createElement('p', null, 'Logistic transformation: ', 
-              React.createElement('span', { style: styles.code }, 'sigmoid(1.37) = 0.797')
+              React.createElement('span', { style: styles.code }, 'sigmoid(1.25) = 0.778')
             ),
             React.createElement('p', null, 'Final prediction: ', 
-              React.createElement('span', { style: styles.highlight }, '79.7% probability of execution')
+              React.createElement('span', { style: styles.highlight }, '77.8% probability of execution')
             )
           )
         )
