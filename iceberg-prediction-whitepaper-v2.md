@@ -26,25 +26,8 @@ exports:
 ## Project Context: Why This Matters in Trading
 
 In high-frequency and algorithmic trading, iceberg orders represent a significant market microstructure phenomenon. Let me walk you through how I approached predicting iceberg order execution using machine learning techniques.
+
 An iceberg order is a large order that's divided into smaller, visible portions - like the tip of an iceberg above water, with the majority hidden below. Traders use them to minimize market impact while executing large positions.
-
-
-```{figure} featureengineeringvisual.svg
-:label: mysvgfigure
-:align: center
-
-```
-
-
-
-```{figure} ./output/FeatureEngineeringVisual.png
-:label: mypngfigure
-:align: center
-
-```
-
-
-
 
 ![Complete Iceberg Order Prediction & Trading System](/assets/complete_iceberg.*)
 

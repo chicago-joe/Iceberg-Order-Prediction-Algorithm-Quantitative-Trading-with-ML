@@ -62,10 +62,11 @@ site:
     - title: Download HPO Study
       url: exports/JLOSS-hyperparameter-tuning-whitepaper.pdf
   options:
-    css:
-      - custom.css
+    style: "custom.css"
     show_source: false
-    show_toc: true
+#    hide_toc: true
+#    hide_outline: true
+    hide_search: true
     numbered_headers: false
     folders: false
     scripts:
