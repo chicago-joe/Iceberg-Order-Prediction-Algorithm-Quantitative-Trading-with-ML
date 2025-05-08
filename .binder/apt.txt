@@ -19,3 +19,4 @@ libxcomposite1
 libxdamage1 
 libxrandr2 
 xdg-utils 
+wkhtmltopdf
