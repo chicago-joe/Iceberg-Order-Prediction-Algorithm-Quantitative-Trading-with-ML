@@ -10,5 +10,4 @@ webp
 inkscape
 rpm
 alien
-"cargo/stable"
 
