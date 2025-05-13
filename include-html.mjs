@@ -21,7 +21,13 @@ const includeHtmlDirective = {
     }
     
     try {
-      const htmlContent = readFileSync(join(__dirname, '_components', `${filename}.html`), 'utf8');
+      let htmlContent = readFileSync(join(__dirname, '_components', `${filename}.html`), 'utf8');
+      
+      // Add wrapper div for component styling and auto-sizing
+      htmlContent = `<div class="component-wrapper" data-component="${filename}">
+        ${htmlContent}
+      </div>`;
+      
       return [{ type: 'html', value: htmlContent }];
     } catch (error) {
       return [{ 
