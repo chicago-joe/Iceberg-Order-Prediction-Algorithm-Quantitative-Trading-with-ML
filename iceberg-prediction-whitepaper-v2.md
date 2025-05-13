@@ -81,6 +81,10 @@ The `status` field indicates the iceberg's current state:
 - `U`: Updated
 :::
 
+
+![Iceberg Order Detection in MBO Environment](/assets/iceberg_detection.*)
+
+
 :::{admonition} IcebergSimulationResult
 :class: note
 
@@ -95,7 +99,7 @@ Example format (simplified):
         timeInterval: NINETY_SECONDS, 
         isTimeBased: true, 
         period: 0, 
-        tradeImbalance: 0.5189873417721519 
+        tradeImbalance: 0.51899 
       },
       # Additional time windows...
     }
@@ -170,8 +174,8 @@ The raw data from iceberg simulations follows a complex nested structure as seen
 !IcebergSimulationResult {
   waitingToOrderTradeImbalance: {
     combinedMap: {
-      TimeWindowNinetySeconds: !TradeImbalance { timeInterval: NINETY_SECONDS, isTimeBased: true, period: 0, tradeImbalance: 0.5189873417721519 },
-      MessageWindow100: !TradeImbalance { timeInterval: NONE, isTimeBased: false, period: 100, tradeImbalance: 1.0204081632653062 },
+      TimeWindowNinetySeconds: !TradeImbalance { timeInterval: NINETY_SECONDS, isTimeBased: true, period: 0, tradeImbalance: 0.51899 },
+      MessageWindow100: !TradeImbalance { timeInterval: NONE, isTimeBased: false, period: 100, tradeImbalance: 1.02041 },
       # ... more time windows
     }
   },
@@ -430,12 +434,14 @@ There are several different categories of features:
 
 <!-- ![Order Book Position Features](/assets/feature_engineering_order_book_position.*) -->
 
-![Feature Engineering Deep Dive](/components/png/FeatureEngineeringVisual.*)
+:::{.full-width}
+```{include-html} FeatureEngineeringVisual
+
+```
+:::
 
 <!-- *Image 4: * -->
-
 <!-- ![Order Dynamics Features](/assets/feature_engineering_order_book_dynamics.*) -->
-
 <!-- *Image 5: .* -->
 
 #### Market Structure Features
@@ -475,7 +481,6 @@ Time-based and momentum characteristics.
 A key innovation is converting raw market features into "side-relative" versions that have consistent meaning regardless of whether the order is a buy or sell, as illustrated in Image 6:
 
 <!-- ![Feature Transformation Examples](/assets/feature_engineering_side_relative_features.*) -->
-
 <!-- *Image 6: Examples of * -->
 
 ```python
@@ -491,7 +496,6 @@ df['ticksFromResistanceLevel'] = np.where(df.isBid!=True, df['ticksFromLow'], df
 *From preprocess_data.ipynb, feature transformation code*
 
 <!-- The examples in Image 6 show how this transformation works: -->
-
 **Example 1: Side-Relative Order Book Imbalance**
 
 - Raw Book Data: Buy/Sell Imbalance: 0.75 (bid)
@@ -509,7 +513,11 @@ This transformation ensures that features have consistent predictive meaning reg
 
 In quantitative trading, traditional cross-validation can lead to look-ahead bias. I implemented a time-series validation approach as shown in Image 13:
 
-![Time Series Cross-Validation Approach](/components/png/TimeSeriesCVDiagram.*)
+:::{.full-width}
+```{include-html} TimeSeriesCVDiagram
+
+```
+:::
 
 *Image 13: Time series cross-validation approach showing how data is split into training and testing periods. This method respects the temporal nature of financial data and prevents future information leakage.*
 
@@ -542,7 +550,11 @@ For a trading system, model selection requires balancing multiple considerations
 
 ### Model Comparison & Theory
 
-![Model Comparison](/components/png/ModelComparisonDiagram.*)
+:::{.full-width}
+```{include-html} ModelComparisonDiagram
+
+```
+:::
 
 
 #### Custom Evaluation Scoring Metric - Max Precision / Optimal (minimum required) Recall
@@ -572,14 +584,315 @@ This metric prioritizes:
 
 #### Best Hyperparameter Tuning Trial per Model
 
-Based on the hyperparameter optimization trials, the best performances across models were:
+Based on the hyperparameter optimization trials, here are the best performances across models:
 
-| Model               | Best Trial Score | Trial Number | Best Parameters |
-| ------------------- | ---------------- | ------------ | --------------- |
-| Logistic Regression | 0.6899342878280169 | 26 | penalty: elasticnet, C: 0.01, solver: saga, max_iter: 1000, l1_ratio: 0.5, train_size: 2 |
-| XGBoost             | 0.6746555095729683 | 21 | eval_metric: error@0.5, learning_rate: 0.03, n_estimators: 250, max_depth: 4, min_child_weight: 8, gamma: 0.2, subsample: 1.0, colsample_bytree: 0.8, reg_alpha: 0.2, reg_lambda: 2, train_size: 2 |
-| LightGBM            | 0.6745654203529987 | 49 | objective: regression, learning_rate: 0.05, n_estimators: 100, max_depth: 4, num_leaves: 31, min_sum_hessian_in_leaf: 10, extra_trees: true, min_data_in_leaf: 100, feature_fraction: 1.0, bagging_fraction: 0.8, bagging_freq: 0, lambda_l1: 2, lambda_l2: 0, min_gain_to_split: 0.1, train_size: 2 |
-| Random Forest       | 0.6648064178583886 | 46 | n_estimators: 500, max_depth: 4, min_samples_split: 7, min_samples_leaf: 3, train_size: 2 |
+## Logistic Regression Best Trial
+:label: logistic-regression-best-trial
+<table>
+   <tr>
+      <th colspan="2" style="background: linear-gradient(90deg, #3a4a7b, #6f8dbd); color: white; text-align: center; padding: 8px;">Best Trial Performance</th>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; width: 40%;">Trial Number</td>
+      <td style="text-align: right; font-family: monospace;">26</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Performance Score</td>
+      <td style="text-align: right; font-family: monospace; background: linear-gradient(90deg, #fdf6ec, #f9d29d); font-weight: bold;">0.68993</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Start Time</td>
+      <td style="text-align: right; font-family: monospace;">2023-11-17 15:55:06</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Completion Time</td>
+      <td style="text-align: right; font-family: monospace;">2023-11-17 15:56:22</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Execution Duration</td>
+      <td style="text-align: right; font-family: monospace; font-style: italic;">76.74 seconds</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Trial ID</td>
+      <td style="text-align: right; font-family: monospace;">177</td>
+   </tr>
+</table>
+
+## Logistic Regression Best Parameters
+:label: logistic-regression-best-parameters
+<table>
+   <tr>
+      <th colspan="2" style="background: linear-gradient(90deg, #3a4a7b, #6f8dbd); color: white; text-align: center; padding: 8px;">Optimized Hyperparameters</th>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; width: 40%;">penalty</td>
+      <td style="text-align: right; font-family: monospace; background-color: #e8f4f8;">elasticnet</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">C</td>
+      <td style="text-align: right; font-family: monospace;">0.01</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">solver</td>
+      <td style="text-align: right; font-family: monospace;">saga</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">max_iter</td>
+      <td style="text-align: right; font-family: monospace;">1000</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">l1_ratio</td>
+      <td style="text-align: right; font-family: monospace; background-color: #f0f8e8;">0.5</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; background-color: #f9f0e8;">train_size</td>
+      <td style="text-align: right; font-family: monospace; background-color: #f9d29d; font-weight: bold;">2</td>
+   </tr>
+</table>
+
+## XGBoost Best Trial
+:label: xgboost-best-trial
+<table>
+   <tr>
+      <th colspan="2" style="background: linear-gradient(90deg, #3a4a7b, #6f8dbd); color: white; text-align: center; padding: 8px;">Best Trial Performance</th>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; width: 40%;">Trial Number</td>
+      <td style="text-align: right; font-family: monospace;">21</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Performance Score</td>
+      <td style="text-align: right; font-family: monospace; background: linear-gradient(90deg, #fdf6ec, #f9d29d); font-weight: bold;">0.67466</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Start Time</td>
+      <td style="text-align: right; font-family: monospace;">2023-11-17 23:02:38</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Completion Time</td>
+      <td style="text-align: right; font-family: monospace;">2023-11-17 23:08:38</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Execution Duration</td>
+      <td style="text-align: right; font-family: monospace; font-style: italic;">360.00 seconds</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Trial ID</td>
+      <td style="text-align: right; font-family: monospace;">122</td>
+   </tr>
+</table>
+
+## XGBoost Best Parameters
+:label: xgboost-best-parameters
+<table>
+   <tr>
+      <th colspan="2" style="background: linear-gradient(90deg, #3a4a7b, #6f8dbd); color: white; text-align: center; padding: 8px;">Optimized Hyperparameters</th>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; width: 40%;">eval_metric</td>
+      <td style="text-align: right; font-family: monospace; background-color: #e8f4f8;">error@0.5</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">learning_rate</td>
+      <td style="text-align: right; font-family: monospace;">0.03</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">n_estimators</td>
+      <td style="text-align: right; font-family: monospace;">250</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">max_depth</td>
+      <td style="text-align: right; font-family: monospace;">4</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">min_child_weight</td>
+      <td style="text-align: right; font-family: monospace; background-color: #f0f8e8;">8</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">gamma</td>
+      <td style="text-align: right; font-family: monospace;">0.2</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">subsample</td>
+      <td style="text-align: right; font-family: monospace;">1.0</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">colsample_bytree</td>
+      <td style="text-align: right; font-family: monospace;">0.8</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">reg_alpha</td>
+      <td style="text-align: right; font-family: monospace;">0.2</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">reg_lambda</td>
+      <td style="text-align: right; font-family: monospace; background-color: #f2e8f8; font-weight: bold;">2</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; background-color: #f9f0e8;">train_size</td>
+      <td style="text-align: right; font-family: monospace; background-color: #f9d29d; font-weight: bold;">2</td>
+   </tr>
+</table>
+
+## LightGBM Best Trial
+:label: lightgbm-best-trial
+<table>
+   <tr>
+      <th colspan="2" style="background: linear-gradient(90deg, #3a4a7b, #6f8dbd); color: white; text-align: center; padding: 8px;">Best Trial Performance</th>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; width: 40%;">Trial Number</td>
+      <td style="text-align: right; font-family: monospace;">49</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Performance Score</td>
+      <td style="text-align: right; font-family: monospace; background: linear-gradient(90deg, #fdf6ec, #f9d29d); font-weight: bold;">0.67457</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Start Time</td>
+      <td style="text-align: right; font-family: monospace;">2023-11-18 01:42:25</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Completion Time</td>
+      <td style="text-align: right; font-family: monospace;">2023-11-18 01:42:59</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Execution Duration</td>
+      <td style="text-align: right; font-family: monospace; font-style: italic;">34.48 seconds</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Trial ID</td>
+      <td style="text-align: right; font-family: monospace;">50</td>
+   </tr>
+</table>
+
+## LightGBM Best Parameters
+:label: lightgbm-best-parameters
+<table>
+   <tr>
+      <th colspan="2" style="background: linear-gradient(90deg, #3a4a7b, #6f8dbd); color: white; text-align: center; padding: 8px;">Optimized Hyperparameters</th>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; width: 40%;">objective</td>
+      <td style="text-align: right; font-family: monospace; background-color: #e8f4f8;">regression</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">learning_rate</td>
+      <td style="text-align: right; font-family: monospace;">0.05</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">n_estimators</td>
+      <td style="text-align: right; font-family: monospace;">100</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">max_depth</td>
+      <td style="text-align: right; font-family: monospace;">4</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">num_leaves</td>
+      <td style="text-align: right; font-family: monospace; background-color: #f0f8e8;">31</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">min_sum_hessian_in_leaf</td>
+      <td style="text-align: right; font-family: monospace;">10</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">extra_trees</td>
+      <td style="text-align: right; font-family: monospace;">true</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">min_data_in_leaf</td>
+      <td style="text-align: right; font-family: monospace; background-color: #f2f8e8; font-weight: bold;">100</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">feature_fraction</td>
+      <td style="text-align: right; font-family: monospace;">1.0</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">bagging_fraction</td>
+      <td style="text-align: right; font-family: monospace;">0.8</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">bagging_freq</td>
+      <td style="text-align: right; font-family: monospace;">0</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">lambda_l1</td>
+      <td style="text-align: right; font-family: monospace; background-color: #f2e8f8; font-weight: bold;">2</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">lambda_l2</td>
+      <td style="text-align: right; font-family: monospace;">0</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">min_gain_to_split</td>
+      <td style="text-align: right; font-family: monospace;">0.1</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; background-color: #f9f0e8;">train_size</td>
+      <td style="text-align: right; font-family: monospace; background-color: #f9d29d; font-weight: bold;">2</td>
+   </tr>
+</table>
+
+## Random Forest Best Trial
+:label: random-forest-best-trial
+<table>
+   <tr>
+      <th colspan="2" style="background: linear-gradient(90deg, #3a4a7b, #6f8dbd); color: white; text-align: center; padding: 8px;">Best Trial Performance</th>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; width: 40%;">Trial Number</td>
+      <td style="text-align: right; font-family: monospace;">46</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Performance Score</td>
+      <td style="text-align: right; font-family: monospace; background: linear-gradient(90deg, #fdf6ec, #f9d29d); font-weight: bold;">0.66481</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Start Time</td>
+      <td style="text-align: right; font-family: monospace;">2023-11-17 18:23:30</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Completion Time</td>
+      <td style="text-align: right; font-family: monospace;">2023-11-17 18:26:19</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Execution Duration</td>
+      <td style="text-align: right; font-family: monospace; font-style: italic;">168.91 seconds</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">Trial ID</td>
+      <td style="text-align: right; font-family: monospace;">97</td>
+   </tr>
+</table>
+
+## Random Forest Best Parameters
+:label: random-forest-best-parameters
+<table>
+   <tr>
+      <th colspan="2" style="background: linear-gradient(90deg, #3a4a7b, #6f8dbd); color: white; text-align: center; padding: 8px;">Optimized Hyperparameters</th>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; width: 40%;">n_estimators</td>
+      <td style="text-align: right; font-family: monospace; background-color: #e8f4f8;">500</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">max_depth</td>
+      <td style="text-align: right; font-family: monospace;">4</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">min_samples_split</td>
+      <td style="text-align: right; font-family: monospace; background-color: #f0f8e8;">7</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold;">min_samples_leaf</td>
+      <td style="text-align: right; font-family: monospace;">3</td>
+   </tr>
+   <tr>
+      <td style="font-weight: bold; background-color: #f9f0e8;">train_size</td>
+      <td style="text-align: right; font-family: monospace; background-color: #f9d29d; font-weight: bold;">2</td>
+   </tr>
+</table>
 
 The trials consistently show that a smaller training window (train_size = 2) performs better across all models, suggesting that recent market conditions are more predictive than longer historical periods.
 
@@ -588,7 +901,11 @@ Interestingly, while tree-based models (XGBoost, LightGBM, Random Forest) perfor
 
 ### Model HPO Results
 
-![Model Results & Trading Impact](/components/png/ModelResults.*)
+:::{.full-width}
+```{include-html} ModelResults
+
+```
+:::
 
 
 ### Precision-Recall and ROC Analysis
@@ -597,11 +914,11 @@ To further evaluate model performance, I analyzed precision-recall and ROC curve
 
 ![Precision-Recall Curve](/assets/precision_recall_curve.*)
 
-*Image 11: Precision-recall curve showing the trade-off between precision and recall. The average precision of 0.53 indicates the model's ability to balance between capturing opportunities and avoiding false positives.*
+*Precision-recall curve showing the trade-off between precision and recall. The average precision of 0.53 indicates the model's ability to balance between capturing opportunities and avoiding false positives.*
 
 ![ROC Curve](/assets/roc_auc_plot.*)
 
-*Image 12: ROC curve showing the trade-off between true positive rate and false positive rate. The area under the curve of 0.48 suggests room for further optimization.*
+*ROC curve showing the trade-off between true positive rate and false positive rate. The area under the curve of 0.48 suggests room for further optimization.*
 
 These curves help in understanding the model's performance across different threshold settings, which is critical for calibrating the model for different trading scenarios.
 
@@ -670,17 +987,11 @@ The table below contains the optimized XGBoost model configuration:
 
 ## Feature Importance: Trading Signal Analysis
 
-Understanding which features drive prediction is critical for trading strategy development. Images 7 and 8 show the feature importance analysis:
-
-![MDA Feature Importance](/assets/mda_importance_plot.*)
-
-*Image 7: MDA (Mean Decrease Accuracy) feature importance showing how permuting each feature affects model accuracy. The dominance of price position features (ticksFromResistanceLevel and ticksFromSupportLevel) is clearly visible.*
-
-![Top 12 Mean Feature Importances](/assets/mean_feature_importance_plot.*)
-
-*Image 8: Top 12 feature importances based on the XGBoost model's native feature importance measure. This provides a different perspective on feature ranking compared to the MDA method.*
+Understanding which features drive prediction is critical for trading strategy development. 
 
 The feature importance analysis was conducted using multiple methods:
+- **MDA (Mean Decrease Accuracy) feature importance** shows how permuting each feature affects model accuracy. The dominance of price position features (ticksFromResistanceLevel and ticksFromSupportLevel) is clearly visible.
+- **XGBoost model's native feature importance** method which provides a different perspective on feature ranking compared to the MDA method.
 
 ```python
 def calculate_mda(self, model, X_test, y_test, scoring=f1_score):
@@ -702,8 +1013,15 @@ def calculate_mda(self, model, X_test, y_test, scoring=f1_score):
 
     return feature_importances
 ```
-
 *From machinelearning_final_modified.py, lines 717-732*
+
+
+:::{.full-width}
+```{include-html} FeatureEngineeringVisual
+
+```
+:::
+
 
 Three insights valuable for trading strategy development:
 
@@ -741,11 +1059,15 @@ This probability-driven approach allows for dynamic adaptation to changing marke
 
 ## Prediction Flow
 
-The complete prediction flow, shown in Image 15, illustrates how a new iceberg order is processed:
+The complete prediction flow, shown below, shows the full model architecture:
 
-![XGBoost Model Architecture & Prediction Flow](/components/png/ModelArchitecture.*)
 
-*Image 15: Prediction flow diagram showing the step-by-step process from raw data to final prediction probability, along with key model advantages for trading applications.*
+:::{.full-width}
+```{include-html} ModelArchitecture
+
+```
+:::
+
 
 1. **Feature Vector Construction**: Raw order data is transformed into engineered features
    
@@ -778,6 +1100,38 @@ The complete prediction flow, shown in Image 15, illustrates how a new iceberg o
    ```
 
 This probability output is more valuable than a simple binary prediction, as it allows for trade sizing and venue selection based on confidence levels.
+
+
+## Model Advantages for Trading Applications
+
+The XGBoost model offers several specific advantages for trading applications, as outlined in Image 15:
+
+| Advantage                 | Description                                                                  | Trading Application                                                    |
+| ------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Non-Linear Relationships  | Captures complex, non-linear interactions between market variables           | Better models tipping points and threshold effects in market behavior  |
+| Robust to Feature Scaling | Tree-based models are less sensitive to feature scaling than neural networks | More stable in production when market metrics have unusual ranges      |
+| Handles Missing Values    | XGBoost can handle missing values in features                                | Resilient against data quality issues in live market feeds             |
+| Interpretable Structure   | Individual trees can be examined for trading logic                           | Easier to explain to regulatory bodies and trading strategy committees |
+| Fast Inference            | Tree traversal is computationally efficient                                  | Low latency prediction suitable for high-frequency trading systems     |
+| Built-in Regularization   | Prevents overfitting to market noise                                         | More stable performance across changing market regimes                 |
+
+## Evaluation & Trading Strategy Implications
+
+The evaluation metrics shown in Image 9 have several implications for trading strategy:
+
+1. **XGBoost Superiority**: XGBoost consistently outperformed other models, especially taking into account the speed in which it is able to make a prediction and the flexibility it has regarding parameter optimization. 
+
+2. **Feature Transferability**: The dominance of order book position and imbalance features suggests that these signals may transfer well to other instruments beyond the ones tested.
+
+3. **Execution Time Sensitivity**: The importance of "oneStateBeforeFill" features indicates that model prediction accuracy increases as the order approaches execution, suggesting a strategy that dynamically adjusts confidence thresholds based on order age.
+
+## Business Impact and Performance Metrics
+
+The optimization trials demonstrate the model's effectiveness, with the best XGBoost configuration achieving a score of **0.674656** on the custom evaluation metric. The trial data reveals that shorter training windows (train_size = 2) consistently perform better across all models, indicating that recent market conditions are more predictive of execution outcomes than longer historical periods.
+
+The custom evaluation metric (**max_precision_optimal_recall_score**) was specifically designed to balance precision (minimizing false positives) with sufficient recall (at least 50%), making it directly relevant to trading performance where both accuracy of execution signals and capturing enough opportunities are critical.
+
++++
 
 ## Model Persistence & Deployment Considerations
 
@@ -832,35 +1186,7 @@ If implemented in a production trading system, this model would:
 
 Additionally, the Neptune integration provides continuous monitoring capabilities to detect model drift in changing market conditions.
 
-## Model Advantages for Trading Applications
-
-The XGBoost model offers several specific advantages for trading applications, as outlined in Image 15:
-
-| Advantage                 | Description                                                                  | Trading Application                                                    |
-| ------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Non-Linear Relationships  | Captures complex, non-linear interactions between market variables           | Better models tipping points and threshold effects in market behavior  |
-| Robust to Feature Scaling | Tree-based models are less sensitive to feature scaling than neural networks | More stable in production when market metrics have unusual ranges      |
-| Handles Missing Values    | XGBoost can handle missing values in features                                | Resilient against data quality issues in live market feeds             |
-| Interpretable Structure   | Individual trees can be examined for trading logic                           | Easier to explain to regulatory bodies and trading strategy committees |
-| Fast Inference            | Tree traversal is computationally efficient                                  | Low latency prediction suitable for high-frequency trading systems     |
-| Built-in Regularization   | Prevents overfitting to market noise                                         | More stable performance across changing market regimes                 |
-
-## Evaluation & Trading Strategy Implications
-
-The evaluation metrics shown in Image 9 have several implications for trading strategy:
-
-1. **XGBoost Superiority**: XGBoost consistently outperformed other models, especially taking into account the speed in which it is able to make a prediction and the flexibility it has regarding parameter optimization. 
-
-2. **Feature Transferability**: The dominance of order book position and imbalance features suggests that these signals may transfer well to other instruments beyond the ones tested.
-
-3. **Execution Time Sensitivity**: The importance of "oneStateBeforeFill" features indicates that model prediction accuracy increases as the order approaches execution, suggesting a strategy that dynamically adjusts confidence thresholds based on order age.
-
-## Business Impact and Performance Metrics
-
-The optimization trials demonstrate the model's effectiveness, with the best XGBoost configuration achieving a score of 0.6746555095729683 on the custom evaluation metric. The trial data reveals that shorter training windows (train_size = 2) consistently perform better across all models, indicating that recent market conditions are more predictive of execution outcomes than longer historical periods.
-
-The custom evaluation metric (max_precision_optimal_recall_score) was specifically designed to balance precision (minimizing false positives) with sufficient recall (at least 50%), making it directly relevant to trading performance where both accuracy of execution signals and capturing enough opportunities are critical.
-
++++
 
 ## Potential Extensions
 
