@@ -10,7 +10,6 @@ webp
 inkscape
 rpm
 alien
-chromium 
 fonts-liberation 
 libatk-bridge2.0-0 
 libgtk-3-0 
