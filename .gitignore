@@ -17,3 +17,5 @@ node_modules/
 
 # MyST build outputs
 _build
+_components
+UPDATES_WIP
