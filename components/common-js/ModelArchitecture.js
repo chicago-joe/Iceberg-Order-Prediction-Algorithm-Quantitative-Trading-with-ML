@@ -5,88 +5,103 @@ const ModelArchitecture = () => {
   const styles = {
     container: {
       fontFamily: 'Arial, sans-serif',
-      padding: '20px',
+      padding: '25px',
       maxWidth: '100%',
+      width: '100%',
       backgroundColor: '#f9f9f9',
       borderRadius: '8px',
-      border: '1px solid #e0e0e0'
+      border: '1px solid #e0e0e0',
+      overflowX: 'auto'
     },
     heading: {
       color: '#333',
-      marginBottom: '20px'
+      marginBottom: '25px',
+      fontSize: '24px',
+      fontWeight: 'bold'
     },
     section: {
       backgroundColor: 'white',
-      padding: '15px',
+      padding: '20px',
       borderRadius: '8px',
       boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-      marginBottom: '20px',
-      border: '1px solid #e0e0e0'
+      marginBottom: '25px',
+      border: '1px solid #e0e0e0',
+      width: '100%'
     },
     subheading: {
       borderBottom: '2px solid #4a90e2',
-      paddingBottom: '8px',
-      marginBottom: '15px',
+      paddingBottom: '10px',
+      marginBottom: '20px',
       color: '#4a90e2',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontSize: '20px'
+    },
+    p: {
+      fontSize: '16px',
+      lineHeight: '1.5',
+      marginBottom: '15px'
     },
     architectureContainer: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      padding: '20px 0'
+      padding: '20px 0',
+      width: '100%'
     },
     treesContainer: {
       display: 'flex',
       justifyContent: 'center',
-      gap: '20px',
-      marginTop: '20px',
-      flexWrap: 'wrap'
+      gap: '25px',
+      marginTop: '25px',
+      flexWrap: 'wrap',
+      width: '100%'
     },
     tree: {
-      width: '180px',
+      width: '200px',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       border: '1px solid #ddd',
       borderRadius: '8px',
-      padding: '10px',
+      padding: '15px',
       backgroundColor: '#f5f9ff'
     },
     treeLabel: {
       fontWeight: 'bold',
-      marginBottom: '10px',
-      fontSize: '14px'
+      marginBottom: '12px',
+      fontSize: '16px'
     },
     node: {
-      width: '140px',
-      height: '40px',
+      width: '160px',
+      height: '45px',
       backgroundColor: '#4a90e2',
       color: 'white',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: '5px',
-      fontSize: '12px',
+      fontSize: '14px',
       position: 'relative',
-      margin: '5px 0'
+      margin: '6px 0',
+      padding: '5px',
+      textAlign: 'center'
     },
     nodeConnection: {
       width: '2px',
-      height: '15px',
+      height: '18px',
       backgroundColor: '#4a90e2',
       margin: '0 auto'
     },
     leafNode: {
-      width: '60px',
-      height: '30px',
+      width: '70px',
+      height: '35px',
       backgroundColor: '#56b45d',
       color: 'white',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: '5px',
-      fontSize: '12px'
+      fontSize: '14px'
     },
     leafContainer: {
       display: 'flex',
@@ -95,72 +110,92 @@ const ModelArchitecture = () => {
     },
     diagram: {
       width: '100%',
-      marginTop: '20px'
+      marginTop: '25px'
     },
     table: {
       width: '100%',
       borderCollapse: 'collapse',
-      marginTop: '15px',
-      fontSize: '14px'
+      marginTop: '20px',
+      fontSize: '16px'
     },
     tableHeader: {
       backgroundColor: '#f5f5f5',
-      padding: '10px',
-      align: 'left',
+      padding: '12px',
+      textAlign: 'left',
       borderBottom: '1px solid #ddd',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontSize: '16px'
     },
     tableCell: {
-      padding: '10px',
-      borderBottom: '1px solid #ddd'
+      padding: '12px',
+      borderBottom: '1px solid #ddd',
+      fontSize: '15px',
+      lineHeight: '1.5'
     },
     code: {
       fontFamily: 'monospace',
       backgroundColor: '#f5f5f5',
-      padding: '2px 4px',
+      padding: '3px 5px',
       borderRadius: '3px',
-      fontSize: '13px'
+      fontSize: '15px'
     },
     arrow: {
-      fontSize: '24px',
-      color: '#4a90e2'
+      fontSize: '28px',
+      color: '#4a90e2',
+      textAlign: 'center',
+      width: '100%'
     },
     flowStep: {
       display: 'flex',
       alignItems: 'center',
-      margin: '10px 0'
+      margin: '15px 0',
+      width: '100%'
     },
     flowBox: {
       flex: 1,
-      padding: '10px',
+      padding: '15px',
       border: '1px solid #ddd',
       borderRadius: '5px',
       backgroundColor: 'white',
-      fontSize: '14px'
+      fontSize: '16px',
+      lineHeight: '1.5'
     },
     featureVec: {
       fontFamily: 'monospace',
-      padding: '10px',
+      padding: '12px',
       backgroundColor: '#f0f8ff',
       borderRadius: '5px',
-      marginTop: '10px',
-      fontSize: '14px',
+      marginTop: '12px',
+      fontSize: '15px',
       overflowX: 'auto',
-      whiteSpace: 'nowrap'
+      whiteSpace: 'pre-wrap',
+      wordBreak: 'break-word',
+      lineHeight: '1.5'
     },
     highlight: {
       backgroundColor: '#fffacd',
-      padding: '2px 4px',
+      padding: '3px 5px',
       borderRadius: '3px'
     },
     note: {
-      fontSize: '14px',
+      fontSize: '15px',
       color: '#666',
       fontStyle: 'italic',
-      marginTop: '15px',
-      padding: '10px',
+      marginTop: '20px',
+      padding: '15px',
       backgroundColor: '#f5f5f5',
-      borderRadius: '5px'
+      borderRadius: '5px',
+      lineHeight: '1.5',
+      width: '100%'
+    },
+    strong: {
+      fontWeight: 'bold',
+      fontSize: '16px'
+    },
+    li: {
+      fontSize: '15px',
+      lineHeight: '1.6',
+      marginBottom: '5px'
     }
   };
 
@@ -169,7 +204,7 @@ const ModelArchitecture = () => {
     
     React.createElement('div', { style: styles.section },
       React.createElement('h3', { style: styles.subheading }, 'Model Configuration'),
-      React.createElement('p', null, 'The XGBoost classifier is configured with the following parameters:'),
+      React.createElement('p', { style: styles.p }, 'The XGBoost classifier is configured with the following parameters:'),
       
       React.createElement('table', { style: styles.table },
         React.createElement('thead', null,
@@ -257,7 +292,7 @@ const ModelArchitecture = () => {
     React.createElement('div', { style: styles.section },
       React.createElement('h3', { style: styles.subheading }, 'Tree Structure Visualization'),
       
-      React.createElement('p', null, 'XGBoost uses an ensemble of gradient boosted decision trees. Each tree contributes to the final prediction, with later trees focusing on correcting errors made by earlier ones.'),
+      React.createElement('p', { style: styles.p }, 'XGBoost uses an ensemble of gradient boosted decision trees. Each tree contributes to the final prediction, with later trees focusing on correcting errors made by earlier ones.'),
       
       React.createElement('div', { style: styles.architectureContainer },
         React.createElement('div', { style: styles.treesContainer },
@@ -356,12 +391,12 @@ const ModelArchitecture = () => {
     React.createElement('div', { style: styles.section },
       React.createElement('h3', { style: styles.subheading }, 'Prediction Flow'),
       
-      React.createElement('p', null, 'When making a prediction for a new iceberg order, the model processes it through these steps:'),
+      React.createElement('p', { style: styles.p }, 'When making a prediction for a new iceberg order, the model processes it through these steps:'),
       
       React.createElement('div', { style: styles.flowStep },
         React.createElement('div', { style: styles.flowBox },
-          React.createElement('strong', null, '1. Feature Vector Construction'),
-          React.createElement('p', null, 'Raw order data is transformed into engineered features'),
+          React.createElement('strong', { style: styles.strong }, '1. Feature Vector Construction'),
+          React.createElement('p', { style: styles.p }, 'Raw order data is transformed into engineered features'),
           React.createElement('div', { style: styles.featureVec },
             '[ticksFromSupportLevel=5.0, ticksFromResistanceLevel=12.0, fillToDisplayRatio=14.0, ',
             'sameSideImbalance=0.73, tradeImbalance90s=0.62, leanOverHedgeRatio=0.75, ...]'
@@ -373,8 +408,8 @@ const ModelArchitecture = () => {
       
       React.createElement('div', { style: styles.flowStep },
         React.createElement('div', { style: styles.flowBox },
-          React.createElement('strong', null, '2. Feature Scaling'),
-          React.createElement('p', null, 'Features are normalized using the stored scaling parameters'),
+          React.createElement('strong', { style: styles.strong }, '2. Feature Scaling'),
+          React.createElement('p', { style: styles.p }, 'Features are normalized using the stored scaling parameters'),
           React.createElement('div', { style: styles.featureVec },
             '[ticksFromSupportLevel=0.37, ticksFromResistanceLevel=0.76, fillToDisplayRatio=1.28, ',
             'sameSideImbalance=0.91, tradeImbalance90s=0.44, leanOverHedgeRatio=0.58, ...]'
@@ -386,15 +421,15 @@ const ModelArchitecture = () => {
       
       React.createElement('div', { style: styles.flowStep },
         React.createElement('div', { style: styles.flowBox },
-          React.createElement('strong', null, '3. Tree Ensemble Processing'),
-          React.createElement('p', null, 'The feature vector passes through all 250 decision trees'),
+          React.createElement('strong', { style: styles.strong }, '3. Tree Ensemble Processing'),
+          React.createElement('p', { style: styles.p }, 'The feature vector passes through all 250 decision trees'),
           React.createElement('div', null,
             React.createElement('ul', { style: {margin: '5px 0', paddingLeft: '20px'} },
-              React.createElement('li', null, 'Tree 1 Output: 0.78'),
-              React.createElement('li', null, 'Tree 2 Output: 0.41'),
-              React.createElement('li', null, 'Tree 3 Output: 0.32'),
-              React.createElement('li', null, '...'),
-              React.createElement('li', null, 'Tree 250 Output: -0.03')
+              React.createElement('li', { style: styles.li }, 'Tree 1 Output: 0.78'),
+              React.createElement('li', { style: styles.li }, 'Tree 2 Output: 0.41'),
+              React.createElement('li', { style: styles.li }, 'Tree 3 Output: 0.32'),
+              React.createElement('li', { style: styles.li }, '...'),
+              React.createElement('li', { style: styles.li }, 'Tree 250 Output: -0.03')
             )
           )
         )
@@ -404,14 +439,14 @@ const ModelArchitecture = () => {
       
       React.createElement('div', { style: styles.flowStep },
         React.createElement('div', { style: styles.flowBox },
-          React.createElement('strong', null, '4. Prediction Combination'),
-          React.createElement('p', null, 'Tree outputs are combined and transformed to a probability'),
+          React.createElement('strong', { style: styles.strong }, '4. Prediction Combination'),
+          React.createElement('p', { style: styles.p }, 'Tree outputs are combined and transformed to a probability'),
           React.createElement('div', null,
-            React.createElement('p', null, 'Sum of tree outputs (weighted by learning rate): 1.25'),
-            React.createElement('p', null, 'Logistic transformation: ', 
+            React.createElement('p', { style: styles.p }, 'Sum of tree outputs (weighted by learning rate): 1.25'),
+            React.createElement('p', { style: styles.p }, 'Logistic transformation: ', 
               React.createElement('span', { style: styles.code }, 'sigmoid(1.25) = 0.778')
             ),
-            React.createElement('p', null, 'Final prediction: ', 
+            React.createElement('p', { style: styles.p }, 'Final prediction: ', 
               React.createElement('span', { style: styles.highlight }, '77.8% probability of execution')
             )
           )
@@ -419,7 +454,7 @@ const ModelArchitecture = () => {
       ),
       
       React.createElement('div', { style: styles.note },
-        React.createElement('strong', null, 'Trading Insight:'), 
+        React.createElement('strong', { style: styles.strong }, 'Trading Insight:'), 
         ' The model produces a probability of execution rather than just a binary yes/no. ',
         'This probability can be used to prioritize trading opportunities, size positions dynamically, or adjust ',
         'trading strategies based on confidence levels.'

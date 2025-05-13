@@ -4,11 +4,24 @@ const FeatureImportanceDiagram = () => {
   const styles = {
     container: {
       fontFamily: 'Arial, sans-serif',
-      padding: '20px',
-      maxWidth: '100%'
+      padding: '25px',
+      maxWidth: '100%',
+      width: '100%',
+      overflowX: 'auto'
     },
     header: {
-      marginBottom: '20px'
+      marginBottom: '25px'
+    },
+    h2: {
+      fontSize: '24px',
+      marginBottom: '15px',
+      color: '#333',
+      fontWeight: 'bold'
+    },
+    p: {
+      fontSize: '17px',
+      lineHeight: '1.5',
+      marginBottom: '15px'
     },
     chartContainer: {
       display: 'flex',
@@ -16,73 +29,89 @@ const FeatureImportanceDiagram = () => {
       marginBottom: '30px',
       border: '1px solid #ddd',
       borderRadius: '8px',
-      padding: '15px',
-      backgroundColor: '#f9f9f9'
+      padding: '20px',
+      backgroundColor: '#f9f9f9',
+      width: '100%'
     },
     chartTitle: {
       fontWeight: 'bold',
-      fontSize: '16px',
-      marginBottom: '10px'
+      fontSize: '18px',
+      marginBottom: '15px',
+      color: '#333'
     },
     barChart: {
       display: 'flex',
       flexDirection: 'column',
       width: '100%',
-      marginTop: '10px'
+      marginTop: '15px'
     },
     barContainer: {
       display: 'flex',
       alignItems: 'center',
-      marginBottom: '8px'
+      marginBottom: '10px',
+      width: '100%'
     },
     barLabel: {
-      width: '210px',
+      width: '240px',
       textAlign: 'right',
-      paddingRight: '10px',
-      fontSize: '14px'
+      paddingRight: '15px',
+      fontSize: '16px'
     },
     bar: {
-      height: '20px',
+      height: '25px',
       backgroundColor: '#4a90e2',
-      borderRadius: '3px',
+      borderRadius: '4px',
       position: 'relative'
     },
     barValue: {
       position: 'absolute',
-      right: '-40px',
-      fontSize: '12px'
+      right: '-45px',
+      fontSize: '14px',
+      fontWeight: 'bold'
     },
     description: {
       backgroundColor: '#fff',
-      padding: '15px',
+      padding: '18px',
       borderRadius: '5px',
-      marginTop: '10px',
-      fontSize: '14px',
-      lineHeight: '1.4'
+      marginTop: '15px',
+      fontSize: '16px',
+      lineHeight: '1.5'
     },
     methodSection: {
-      marginBottom: '30px'
+      marginBottom: '30px',
+      width: '100%'
     },
     methodTitle: {
       fontWeight: 'bold',
-      marginBottom: '8px'
+      marginBottom: '12px',
+      fontSize: '17px'
     },
     legendBox: {
       display: 'flex',
       justifyContent: 'flex-start',
       flexWrap: 'wrap',
-      marginBottom: '20px',
-      gap: '15px'
+      marginBottom: '25px',
+      gap: '20px'
     },
     legendItem: {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
+      fontSize: '16px'
     },
     legendColor: {
-      width: '15px',
-      height: '15px',
-      marginRight: '5px',
+      width: '18px',
+      height: '18px',
+      marginRight: '8px',
       borderRadius: '3px'
+    },
+    strong: {
+      fontWeight: 'bold',
+      fontSize: '16px'
+    },
+    li: {
+      fontSize: '16px',
+      lineHeight: '1.5',
+      marginBottom: '8px'
     }
   };
 
@@ -116,8 +145,8 @@ const FeatureImportanceDiagram = () => {
 
   return React.createElement('div', { style: styles.container },
     React.createElement('div', { style: styles.header },
-      React.createElement('h2', null, 'Feature Importance Analysis'),
-      React.createElement('p', null, 'Comparison of feature importance across different models and techniques')
+      React.createElement('h2', { style: styles.h2 }, 'Feature Importance Analysis'),
+      React.createElement('p', { style: styles.p }, 'Comparison of feature importance across different models and techniques')
     ),
     
     React.createElement('div', { style: styles.legendBox },
@@ -142,16 +171,16 @@ const FeatureImportanceDiagram = () => {
     React.createElement('div', { style: styles.methodSection },
       React.createElement('div', { style: styles.methodTitle }, 'Feature Importance Methods Used in the Project:'),
       React.createElement('ul', null,
-        React.createElement('li', null, 
-          React.createElement('strong', null, 'Direct Feature Importance:'), 
+        React.createElement('li', { style: styles.li }, 
+          React.createElement('strong', { style: styles.strong }, 'Direct Feature Importance:'), 
           ' Native importance from tree-based models'
         ),
-        React.createElement('li', null, 
-          React.createElement('strong', null, 'Mean Decrease Accuracy (MDA):'), 
+        React.createElement('li', { style: styles.li }, 
+          React.createElement('strong', { style: styles.strong }, 'Mean Decrease Accuracy (MDA):'), 
           ' Measures importance by permuting feature values'
         ),
-        React.createElement('li', null, 
-          React.createElement('strong', null, 'SHAP (SHapley Additive exPlanations):'), 
+        React.createElement('li', { style: styles.li }, 
+          React.createElement('strong', { style: styles.strong }, 'SHAP (SHapley Additive exPlanations):'), 
           ' Game theory-based unified approach to feature importance'
         )
       )
@@ -206,13 +235,13 @@ const FeatureImportanceDiagram = () => {
     React.createElement('div', { style: styles.chartContainer },
       React.createElement('div', { style: styles.chartTitle }, 'Feature Importance Comparison'),
       React.createElement('div', { style: styles.description },
-        React.createElement('p', null, React.createElement('strong', null, 'Key Findings:')),
+        React.createElement('p', { style: styles.p }, React.createElement('strong', { style: styles.strong }, 'Key Findings:')),
         React.createElement('ul', null,
-          React.createElement('li', null, 'All methods indicate that price position (support/resistance) features are highly predictive'),
-          React.createElement('li', null, 'Order book imbalance ratios consistently rank in the top features'),
-          React.createElement('li', null, 'Time-based features (time windows, expiry) have moderate importance'),
-          React.createElement('li', null, 'The state immediately before fill (oneStateBeforeFill) provides more predictive power than earlier states'),
-          React.createElement('li', null, 'Market indicators based on actual quantities (useQty=true) are generally less important than indicators based on number of orders')
+          React.createElement('li', { style: styles.li }, 'All methods indicate that price position (support/resistance) features are highly predictive'),
+          React.createElement('li', { style: styles.li }, 'Order book imbalance ratios consistently rank in the top features'),
+          React.createElement('li', { style: styles.li }, 'Time-based features (time windows, expiry) have moderate importance'),
+          React.createElement('li', { style: styles.li }, 'The state immediately before fill (oneStateBeforeFill) provides more predictive power than earlier states'),
+          React.createElement('li', { style: styles.li }, 'Market indicators based on actual quantities (useQty=true) are generally less important than indicators based on number of orders')
         )
       )
     )

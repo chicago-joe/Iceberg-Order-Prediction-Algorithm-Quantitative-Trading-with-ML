@@ -5,42 +5,48 @@ const ModelResults = () => {
   const styles = {
     container: {
       fontFamily: 'Arial, sans-serif',
-      padding: '20px',
+      padding: '25px',
       maxWidth: '100%',
+      width: '100%',
       backgroundColor: '#f9f9f9',
       borderRadius: '8px',
-      border: '1px solid #e0e0e0'
+      border: '1px solid #e0e0e0',
+      overflowX: 'auto'
     },
     heading: {
       color: '#333',
-      marginBottom: '20px'
+      marginBottom: '25px',
+      fontSize: '24px',
+      fontWeight: 'bold'
     },
     section: {
       backgroundColor: 'white',
-      padding: '15px',
+      padding: '20px',
       borderRadius: '8px',
       boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-      marginBottom: '20px',
-      border: '1px solid #e0e0e0'
+      marginBottom: '25px',
+      border: '1px solid #e0e0e0',
+      width: '100%'
     },
     subheading: {
       borderBottom: '2px solid #4a90e2',
-      paddingBottom: '8px',
-      marginBottom: '15px',
+      paddingBottom: '10px',
+      marginBottom: '20px',
       color: '#4a90e2',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontSize: '20px'
     },
     chartContainer: {
       width: '100%',
       height: '300px',
       position: 'relative',
-      marginTop: '20px',
+      marginTop: '25px',
       marginBottom: '30px'
     },
     axisLabel: {
       position: 'absolute',
       fontWeight: 'bold',
-      fontSize: '14px'
+      fontSize: '16px'
     },
     axis: {
       position: 'absolute',
@@ -65,13 +71,13 @@ const ModelResults = () => {
     barLabel: {
       position: 'absolute',
       bottom: '-25px',
-      fontSize: '12px',
+      fontSize: '14px',
       fontWeight: 'bold'
     },
     barValue: {
       position: 'absolute',
       top: '-25px',
-      fontSize: '12px'
+      fontSize: '14px'
     },
     lineChart: {
       position: 'absolute',
@@ -83,11 +89,11 @@ const ModelResults = () => {
     metricsContainer: {
       display: 'flex',
       flexWrap: 'wrap',
-      gap: '15px',
-      marginTop: '20px'
+      gap: '20px',
+      marginTop: '25px'
     },
     metricBox: {
-      padding: '15px',
+      padding: '20px',
       borderRadius: '8px',
       border: '1px solid #ddd',
       flex: '1 0 200px',
@@ -95,30 +101,34 @@ const ModelResults = () => {
     },
     metricName: {
       fontWeight: 'bold',
-      marginBottom: '8px',
-      fontSize: '14px'
+      marginBottom: '10px',
+      fontSize: '16px'
     },
     metricValue: {
-      fontSize: '24px',
+      fontSize: '28px',
       color: '#4a90e2',
-      marginBottom: '8px'
+      marginBottom: '10px'
     },
     metricDescription: {
-      fontSize: '13px',
-      color: '#666'
+      fontSize: '15px',
+      color: '#666',
+      lineHeight: '1.5'
     },
     confusionMatrix: {
-      marginTop: '20px',
+      marginTop: '25px',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center'
+      alignItems: 'center',
+      width: '100%'
     },
     matrixContainer: {
       display: 'grid',
-      gridTemplateColumns: '60px repeat(2, 100px)',
+      gridTemplateColumns: '80px repeat(2, 100px)',
       gridTemplateRows: '60px repeat(2, 100px)',
       border: '1px solid #ddd',
-      backgroundColor: 'white'
+      backgroundColor: 'white',
+      margin: '0 auto',
+      maxWidth: '400px'
     },
     matrixHeader: {
       display: 'flex',
@@ -127,7 +137,8 @@ const ModelResults = () => {
       backgroundColor: '#f0f0f0',
       border: '1px solid #ddd',
       fontWeight: 'bold',
-      fontSize: '14px'
+      fontSize: '15px',
+      padding: '10px'
     },
     matrixHeaderMain: {
       display: 'flex',
@@ -137,19 +148,20 @@ const ModelResults = () => {
       color: 'white',
       border: '1px solid #ddd',
       fontWeight: 'bold',
-      fontSize: '14px'
+      fontSize: '16px',
+      padding: '10px'
     },
     matrixCell: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       border: '1px solid #ddd',
-      fontSize: '18px',
+      fontSize: '20px',
       position: 'relative'
     },
     matrixCellLabel: {
       position: 'absolute',
-      fontSize: '12px',
+      fontSize: '14px',
       color: '#666',
       top: '5px',
       left: '5px'
@@ -157,61 +169,80 @@ const ModelResults = () => {
     matrixLegend: {
       display: 'flex',
       justifyContent: 'center',
-      gap: '20px',
+      gap: '25px',
       marginTop: '15px',
-      fontSize: '14px'
+      fontSize: '16px'
     },
     tableContainer: {
-      marginTop: '20px',
-      overflowX: 'auto'
+      marginTop: '25px',
+      overflowX: 'auto',
+      width: '100%'
     },
     table: {
       width: '100%',
       borderCollapse: 'collapse',
-      fontSize: '14px'
+      fontSize: '16px'
     },
     tableHeader: {
       backgroundColor: '#f5f5f5',
-      padding: '10px',
+      padding: '12px',
       textAlign: 'left',
       borderBottom: '1px solid #ddd',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontSize: '16px'
     },
     tableCell: {
-      padding: '10px',
-      borderBottom: '1px solid #ddd'
+      padding: '12px',
+      borderBottom: '1px solid #ddd',
+      fontSize: '15px',
+      lineHeight: '1.5'
     },
     highlight: {
       backgroundColor: '#fffacd',
-      padding: '2px 4px',
+      padding: '3px 5px',
       borderRadius: '3px'
     },
     note: {
-      fontSize: '14px',
+      fontSize: '15px',
       color: '#666',
       fontStyle: 'italic',
-      marginTop: '15px',
-      padding: '10px',
+      marginTop: '20px',
+      padding: '15px',
       backgroundColor: '#f5f5f5',
-      borderRadius: '5px'
+      borderRadius: '5px',
+      lineHeight: '1.5'
+    },
+    p: {
+      fontSize: '16px',
+      lineHeight: '1.5',
+      marginBottom: '15px'
+    },
+    h4: {
+      fontSize: '18px',
+      marginBottom: '15px',
+      color: '#333'
     },
     comparisonChart: {
       display: 'flex',
       justifyContent: 'space-between',
-      marginTop: '20px',
-      gap: '20px'
+      marginTop: '25px',
+      gap: '25px',
+      flexWrap: 'wrap'
     },
     comparisonItem: {
-      flex: 1,
-      padding: '15px',
+      flex: '1 1 300px',
+      padding: '20px',
       border: '1px solid #ddd',
       borderRadius: '8px',
       backgroundColor: '#fff'
     },
     comparisonTitle: {
       fontWeight: 'bold',
-      marginBottom: '10px',
-      fontSize: '16px',
+      marginBottom: '12px',
+      fontSize: '18px',
+      textAlign: 'center'
+    },
+    centerText: {
       textAlign: 'center'
     },
     sparklineContainer: {
@@ -233,18 +264,18 @@ const ModelResults = () => {
       marginTop: '10px',
       display: 'flex',
       alignItems: 'center',
-      gap: '5px'
+      gap: '8px'
     },
     advantageIndicator: {
-      width: '16px',
-      height: '16px',
+      width: '18px',
+      height: '18px',
       backgroundColor: '#56b45d',
       borderRadius: '50%',
       color: 'white',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      fontSize: '10px',
+      fontSize: '12px',
       fontWeight: 'bold'
     }
   };
@@ -386,7 +417,7 @@ const ModelResults = () => {
       ),
       
       React.createElement('div', { style: styles.confusionMatrix },
-        React.createElement('h4', null, 'Confusion Matrix'),
+        React.createElement('h4', { style: styles.h4 }, 'Confusion Matrix'),
         
         React.createElement('div', { style: styles.matrixContainer },
           React.createElement('div', { style: styles.matrixHeaderMain }, 'Actual vs. Predicted'),
@@ -434,7 +465,7 @@ const ModelResults = () => {
     React.createElement('div', { style: styles.section },
       React.createElement('h3', { style: styles.subheading }, 'Time Series Cross-Validation Performance'),
       
-      React.createElement('p', null, 'Performance across different time periods shows model stability in changing market conditions:'),
+      React.createElement('p', { style: styles.p }, 'Performance across different time periods shows model stability in changing market conditions:'),
       
       React.createElement('div', { style: styles.tableContainer },
         React.createElement('table', { style: styles.table },
@@ -563,9 +594,9 @@ const ModelResults = () => {
     
     // Trading Strategy Impact
     React.createElement('div', { style: styles.section },
-      React.createElement('h3', { style: styles.subheading }, 'Trading Strategy Impact'),
+      React.createElement('h3', { style: styles.subheading }, 'Trading Strategy Impact Example'),
       
-      React.createElement('p', null, 'The impact of integrating the model predictions into actual trading strategies:'),
+      React.createElement('p', { style: styles.p }, 'The impact of integrating the model predictions into actual trading strategies:'),
       
       React.createElement('div', { style: styles.comparisonChart },
         React.createElement('div', { style: styles.comparisonItem },

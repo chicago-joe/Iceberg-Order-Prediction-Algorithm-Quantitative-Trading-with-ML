@@ -4,35 +4,74 @@ const TimeSeriesCVDiagram = () => {
   const styles = {
     container: {
       fontFamily: 'Arial, sans-serif',
-      padding: '20px',
-      maxWidth: '100%'
+      padding: '25px',
+      maxWidth: '100%',
+      width: '100%',
+      overflowX: 'auto'
     },
     header: {
-      marginBottom: '20px'
+      marginBottom: '25px'
+    },
+    h2: {
+      fontSize: '24px',
+      marginBottom: '15px',
+      color: '#333',
+      fontWeight: 'bold'
+    },
+    h3: {
+      fontSize: '20px',
+      marginBottom: '15px',
+      color: '#333',
+      fontWeight: 'bold'
+    },
+    p: {
+      fontSize: '17px',
+      lineHeight: '1.5',
+      marginBottom: '15px'
+    },
+    code: {
+      fontFamily: 'monospace',
+      backgroundColor: '#f5f5f5',
+      padding: '3px 5px',
+      borderRadius: '3px',
+      fontSize: '15px'
+    },
+    pre: {
+      fontFamily: 'monospace',
+      backgroundColor: '#f5f5f5',
+      padding: '15px',
+      borderRadius: '5px',
+      fontSize: '16px',
+      lineHeight: '1.5',
+      overflowX: 'auto',
+      whiteSpace: 'pre-wrap',
+      marginTop: '15px'
     },
     visualContainer: {
       border: '1px solid #ddd',
       borderRadius: '8px',
-      padding: '20px',
+      padding: '25px',
       marginBottom: '30px',
-      backgroundColor: '#fafafa'
+      backgroundColor: '#fafafa',
+      width: '100%'
     },
     visualization: {
       display: 'flex',
       flexDirection: 'column',
-      gap: '15px',
-      marginTop: '20px'
+      gap: '18px',
+      marginTop: '25px',
+      width: '100%'
     },
     timeBlock: {
       display: 'flex',
       alignItems: 'center',
-      height: '40px'
+      height: '45px'
     },
     dateLabel: {
       width: '100px',
       textAlign: 'right',
-      paddingRight: '10px',
-      fontSize: '12px',
+      paddingRight: '12px',
+      fontSize: '15px',
       fontWeight: 'bold'
     },
     timeBlockContainer: {
@@ -47,8 +86,8 @@ const TimeSeriesCVDiagram = () => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      color: '#fff',
-      fontSize: '12px',
+      color: '#000',
+      fontSize: '16px',
       fontWeight: 'bold'
     },
     testBlock: {
@@ -58,8 +97,8 @@ const TimeSeriesCVDiagram = () => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      color: '#fff',
-      fontSize: '12px',
+      color: '#000',
+      fontSize: '16px',
       fontWeight: 'bold'
     },
     unusedBlock: {
@@ -70,28 +109,32 @@ const TimeSeriesCVDiagram = () => {
     },
     legend: {
       display: 'flex',
-      gap: '20px',
-      marginBottom: '20px'
+      gap: '25px',
+      marginBottom: '25px'
     },
     legendItem: {
       display: 'flex',
       alignItems: 'center',
-      fontSize: '14px'
+      fontSize: '16px'
     },
     legendColor: {
-      width: '20px',
-      height: '20px',
-      marginRight: '8px',
+      width: '22px',
+      height: '22px',
+      marginRight: '10px',
       borderRadius: '4px'
     },
     notes: {
-      fontSize: '14px',
-      lineHeight: '1.5',
-      marginTop: '20px',
-      padding: '15px',
+      fontSize: '16px',
+      lineHeight: '1.6',
+      marginTop: '25px',
+      padding: '20px',
       backgroundColor: '#f5f5f5',
       borderRadius: '5px',
       border: '1px solid #eee'
+    },
+    li: {
+      marginBottom: '8px',
+      lineHeight: '1.6'
     }
   };
 
@@ -144,8 +187,8 @@ const TimeSeriesCVDiagram = () => {
 
   return React.createElement('div', { style: styles.container },
     React.createElement('div', { style: styles.header },
-      React.createElement('h2', null, 'Time Series Cross-Validation Approach'),
-      React.createElement('p', null, 'The project uses a rolling window approach to handle the time-dependent nature of financial data')
+      React.createElement('h2', { style: styles.h2 }, 'Time Series Cross-Validation Approach'),
+      React.createElement('p', { style: styles.p }, 'The project uses a rolling window approach to handle the time-dependent nature of financial data')
     ),
     
     React.createElement('div', { style: styles.legend },
@@ -164,7 +207,7 @@ const TimeSeriesCVDiagram = () => {
     ),
     
     React.createElement('div', { style: styles.visualContainer },
-      React.createElement('h3', null, 'Rolling Window Cross-Validation'),
+      React.createElement('h3', { style: styles.h3 }, 'Rolling Window Cross-Validation'),
       
       React.createElement('div', { style: styles.visualization },
         folds.map((fold, foldIndex) => 
@@ -224,7 +267,8 @@ const TimeSeriesCVDiagram = () => {
                   style: {
                     width: `${100 / dates.length}%`,
                     textAlign: 'center',
-                    fontSize: '11px'
+                    fontSize: '14px',
+                    fontWeight: 'bold'
                   }
                 },
                 date
@@ -235,20 +279,20 @@ const TimeSeriesCVDiagram = () => {
       ),
       
       React.createElement('div', { style: styles.notes },
-        React.createElement('p', null, React.createElement('strong', null, 'Implementation Details:')),
+        React.createElement('p', { style: styles.p }, React.createElement('strong', null, 'Implementation Details:')),
         React.createElement('ul', null,
-          React.createElement('li', null, 'Each fold uses a fixed window size of 2 days for training (optimal as found in hyperparameter optimization)'),
-          React.createElement('li', null, 'Test window is 1 day immediately following the training period'),
-          React.createElement('li', null, 'Windows "roll forward" in time for each fold'),
-          React.createElement('li', null, 'This approach respects the temporal nature of financial data - prevents future information leakage'),
-          React.createElement('li', null, 'Hyperparameter tuning uses early data, final evaluation uses later data (validation set)'),
-          React.createElement('li', null, 'Models are evaluated on ability to generalize to future, unseen data')
+          React.createElement('li', { style: styles.li }, 'Each fold uses a fixed window size of 2 days for training (optimal as found in hyperparameter optimization)'),
+          React.createElement('li', { style: styles.li }, 'Test window is 1 day immediately following the training period'),
+          React.createElement('li', { style: styles.li }, 'Windows "roll forward" in time for each fold'),
+          React.createElement('li', { style: styles.li }, 'This approach respects the temporal nature of financial data - prevents future information leakage'),
+          React.createElement('li', { style: styles.li }, 'Hyperparameter tuning uses early data, final evaluation uses later data (validation set)'),
+          React.createElement('li', { style: styles.li }, 'Models are evaluated on ability to generalize to future, unseen data')
         ),
-        React.createElement('p', null, 'The code implements this approach using the function ', 
-          React.createElement('code', null, '_create_time_series_splits'), 
+        React.createElement('p', { style: styles.p }, 'The code implements this approach using the function ', 
+          React.createElement('code', { style: styles.code }, '_create_time_series_splits'), 
           ' which generates train/test splits with proper date separation:'
         ),
-        React.createElement('pre', null,
+        React.createElement('pre', { style: styles.pre },
           'def _create_time_series_splits(self, train_size, dates):\n' +
           '    splits = []\n' +
           '    n = len(dates)\n\n' +
