@@ -15,6 +15,7 @@ project:
   github: https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/
   jupyter:
     binder:
+      url: https://mybinder.org/v2/gh/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/main
       provider: github
       repo: chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML
       ref: main
@@ -22,6 +23,9 @@ project:
       url: "http://localhost:9090"
       token: "1234"
     kernelName: 'python3'
+  plugins:
+    - type: javascript
+      path: include-html.mjs
   toc:
     - title: index
       file: index.md
