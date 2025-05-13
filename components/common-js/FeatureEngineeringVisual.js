@@ -219,11 +219,15 @@ const FeatureEngineeringVisual = () => {
     }
   ];
 
-  // Side imbalance transformation example
+  // Side imbalance transformation example - Updated to include the middle "Consider Order Side" step
   const sideImbalanceTransformation = [
     {
-      title: "Raw Book Data → Order Side",
-      content: "Buy/Sell Imbalance: 0.75 (bid)\nAsk Volume: 25\nBid Volume: 75\nOrder Type: SELL"
+      title: "Raw Book Data",
+      content: "Buy/Sell Imbalance: 0.75 (bid)\nAsk Volume: 25\nBid Volume: 75"
+    },
+    {
+      title: "Consider Order Side",
+      content: "Order Type: SELL\nImbalance in raw form is not directly useful for the model"
     },
     {
       title: "Side-Relative Transformation",
@@ -231,11 +235,15 @@ const FeatureEngineeringVisual = () => {
     }
   ];
 
-  // Support level transformation example
+  // Support level transformation example - Updated to include clearer order side consideration
   const supportLevelTransformation = [
     {
-      title: "Raw Price Data → Order Side",
-      content: "Current Price: 100.25\nRecent High: 102.50\nRecent Low: 98.75\nTicksFromHigh: 9\nTicksFromLow: 6\nOrder Type: BUY"
+      title: "Raw Price Data",
+      content: "Current Price: 100.25\nRecent High: 102.50\nRecent Low: 98.75\nTicksFromHigh: 9\nTicksFromLow: 6"
+    },
+    {
+      title: "Consider Order Side",
+      content: "Order Type: BUY\nFor buy orders, support is relevant\nFor sell orders, resistance is relevant"
     },
     {
       title: "Side-Adjusted Feature",

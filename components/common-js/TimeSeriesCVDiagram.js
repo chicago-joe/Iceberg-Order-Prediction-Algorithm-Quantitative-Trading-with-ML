@@ -287,21 +287,6 @@ const TimeSeriesCVDiagram = () => {
           React.createElement('li', { style: styles.li }, 'This approach respects the temporal nature of financial data - prevents future information leakage'),
           React.createElement('li', { style: styles.li }, 'Hyperparameter tuning uses early data, final evaluation uses later data (validation set)'),
           React.createElement('li', { style: styles.li }, 'Models are evaluated on ability to generalize to future, unseen data')
-        ),
-        React.createElement('p', { style: styles.p }, 'The code implements this approach using the function ', 
-          React.createElement('code', { style: styles.code }, '_create_time_series_splits'), 
-          ' which generates train/test splits with proper date separation:'
-        ),
-        React.createElement('pre', { style: styles.pre },
-          'def _create_time_series_splits(self, train_size, dates):\n' +
-          '    splits = []\n' +
-          '    n = len(dates)\n\n' +
-          '    for i in range(n):\n' +
-          '        if i + train_size < n:\n' +
-          '            train_dates = dates[i:i + train_size]\n' +
-          '            test_dates = [dates[i + train_size]]\n' +
-          '            splits.append((train_dates, test_dates))\n\n' +
-          '    return splits'
         )
       )
     )

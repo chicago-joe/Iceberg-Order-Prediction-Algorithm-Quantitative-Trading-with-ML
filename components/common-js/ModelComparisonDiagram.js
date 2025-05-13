@@ -65,14 +65,71 @@ const ModelComparisonDiagram = () => {
       margin: '8px 0',
       fontSize: '16px',
       lineHeight: '1.4'
+    },
+    barChart: {
+      marginTop: '30px',
+      width: '100%'
+    },
+    barContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '10px',
+      marginBottom: '25px'
+    },
+    modelBar: {
+      display: 'flex',
+      alignItems: 'center',
+      height: '40px'
+    },
+    modelLabel: {
+      width: '150px',
+      fontWeight: 'bold',
+      fontSize: '16px'
+    },
+    bar: {
+      height: '30px',
+      borderRadius: '3px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: 'white',
+      fontWeight: 'bold'
     }
   };
+
+  // Model performance data
+  const models = [
+    { name: 'LogisticRegression', score: 69, color: '#9c59b6' },
+    { name: 'XGBoost', score: 67, color: '#3498db' },
+    { name: 'LightGBM', score: 67, color: '#e67e22' },
+    { name: 'RandomForest', score: 66, color: '#2ecc71' }
+  ];
 
   return (
     React.createElement('div', { style: styles.container },
       React.createElement('div', { style: styles.header },
-        React.createElement('h2', { style: styles.h2 }, 'Model Comparison for Iceberg Order Prediction'),
-        React.createElement('p', { style: styles.p }, 'Comparison of machine learning models evaluated on the iceberg order simulation dataset')
+        React.createElement('h2', { style: styles.h2 }, 'Model Comparison'),
+        React.createElement('p', { style: styles.p }, 'Comparison of machine learning models evaluated on the iceberg order dataset')
+      ),
+      
+      React.createElement('div', { style: styles.barChart },
+        React.createElement('div', { style: styles.barContainer },
+          models.map((model, index) => 
+            React.createElement('div', { key: index, style: styles.modelBar },
+              React.createElement('div', { style: styles.modelLabel }, model.name),
+              React.createElement('div', 
+                { 
+                  style: {
+                    ...styles.bar,
+                    width: `${model.score * 5}px`,
+                    backgroundColor: model.color
+                  }
+                }, 
+                `${model.score}%`
+              )
+            )
+          )
+        )
       ),
       
       React.createElement('table', { style: styles.table },
@@ -87,27 +144,27 @@ const ModelComparisonDiagram = () => {
         ),
         React.createElement('tbody', null,
           React.createElement('tr', null,
-            React.createElement('td', { style: styles.td }, React.createElement('strong', null, 'RandomForest')),
-            React.createElement('td', { style: styles.td }, 'Ensemble of decision trees using bootstrap samples'),
+            React.createElement('td', { style: styles.td }, React.createElement('strong', null, 'LogisticRegression')),
+            React.createElement('td', { style: styles.td }, 'Linear model for binary classification'),
             React.createElement('td', { style: styles.td }, 
               React.createElement('ul', { style: {margin: 0, paddingLeft: '20px'} },
-                React.createElement('li', null, 'n_estimators=500'),
-                React.createElement('li', null, 'criterion=\'log_loss\''),
-                React.createElement('li', null, 'max_depth=4'),
-                React.createElement('li', null, 'min_samples_split=7'),
-                React.createElement('li', null, 'min_samples_leaf=3'),
+                React.createElement('li', null, 'penalty=\'elasticnet\''),
+                React.createElement('li', null, 'C=0.01'),
+                React.createElement('li', null, 'solver=\'saga\''),
+                React.createElement('li', null, 'max_iter=1000'),
+                React.createElement('li', null, 'l1_ratio=0.5'),
                 React.createElement('li', null, 'train_size=2')
               )
             ),
             React.createElement('td', { style: styles.td }, 
-              '- Handles non-linearity well', React.createElement('br'),
-              '- Robust to outliers', React.createElement('br'),
-              '- Native feature importance'
+              '- Simple and interpretable', React.createElement('br'),
+              '- Fast training and inference', React.createElement('br'),
+              '- Less prone to overfitting'
             ),
             React.createElement('td', { style: styles.td }, 
-              '- May overfit on noisy data', React.createElement('br'),
-              '- Less interpretable than single trees', React.createElement('br'),
-              '- Memory intensive for large datasets'
+              '- Cannot capture non-linear relationships', React.createElement('br'),
+              '- Lower performance ceiling', React.createElement('br'),
+              '- Feature engineering more important'
             )
           ),
           React.createElement('tr', { style: styles.highlight },
@@ -171,27 +228,27 @@ const ModelComparisonDiagram = () => {
             )
           ),
           React.createElement('tr', null,
-            React.createElement('td', { style: styles.td }, React.createElement('strong', null, 'LogisticRegression')),
-            React.createElement('td', { style: styles.td }, 'Linear model for binary classification'),
+            React.createElement('td', { style: styles.td }, React.createElement('strong', null, 'RandomForest')),
+            React.createElement('td', { style: styles.td }, 'Ensemble of decision trees using bootstrap samples'),
             React.createElement('td', { style: styles.td }, 
               React.createElement('ul', { style: {margin: 0, paddingLeft: '20px'} },
-                React.createElement('li', null, 'penalty=\'elasticnet\''),
-                React.createElement('li', null, 'C=0.01'),
-                React.createElement('li', null, 'solver=\'saga\''),
-                React.createElement('li', null, 'max_iter=1000'),
-                React.createElement('li', null, 'l1_ratio=0.5'),
+                React.createElement('li', null, 'n_estimators=500'),
+                React.createElement('li', null, 'criterion=\'log_loss\''),
+                React.createElement('li', null, 'max_depth=4'),
+                React.createElement('li', null, 'min_samples_split=7'),
+                React.createElement('li', null, 'min_samples_leaf=3'),
                 React.createElement('li', null, 'train_size=2')
               )
             ),
             React.createElement('td', { style: styles.td }, 
-              '- Simple and interpretable', React.createElement('br'),
-              '- Fast training and inference', React.createElement('br'),
-              '- Less prone to overfitting'
+              '- Handles non-linearity well', React.createElement('br'),
+              '- Robust to outliers', React.createElement('br'),
+              '- Native feature importance'
             ),
             React.createElement('td', { style: styles.td }, 
-              '- Cannot capture non-linear relationships', React.createElement('br'),
-              '- Lower performance ceiling', React.createElement('br'),
-              '- Feature engineering more important'
+              '- May overfit on noisy data', React.createElement('br'),
+              '- Less interpretable than single trees', React.createElement('br'),
+              '- Memory intensive for large datasets'
             )
           )
         )

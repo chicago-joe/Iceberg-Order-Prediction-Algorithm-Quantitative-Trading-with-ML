@@ -6,66 +6,58 @@ chmod +x "${0}"
 # Set paths
 export PATH="${HOME}/.local/bin:${PATH}"
 
-# Install system-level dependencies
-apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    graphviz \
-    cargo/stable \
-    xclip \
-    ack \
-    ripgrep \
-    alien \
-    texinfo \
-    apt-utils \
-    pandoc \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+# Skip system-level dependencies as they require root
+# Instead, install user-level packages where possible
+echo "Skipping system packages that require root permissions"
 
-# for pdf image exports
-wget --output-document ~/.local/bin/magick.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-7.1.1-47.x86_64.rpm
-wget --output-document ~/.local/bin/magick-libs.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-libs-7.1.1-47.x86_64.rpm
-
-alien ~/.local/bin/magick.rpm && alien ~/.local/bin/magick-libs.rpm
-rm -rf ~/.local/bin/*.rpm && dpkg -i ~/.local/bin/*.deb
-
+# Create local bin directory if it doesn't exist
+mkdir -p ~/.local/bin
 
 # Install Typst via the official installer (avoids snapd issues)
-curl -fsSL https://typst.community/typst-install/install.sh | sh && \
-    echo 'export PATH="$HOME/.typst:$PATH"' >> /etc/profile && \
-    echo 'export PATH="$HOME/.typst:$PATH"' >> ~/.bashrc
+curl -fsSL https://typst.community/typst-install/install.sh | sh
+# Add Typst to PATH (user-level only)
+echo 'export PATH="$HOME/.typst/bin:$PATH"' >> ~/.bashrc
 
 # Set environment variables
-export PATH="${HOME}/.typst:${PATH}"
+export PATH="${HOME}/.typst/bin:${PATH}"
 export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
 
-# Install Python packages
-uv run python -m pip install --no-cache-dir -r ./requirements.txt
-    #jupytext \
-    #myst-parser \
-    #myst-nb \
-    #jupyter-book \
-    #jupyterlab-myst \
+# Check if Python requirements file exists
+if [ -f "./requirements.txt" ]; then
+    echo "Installing Python requirements"
+    pip install --user --no-cache-dir -r ./requirements.txt
+else
+    echo "No requirements.txt found, skipping Python package installation"
+fi
 
+# Don't try to use uv or cargo as they might not be available
+# and require root to install
 
-cargo install --locked typst-cli gitui eza
+# Stay in the current directory
+# Relative paths should be used for node operations
 
-cd ..
+# Install node packages if package.json exists
+if [ -f "./package.json" ]; then
+    echo "Installing npm packages"
+    npm install --force --prefix .
+else
+    echo "No package.json found, skipping npm install"
+fi
 
-npm install --force
+# Run build components if the file exists
+if [ -f "./build-components.mjs" ]; then
+    echo "Building components"
+    node ./build-components.mjs
+else
+    echo "No build-components.mjs found, skipping component build"
+fi
 
-node install
-
-node build-components.mjs
-
-uv run jupyter lab build --dev-build=False
-
-## Find and convert notebooks to MyST if needed
-#find . -name "*.ipynb" -not -path "*/\.*" -exec jupytext --to myst {} \; || echo "No notebooks to convert"
-
-## Initialize MyST environment (with error handling)
-#myst init || echo "MyST initialization failed"
-
-## Build JupyterLab (with error handling)
-#jupyter lab build || echo "JupyterLab build failed"
+# Run jupyter lab build if jupyter is available
+if command -v jupyter &> /dev/null; then
+    echo "Building JupyterLab"
+    jupyter lab build --dev-build=False
+else
+    echo "Jupyter not available, skipping lab build"
+fi
 
 echo "postBuild script completed"
