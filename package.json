@@ -1,11 +1,10 @@
 {
   "dependencies": {
-    "@myst-theme/providers": "^0.14.3",
-    "cwebp-bin": "^8.0.0",
+    "@myst-theme/providers": "*",
+    "cwebp-bin": "*",
     "express": "^5.1.0",
-    "puppeteer": "^24.8.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "recharts": "^2.15.3"
+    "recharts": "*"
   }
 }
