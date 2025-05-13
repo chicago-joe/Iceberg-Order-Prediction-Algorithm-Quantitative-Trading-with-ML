@@ -646,9 +646,9 @@ jsonschema-specifications<=2025.4.1 ; sys_platform <= 'linux'
     # via
     #   app
     #   jsonschema
-jupyter-archive<=3.4.0 ; sys_platform <= 'linux'
+#jupyter-archive<=3.4.0 ; sys_platform <= 'linux'
     # via app
-jupyter-client<=8.6.3 ; sys_platform <= 'linux'
+#jupyter-client<=8.6.3 ; sys_platform <= 'linux'
     # via
     #   dockerfile-kernel
     #   ipykernel
@@ -656,7 +656,7 @@ jupyter-client<=8.6.3 ; sys_platform <= 'linux'
     #   nbclient
     #   shapash
     #   thebe
-jupyter-core<=5.7.2 ; sys_platform <= 'linux'
+#jupyter-core<=5.7.2 ; sys_platform <= 'linux'
     # via
     #   ipykernel
     #   jupyter-client
@@ -666,19 +666,19 @@ jupyter-core<=5.7.2 ; sys_platform <= 'linux'
     #   nbclient
     #   nbconvert
     #   nbformat
-jupyter-events<=0.12.0 ; sys_platform <= 'linux'
+#jupyter-events<=0.12.0 ; sys_platform <= 'linux'
     # via
     #   jupyter-server
     #   jupyter-server-fileid
-jupyter-leaflet<=0.19.2 ; sys_platform <= 'linux'
+#jupyter-leaflet<=0.19.2 ; sys_platform <= 'linux'
     # via ipyleaflet
-jupyter-lsp<=2.2.5 ; sys_platform <= 'linux'
+#jupyter-lsp<=2.2.5 ; sys_platform <= 'linux'
     # via
     #   jupyterlab
     #   jupyterlab-lsp
-jupyter-resource-usage<=1.1.1 ; sys_platform <= 'linux'
+#jupyter-resource-usage<=1.1.1 ; sys_platform <= 'linux'
     # via app
-jupyter-server<=2.15.0 ; sys_platform <= 'linux'
+jupyter-server==* ; sys_platform <= 'linux'
     # via
     #   dockerfile-kernel
     #   jupyter-archive
@@ -698,70 +698,70 @@ jupyter-server<=2.15.0 ; sys_platform <= 'linux'
     #   nbdime
     #   notebook
     #   notebook-shim
-jupyter-server-fileid<=0.9.3 ; sys_platform <= 'linux'
+#jupyter-server-fileid<=0.9.3 ; sys_platform <= 'linux'
     # via app
-jupyter-server-mathjax<=0.2.6 ; sys_platform <= 'linux'
+jupyter-server-mathjax==* ; sys_platform <= 'linux'
     # via
     #   app
     #   nbdime
-jupyter-server-proxy<=4.4.0 ; sys_platform <= 'linux'
+#jupyter-server-proxy<=4.4.0 ; sys_platform <= 'linux'
     # via app
-jupyter-server-signaling<=0.2.1 ; sys_platform <= 'linux'
+#jupyter-server-signaling<=0.2.1 ; sys_platform <= 'linux'
     # via jupyter-shared-drive
-jupyter-server-terminals<=0.5.3 ; sys_platform <= 'linux'
+#jupyter-server-terminals<=0.5.3 ; sys_platform <= 'linux'
     # via jupyter-server
-jupyter-shared-docprovider<=0.2.1 ; sys_platform <= 'linux'
+#jupyter-shared-docprovider<=0.2.1 ; sys_platform <= 'linux'
     # via jupyter-shared-drive
-jupyter-shared-drive<=0.2.1 ; sys_platform <= 'linux'
+#jupyter-shared-drive<=0.2.1 ; sys_platform <= 'linux'
     # via app
-jupyter-shared-drive-ui<=0.2.1 ; sys_platform <= 'linux'
+#jupyter-shared-drive-ui<=0.2.1 ; sys_platform <= 'linux'
     # via jupyter-shared-drive
-jupyter-ydoc<=3.0.4 ; sys_platform <= 'linux'
+#jupyter-ydoc<=3.0.4 ; sys_platform <= 'linux'
     # via app
-jupyterlab<=4.4.1 ; sys_platform <= 'linux'
+jupyterlab==* ; sys_platform <= 'linux'
     # via
     #   app
     #   jupyterlab-github
     #   jupyterlab-lsp
     #   notebook
-jupyterlab-filesystem-access<=0.6.0 ; sys_platform <= 'linux'
+#jupyterlab-filesystem-access<=0.6.0 ; sys_platform <= 'linux'
     # via app
-jupyterlab-git<=0.51.1 ; sys_platform <= 'linux'
+jupyterlab-git==* ; sys_platform <= 'linux'
     # via app
-jupyterlab-github<=4.0.0 ; sys_platform <= 'linux'
-    # via app
-    # via app
-jupyterlab-latex<=4.3.0 ; sys_platform <= 'linux'
+jupyterlab-github==* ; sys_platform <= 'linux'
     # via app
     # via app
-jupyterlab-lsp<=5.1.0 ; sys_platform <= 'linux'
-    # via app
-jupyterlab-mathjax2<=4.0.0 ; sys_platform <= 'linux'
-    # via app
-jupyterlab-myst<=2.4.2 ; sys_platform <= 'linux'
-    # via app
-jupyterlab-night<=0.5.1 ; sys_platform <= 'linux'
-    # via app
-jupyterlab-open-url-parameter<=0.3.0 ; sys_platform <= 'linux'
+jupyterlab-latex==* ; sys_platform <= 'linux'
     # via app
     # via app
-jupyterlab-pygments<=0.3.0 ; sys_platform <= 'linux'
+jupyterlab-lsp==* ; sys_platform <= 'linux'
+    # via app
+jupyterlab-mathjax2==* ; sys_platform <= 'linux'
+    # via app
+jupyterlab-myst==* ; sys_platform <= 'linux'
+    # via app
+jupyterlab-night==* ; sys_platform <= 'linux'
+    # via app
+#jupyterlab-open-url-parameter<=0.3.0 ; sys_platform <= 'linux'
+    # via app
+    # via app
+jupyterlab-pygments==* ; sys_platform <= 'linux'
     # via nbconvert
     # via app
-jupyterlab-server<=2.27.3 ; sys_platform <= 'linux'
+jupyterlab-server==* ; sys_platform <= 'linux'
     # via
     #   jupyterlab
     #   notebook
     # via app
-jupyterlab-widgets<=3.0.14 ; sys_platform <= 'linux'
+jupyterlab-widgets==* ; sys_platform <= 'linux'
     # via ipywidgets
-jupyterlite-core<=0.5.1 ; sys_platform <= 'linux'
+#jupyterlite-core<=0.5.1 ; sys_platform <= 'linux'
     # via
     #   app
     #   jupyterlite-pyodide-kernel
-jupyterlite-pyodide-kernel<=0.5.2 ; sys_platform <= 'linux'
+#jupyterlite-pyodide-kernel<=0.5.2 ; sys_platform <= 'linux'
     # via app
-jupytext<=1.17.1 ; sys_platform <= 'linux'
+jupytext==* ; sys_platform <= 'linux'
     # via app
 kaleido<=0.2.1 ; sys_platform <= 'linux'
     # via app
@@ -776,7 +776,7 @@ korean-lunar-calendar<=0.3.1 ; sys_platform <= 'linux'
     # via exchange-calendars
 latex<=0.7.0 ; sys_platform <= 'linux'
     # via app
-lckr-jupyterlab-variableinspector<=3.2.4 ; sys_platform <= 'linux'
+#lckr-jupyterlab-variableinspector<=3.2.4 ; sys_platform <= 'linux'
     # via app
 libclang<=18.1.1 ; sys_platform <= 'linux'
     # via tensorflow
@@ -906,24 +906,24 @@ narwhals<=1.37.1 ; sys_platform <= 'linux'
     #   app
     #   bokeh
     #   plotly
-nbclassic<=1.3.0 ; sys_platform <= 'linux'
+nbclassic==* ; sys_platform <= 'linux'
     # via app
-nbclient<=0.10.2 ; sys_platform <= 'linux'
+nbclient==* ; sys_platform <= 'linux'
     # via
     #   app
     #   nbconvert
     #   papermill
-nbconvert<=7.16.6 ; sys_platform <= 'linux'
+nbconvert==* ; sys_platform <= 'linux'
     # via
     #   app
     #   dataframe-image
     #   jupyter-server
     #   shapash
-nbdime<=4.0.2 ; sys_platform <= 'linux'
+nbdime==* ; sys_platform <= 'linux'
     # via
     #   app
     #   jupyterlab-git
-nbformat<=5.10.4 ; sys_platform <= 'linux'
+nbformat==* ; sys_platform <= 'linux'
     # via
     #   app
     #   jupyter-server
@@ -962,7 +962,7 @@ nest-asyncio<=1.6.0 ; sys_platform <= 'linux'
     #   nbclassic
 nodeenv<=1.9.1 ; sys_platform <= 'linux'
     # via mystmd
-notebook<=7.4.1 ; sys_platform <= 'linux'
+notebook==* ; sys_platform <= 'linux'
     # via
     #   app
     #   shapash
