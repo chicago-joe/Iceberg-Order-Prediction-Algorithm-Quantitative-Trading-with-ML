@@ -17,7 +17,7 @@ date: "2025-04-21"
    </tr>
    <tr>
       <td style="font-weight: bold;">Performance Score</td>
-      <td style="text-align: right; font-family: monospace; background: linear-gradient(90deg, #fdf6ec, #f9d29d); font-weight: bold;">0.6746</td>
+      <td style="text-align: right; font-family: monospace; background: linear-gradient(90deg, #fdf6ec, #f9d29d); font-weight: bold;">0.67460</td>
    </tr>
    <tr>
       <td style="font-weight: bold;">Start Time</td>

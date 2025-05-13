@@ -19,3 +19,4 @@ node_modules/
 _build
 _components
 UPDATES_WIP
+package-lock.json

@@ -199,7 +199,7 @@ const FeatureImportanceDiagram = () => {
                 backgroundColor: '#4a90e2'
               }
             },
-              React.createElement('span', { style: styles.barValue }, item.importance.toFixed(3))
+              React.createElement('span', { style: styles.barValue }, item.importance.toFixed(5))
             )
           )
         )
@@ -222,7 +222,7 @@ const FeatureImportanceDiagram = () => {
                 backgroundColor: '#56b45d'
               }
             },
-              React.createElement('span', { style: styles.barValue }, item.importance.toFixed(3))
+              React.createElement('span', { style: styles.barValue }, item.importance.toFixed(5))
             )
           )
         )
