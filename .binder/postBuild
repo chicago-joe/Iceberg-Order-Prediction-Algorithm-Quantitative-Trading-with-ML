@@ -47,7 +47,7 @@ uv run python -m pip install --no-cache-dir -r ./requirements.txt
     #jupyterlab-myst \
     
 
-cargo install --locked typst-cli gitui
+cargo install --locked typst-cli gitui eza
 
 cd ..
 npm install --force
