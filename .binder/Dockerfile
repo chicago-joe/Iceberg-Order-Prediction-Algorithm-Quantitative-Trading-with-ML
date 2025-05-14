@@ -1,7 +1,7 @@
 FROM jupyter/base-notebook:python-3.11
 
-ENV ZSH="$HOME/.oh-my-zsh" \
-    PYTHONUNBUFFERED=1 \
+ENV ZSH="$HOME/.oh-my-zsh" \    
+	PYTHONUNBUFFERED=1 \
 	PYTHONDONTWRITEBYTECODE=1 \
  	PIP_NO_CACHE_DIR=OFF \
     PIP_DEFAULT_TIMEOUT=100 \
@@ -98,7 +98,6 @@ RUN . "$HOME/.cargo/env" && \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     fzf \
     bat \
-    # cht.sh \
     jq \
     tldr \
     nano \
