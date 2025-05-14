@@ -102,10 +102,12 @@ RUN . "$HOME/.cargo/env" && \
     cargo install --locked typst-cli gitui eza \
     && cp ~/.cargo/bin/* /usr/local/bin/
 
-# Install uv as root for system-wide availability
-RUN curl -fsSL https://astral.sh/uv/install.sh | sh && \
-    mv ~/.cargo/bin/uv /usr/local/bin/ && \
-    chmod 755 /usr/local/bin/uv
+# Install directly to /usr/local/bin (Recommended)
+RUN curl -fsSL https://astral.sh/uv/install.sh | sh -s -- --to /usr/local/bin && \
+    chmod 755 /usr/local/bin/uv && \
+    # The install script should also install uvx to /usr/local/bin
+    # and set its permissions. If you want to be explicit for uvx:
+    chmod 755 /usr/local/bin/uvx
 
 # Set environment variables for Puppeteer
 ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
