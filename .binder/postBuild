@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+#set -e
 
 echo "Starting postBuild script"
 
@@ -15,29 +15,32 @@ if [ -f /bin/zsh ]; then
     chsh -s /bin/zsh jovyan || echo "Failed to change shell to zsh"
 fi
 
-# Set paths - use the jovyan home directory
-export PATH="/home/jovyan/.local/bin:${PATH}"
+# Set paths - use the root directory
+#export PATH="/root/.local/bin:${PATH}"
 
 # Install Typst via the official installer
 echo "Installing Typst"
-mkdir -p /home/jovyan/.local/bin
+mkdir -p /root/.local/bin
 
 curl -fsSL https://typst.community/typst-install/install.sh | sh || echo "Typst installation failed"
 
 # Add to bashrc
-echo 'export TYPST_INSTALL="/home/jovyan/.typst"' >> /home/jovyan/.bashrc
-echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /home/jovyan/.bashrc
+echo 'export TYPST_INSTALL="/root/.typst"' >> /root/.bashrc
+echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /root/.bashrc
 
 # Add to zshrc
-echo 'export TYPST_INSTALL="/home/jovyan/.typst"' >> /home/jovyan/.zshrc
-echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /home/jovyan/.zshrc
-echo 'export PATH="/home/jovyan/.local/bin:${PATH}"' >> /home/jovyan/.zshrc
-echo 'export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"' >> /home/jovyan/.zshrc
+echo 'export TYPST_INSTALL="/root/.typst"' >> /root/.zshrc
+echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /root/.zshrc
+echo 'export PATH="/root/.local/bin:${PATH}"' >> /root/.zshrc
+echo 'export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"' >> /root/.zshrc
 
 # Set environment variables
-export TYPST_INSTALL="/home/jovyan/.typst"
+export TYPST_INSTALL="/root/.typst"
 export PATH="${TYPST_INSTALL}/bin:${PATH}"
 export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
+
+# Navigate to the repository directory instead of home
+cd /app/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML
 
 # Install Python dependencies - try with uv first, fallback to pip
 echo "Installing Python dependencies"
@@ -48,9 +51,7 @@ else
   echo "Error with uv"
 fi
 
-cd /home/jovyan
-
-# Install npm packages in the current directory
+# Install npm packages in the repository directory
 echo "Installing npm packages"
 npm install --no-fund --force || echo "npm install failed"
 
