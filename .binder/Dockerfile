@@ -155,10 +155,6 @@ USER ${NB_UID}
 WORKDIR ${HOME}
 RUN /usr/local/bin/uv pip install --system --no-cache-dir -r .binder/requirements.txt
 
-# Install JBang for Java support
-RUN mkdir -p ${HOME}/.jbang/bin ${HOME}/.jbang/currentjdk && \
-    curl -Ls https://sh.jbang.dev | bash -s - app install --fresh
-
 # Install NVM for Node.js version management
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
@@ -172,8 +168,8 @@ RUN mkdir -p ${HOME}/.local/bin && \
 #COPY .zshrc ${HOME}/.zshrc
 
 # Ensure tools are available in all shells by adding them to global profile
-RUN echo 'export PATH="/usr/local/bin:/usr/local/typst/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.jbang/bin:$HOME/.jbang/currentjdk/bin:$PATH"' >> /etc/profile && \
-    echo 'export PATH="/usr/local/bin:/usr/local/typst/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.jbang/bin:$HOME/.jbang/currentjdk/bin:$PATH"' >> /etc/bash.bashrc && \
+RUN echo 'export PATH="/usr/local/bin:/usr/local/typst/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME:$PATH"' >> /etc/profile && \
+    echo 'export PATH="/usr/local/bin:/usr/local/typst/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME:$PATH"' >> /etc/bash.bashrc && \
     echo 'source "$HOME/.cargo/env"' >> /etc/profile && \
     echo 'source "$HOME/.cargo/env"' >> /etc/bash.bashrc
 
