@@ -1,13 +1,21 @@
 FROM jupyter/base-notebook:python-3.11
 
-export ZSH="$HOME/.oh-my-zsh"
+ENV ZSH="$HOME/.oh-my-zsh" \
+    PYTHONUNBUFFERED=1 \
+	PYTHONDONTWRITEBYTECODE=1 \
+ 	PIP_NO_CACHE_DIR=OFF \
+    PIP_DEFAULT_TIMEOUT=100 \
+	PATH="$PATH:$HOME/bin/" \
+	UV_VENV=.venv \
+	UV_USE_PYPACKAGES=1 \
+    MSYS_NO_PATHCONV=1 \
+
 
 ZSH_THEME="robbyrussell"
 
 plugins=(
   git
   zsh-autosuggestions
-#  F-Sy-H
   tldr
 )
 
@@ -15,13 +23,9 @@ plugins=(
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 source $ZSH/oh-my-zsh.sh
 
-ENV PATH="$PATH:$HOME/bin/"
-ENV UV_VENV=.venv
-ENV UV_USE_PYPACKAGES=1                                                                                                                                                        export MSYS_NO_PATHCONV=1
-
-ENV NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# ENV NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # alias for env
 #. "$HOME/.local/bin/env"
