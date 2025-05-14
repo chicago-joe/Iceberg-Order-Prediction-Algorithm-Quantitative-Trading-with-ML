@@ -102,11 +102,15 @@ RUN . "$HOME/.cargo/env" && \
     cargo install --locked typst-cli gitui eza \
     && cp ~/.cargo/bin/* /usr/local/bin/
 
-# Install directly to /usr/local/bin (Recommended)
-RUN curl -fsSL https://astral.sh/uv/install.sh | sh -s -- --to /usr/local/bin && \
+# Corrected command to install uv and uvx
+# 1. Download and run the uv installation script. It installs to ~/.local/bin by default.
+# 2. Move uv from ~/.local/bin/uv to /usr/local/bin/uv.
+# 3. Move uvx from ~/.local/bin/uvx to /usr/local/bin/uvx.
+# 4. Set execute permissions for both.
+RUN curl -fsSL https://astral.sh/uv/install.sh | sh && \
+    mv ~/.local/bin/uv /usr/local/bin/uv && \
+    mv ~/.local/bin/uvx /usr/local/bin/uvx && \
     chmod 755 /usr/local/bin/uv && \
-    # The install script should also install uvx to /usr/local/bin
-    # and set its permissions. If you want to be explicit for uvx:
     chmod 755 /usr/local/bin/uvx
 
 # Set environment variables for Puppeteer
