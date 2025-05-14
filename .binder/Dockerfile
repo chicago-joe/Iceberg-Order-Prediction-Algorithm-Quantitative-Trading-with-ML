@@ -57,22 +57,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Set up zsh as default shell for jovyan user
 RUN chsh -s /bin/zsh jovyan
 
-# Install Typst via the official installer
+# Install Typst - note that it installs to /home/jovyan/.typst
 RUN curl -fsSL https://typst.community/typst-install/install.sh | sh && \
-    echo 'export PATH="/root/.typst/bin:$PATH"' >> /etc/profile && \
-    echo 'export PATH="/root/.typst/bin:$PATH"' >> /etc/bash.bashrc
-
-# Make Typst accessible to all users
-RUN mkdir -p /usr/local/typst && \
-    cp -r /root/.typst/bin /usr/local/typst/ && \
-    chmod -R 755 /usr/local/typst
+    # Since it's installed to jovyan's home directory, make it accessible to all
+    mkdir -p /usr/local/typst/bin && \
+    cp /home/jovyan/.typst/bin/typst /usr/local/typst/bin/ && \
+    chmod -R 755 /usr/local/typst && \
+    # Add to system PATH
+    echo 'export PATH="/usr/local/typst/bin:$PATH"' >> /etc/profile && \
+    echo 'export PATH="/usr/local/typst/bin:$PATH"' >> /etc/bash.bashrc
 
 # Install cargo packages system-wide
 RUN cargo install --locked typst-cli gitui eza
 
 # Install uv as root for system-wide availability
 RUN curl -fsSL https://astral.sh/uv/install.sh | sh && \
-    ln -s /root/.cargo/bin/uv /usr/local/bin/uv
+    mv ~/.cargo/bin/uv /usr/local/bin/ && \
+    chmod 755 /usr/local/bin/uv
 
 # Set environment variables for Puppeteer
 ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
@@ -94,25 +95,20 @@ USER ${NB_UID}
 
 # Install Python packages using uv
 WORKDIR ${HOME}
-RUN uv pip install --no-cache-dir -r .binder/requirements.txt
+RUN /usr/local/bin/uv pip install --no-cache-dir -r .binder/requirements.txt
 
 # Set up environment PATH variables for user
-RUN echo 'export PATH="${HOME}/.local/bin:${PATH}"' >> ${HOME}/.bashrc && \
-    echo 'export PATH="${HOME}/.local/bin:${PATH}"' >> ${HOME}/.zshrc
-
-# Create directory for user-specific Typst installations
-RUN mkdir -p ${HOME}/.typst/bin && \
-    echo 'export PATH="${HOME}/.typst/bin:/usr/local/typst/bin:${PATH}"' >> ${HOME}/.bashrc && \
-    echo 'export PATH="${HOME}/.typst/bin:/usr/local/typst/bin:${PATH}"' >> ${HOME}/.zshrc
+RUN echo 'export PATH="/usr/local/typst/bin:${HOME}/.local/bin:${PATH}"' >> ${HOME}/.bashrc && \
+    echo 'export PATH="/usr/local/typst/bin:${HOME}/.local/bin:${PATH}"' >> ${HOME}/.zshrc
 
 # Build components using Node.js
 RUN node build-components.mjs || echo "build-components.mjs failed"
 
 # Build JupyterLab using uv
-RUN uv run --no-cache jupyter lab build --dev-build=False || echo "jupyter lab build failed"
+RUN /usr/local/bin/uv run --no-cache jupyter lab build --dev-build=False || echo "jupyter lab build failed"
 
 # Set the working directory to home
 WORKDIR ${HOME}
 
 # Command to run JupyterLab using uv
-CMD ["sh", "-c", "uv run jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''"]
+CMD ["sh", "-c", "/usr/local/bin/uv run jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''"]
