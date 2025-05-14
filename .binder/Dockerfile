@@ -22,7 +22,7 @@ ENV ZSH="$HOME/.oh-my-zsh" \
 #. "$HOME/.local/bin/env"
 
 # Switch to root for system installations
-USER=root
+USER root
 
 # Install system dependencies from apt.txt and additional required packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
