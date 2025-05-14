@@ -1,7 +1,35 @@
 #!/bin/bash
-#set -e
 
 echo "Starting postBuild script"
+
+# Ensure the script is executable
+chmod +x "${0}"
+
+# Set paths
+export PATH="${HOME}/.local/bin:${PATH}"
+
+# Install system-level dependencies
+apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    graphviz \
+    cargo/stable \
+    xclip \
+    ack \
+    ripgrep \
+    alien \
+    texinfo \
+    apt-utils \
+    pandoc \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# for pdf image exports
+wget --output-document ~/.local/bin/magick.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-7.1.1-47.x86_64.rpm
+wget --output-document ~/.local/bin/magick-libs.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-libs-7.1.1-47.x86_64.rpm
+
+alien ~/.local/bin/magick.rpm && alien ~/.local/bin/magick-libs.rpm
+rm -rf ~/.local/bin/*.rpm && dpkg -i ~/.local/bin/*.deb
+
 
 # Install zsh if not already installed
 if ! command -v zsh &> /dev/null; then
@@ -15,55 +43,63 @@ if [ -f /bin/zsh ]; then
     chsh -s /bin/zsh jovyan || echo "Failed to change shell to zsh"
 fi
 
-# Set paths - use the root directory
-#export PATH="/root/.local/bin:${PATH}"
 
 # Install Typst via the official installer
 echo "Installing Typst"
-mkdir -p /root/.local/bin
 
-curl -fsSL https://typst.community/typst-install/install.sh | sh || echo "Typst installation failed"
 
-# Add to bashrc
-echo 'export TYPST_INSTALL="/root/.typst"' >> /root/.bashrc
-echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /root/.bashrc
-
-# Add to zshrc
-echo 'export TYPST_INSTALL="/root/.typst"' >> /root/.zshrc
-echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /root/.zshrc
-echo 'export PATH="/root/.local/bin:${PATH}"' >> /root/.zshrc
-echo 'export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"' >> /root/.zshrc
+# Install Typst via the official installer (avoids snapd issues)
+curl -fsSL https://typst.community/typst-install/install.sh | sh && \
+    echo 'export PATH="$HOME/.typst:$PATH"' >> /etc/profile && \
+    echo 'export PATH="$HOME/.typst:$PATH"' >> ~/.bashrc
 
 # Set environment variables
-export TYPST_INSTALL="/root/.typst"
-export PATH="${TYPST_INSTALL}/bin:${PATH}"
+export PATH="${HOME}/.typst:${PATH}"
 export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
 
-# Navigate to the repository directory instead of home
-cd /app/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML
+
+#echo 'export TYPST_INSTALL="/root/.typst"' >> /root/.bashrc
+#echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /root/.bashrc
+#echo 'export TYPST_INSTALL="/root/.typst"' >> /root/.zshrc
+#echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /root/.zshrc
+#echo 'export PATH="/root/.local/bin:${PATH}"' >> /root/.zshrc
+#echo 'export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"' >> /root/.zshrc
+#echo 'export TYPST_INSTALL="/root/.typst"' >> /jovyan/.bashrc
+#echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /jovyan/.bashrc
+#echo 'export TYPST_INSTALL="/root/.typst"' >> /jovyan/.zshrc
+#echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /jovyan/.zshrc
+#echo 'export PATH="/root/.local/bin:${PATH}"' >> /jovyan/.zshrc
+#echo 'export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"' >> /jovyan/.zshrc
+
 
 # Install Python dependencies - try with uv first, fallback to pip
 echo "Installing Python dependencies"
 
 if which uv; then
-  uv sync --all-extras --check --no-cache || uv run pip install --no-cache-dir -e .
+  uv sync --all-extras --check --no-cache || uv pip install --no-cache-dir -e .
 else
   echo "Error with uv"
 fi
 
+# install cargo packages
+cargo install --locked typst-cli gitui eza
+
 # Install npm packages in the repository directory
 echo "Installing npm packages"
-npm install --no-fund --force || echo "npm install failed"
+
+cd ..
+npm install --force || echo "npm install failed"
 
 # Build components
 echo "Building components"
+
 node build-components.mjs || echo "build-components.mjs failed"
 
 # Build JupyterLab - try with uv first, fallback to jupyter directly
 echo "Building JupyterLab"
 
 if which uv; then
-  uv run jupyter lab build --dev-build=False --minimize=False || echo "jupyter lab build failed"
+  uv run --no-cache jupyter lab build --dev-build=False || echo "jupyter lab build failed"
 else
   echo "uv can't launch jupyter lab. See logs"
 fi
