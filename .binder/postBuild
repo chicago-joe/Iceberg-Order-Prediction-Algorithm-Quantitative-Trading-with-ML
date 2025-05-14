@@ -21,14 +21,18 @@ apt-get update && apt-get install -y --no-install-recommends \
     apt-utils \
     pandoc \
     curl \
+    imagemagick \
     && rm -rf /var/lib/apt/lists/*
 
-# for pdf image exports
-wget --output-document ~/.local/bin/magick.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-7.1.1-47.x86_64.rpm
-wget --output-document ~/.local/bin/magick-libs.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-libs-7.1.1-47.x86_64.rpm
+cat apt.txt | apt-get install --no-install-recommends -
+rm -rf /var/lib/apt/lists/*
 
-alien ~/.local/bin/magick.rpm && alien ~/.local/bin/magick-libs.rpm
-rm -rf ~/.local/bin/*.rpm && dpkg -i ~/.local/bin/*.deb
+# for pdf image exports
+#wget --output-document ~/.local/bin/magick.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-7.1.1-47.x86_64.rpm
+#wget --output-document ~/.local/bin/magick-libs.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-libs-7.1.1-47.x86_64.rpm
+
+#alien ~/.local/bin/magick.rpm && alien ~/.local/bin/magick-libs.rpm
+#rm -rf ~/.local/bin/*.rpm && dpkg -i ~/.local/bin/*.deb
 
 
 # Install zsh if not already installed
@@ -40,15 +44,15 @@ fi
 # Set zsh as default shell for jovyan user
 if [ -f /bin/zsh ]; then
     echo "Setting zsh as default shell"
-    chsh -s /bin/zsh jovyan || echo "Failed to change shell to zsh"
+    USER_TO_CHANGE=${USERNAME:-${USER:-jovyan}}
+    echo "Changing shell to zsh for user: $USER_TO_CHANGE"
+    chsh -s /bin/zsh "$USER_TO_CHANGE" || echo "Failed to change shell to zsh for $USER_TO_CHANGE"
+    #chsh -s /bin/zsh "$USERNAME" || echo "Failed to change shell to zsh"
 fi
 
 
 # Install Typst via the official installer
 echo "Installing Typst"
-
-
-# Install Typst via the official installer (avoids snapd issues)
 curl -fsSL https://typst.community/typst-install/install.sh | sh && \
     echo 'export PATH="$HOME/.typst:$PATH"' >> /etc/profile && \
     echo 'export PATH="$HOME/.typst:$PATH"' >> ~/.bashrc
@@ -57,7 +61,8 @@ curl -fsSL https://typst.community/typst-install/install.sh | sh && \
 export PATH="${HOME}/.typst:${PATH}"
 export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
 
-
+## IGNORE
+# -----------------------------------------------------------
 #echo 'export TYPST_INSTALL="/root/.typst"' >> /root/.bashrc
 #echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /root/.bashrc
 #echo 'export TYPST_INSTALL="/root/.typst"' >> /root/.zshrc
@@ -70,11 +75,10 @@ export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
 #echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /jovyan/.zshrc
 #echo 'export PATH="/root/.local/bin:${PATH}"' >> /jovyan/.zshrc
 #echo 'export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"' >> /jovyan/.zshrc
-
+# --------------------------------------------------------------
 
 # Install Python dependencies - try with uv first, fallback to pip
 echo "Installing Python dependencies"
-
 if which uv; then
   uv sync --all-extras --check --no-cache || uv pip install --no-cache-dir -e .
 else
@@ -85,19 +89,16 @@ fi
 cargo install --locked typst-cli gitui eza
 
 # Install npm packages in the repository directory
-echo "Installing npm packages"
-
 cd ..
+echo "Installing npm packages"
 npm install --force || echo "npm install failed"
 
 # Build components
 echo "Building components"
-
 node build-components.mjs || echo "build-components.mjs failed"
 
 # Build JupyterLab - try with uv first, fallback to jupyter directly
 echo "Building JupyterLab"
-
 if which uv; then
   uv run --no-cache jupyter lab build --dev-build=False || echo "jupyter lab build failed"
 else
