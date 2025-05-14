@@ -153,7 +153,7 @@ USER ${NB_UID}
 
 # Install Python packages using uv
 WORKDIR ${HOME}
-RUN /usr/local/bin/uv pip install --no-cache-dir -r .binder/requirements.txt
+RUN /usr/local/bin/uv pip install --system --no-cache-dir -r .binder/requirements.txt
 
 # Install JBang for Java support
 RUN mkdir -p ${HOME}/.jbang/bin ${HOME}/.jbang/currentjdk && \
