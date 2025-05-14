@@ -1,14 +1,14 @@
 FROM jupyter/base-notebook:python-3.11
 
-ENV ZSH="$HOME/.oh-my-zsh" \    
-	PYTHONUNBUFFERED=1 \
-	PYTHONDONTWRITEBYTECODE=1 \
- 	PIP_NO_CACHE_DIR=OFF \
+ENV ZSH="$HOME/.oh-my-zsh" \
+		PYTHONUNBUFFERED=1 \
+		PYTHONDONTWRITEBYTECODE=1 \
+ 		PIP_NO_CACHE_DIR=OFF \
     PIP_DEFAULT_TIMEOUT=100 \
-	PATH="$PATH:$HOME/bin/" \
-	UV_VENV=.venv \
-	UV_USE_PYPACKAGES=1 \
-    MSYS_NO_PATHCONV=1 \
+		PATH="$PATH:$HOME/bin/" \
+		UV_VENV=.venv \
+		UV_USE_PYPACKAGES=1 \
+    MSYS_NO_PATHCONV=1 
 
 #export ZSH_AUTOSUGGEST_STRATEGY="history"
 #fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
@@ -22,7 +22,7 @@ ENV ZSH="$HOME/.oh-my-zsh" \
 #. "$HOME/.local/bin/env"
 
 # Switch to root for system installations
-USER root
+USER=root
 
 # Install system dependencies from apt.txt and additional required packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
