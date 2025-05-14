@@ -1,5 +1,31 @@
 FROM jupyter/base-notebook:python-3.11
 
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="robbyrussell"
+
+plugins=(
+  git
+  zsh-autosuggestions
+#  F-Sy-H
+  tldr
+)
+
+#export ZSH_AUTOSUGGEST_STRATEGY="history"
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+source $ZSH/oh-my-zsh.sh
+
+ENV PATH="$PATH:$HOME/bin/"
+ENV UV_VENV=.venv
+ENV UV_USE_PYPACKAGES=1                                                                                                                                                        export MSYS_NO_PATHCONV=1
+
+ENV NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# alias for env
+#. "$HOME/.local/bin/env"
+
 # Switch to root for system installations
 USER root
 
