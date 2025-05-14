@@ -10,18 +10,9 @@ ENV ZSH="$HOME/.oh-my-zsh" \
 	UV_USE_PYPACKAGES=1 \
     MSYS_NO_PATHCONV=1 \
 
-
-ZSH_THEME="robbyrussell"
-
-plugins=(
-  git
-  zsh-autosuggestions
-  tldr
-)
-
 #export ZSH_AUTOSUGGEST_STRATEGY="history"
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-source $ZSH/oh-my-zsh.sh
+#fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+#source $ZSH/oh-my-zsh.sh
 
 # ENV NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
