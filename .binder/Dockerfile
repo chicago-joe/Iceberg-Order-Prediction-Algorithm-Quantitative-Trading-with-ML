@@ -1,5 +1,5 @@
 # Start with the Jupyter base notebook image with Python 3.9
-FROM jupyter/base-notebook:python-3.9
+FROM jupyter/base-notebook:python-3.11
 
 # Switch to root for system installations
 USER root
