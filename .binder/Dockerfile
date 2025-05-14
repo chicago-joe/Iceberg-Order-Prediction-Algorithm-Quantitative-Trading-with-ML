@@ -77,6 +77,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install Oh My Zsh for jovyan
 USER jovyan
+ENV ZSH="$HOME/.oh-my-zsh"
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended \
     && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions \
     && git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions \
