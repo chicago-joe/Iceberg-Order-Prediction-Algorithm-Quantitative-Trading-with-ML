@@ -1,69 +1,70 @@
 #!/bin/bash
+set -e
 
-# Ensure the script is executable
-chmod +x "${0}"
+echo "Starting postBuild script"
 
-# Set paths
-export PATH="${HOME}/.local/bin:${PATH}"
+# Install zsh if not already installed
+if ! command -v zsh &> /dev/null; then
+    echo "Installing zsh"
+    apt-get update && apt-get install -y zsh
+fi
 
-# Install system-level dependencies
-apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    graphviz \
-    cargo/stable \
-    xclip \
-    ack \
-    ripgrep \
-    alien \
-    texinfo \
-    apt-utils \
-    pandoc \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+# Set zsh as default shell for jovyan user
+if [ -f /bin/zsh ]; then
+    echo "Setting zsh as default shell"
+    chsh -s /bin/zsh jovyan || echo "Failed to change shell to zsh"
+fi
 
-# for pdf image exports
-wget --output-document ~/.local/bin/magick.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-7.1.1-47.x86_64.rpm
-wget --output-document ~/.local/bin/magick-libs.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-libs-7.1.1-47.x86_64.rpm
+# Set paths - use the jovyan home directory
+export PATH="/home/jovyan/.local/bin:${PATH}"
 
-alien ~/.local/bin/magick.rpm && alien ~/.local/bin/magick-libs.rpm
-rm -rf ~/.local/bin/*.rpm && dpkg -i ~/.local/bin/*.deb
+# Install Typst via the official installer
+echo "Installing Typst"
+mkdir -p /home/jovyan/.local/bin
 
+curl -fsSL https://typst.community/typst-install/install.sh | sh || echo "Typst installation failed"
 
-# Install Typst via the official installer (avoids snapd issues)
-curl -fsSL https://typst.community/typst-install/install.sh | sh && \
-    echo 'export PATH="$HOME/.typst:$PATH"' >> /etc/profile && \
-    echo 'export PATH="$HOME/.typst:$PATH"' >> ~/.bashrc
+# Add to bashrc
+echo 'export TYPST_INSTALL="/home/jovyan/.typst"' >> /home/jovyan/.bashrc
+echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /home/jovyan/.bashrc
+
+# Add to zshrc
+echo 'export TYPST_INSTALL="/home/jovyan/.typst"' >> /home/jovyan/.zshrc
+echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /home/jovyan/.zshrc
+echo 'export PATH="/home/jovyan/.local/bin:${PATH}"' >> /home/jovyan/.zshrc
+echo 'export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"' >> /home/jovyan/.zshrc
 
 # Set environment variables
-export PATH="${HOME}/.typst:${PATH}"
+export TYPST_INSTALL="/home/jovyan/.typst"
+export PATH="${TYPST_INSTALL}/bin:${PATH}"
 export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
 
-# Install Python packages
-uv run python -m pip install --no-cache-dir -r ./requirements.txt
-    #jupytext \
-    #myst-parser \
-    #myst-nb \
-    #jupyter-book \
-    #jupyterlab-myst \
+# Install Python dependencies - try with uv first, fallback to pip
+echo "Installing Python dependencies"
 
+if which uv; then
+  uv sync --all-extras --check --no-cache || uv run pip install --no-cache-dir -e .
+else
+  echo "Error with uv"
+fi
 
-cargo install --locked typst-cli gitui eza
+cd /home/jovyan
 
-cd ..
+# Install npm packages in the current directory
+echo "Installing npm packages"
+npm install --no-fund --force || echo "npm install failed"
 
-npm install --force
+# Build components
+echo "Building components"
+node build-components.mjs || echo "build-components.mjs failed"
 
-node build-components.mjs     
+# Build JupyterLab - try with uv first, fallback to jupyter directly
+echo "Building JupyterLab"
 
-uv run jupyter lab build --dev-build=False
-
-## Find and convert notebooks to MyST if needed
-#find . -name "*.ipynb" -not -path "*/\.*" -exec jupytext --to myst {} \; || echo "No notebooks to convert"
-
-## Initialize MyST environment (with error handling)
-#myst init || echo "MyST initialization failed"
-
-## Build JupyterLab (with error handling)
-#jupyter lab build || echo "JupyterLab build failed"
+if which uv; then
+  uv run jupyter lab build --dev-build=False --minimize=False || echo "jupyter lab build failed"
+else
+  echo "uv can't launch jupyter lab. See logs"
+fi
 
 echo "postBuild script completed"
