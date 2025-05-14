@@ -158,11 +158,11 @@ RUN /usr/local/bin/uv pip install --system --no-cache-dir -r .binder/requirement
 # Install NVM for Node.js version management
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
-# Create env file with any additional environment variables
-RUN mkdir -p ${HOME}/.local/bin && \
-    echo '#!/bin/bash' > ${HOME}/.local/bin/env && \
-    echo 'echo "Environment loaded"' >> ${HOME}/.local/bin/env && \
-    chmod +x ${HOME}/.local/bin/env
+#todo: Create env file with any additional environment variables
+# RUN mkdir -p ${HOME}/.local/bin && \
+#     echo '#!/bin/bash' > ${HOME}/.local/bin/env && \
+#     echo 'echo "Environment loaded"' >> ${HOME}/.local/bin/env && \
+#     chmod +x ${HOME}/.local/bin/env
 
 # Configure jovyan's zshrc with the exact requested settings
 #COPY .zshrc ${HOME}/.zshrc
