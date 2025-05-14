@@ -143,7 +143,7 @@ RUN mkdir -p ${HOME}/.local/bin && \
     chmod +x ${HOME}/.local/bin/env
 
 # Configure jovyan's zshrc with the exact requested settings
-COPY .zshrc ${HOME}/.zshrc
+#COPY .zshrc ${HOME}/.zshrc
 
 # Ensure tools are available in all shells by adding them to global profile
 RUN echo 'export PATH="/usr/local/bin:/usr/local/typst/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.jbang/bin:$HOME/.jbang/currentjdk/bin:$PATH"' >> /etc/profile && \
