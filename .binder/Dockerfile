@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     webp \
     inkscape \
     # Package management
-    cargo/stable
+    cargo/stable \
     rpm \
     # Web and display libraries
     fonts-liberation \
