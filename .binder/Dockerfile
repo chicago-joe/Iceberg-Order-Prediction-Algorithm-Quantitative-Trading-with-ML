@@ -68,7 +68,7 @@ RUN curl -fsSL https://typst.community/typst-install/install.sh | sh && \
     echo 'export PATH="/usr/local/typst/bin:$PATH"' >> /etc/bash.bashrc
 
 # Install cargo packages system-wide
-RUN cargo install --locked gitui eza
+RUN cargo install --locked --force typst-cli gitui eza
 
 # Install uv as root for system-wide availability
 RUN curl -fsSL https://astral.sh/uv/install.sh | sh && \
