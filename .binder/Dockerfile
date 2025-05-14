@@ -68,7 +68,7 @@ RUN . "$HOME/.cargo/env" && \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     fzf \
     bat \
-    cht.sh \
+    # cht.sh \
     jq \
     tldr \
     nano \
