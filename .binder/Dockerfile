@@ -44,15 +44,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     # Shell and utilities
     zsh \
     curl \
-    # Rust (needed for cargo)
-    rustc \
-    cargo \
+    # Rust dependencies
+    pkg-config \
+    libssl-dev \
     # Python build dependencies
     python3-dev \
-    # Node.js dependencies 
+    # Node.js dependencies
     nodejs \
     npm \
     && rm -rf /var/lib/apt/lists/*
+
+# Install Rust using rustup (latest stable version)
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
 
 # Set up zsh as default shell for jovyan user
 RUN chsh -s /bin/zsh jovyan
@@ -68,7 +72,7 @@ RUN curl -fsSL https://typst.community/typst-install/install.sh | sh && \
     echo 'export PATH="/usr/local/typst/bin:$PATH"' >> /etc/bash.bashrc
 
 # Install cargo packages system-wide
-RUN cargo install --locked --force typst-cli gitui eza
+RUN cargo install --locked typst-cli gitui eza
 
 # Install uv as root for system-wide availability
 RUN curl -fsSL https://astral.sh/uv/install.sh | sh && \
@@ -99,7 +103,9 @@ RUN /usr/local/bin/uv pip install --no-cache-dir -r .binder/requirements.txt
 
 # Set up environment PATH variables for user
 RUN echo 'export PATH="/usr/local/typst/bin:${HOME}/.local/bin:${PATH}"' >> ${HOME}/.bashrc && \
-    echo 'export PATH="/usr/local/typst/bin:${HOME}/.local/bin:${PATH}"' >> ${HOME}/.zshrc
+    echo 'export PATH="/usr/local/typst/bin:${HOME}/.local/bin:${PATH}"' >> ${HOME}/.zshrc && \
+    echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ${HOME}/.bashrc && \
+    echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ${HOME}/.zshrc
 
 # Build components using Node.js
 RUN node build-components.mjs || echo "build-components.mjs failed"
