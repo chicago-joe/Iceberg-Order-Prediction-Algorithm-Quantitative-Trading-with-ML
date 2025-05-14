@@ -55,11 +55,31 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Rust using rustup (latest stable version)
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
-#RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
+    echo 'source "$HOME/.cargo/env"' >> ~/.bashrc && \
+    export PATH="$HOME/.cargo/bin:$PATH"
 ENV PATH="/root/.cargo/bin:${PATH}"
 
+# Install Oh My Zsh, zsh plugins, and set up zsh as default shell for jovyan user
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    fzf \
+    bat \
+    cht.sh \
+    jq \
+    tldr \
+    nano \
+    && ln -s /usr/bin/batcat /usr/local/bin/bat \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Oh My Zsh for jovyan
+USER jovyan
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended \
+    && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions \
+    && git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions \
+    && mkdir -p ~/bin ~/.local/bin
+
 # Set up zsh as default shell for jovyan user
+USER root
 RUN chsh -s /bin/zsh jovyan
 
 # Install Typst - note that it installs to /home/jovyan/.typst
@@ -72,8 +92,10 @@ RUN curl -fsSL https://typst.community/typst-install/install.sh | sh && \
     echo 'export PATH="/usr/local/typst/bin:$PATH"' >> /etc/profile && \
     echo 'export PATH="/usr/local/typst/bin:$PATH"' >> /etc/bash.bashrc
 
-# Install cargo packages system-wide
-RUN cargo install --locked typst-cli gitui eza
+# Install cargo packages system-wide and ensure they're in PATH
+RUN . "$HOME/.cargo/env" && \
+    cargo install --locked typst-cli gitui eza \
+    && cp ~/.cargo/bin/* /usr/local/bin/
 
 # Install uv as root for system-wide availability
 RUN curl -fsSL https://astral.sh/uv/install.sh | sh && \
@@ -102,11 +124,62 @@ USER ${NB_UID}
 WORKDIR ${HOME}
 RUN /usr/local/bin/uv pip install --no-cache-dir -r .binder/requirements.txt
 
-# Set up environment PATH variables for user
-RUN echo 'export PATH="/usr/local/typst/bin:${HOME}/.local/bin:${PATH}"' >> ${HOME}/.bashrc && \
-    echo 'export PATH="/usr/local/typst/bin:${HOME}/.local/bin:${PATH}"' >> ${HOME}/.zshrc && \
-    echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ${HOME}/.bashrc && \
-    echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ${HOME}/.zshrc
+# Install JBang for Java support
+RUN mkdir -p ${HOME}/.jbang/bin ${HOME}/.jbang/currentjdk && \
+    curl -Ls https://sh.jbang.dev | bash -s - app install --fresh
+
+# Install NVM for Node.js version management
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+# Create env file with any additional environment variables
+RUN mkdir -p ${HOME}/.local/bin && \
+    echo '#!/bin/bash' > ${HOME}/.local/bin/env && \
+    echo 'echo "Environment loaded"' >> ${HOME}/.local/bin/env && \
+    chmod +x ${HOME}/.local/bin/env
+
+# Configure jovyan's zshrc with the exact requested settings
+RUN echo 'export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="robbyrussell"
+
+plugins=(
+  git
+  zsh-autosuggestions
+#  F-Sy-H
+  tldr
+)
+
+#export ZSH_AUTOSUGGEST_STRATEGY="history"
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+source $ZSH/oh-my-zsh.sh
+
+export PATH="$PATH:$HOME/bin/"
+export UV_VENV=.venv
+export UV_USE_PYPACKAGES=1
+export MSYS_NO_PATHCONV=1
+export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
+
+# alias for env
+. "$HOME/.local/bin/env"
+alias j!=jbang
+alias ls="ls --group-directories-first -a -h -p --format=vertical -s --color=always"
+alias bat="batcat"
+alias fcat="fzf --preview \"batcat --style=numbers --color=always --line-range=:500 {}\""
+alias zshconfig="nano ~/.zshrc"
+alias cht="cht.sh"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+export PATH="$HOME/.jbang/bin:$HOME/.jbang/currentjdk/bin:$PATH"
+export JAVA_HOME=$HOME/.jbang/currentjdk' > ${HOME}/.zshrc
+
+# Ensure tools are available in all shells by adding them to global profile
+RUN echo 'export PATH="/usr/local/bin:/usr/local/typst/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.jbang/bin:$HOME/.jbang/currentjdk/bin:$PATH"' >> /etc/profile && \
+    echo 'export PATH="/usr/local/bin:/usr/local/typst/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.jbang/bin:$HOME/.jbang/currentjdk/bin:$PATH"' >> /etc/bash.bashrc && \
+    echo 'source "$HOME/.cargo/env"' >> /etc/profile && \
+    echo 'source "$HOME/.cargo/env"' >> /etc/bash.bashrc
 
 # Build components using Node.js
 RUN node build-components.mjs || echo "build-components.mjs failed"
@@ -116,6 +189,9 @@ RUN /usr/local/bin/uv run --no-cache jupyter lab build --dev-build=False || echo
 
 # Set the working directory to home
 WORKDIR ${HOME}
+
+# Ensure all tools are in path when container starts
+RUN echo 'source /etc/profile' >> /etc/zsh/zshenv
 
 # Command to run JupyterLab using uv
 CMD ["sh", "-c", "/usr/local/bin/uv run jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''"]
