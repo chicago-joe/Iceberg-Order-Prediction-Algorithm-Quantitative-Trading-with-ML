@@ -30,7 +30,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     webp \
     inkscape \
     # Package management
-    cargo/stable \
     rpm \
     # Web and display libraries
     fonts-liberation \
@@ -56,7 +55,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Rust using rustup (latest stable version)
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+#RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 # Set up zsh as default shell for jovyan user
