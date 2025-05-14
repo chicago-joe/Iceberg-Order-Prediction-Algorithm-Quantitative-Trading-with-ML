@@ -43,11 +43,11 @@ fi
 
 # Set zsh as default shell for jovyan user
 if [ -f /bin/zsh ]; then
-    echo "Setting zsh as default shell"
-    USER_TO_CHANGE=${USERNAME:-${USER:-jovyan}}
+#    echo "Setting zsh as default shell"
+ #   USER_TO_CHANGE=${USERNAME:-${USER:-jovyan}}
     echo "Changing shell to zsh for user: $USER_TO_CHANGE"
-    chsh -s /bin/zsh "$USER_TO_CHANGE" || echo "Failed to change shell to zsh for $USER_TO_CHANGE"
-    #chsh -s /bin/zsh "$USERNAME" || echo "Failed to change shell to zsh"
+  #  chsh -s /bin/zsh "$USER_TO_CHANGE" || echo "Failed to change shell to zsh for $USER_TO_CHANGE"
+    chsh -s /bin/zsh jovyan || echo "Failed to change shell to zsh"
 fi
 
 
@@ -78,6 +78,8 @@ export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
 # --------------------------------------------------------------
 
 # Install Python dependencies - try with uv first, fallback to pip
+cd ~
+
 echo "Installing Python dependencies"
 if which uv; then
   uv sync --all-extras --check --no-cache || uv pip install --no-cache-dir -e .
@@ -89,7 +91,6 @@ fi
 cargo install --locked typst-cli gitui eza
 
 # Install npm packages in the repository directory
-cd ..
 echo "Installing npm packages"
 npm install --force || echo "npm install failed"
 
