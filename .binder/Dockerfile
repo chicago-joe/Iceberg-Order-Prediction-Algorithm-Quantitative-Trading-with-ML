@@ -168,10 +168,10 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | b
 #COPY .zshrc ${HOME}/.zshrc
 
 # Ensure tools are available in all shells by adding them to global profile
-RUN echo 'export PATH="/usr/local/bin:/usr/local/typst/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME:$PATH"' >> /etc/profile && \
-    echo 'export PATH="/usr/local/bin:/usr/local/typst/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME:$PATH"' >> /etc/bash.bashrc && \
-    echo 'source "$HOME/.cargo/env"' >> /etc/profile && \
-    echo 'source "$HOME/.cargo/env"' >> /etc/bash.bashrc
+# RUN echo 'export PATH="/usr/local/bin:/usr/local/typst/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME:$PATH"' >> /etc/profile && \
+#     echo 'export PATH="/usr/local/bin:/usr/local/typst/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME:$PATH"' >> /etc/bash.bashrc && \
+#     echo 'source "$HOME/.cargo/env"' >> /etc/profile && \
+#     echo 'source "$HOME/.cargo/env"' >> /etc/bash.bashrc
 
 # Build components using Node.js
 RUN node build-components.mjs || echo "build-components.mjs failed"
