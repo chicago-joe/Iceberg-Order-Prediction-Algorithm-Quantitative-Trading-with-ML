@@ -29,7 +29,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends build-essential nodejs npm python3-full
-          # Install Chrome dependencies that are available in Ubuntu
+          # Install Chrome dependencies that are available
           sudo apt-get install -y --no-install-recommends ca-certificates fonts-liberation libasound2-dev libnss3 libx11-6 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 xdg-utils
           cat .binder/apt.txt | xargs sudo apt-get install -y --no-install-recommends || true
 
@@ -156,56 +156,6 @@ jobs:
             // Close the browser
             await browser.close();
             console.log('HTML to PNG conversion completed');
-            
-            // Now update markdown files to use PNG images instead of include-html
-            updateMarkdownFiles();
-          }
-
-          function updateMarkdownFiles() {
-            console.log('Updating markdown files...');
-            
-            // Find all markdown files
-            const mdFiles = [
-              'iceberg-prediction-whitepaper-v2.md',
-              'hyperparameter-optimization-whitepaper.md'
-            ];
-            
-            for (const mdFile of mdFiles) {
-              if (!fs.existsSync(mdFile)) {
-                console.log(`File ${mdFile} not found, skipping.`);
-                continue;
-              }
-              
-              console.log(`Processing ${mdFile}...`);
-              let content = fs.readFileSync(mdFile, 'utf8');
-              
-              // Find all include-html directives
-              const includeHtmlRegex = /```{include-html} ([A-Za-z0-9_]+)\n\n```/g;
-              let match;
-              
-              while ((match = includeHtmlRegex.exec(content)) !== null) {
-                const componentName = match[1];
-                // Use markdown image syntax for both HTML and PDF rendering
-                const replacement = `![${componentName}](./assets/components/${componentName}.png)`;
-                
-                // Replace the directive with an image reference
-                content = content.replace(match[0], replacement);
-                console.log(`Replaced ${componentName} with PNG reference`);
-              }
-              
-              // Fix code blocks with no language specified
-              content = content.replace(/```\n/g, '```python\n');
-              content = content.replace(/```\s+/g, '```python\n');
-              
-              // Fix special characters for Typst
-              content = content.replace(/\*([^*\n]+)\*/g, '**$1**');
-              
-              // Write the updated content back
-              fs.writeFileSync(mdFile, content);
-              console.log(`Updated ${mdFile}`);
-            }
-            
-            console.log('Markdown updates completed');
           }
 
           // Run the conversion
@@ -218,6 +168,83 @@ jobs:
       - name: Run HTML-to-PNG conversion
         run: |
           node html-to-png.js
+
+      - name: Create PDF-specific markdown files
+        run: |
+          cat > create-pdf-files.js << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          // Directory for PDF-specific files
+          const pdfDir = path.join(__dirname, 'pdf-source');
+          
+          // Create PDF directory if it doesn't exist
+          if (!fs.existsSync(pdfDir)) {
+            fs.mkdirSync(pdfDir, { recursive: true });
+          }
+
+          // List of markdown files to process
+          const mdFiles = [
+            'iceberg-prediction-whitepaper-v2.md',
+            'hyperparameter-optimization-whitepaper.md'
+          ];
+
+          for (const mdFile of mdFiles) {
+            if (!fs.existsSync(mdFile)) {
+              console.log(`File ${mdFile} not found, skipping.`);
+              continue;
+            }
+
+            console.log(`Creating PDF-specific version of ${mdFile}...`);
+            const content = fs.readFileSync(mdFile, 'utf8');
+            
+            // Create PDF-specific filename
+            const pdfMdFile = path.join(pdfDir, path.basename(mdFile));
+            
+            // Copy original content
+            let pdfContent = content;
+            
+            // Replace include-html directives with PNG image references
+            const includeHtmlRegex = /```{include-html} ([A-Za-z0-9_]+)\n\n```/g;
+            let match;
+            
+            while ((match = includeHtmlRegex.exec(content)) !== null) {
+              const componentName = match[1];
+              const replacement = `![${componentName}](../assets/components/${componentName}.png)`;
+              
+              // Replace the directive with an image reference
+              pdfContent = pdfContent.replace(match[0], replacement);
+              console.log(`Replaced ${componentName} with PNG reference`);
+            }
+            
+            // Fix code blocks with no language specified
+            pdfContent = pdfContent.replace(/```\n/g, '```python\n');
+            pdfContent = pdfContent.replace(/```\s+/g, '```python\n');
+            
+            // Fix special characters for Typst
+            pdfContent = pdfContent.replace(/\*([^*\n]+)\*/g, '**$1**');
+            
+            // Write the PDF-specific content
+            fs.writeFileSync(pdfMdFile, pdfContent);
+            console.log(`Created ${pdfMdFile}`);
+          }
+
+          // Create a PDF-specific myst.yml file
+          const mystConfig = fs.readFileSync('myst.yml', 'utf8');
+          
+          // Modify the PDF exports to use the PDF-specific files
+          let pdfMystConfig = mystConfig.replace(
+            /(exports:[\s\S]*?format: pdf[\s\S]*?template: [^\n]*\n)/g,
+            (match) => {
+              return match + '    source: pdf-source\n';
+            }
+          );
+          
+          fs.writeFileSync(path.join(pdfDir, 'myst.yml'), pdfMystConfig);
+          console.log('Created PDF-specific myst.yml');
+          EOF
+
+          node create-pdf-files.js
 
       - name: Install Python dependencies
         run: |
@@ -233,7 +260,7 @@ jobs:
       - name: Prepare directories
         run: |
           mkdir -p exports
-          mkdir -p assets/components
+          mkdir -p _build/html/assets/components
 
       - name: Start Jupyter server
         run: |
@@ -252,11 +279,23 @@ jobs:
           JUPYTER_BASE_URL: "http://localhost:9090"
           JUPYTER_TOKEN: "1234"
 
-      - name: Build documentation
+      - name: Build HTML documentation
         run: |
-          # Build all formats with a single command 
-          # The PNG images will be used for both HTML and PDF
-          myst build --all --site --execute --html --pdf --typst -d
+          # Build HTML with the original files (include-html directives)
+          myst build --site --execute --html -d
+        env:
+          JUPYTER_BASE_URL: "http://localhost:9090"
+          JUPYTER_TOKEN: "1234"
+
+      - name: Build PDF documentation
+        run: |
+          # Build PDFs with the PDF-specific files (PNG images)
+          cd pdf-source
+          myst build --pdf --typst -d
+          cd ..
+          # Copy PDFs to exports directory
+          mkdir -p exports
+          cp -vf pdf-source/exports/*.pdf exports/ || echo "No PDFs found"
         env:
           JUPYTER_BASE_URL: "http://localhost:9090"
           JUPYTER_TOKEN: "1234"
