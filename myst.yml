@@ -18,10 +18,10 @@ project:
       repo: chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML
       ref: main
       provider: github
-     server:
+#     server:
 #      url: "http://localhost:9090"
 #      token: "1234"
-    kernelName: 'python3'
+#    kernelName: 'python3'
   plugins:
     - type: javascript
       path: include-html.mjs
