@@ -17,6 +17,6 @@ node_modules/
 
 # MyST build outputs
 _build
-_components
+#_components
 UPDATES_WIP
 package-lock.json

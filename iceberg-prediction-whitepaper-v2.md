@@ -29,9 +29,12 @@ In high-frequency and algorithmic trading, iceberg orders represent a significan
 
 An iceberg order is a large order that's divided into smaller, visible portions - like the tip of an iceberg above water, with the majority hidden below. Traders use them to minimize market impact while executing large positions.
 
+:::{.full-width}
 ![Complete Iceberg Order Prediction & Trading System](/assets/complete_iceberg.*)
-
 *Image 1: The complete system architecture showing data acquisition, processing, modeling, and trading strategy components. This diagram illustrates the end-to-end pipeline from market data to trading decisions.*
+
+:::
+
 
 ## The Business Problem
 
@@ -81,8 +84,9 @@ The `status` field indicates the iceberg's current state:
 - `U`: Updated
 :::
 
-
+:::{.full-width}
 ![Iceberg Order Detection in MBO Environment](/assets/iceberg_detection.*)
+:::
 
 
 :::{admonition} IcebergSimulationResult
@@ -432,7 +436,6 @@ There are several different categories of features:
 2. **Order dynamics features** including fill-to-display ratio and lean-over-hedge ratio, along with temporal features that capture market timing effects. These features help identify aggressive iceberg orders.
 3. **Side-relative transformations** for order book imbalance and support/resistance levels. These transformations create consistent features that work regardless of whether the order is a buy or sell.
 
-<!-- ![Order Book Position Features](/assets/feature_engineering_order_book_position.*) -->
 
 :::{.full-width}
 ```{include-html} FeatureEngineeringVisual
@@ -440,9 +443,6 @@ There are several different categories of features:
 ```
 :::
 
-<!-- *Image 4: * -->
-<!-- ![Order Dynamics Features](/assets/feature_engineering_order_book_dynamics.*) -->
-<!-- *Image 5: .* -->
 
 #### Market Structure Features
 
@@ -480,8 +480,6 @@ Time-based and momentum characteristics.
 
 A key innovation is converting raw market features into "side-relative" versions that have consistent meaning regardless of whether the order is a buy or sell, as illustrated in Image 6:
 
-<!-- ![Feature Transformation Examples](/assets/feature_engineering_side_relative_features.*) -->
-<!-- *Image 6: Examples of * -->
 
 ```python
 # Converting bid/ask imbalances to side-relative measures
@@ -495,7 +493,6 @@ df['ticksFromResistanceLevel'] = np.where(df.isBid!=True, df['ticksFromLow'], df
 
 *From preprocess_data.ipynb, feature transformation code*
 
-<!-- The examples in Image 6 show how this transformation works: -->
 **Example 1: Side-Relative Order Book Imbalance**
 
 - Raw Book Data: Buy/Sell Imbalance: 0.75 (bid)
@@ -1017,7 +1014,7 @@ def calculate_mda(self, model, X_test, y_test, scoring=f1_score):
 
 
 :::{.full-width}
-```{include-html} FeatureEngineeringVisual
+```{include-html} FeatureImportanceDiagram
 
 ```
 :::
@@ -1035,11 +1032,14 @@ Three insights valuable for trading strategy development:
 
 The prediction model doesn't operate in isolation - it feeds into a sophisticated trading decision process, as shown in Image 3:
 
+
+:::{.full-width}
 ![Decision Flow: From Model Prediction to Trading Action](/assets/decision_flow_prediction_to_training.*)
 
 *Image 3: Decision flow diagram illustrating how model predictions drive trading decisions through confidence bands and feature analysis. This probabilistic approach allows for dynamic adaptation to market conditions.*
+:::
 
-The decision flow illustrates how the model's prediction probability drives multiple trading decisions:
+
 
 ### Prediction Confidence Bands
 
@@ -1069,51 +1069,6 @@ The complete prediction flow, shown below, shows the full model architecture:
 :::
 
 
-1. **Feature Vector Construction**: Raw order data is transformed into engineered features
-   
-   ```
-   [ticksFromSupportLevel=5.0, ticksFromResistanceLevel=12.0, fillToDisplayRatio=14.0, sameSideImbalance=0.73, ...]
-   ```
-
-2. **Feature Scaling**: Features are normalized using the stored scaling parameters
-   
-   ```
-   [ticksFromSupportLevel=0.37, ticksFromResistanceLevel=0.76, fillToDisplayRatio=1.28, sameSideImbalance=0.91, ...]
-   ```
-
-3. **Tree Ensemble Processing**: The feature vector passes through all 250 decision trees
-   
-   ```
-   Tree 1 Output: 0.78
-   Tree 2 Output: 0.41
-   Tree 3 Output: 0.32
-   ...
-   Tree 250 Output: -0.03
-   ```
-
-4. **Prediction Combination**: Tree outputs are combined and transformed to a probability
-   
-   ```
-   Sum of tree outputs: 1.37
-   Logistic transformation: sigmoid(1.37) = 0.797
-   Final prediction: 79.7% probability of execution
-   ```
-
-This probability output is more valuable than a simple binary prediction, as it allows for trade sizing and venue selection based on confidence levels.
-
-
-## Model Advantages for Trading Applications
-
-The XGBoost model offers several specific advantages for trading applications, as outlined in Image 15:
-
-| Advantage                 | Description                                                                  | Trading Application                                                    |
-| ------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Non-Linear Relationships  | Captures complex, non-linear interactions between market variables           | Better models tipping points and threshold effects in market behavior  |
-| Robust to Feature Scaling | Tree-based models are less sensitive to feature scaling than neural networks | More stable in production when market metrics have unusual ranges      |
-| Handles Missing Values    | XGBoost can handle missing values in features                                | Resilient against data quality issues in live market feeds             |
-| Interpretable Structure   | Individual trees can be examined for trading logic                           | Easier to explain to regulatory bodies and trading strategy committees |
-| Fast Inference            | Tree traversal is computationally efficient                                  | Low latency prediction suitable for high-frequency trading systems     |
-| Built-in Regularization   | Prevents overfitting to market noise                                         | More stable performance across changing market regimes                 |
 
 ## Evaluation & Trading Strategy Implications
 
