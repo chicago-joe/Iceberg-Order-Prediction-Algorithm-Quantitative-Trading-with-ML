@@ -25,6 +25,21 @@ abstract: |
   frequent retraining on recent data should be prioritized over accumulating larger historical datasets. 
   We provide practical optimization strategies for trading applications and discuss future directions including adaptive optimization and multi-objective 
   approaches to balance competing trading metrics.
+exports:
+  - format: pdf
+    template: lapreprint-typst
+    title: Hyperparameter Tuning Whitepaper
+    output: exports/JLOSS-hyperparameter-tuning-whitepaper.pdf
+    id: hpo-tuning-paper
+    articles:
+    - file: Logistic_Regression_hpo_report.md
+      title: Logistic Regression Optuna HPO Results
+    - file: Random_Forest_hpo_report.md
+      title: Random Forest Optuna HPO Results
+    - file: LightGBM_hpo_report.md
+      title: LightGBM Optuna HPO Results   
+    - file: XGBoost_hpo_report.md      
+      title: XGBoost Optuna HPO Results
 ---
 
 +++
