@@ -29,6 +29,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends build-essential nodejs npm python3-full
+          sudo apt-get install -y --no-install-recommends gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
           cat .binder/apt.txt | xargs sudo apt-get install -y --no-install-recommends
 
       - name: Install uv and create virtual environment
@@ -53,92 +54,224 @@ jobs:
       - name: Build components
         run: node build-components.mjs
 
-      # Create fix scripts
-      - name: Create component and markdown fix scripts
+      - name: Create HTML-to-PNG conversion script
         run: |
-          # Create fix-components.js
-          cat > fix-components.js << 'EOF'
+          cat > html-to-png.js << 'EOF'
           const fs = require('fs');
           const path = require('path');
+          const puppeteer = require('puppeteer');
 
-          // Directory where the components are stored
+          // Directory where components are stored
           const componentsDir = path.join(__dirname, '_components');
+          // Directory for PNG output
+          const pngDir = path.join(__dirname, 'assets/components');
+          
+          // Create PNG directory if it doesn't exist
+          if (!fs.existsSync(pngDir)) {
+            fs.mkdirSync(pngDir, { recursive: true });
+          }
 
-          // Process each HTML file in the components directory
-          fs.readdirSync(componentsDir)
-            .filter(file => file.endsWith('.html'))
-            .forEach(file => {
-              const filePath = path.join(componentsDir, file);
-              console.log(`Processing ${filePath}...`);
+          async function convertHtmlToPng() {
+            console.log('Starting HTML to PNG conversion...');
+            
+            // Get all HTML files in components directory
+            const htmlFiles = fs.readdirSync(componentsDir)
+              .filter(file => file.endsWith('.html'));
               
-              let content = fs.readFileSync(filePath, 'utf8');
-              
-              // 1. Fix asterisks in code and examples
-              // Replace *feature_name* patterns with <strong>feature_name</strong>
-              content = content.replace(/\*([^*\n]+)\*/g, '<strong>$1</strong>');
-              
-              // 2. Fix backslashes in code that cause Typst issues
-              content = content.replace(/\\(?![a-zA-Z])/g, '\\\\');
-              
-              // 3. Fix Example:* \ patterns
-              content = content.replace(/\*Example:\*\s*\\/g, '<strong>Example:</strong>');
-              
-              // 4. Ensure all code blocks have a language specified
-              content = content.replace(/<pre><code>/g, '<pre><code class="language-python">');
-              
-              // Write the fixed content back
-              fs.writeFileSync(filePath, content);
-              console.log(`Fixed ${filePath}`);
+            console.log(`Found ${htmlFiles.length} HTML components to convert`);
+            
+            // Launch a headless browser
+            const browser = await puppeteer.launch({
+              headless: 'new',
+              args: ['--no-sandbox', '--disable-setuid-sandbox']
             });
-
-          console.log('All components fixed!');
-          EOF
-
-          # Create fix-markdown.js
-          cat > fix-markdown.js << 'EOF'
-          const fs = require('fs');
-          const path = require('path');
-
-          // Get the markdown files
-          const markdownFiles = [
-            'iceberg-prediction-whitepaper-v2.md',
-            'hyperparameter-optimization-whitepaper.md',
-            'index.md'
-          ];
-
-          markdownFiles.forEach(file => {
-            if (!fs.existsSync(file)) {
-              console.log(`File ${file} not found, skipping.`);
-              return;
+            
+            for (const file of htmlFiles) {
+              const htmlPath = path.join(componentsDir, file);
+              const componentName = file.replace('.html', '');
+              const pngPath = path.join(pngDir, `${componentName}.png`);
+              
+              console.log(`Converting ${file} to PNG...`);
+              
+              try {
+                // Read HTML content
+                const htmlContent = fs.readFileSync(htmlPath, 'utf8');
+                
+                // Create a new page
+                const page = await browser.newPage();
+                
+                // Set viewport size
+                await page.setViewport({
+                  width: 1200,
+                  height: 800,
+                  deviceScaleFactor: 2 // Higher resolution
+                });
+                
+                // Set content and wait for rendering
+                await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+                
+                // Get content size
+                const dimensions = await page.evaluate(() => {
+                  const element = document.body;
+                  return {
+                    width: element.scrollWidth,
+                    height: element.scrollHeight
+                  };
+                });
+                
+                // Resize viewport to fit content
+                await page.setViewport({
+                  width: dimensions.width,
+                  height: dimensions.height,
+                  deviceScaleFactor: 2
+                });
+                
+                // Take screenshot
+                await page.screenshot({
+                  path: pngPath,
+                  fullPage: true,
+                  omitBackground: false
+                });
+                
+                console.log(`Created ${pngPath}`);
+                
+                // Close the page
+                await page.close();
+                
+              } catch (error) {
+                console.error(`Error converting ${file}:`, error);
+              }
             }
             
-            console.log(`Processing ${file}...`);
-            let content = fs.readFileSync(file, 'utf8');
+            // Close the browser
+            await browser.close();
+            console.log('HTML to PNG conversion completed');
             
-            // Find code blocks with no language specified (```) and add python language
-            content = content.replace(/```\n/g, '```python\n');
-            
-            // Fix any ```(space) blocks
-            content = content.replace(/```\s+/g, '```python\n');
-            
-            // Fix special characters for Typst
-            content = content.replace(/\*([^*\n]+)\*/g, '**$1**'); // Double asterisks for bold
-            
-            // Write the fixed content back
-            fs.writeFileSync(file, content);
-            console.log(`Fixed ${file}`);
-          });
+            // Now update markdown files to use PNG images instead of include-html
+            updateMarkdownFiles();
+          }
 
-          console.log('All markdown files fixed!');
+          function updateMarkdownFiles() {
+            console.log('Updating markdown files...');
+            
+            // Find all markdown files
+            const mdFiles = [
+              'iceberg-prediction-whitepaper-v2.md',
+              'hyperparameter-optimization-whitepaper.md'
+            ];
+            
+            for (const mdFile of mdFiles) {
+              if (!fs.existsSync(mdFile)) {
+                console.log(`File ${mdFile} not found, skipping.`);
+                continue;
+              }
+              
+              console.log(`Processing ${mdFile}...`);
+              let content = fs.readFileSync(mdFile, 'utf8');
+              
+              // Find all include-html directives
+              const includeHtmlRegex = /```{include-html} ([A-Za-z0-9_]+)\n\n```/g;
+              let match;
+              
+              while ((match = includeHtmlRegex.exec(content)) !== null) {
+                const componentName = match[1];
+                const replacement = `![${componentName}](/assets/components/${componentName}.png)`;
+                
+                // Replace the directive with an image reference
+                content = content.replace(match[0], replacement);
+                console.log(`Replaced ${componentName} with PNG reference`);
+              }
+              
+              // Fix code blocks with no language specified
+              content = content.replace(/```\n/g, '```python\n');
+              content = content.replace(/```\s+/g, '```python\n');
+              
+              // Fix special characters for Typst
+              content = content.replace(/\*([^*\n]+)\*/g, '**$1**');
+              
+              // Write the updated content back
+              fs.writeFileSync(mdFile, content);
+              console.log(`Updated ${mdFile}`);
+            }
+            
+            console.log('Markdown updates completed');
+          }
+
+          // Run the conversion
+          convertHtmlToPng().catch(error => {
+            console.error('Conversion failed:', error);
+            process.exit(1);
+          });
           EOF
 
-      - name: Fix components before processing
+      - name: Run HTML-to-PNG conversion
         run: |
-          # Run the component fix script
-          node fix-components.js
-          
-          # Run the markdown fix script
-          node fix-markdown.js
+          node html-to-png.js
+
+      - name: Create separate PDF-friendly versions of markdown
+        run: |
+          cat > prepare-pdf-content.js << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          // List of markdown files to process
+          const mdFiles = [
+            'iceberg-prediction-whitepaper-v2.md',
+            'hyperparameter-optimization-whitepaper.md'
+          ];
+
+          for (const mdFile of mdFiles) {
+            if (!fs.existsSync(mdFile)) {
+              console.log(`File ${mdFile} not found, skipping.`);
+              continue;
+            }
+
+            console.log(`Creating PDF-friendly version of ${mdFile}...`);
+            const content = fs.readFileSync(mdFile, 'utf8');
+            
+            // Create PDF-specific filename
+            const pdfMdFile = mdFile.replace('.md', '-pdf.md');
+            
+            // Copy original content
+            let pdfContent = content;
+            
+            // Update image paths to be absolute
+            pdfContent = pdfContent.replace(/!\[(.*?)\]\((\/assets\/.*?)\)/g, '![$1](./$2)');
+            
+            // Fix other potential Typst rendering issues
+            // Remove HTML blocks that might cause problems
+            pdfContent = pdfContent.replace(/<div.*?>.*?<\/div>/gs, '');
+            
+            // Clean up any remaining HTML tags
+            pdfContent = pdfContent.replace(/<[^>]*>/g, '');
+            
+            // Make sure code blocks have language specifiers
+            pdfContent = pdfContent.replace(/```\n/g, '```python\n');
+            pdfContent = pdfContent.replace(/```\s+/g, '```python\n');
+            
+            // Fix emphasis markers for Typst
+            pdfContent = pdfContent.replace(/\*([^*\n]+)\*/g, '**$1**');
+            
+            // Write the PDF-specific content
+            fs.writeFileSync(pdfMdFile, pdfContent);
+            console.log(`Created ${pdfMdFile}`);
+            
+            // Update the frontmatter in the original file to point to the PDF-specific file
+            let updatedContent = content;
+            if (updatedContent.includes('exports:')) {
+              // Update the PDF export to use the PDF-specific file
+              updatedContent = updatedContent.replace(
+                /(exports:[\s\S]*?format: pdf[\s\S]*?template: [^\n]*\n)/,
+                `$1    source: ${pdfMdFile}\n`
+              );
+              
+              fs.writeFileSync(mdFile, updatedContent);
+              console.log(`Updated export configuration in ${mdFile}`);
+            }
+          }
+          EOF
+
+          node prepare-pdf-content.js
 
       - name: Install Python dependencies
         run: |
@@ -154,6 +287,7 @@ jobs:
       - name: Prepare directories
         run: |
           mkdir -p exports
+          mkdir -p assets/components
 
       - name: Start Jupyter server
         run: |
@@ -172,10 +306,18 @@ jobs:
           JUPYTER_BASE_URL: "http://localhost:9090"
           JUPYTER_TOKEN: "1234"
 
-      - name: Build documentation
+      - name: Build HTML documentation
         run: |
-          # Build all formats with a single command
-          myst build --all --site --md --execute --html --pdf --typst -d
+          # Build HTML separately to ensure proper execution and HTML component inclusion
+          myst build --site --execute -d
+        env:
+          JUPYTER_BASE_URL: "http://localhost:9090"
+          JUPYTER_TOKEN: "1234"
+
+      - name: Build PDF documentation
+        run: |
+          # Build PDFs separately with Typst
+          myst build --pdf --typst -d
         env:
           JUPYTER_BASE_URL: "http://localhost:9090"
           JUPYTER_TOKEN: "1234"
