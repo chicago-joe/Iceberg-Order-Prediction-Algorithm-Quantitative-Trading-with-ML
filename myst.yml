@@ -61,10 +61,10 @@ site:
   actions:
     - title: Share on LinkedIn
       url: https://www.linkedin.com/shareArticle?mini=true&url=https://chicago-joe.github.io/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML&title=Machine%20Learning%20Research%20-%20Joseph%20Loss
-    # - title: Download Iceberg Paper
-      # url: exports/JLOSS-iceberg-prediction-whitepaper.pdf
-    # - title: Download HPO Study
-      # url: exports/JLOSS-hyperparameter-tuning-whitepaper.pdf
+    - title: Download Iceberg Paper
+      url: exports/JLOSS-iceberg-prediction-whitepaper.pdf
+    - title: Download HPO Study
+      url: exports/JLOSS-hyperparameter-tuning-whitepaper.pdf
   options:
     style: "custom.css"
     show_source: false
