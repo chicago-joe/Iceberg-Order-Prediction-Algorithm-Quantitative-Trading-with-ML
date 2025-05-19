@@ -1,4 +1,4 @@
-name: test deploy
+name: MyST GitHub Pages Deploy
 
 on:
   workflow_dispatch:
@@ -7,6 +7,7 @@ on:
 
 env:
   BASE_URL: /${{ github.event.repository.name }}
+  VENV_PATH: ./.venv
 
 permissions:
   contents: read
@@ -24,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Python and Jupyter
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
@@ -33,6 +34,11 @@ jobs:
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
           echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+      - name: Create virtual environment
+        run: |
+          uv venv $VENV_PATH
+          echo "Created virtual environment at $VENV_PATH"
 
       - name: Install Python dependencies
         run: |
@@ -63,7 +69,7 @@ jobs:
           sudo mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/
       
       - name: Clean MyST cache
-        run: uv pip run myst clean --all
+        run: source $VENV_PATH/bin/activate && myst clean --all
           
       - name: Prepare Directories
         run: mkdir -p exports _build/html/exports
@@ -73,7 +79,8 @@ jobs:
           export JUPYTER_BASE_URL="http://localhost:9090"
           export JUPYTER_TOKEN="github-actions-token"
           
-          uv pip run jupyter-server --allow-root --ip 0.0.0.0 --port 9090 --IdentityProvider.token="${JUPYTER_TOKEN}" --ServerApp.allow_origin='*' &
+          source $VENV_PATH/bin/activate && \
+          jupyter-server --allow-root --ip 0.0.0.0 --port 9090 --IdentityProvider.token="${JUPYTER_TOKEN}" --ServerApp.allow_origin='*' &
           echo "Started Jupyter server at $JUPYTER_BASE_URL"
           # Wait for Jupyter to fully start
           sleep 10
@@ -83,7 +90,8 @@ jobs:
           export JUPYTER_BASE_URL="http://localhost:9090"
           export JUPYTER_TOKEN="github-actions-token"
           
-          uv pip run myst build --execute --all --typst --md --html --site --pdf -d
+          source $VENV_PATH/bin/activate && \
+          myst build --execute --all --typst --md --html --site --pdf -d
           
       - name: Ensure PDFs are in HTML output
         run: |
