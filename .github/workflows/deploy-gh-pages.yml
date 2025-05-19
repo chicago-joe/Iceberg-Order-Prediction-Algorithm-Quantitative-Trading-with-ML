@@ -29,8 +29,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends build-essential nodejs npm python3-full
-          sudo apt-get install -y --no-install-recommends gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
-          cat .binder/apt.txt | xargs sudo apt-get install -y --no-install-recommends
+          # Install Chrome dependencies that are available in Ubuntu
+          sudo apt-get install -y --no-install-recommends ca-certificates fonts-liberation libasound2-dev libnss3 libx11-6 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 xdg-utils
+          cat .binder/apt.txt | xargs sudo apt-get install -y --no-install-recommends || true
 
       - name: Install uv and create virtual environment
         run: |
@@ -80,10 +81,19 @@ jobs:
               
             console.log(`Found ${htmlFiles.length} HTML components to convert`);
             
-            // Launch a headless browser
+            // Launch a headless browser with minimal requirements
             const browser = await puppeteer.launch({
               headless: 'new',
-              args: ['--no-sandbox', '--disable-setuid-sandbox']
+              args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-accelerated-2d-canvas',
+                '--no-first-run',
+                '--no-zygote',
+                '--single-process',
+                '--disable-gpu'
+              ]
             });
             
             for (const file of htmlFiles) {
@@ -175,7 +185,8 @@ jobs:
               
               while ((match = includeHtmlRegex.exec(content)) !== null) {
                 const componentName = match[1];
-                const replacement = `![${componentName}](/assets/components/${componentName}.png)`;
+                // Use markdown image syntax for both HTML and PDF rendering
+                const replacement = `![${componentName}](./assets/components/${componentName}.png)`;
                 
                 // Replace the directive with an image reference
                 content = content.replace(match[0], replacement);
@@ -207,71 +218,6 @@ jobs:
       - name: Run HTML-to-PNG conversion
         run: |
           node html-to-png.js
-
-      - name: Create separate PDF-friendly versions of markdown
-        run: |
-          cat > prepare-pdf-content.js << 'EOF'
-          const fs = require('fs');
-          const path = require('path');
-
-          // List of markdown files to process
-          const mdFiles = [
-            'iceberg-prediction-whitepaper-v2.md',
-            'hyperparameter-optimization-whitepaper.md'
-          ];
-
-          for (const mdFile of mdFiles) {
-            if (!fs.existsSync(mdFile)) {
-              console.log(`File ${mdFile} not found, skipping.`);
-              continue;
-            }
-
-            console.log(`Creating PDF-friendly version of ${mdFile}...`);
-            const content = fs.readFileSync(mdFile, 'utf8');
-            
-            // Create PDF-specific filename
-            const pdfMdFile = mdFile.replace('.md', '-pdf.md');
-            
-            // Copy original content
-            let pdfContent = content;
-            
-            // Update image paths to be absolute
-            pdfContent = pdfContent.replace(/!\[(.*?)\]\((\/assets\/.*?)\)/g, '![$1](./$2)');
-            
-            // Fix other potential Typst rendering issues
-            // Remove HTML blocks that might cause problems
-            pdfContent = pdfContent.replace(/<div.*?>.*?<\/div>/gs, '');
-            
-            // Clean up any remaining HTML tags
-            pdfContent = pdfContent.replace(/<[^>]*>/g, '');
-            
-            // Make sure code blocks have language specifiers
-            pdfContent = pdfContent.replace(/```\n/g, '```python\n');
-            pdfContent = pdfContent.replace(/```\s+/g, '```python\n');
-            
-            // Fix emphasis markers for Typst
-            pdfContent = pdfContent.replace(/\*([^*\n]+)\*/g, '**$1**');
-            
-            // Write the PDF-specific content
-            fs.writeFileSync(pdfMdFile, pdfContent);
-            console.log(`Created ${pdfMdFile}`);
-            
-            // Update the frontmatter in the original file to point to the PDF-specific file
-            let updatedContent = content;
-            if (updatedContent.includes('exports:')) {
-              // Update the PDF export to use the PDF-specific file
-              updatedContent = updatedContent.replace(
-                /(exports:[\s\S]*?format: pdf[\s\S]*?template: [^\n]*\n)/,
-                `$1    source: ${pdfMdFile}\n`
-              );
-              
-              fs.writeFileSync(mdFile, updatedContent);
-              console.log(`Updated export configuration in ${mdFile}`);
-            }
-          }
-          EOF
-
-          node prepare-pdf-content.js
 
       - name: Install Python dependencies
         run: |
@@ -306,18 +252,11 @@ jobs:
           JUPYTER_BASE_URL: "http://localhost:9090"
           JUPYTER_TOKEN: "1234"
 
-      - name: Build HTML documentation
+      - name: Build documentation
         run: |
-          # Build HTML separately to ensure proper execution and HTML component inclusion
-          myst build --site --execute -d
-        env:
-          JUPYTER_BASE_URL: "http://localhost:9090"
-          JUPYTER_TOKEN: "1234"
-
-      - name: Build PDF documentation
-        run: |
-          # Build PDFs separately with Typst
-          myst build --pdf --typst -d
+          # Build all formats with a single command 
+          # The PNG images will be used for both HTML and PDF
+          myst build --all --site --execute --html --pdf --typst -d
         env:
           JUPYTER_BASE_URL: "http://localhost:9090"
           JUPYTER_TOKEN: "1234"
