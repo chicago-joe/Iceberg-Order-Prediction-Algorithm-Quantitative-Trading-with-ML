@@ -64,7 +64,7 @@ jobs:
           myst build hyperparameter-optimization-whitepaper.md --pdf --execute
           
       - name: Build HTML Assets (with execution)
-        run: myst build --execute -d --html
+        run: myst build --execute -d --html --md
               
       - name: Ensure PDFs are in HTML output
         run: |
