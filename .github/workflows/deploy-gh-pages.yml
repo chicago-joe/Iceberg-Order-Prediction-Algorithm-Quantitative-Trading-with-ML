@@ -22,59 +22,72 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Python and Jupyter
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
-
-      - name: Install Python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r .binder/requirements.txt
-
-      - name: Install system dependencies from .binder/apt.txt
+      - name: Install system dependencies
         run: |
           sudo apt-get update
-          < .binder/apt.txt xargs sudo apt-get install -y
+          sudo apt-get install -y --no-install-recommends build-essential graphviz curl \
+            imagemagick fonts-liberation libatk-bridge2.0-0 libgtk-3-0 \
+            pkg-config libssl-dev python3-dev nodejs npm
+          cat .binder/apt.txt | xargs sudo apt-get install -y --no-install-recommends
 
-      - name: Run Binder postBuild
-        run: bash .binder/postBuild
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
+      - name: Install uv
+        run: |
+          curl -fsSL https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 18.x
 
-      - name: Install MyST Markdown CLI
-        run: npm install -g mystmd
+      - name: Install Node.js packages
+        run: npm install --force
+      
+      - name: Build components
+        run: node build-components.mjs
+      
+      - name: Install Python dependencies with uv
+        run: |
+          ~/.local/bin/uv pip install --system --no-cache-dir -r .binder/requirements.txt
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
 
       - name: Install Typst
         run: |
           curl -L -o typst.tar.xz \
             https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz
           tar -xf typst.tar.xz
-          mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/
+          sudo mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/
+          typst --version
 
-      - name: Prepare Directories
+      - name: Prepare directories
         run: mkdir -p exports
 
-      - name: Build PDF Assets (with execution)
+      - name: Build all documentation
         run: |
-          myst build iceberg-prediction-whitepaper-v2.md --pdf --execute
-          myst build index.md --pdf --execute
-
-      - name: Build HTML Assets (with execution)
-        run: myst build --execute --html
+          ~/.local/bin/uv run myst build --typst --pdf --execute --md --site --html -d --all
+        #continue-on-error: true
 
       - name: Ensure PDFs are in HTML output
         run: |
           mkdir -p _build/html/exports
-          cp exports/*.pdf _build/html/exports/
+          cp exports/*.pdf _build/html/exports/ 2>/dev/null || echo "No PDFs to copy, continuing anyway"
+        #continue-on-error: true
 
       - name: Copy project assets into build output
-        run: cp -R assets _build/html/assets
+        run: |
+          if [ -d "assets" ]; then
+            cp -R assets _build/html/assets
+          else
+            echo "Assets directory not found, skipping"
+          fi
+        #continue-on-error: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -84,5 +97,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          github_token: ${{ secrets.PAGES_TOKEN }}
