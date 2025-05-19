@@ -60,10 +60,10 @@ jobs:
 
       - name: Build PDF Assets (with execution)
         run: |
-          myst build --pdf --execute -d --pdf 
+          myst build --execute -d --pdf --site --html --md --all --typst
           
       - name: Build HTML Assets (with execution)
-        run: myst build --execute --html -d 
+        run: myst build --execute -d --pdf --site --html --md --all --typst
         # run: myst build --execute --html -d --md --site --all 
       
       - name: Ensure PDFs are in HTML output
