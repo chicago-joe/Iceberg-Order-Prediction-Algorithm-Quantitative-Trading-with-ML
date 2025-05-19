@@ -5,77 +5,92 @@ const FeatureEngineeringVisual = () => {
   const styles = {
     container: {
       fontFamily: 'Arial, sans-serif',
-      padding: '20px',
+      padding: '25px',
       maxWidth: '100%',
+      width: '100%',
       backgroundColor: '#f9f9f9',
       borderRadius: '8px',
-      border: '1px solid #e0e0e0'
+      border: '1px solid #e0e0e0',
+      overflowX: 'auto'
     },
     heading: {
       color: '#333',
-      marginBottom: '20px'
+      marginBottom: '15px',
+      fontSize: '20px',
+      fontWeight: 'bold'
     },
     featureGroup: {
       backgroundColor: 'white',
-      padding: '15px',
+      padding: '20px',
       borderRadius: '8px',
       boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-      marginBottom: '20px',
-      border: '1px solid #e0e0e0'
+      marginBottom: '25px',
+      border: '1px solid #e0e0e0',
+      width: '100%'
     },
     groupTitle: {
       borderBottom: '2px solid #4a90e2',
       paddingBottom: '8px',
       marginBottom: '15px',
       color: '#4a90e2',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontSize: '16px'
     },
     featureTable: {
       width: '100%',
       borderCollapse: 'collapse',
-      marginTop: '10px',
-      fontSize: '14px'
+      marginTop: '12px',
+      fontSize: '13px'
     },
     tableHeader: {
       backgroundColor: '#f5f5f5',
-      padding: '10px',
+      padding: '8px',
       textAlign: 'left',
       borderBottom: '1px solid #ddd',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontSize: '13px'
     },
     tableCell: {
-      padding: '10px',
+      padding: '8px',
       borderBottom: '1px solid #ddd',
-      verticalAlign: 'top'
+      verticalAlign: 'top',
+      fontSize: '13px',
+      lineHeight: '1.4'
     },
     code: {
       fontFamily: 'monospace',
       backgroundColor: '#f5f5f5',
-      padding: '2px 4px',
+      padding: '3px 5px',
       borderRadius: '3px',
-      fontSize: '13px'
+      fontSize: '12px',
+      lineHeight: '1.3',
+      overflowX: 'auto',
+      whiteSpace: 'pre-wrap',
+      wordBreak: 'break-word'
     },
     exampleBox: {
       backgroundColor: '#f0f8ff',
-      padding: '10px',
+      padding: '8px',
       borderRadius: '5px',
-      marginTop: '10px',
+      marginTop: '8px',
       border: '1px solid #d0e3f0',
-      fontSize: '14px'
+      fontSize: '12px',
+      lineHeight: '1.4'
     },
     highlight: {
       backgroundColor: '#fffacd',
-      padding: '2px 4px',
+      padding: '3px 5px',
       borderRadius: '3px'
     },
     transformation: {
       display: 'flex',
-      alignItems: 'center',
+      alignItems: 'stretch',
       margin: '15px 0',
-      gap: '15px'
+      gap: '10px',
+      flexWrap: 'nowrap'
     },
     transformStep: {
-      flex: 1,
+      flex: '1 1 0',
       backgroundColor: 'white',
       padding: '10px',
       borderRadius: '5px',
@@ -83,33 +98,36 @@ const FeatureEngineeringVisual = () => {
       minHeight: '80px'
     },
     arrow: {
-      fontSize: '24px',
-      color: '#4a90e2'
+      fontSize: '22px',
+      color: '#4a90e2',
+      display: 'flex',
+      alignItems: 'center'
     },
     title: {
       fontWeight: 'bold',
-      marginBottom: '5px',
-      fontSize: '14px'
+      marginBottom: '6px',
+      fontSize: '13px'
     },
     note: {
-      fontSize: '14px',
+      fontSize: '12px',
       color: '#666',
       fontStyle: 'italic',
-      marginTop: '8px'
+      marginTop: '10px',
+      lineHeight: '1.4'
     },
     importanceIndicator: {
       display: 'flex',
-      marginTop: '5px',
+      marginTop: '6px',
       alignItems: 'center'
     },
     importanceLabel: {
-      marginRight: '10px',
-      fontSize: '13px',
+      marginRight: '8px',
+      fontSize: '11px',
       width: '100px'
     },
     importanceBar: {
-      height: '8px',
-      borderRadius: '4px'
+      height: '10px',
+      borderRadius: '5px'
     }
   };
 
@@ -201,7 +219,7 @@ const FeatureEngineeringVisual = () => {
     }
   ];
 
-  // Side imbalance transformation example
+  // Side imbalance transformation example - Updated to include the middle "Consider Order Side" step
   const sideImbalanceTransformation = [
     {
       title: "Raw Book Data",
@@ -217,7 +235,7 @@ const FeatureEngineeringVisual = () => {
     }
   ];
 
-  // Support level transformation example
+  // Support level transformation example - Updated to include clearer order side consideration
   const supportLevelTransformation = [
     {
       title: "Raw Price Data",

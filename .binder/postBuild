@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Starting postBuild script"
+
 # Ensure the script is executable
 chmod +x "${0}"
 
@@ -19,17 +21,38 @@ apt-get update && apt-get install -y --no-install-recommends \
     apt-utils \
     pandoc \
     curl \
+    imagemagick \
     && rm -rf /var/lib/apt/lists/*
 
+cat apt.txt | apt-get install --no-install-recommends -
+rm -rf /var/lib/apt/lists/*
+
 # for pdf image exports
-wget --output-document ~/.local/bin/magick.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-7.1.1-47.x86_64.rpm
-wget --output-document ~/.local/bin/magick-libs.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-libs-7.1.1-47.x86_64.rpm
+#wget --output-document ~/.local/bin/magick.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-7.1.1-47.x86_64.rpm
+#wget --output-document ~/.local/bin/magick-libs.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-libs-7.1.1-47.x86_64.rpm
 
-alien ~/.local/bin/magick.rpm && alien ~/.local/bin/magick-libs.rpm
-rm -rf ~/.local/bin/*.rpm && dpkg -i ~/.local/bin/*.deb
+#alien ~/.local/bin/magick.rpm && alien ~/.local/bin/magick-libs.rpm
+#rm -rf ~/.local/bin/*.rpm && dpkg -i ~/.local/bin/*.deb
 
 
-# Install Typst via the official installer (avoids snapd issues)
+# Install zsh if not already installed
+if ! command -v zsh &> /dev/null; then
+    echo "Installing zsh"
+    apt-get update && apt-get install -y zsh
+fi
+
+# Set zsh as default shell for jovyan user
+if [ -f /bin/zsh ]; then
+#    echo "Setting zsh as default shell"
+ #   USER_TO_CHANGE=${USERNAME:-${USER:-jovyan}}
+    echo "Changing shell to zsh for user: $USER_TO_CHANGE"
+  #  chsh -s /bin/zsh "$USER_TO_CHANGE" || echo "Failed to change shell to zsh for $USER_TO_CHANGE"
+    chsh -s /bin/zsh jovyan || echo "Failed to change shell to zsh"
+fi
+
+
+# Install Typst via the official installer
+echo "Installing Typst"
 curl -fsSL https://typst.community/typst-install/install.sh | sh && \
     echo 'export PATH="$HOME/.typst:$PATH"' >> /etc/profile && \
     echo 'export PATH="$HOME/.typst:$PATH"' >> ~/.bashrc
@@ -38,29 +61,49 @@ curl -fsSL https://typst.community/typst-install/install.sh | sh && \
 export PATH="${HOME}/.typst:${PATH}"
 export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
 
-# Install Python packages
-uv run python -m pip install --no-cache-dir -r ./requirements.txt
-    #jupytext \
-    #myst-parser \
-    #myst-nb \
-    #jupyter-book \
-    #jupyterlab-myst \
+## IGNORE
+# -----------------------------------------------------------
+#echo 'export TYPST_INSTALL="/root/.typst"' >> /root/.bashrc
+#echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /root/.bashrc
+#echo 'export TYPST_INSTALL="/root/.typst"' >> /root/.zshrc
+#echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /root/.zshrc
+#echo 'export PATH="/root/.local/bin:${PATH}"' >> /root/.zshrc
+#echo 'export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"' >> /root/.zshrc
+#echo 'export TYPST_INSTALL="/root/.typst"' >> /jovyan/.bashrc
+#echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /jovyan/.bashrc
+#echo 'export TYPST_INSTALL="/root/.typst"' >> /jovyan/.zshrc
+#echo 'export PATH="$TYPST_INSTALL/bin:$PATH"' >> /jovyan/.zshrc
+#echo 'export PATH="/root/.local/bin:${PATH}"' >> /jovyan/.zshrc
+#echo 'export PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"' >> /jovyan/.zshrc
+# --------------------------------------------------------------
 
+# Install Python dependencies - try with uv first, fallback to pip
+cd ~
 
+echo "Installing Python dependencies"
+if which uv; then
+  uv sync --all-extras --check --no-cache || uv pip install --no-cache-dir -e .
+else
+  echo "Error with uv"
+fi
+
+# install cargo packages
 cargo install --locked typst-cli gitui eza
 
-cd ..
-npm install --force
+# Install npm packages in the repository directory
+echo "Installing npm packages"
+npm install --force || echo "npm install failed"
 
-uv run jupyter lab build --dev-build=False
+# Build components
+echo "Building components"
+node build-components.mjs || echo "build-components.mjs failed"
 
-## Find and convert notebooks to MyST if needed
-#find . -name "*.ipynb" -not -path "*/\.*" -exec jupytext --to myst {} \; || echo "No notebooks to convert"
-
-## Initialize MyST environment (with error handling)
-#myst init || echo "MyST initialization failed"
-
-## Build JupyterLab (with error handling)
-#jupyter lab build || echo "JupyterLab build failed"
+# Build JupyterLab - try with uv first, fallback to jupyter directly
+echo "Building JupyterLab"
+if which uv; then
+  uv run --no-cache jupyter lab build --dev-build=False || echo "jupyter lab build failed"
+else
+  echo "uv can't launch jupyter lab. See logs"
+fi
 
 echo "postBuild script completed"

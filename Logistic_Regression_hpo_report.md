@@ -18,7 +18,7 @@ date: "2025-04-21"
    </tr>
    <tr>
       <td style="font-weight: bold;">Performance Score</td>
-      <td style="text-align: right; font-family: monospace; background: linear-gradient(90deg, #e8f8e8, #b8e0b8); font-weight: bold; font-size: 110%;">0.6899</td>
+      <td style="text-align: right; font-family: monospace; background: linear-gradient(90deg, #e8f8e8, #b8e0b8); font-weight: bold; font-size: 110%;">0.68990</td>
    </tr>
    <tr>
       <td style="font-weight: bold;">Start Time</td>
@@ -51,7 +51,7 @@ date: "2025-04-21"
    </tr>
    <tr>
       <td style="font-weight: bold;">Performance Score</td>
-      <td style="text-align: right; font-family: monospace; background: linear-gradient(90deg, #e8f8e8, #b8e0b8); font-weight: bold; font-size: 110%;">0.6899</td>
+      <td style="text-align: right; font-family: monospace; background: linear-gradient(90deg, #e8f8e8, #b8e0b8); font-weight: bold; font-size: 110%;">0.68990</td>
    </tr>
    <tr>
       <td style="font-weight: bold;">Start Time</td>

@@ -14,3 +14,9 @@ Untitled.md
 node_modules/
 
 **/.claude/settings.local.json
+
+# MyST build outputs
+_build
+#_components
+UPDATES_WIP
+package-lock.json

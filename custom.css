@@ -1,3 +1,69 @@
+/* Base font settings to match book-theme template */
+:root {
+  --book-font-size: 1rem;
+  --book-line-height: 1.6;
+  --book-paragraph-spacing: 1.25rem;
+  --book-heading-spacing: 2rem;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
+  font-size: var(--book-font-size);
+  line-height: var(--book-line-height);
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Main wrapper - ensure it can accommodate our wide elements */
+.myst-page {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Typography scaling for the book theme */
+.myst-content h1 {
+  font-size: 2.25rem !important;
+  margin-bottom: 1.75rem !important;
+  font-weight: 600 !important;
+}
+
+.myst-content h2 {
+  font-size: 1.8rem !important;
+  margin-top: 2.5rem !important;
+  margin-bottom: 1.25rem !important;
+  font-weight: 600 !important;
+}
+
+.myst-content h3 {
+  font-size: 1.5rem !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+  font-weight: 600 !important;
+}
+
+.myst-content h4 {
+  font-size: 1.25rem !important;
+  margin-top: 1.75rem !important;
+  margin-bottom: 0.75rem !important;
+  font-weight: 600 !important;
+}
+
+.myst-content p, 
+.myst-content li {
+  font-size: 1.05rem !important;
+  margin-bottom: var(--book-paragraph-spacing) !important;
+  line-height: 1.6 !important;
+}
+
+.myst-content code, 
+.myst-content pre {
+  font-family: "SFMono-Regular", Menlo, Consolas, Monaco, "Liberation Mono", "Courier New", monospace !important;
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+}
+
 /* Make images larger */
 .myst-content img {
   max-width: 100% !important;
@@ -13,11 +79,339 @@
   margin: 2rem 0;
 }
 
-/* Layout for left TOC */
+.myst-content figcaption {
+  font-size: 0.9rem !important;
+  line-height: 1.4 !important;
+  margin-top: 0.75rem !important;
+}
+
+/* Component containers should be full width */
+.component-container,
+.component-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 2rem 0;
+  overflow-x: hidden !important; /* Prevent horizontal scrolling */
+  overflow-y: visible !important;
+  box-sizing: border-box !important;
+}
+
+/* Components inside full-width containers */
+.full-width .component-container,
+.full-width .component-wrapper,
+.full-width div[class*="html"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 1.5rem !important;
+  font-size: 0.875rem !important; /* Smaller font size for rendered components */
+  line-height: 1.4 !important;
+}
+
+/* Smaller text for all HTML components */
+.myst-content div[class*="html"] p,
+.myst-content div[class*="html"] li,
+.myst-content div[class*="html"] div,
+.myst-content div[class*="html"] span {
+  font-size: 0.875rem !important; /* 14px at default browser size */
+  line-height: 1.4 !important;
+}
+
+/* Feature Engineering Deep Dive specific styles */
+.myst-content div[class*="html"] h2[style] {
+  font-size: 1.6rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.myst-content div[class*="html"] h3[style] {
+  font-size: 1.3rem !important;
+}
+
+.myst-content div[class*="html"] h4 {
+  font-size: 1.1rem !important;
+  margin-top: 1.25rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.myst-content div[class*="html"] table[style] {
+  font-size: 0.75rem !important;
+}
+
+.myst-content div[class*="html"] td[style],
+.myst-content div[class*="html"] th[style] {
+  font-size: 0.75rem !important;
+  padding: 8px !important;
+}
+
+.myst-content div[class*="html"] div[style*="code"] {
+  font-size: 0.7rem !important;
+}
+
+.myst-content div[class*="html"] div[style*="exampleBox"] {
+  font-size: 0.75rem !important;
+}
+
+.myst-content div[class*="html"] div[style*="note"] {
+  font-size: 0.75rem !important;
+}
+
+.myst-content div[class*="html"] div[style*="importanceLabel"] {
+  font-size: 0.7rem !important;
+}
+
+.myst-content div[class*="html"] div[style*="transformation"] {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+}
+
+.myst-content div[class*="html"] div[style*="transformStep"] {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  font-size: 0.75rem !important;
+}
+
+/* Time Series CV Diagram styles */
+.myst-content div[class*="html"] div[style*="visualContainer"] {
+  width: 90% !important;
+  margin: 0 auto !important;
+}
+
+.myst-content div[class*="html"] div[style*="timeBlock"] {
+  height: 50px !important;
+}
+
+.myst-content div[class*="html"] div[style*="visualization"] {
+  margin: 0 auto !important;
+  width: 90% !important;
+}
+
+/* Feature Importance override styles */
+.myst-content div[class*="html"] div[style*="barLabel"] {
+  width: 280px !important; /* Wider label area */
+  font-size: 0.75rem !important;
+}
+
+.myst-content div[class*="html"] div[style*="barChart"] {
+  width: calc(100% - 20px) !important;
+}
+
+.myst-content div[class*="html"] div[style*="barValue"] {
+  right: -55px !important; /* Move values further right */
+  font-size: 0.75rem !important;
+}
+
+.myst-content div[class*="html"] div[style*="barContainer"] {
+  width: 100% !important;
+}
+
+/* Model Comparison override styles */
+.myst-content div[class*="html"] div[style*="th"] {
+  background-color: #4a90e2 !important;
+  color: white !important;
+  font-size: 0.8rem !important;
+}
+
+.myst-content div[class*="html"] div[style*="td"] span[style*="parameter"] {
+  display: list-item !important;
+  margin-left: 20px !important;
+  list-style-type: disc !important;
+  font-size: 0.75rem !important;
+}
+
+.myst-content div[class*="html"] div[style*="barChart"] {
+  width: 100% !important;
+}
+
+.myst-content div[class*="html"] div[style*="bar"] {
+  min-width: 100px !important; /* Ensure bar minimum width */
+  margin-right: 40px !important; /* More space between bars */
+}
+
+.myst-content div[class*="html"] div[style*="barLabel"] {
+  font-size: 0.75rem !important;
+}
+
+/* Model Results override styles */
+.myst-content div[class*="html"] div[style*="matrixHeaderMain"] {
+  font-size: 0.8rem !important;
+  padding: 5px !important;
+}
+
+.myst-content div[class*="html"] div[style*="matrixHeader"] {
+  font-size: 0.8rem !important;
+  padding: 5px !important;
+}
+
+.myst-content div[class*="html"] div[style*="matrixContainer"] {
+  margin: 0 auto !important;
+  max-width: 400px !important;
+}
+
+.myst-content div[class*="html"] div[style*="lineChart"] svg text {
+  font-size: 13px !important;
+}
+
+.myst-content div[class*="html"] div[style*="testBlock"] {
+  background-color: #e2984a !important;
+  color: black !important;
+  font-weight: bold !important;
+}
+
+.myst-content div[class*="html"] div[style*="trainBlock"] {
+  background-color: #4a90e2 !important;
+  color: black !important;
+  font-weight: bold !important;
+}
+
+.myst-content div[class*="html"] div[style*="tableContainer"] {
+  width: 80% !important;
+  margin: 0 auto !important;
+}
+
+.myst-content div[class*="html"] div[style*="comparisonTitle"] {
+  font-size: 0.9rem !important;
+  text-align: center !important;
+}
+
+/* Headers in rendered components */
+.myst-content div[class*="html"] h1 {
+  font-size: 1.5rem !important;
+}
+
+.myst-content div[class*="html"] h2 {
+  font-size: 1.3rem !important;
+}
+
+.myst-content div[class*="html"] h3 {
+  font-size: 1.1rem !important;
+}
+
+.myst-content div[class*="html"] h4,
+.myst-content div[class*="html"] h5,
+.myst-content div[class*="html"] h6 {
+  font-size: 1rem !important;
+}
+
+/* Full-width class for MyST directives */
+.full-width {
+  width: calc(100% + 400px) !important; /* Extend to take up expanded right sidebar area */
+  position: relative !important;
+  margin-left: 0 !important;
+  margin-right: -400px !important; /* Extend further into right area */
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+  padding: 0 !important;
+  background-color: #f9f9fc !important; /* Light background to visually separate */
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Ensure component content is properly contained */
+.component-wrapper {
+  display: block !important;
+  padding: 0 !important;
+}
+
+/* All HTML content should take full width */
+.myst-content div[class*="html"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+  font-size: 0.875rem !important; /* Default smaller font size for all HTML components */
+}
+
+/* Adjust spacing in HTML components */
+.myst-content div[class*="html"] p {
+  margin-bottom: 0.75rem !important;
+}
+
+/* Buttons and controls in HTML components */
+.myst-content div[class*="html"] button,
+.myst-content div[class*="html"] input,
+.myst-content div[class*="html"] select {
+  font-size: 0.75rem !important;
+  padding: 0.25rem 0.5rem !important;
+}
+
+/* Javascript components should fit viewport width */
+.myst-content .component-iframe,
+.myst-content iframe {
+  width: 100% !important;
+  min-width: 100% !important;
+  border: none !important;
+  overflow: hidden !important;
+}
+
+/* Ensure tables within components are responsive */
+.component-wrapper table,
+.myst-content div[class*="html"] table {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  font-size: 0.8rem !important; /* Even smaller for tables */
+  margin: 1rem 0 !important;
+}
+
+/* Table headers and cells in components */
+.myst-content div[class*="html"] table th,
+.component-wrapper table th {
+  padding: 0.5rem !important;
+  font-weight: 600 !important;
+  background-color: #f5f7f9 !important;
+  text-align: left !important;
+}
+
+.myst-content div[class*="html"] table td,
+.component-wrapper table td {
+  padding: 0.4rem 0.5rem !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+/* Handle JS component containers */
+.component-wrapper > div {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure code blocks and pre elements don't overflow */
+.myst-content pre,
+.myst-content code {
+  max-width: 100% !important;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Code blocks styling */
+.myst-content pre {
+  padding: 1rem !important;
+  margin: 1.5rem 0 !important;
+  border-radius: 4px !important;
+  background-color: #f5f7f9 !important;
+}
+
+/* Inline code styling */
+.myst-content p code,
+.myst-content li code {
+  padding: 0.15rem 0.3rem !important;
+  border-radius: 3px !important;
+  background-color: #f5f7f9 !important;
+}
+
+/* Layout for left TOC and main content */
 .myst-layout {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 250px minmax(0, 1fr) 400px; /* Left TOC, content, increased right space */
   grid-gap: 2rem;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* TOC styling */
@@ -28,13 +422,75 @@
   max-height: calc(100vh - 4rem);
   overflow-y: auto;
   padding-right: 1rem;
+  font-size: 0.95rem !important;
+  line-height: 1.4 !important;
+}
+
+.myst-toc a {
+  color: #374151 !important;
+  text-decoration: none !important;
+}
+
+.myst-toc a:hover {
+  color: #1a56db !important;
+  text-decoration: underline !important;
 }
 
 /* Main content area */
 .myst-content {
   grid-column: 2;
-  max-width: 1200px;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-right: 1rem;
+  overflow-x: visible !important; /* Allow content to extend into right column */
+}
+
+/* Right sidebar area (for our full-width elements to expand into) */
+.myst-right-sidebar {
+  grid-column: 3;
   width: 100%;
+  min-width: 400px; /* Ensure we have enough space */
+}
+
+/* Ensure markdown content expands properly */
+.myst-content p,
+.myst-content h1,
+.myst-content h2,
+.myst-content h3,
+.myst-content h4,
+.myst-content h5,
+.myst-content h6,
+.myst-content ul,
+.myst-content ol {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+}
+
+/* Tables should be full width and scroll on overflow */
+table {
+  width: 100% !important;
+  max-width: 100% !important;
+  table-layout: fixed !important;
+  overflow-x: auto;
+  display: block;
+  font-size: 0.95rem !important;
+  margin: 1.75rem 0 !important;
+  border-collapse: collapse !important;
+}
+
+table th {
+  background-color: #f5f7f9 !important;
+  font-weight: 600 !important;
+  padding: 0.75rem !important;
+  text-align: left !important;
+  border-bottom: 2px solid #e5e7eb !important;
+}
+
+table td {
+  padding: 0.75rem !important;
+  border-bottom: 1px solid #e5e7eb !important;
 }
 
 /* Mobile responsiveness */
@@ -51,5 +507,28 @@
   
   .myst-content {
     grid-column: 1;
+    padding-right: 0;
+  }
+  
+  .myst-right-sidebar {
+    display: none;
+  }
+  
+  .full-width {
+    width: 100% !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+  
+  .myst-content h1 {
+    font-size: 1.75rem !important;
+  }
+  
+  .myst-content h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  .myst-content h3 {
+    font-size: 1.3rem !important;
   }
 }

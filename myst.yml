@@ -15,6 +15,7 @@ project:
   github: https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/
   jupyter:
     binder:
+      url: https://mybinder.org/v2/gh/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/main
       provider: github
       repo: chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML
       ref: main
@@ -22,6 +23,9 @@ project:
       url: "http://localhost:9090"
       token: "1234"
     kernelName: 'python3'
+  plugins:
+    - type: javascript
+      path: include-html.mjs
   toc:
     - title: index
       file: index.md
@@ -65,13 +69,14 @@ site:
     style: "custom.css"
     show_source: false
 #    hide_toc: true
-#    hide_outline: true
+    hide_outline: true
     hide_search: true
     numbered_headers: false
     folders: false
     scripts:
       - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
       - https://cdn.plot.ly/plotly-latest.min.js
+      - scripts/html-autosize.js
   parts:
     footer: |
       © 2025 Joseph Loss. All rights reserved.

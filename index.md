@@ -15,7 +15,7 @@ abstract: |
   market conditions. The included model comparison reports provide detailed optimization 
   results for XGBoost, LightGBM, Random Forest, and Logistic Regression, with the surprising 
   finding that simpler Logistic Regression models achieved the highest overall performance 
-  (0.6899) when properly regularized.
+  (0.68990) when properly regularized.
 ---
 
 This paper presents a machine learning approach for predicting iceberg order execution in quantitative trading. We analyze market microstructure patterns to predict whether detected iceberg orders will be filled or canceled, providing valuable signals for algorithmic trading strategies.
