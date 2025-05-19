@@ -1,4 +1,4 @@
-name: MyST GitHub Pages Deploy
+name: Test Pages Deploy
 
 on:
   workflow_dispatch:
