@@ -44,7 +44,7 @@ exports:
 
 +++
 
-```{code-cell} ipython3
+:::{code-cell} ipython3
 :tags: [remove-input]
 
 import plotly.graph_objects as go
@@ -107,7 +107,7 @@ fig.update_layout(
 )
 
 fig.show()
-```
+:::
 
 +++
 
