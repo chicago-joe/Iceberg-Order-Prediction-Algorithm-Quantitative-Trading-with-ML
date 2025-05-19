@@ -57,17 +57,17 @@ jobs:
       - name: Prepare Directories
         run: mkdir -p exports
 
-      - name: Build PDF Assets (with execution)
-        run: |
-          #myst build iceberg-prediction-whitepaper-v2.md --pdf --execute -d --site --html --md --all
-          #myst build index.md --pdf --execute -d --site --html --md --all
+      # - name: Build PDF Assets (with execution)
+        # run: |
+          # myst build iceberg-prediction-whitepaper-v2.md --pdf --execute -d --site --html --md --all
+          # myst build index.md --pdf --execute -d --site --html --md --all
       - name: Build HTML Assets (with execution)
         run: myst build --execute --html -d --md --site --all 
 
-      - name: Ensure PDFs are in HTML output
-        run: |
-          mkdir -p _build/html/exports
-          cp exports/*.pdf _build/html/exports/
+      # - name: Ensure PDFs are in HTML output
+      #   run: |
+      #     mkdir -p _build/html/exports
+      #     cp exports/*.pdf _build/html/exports/
       - name: Copy project assets into build output
         run: cp -R assets _build/html/assets
 
