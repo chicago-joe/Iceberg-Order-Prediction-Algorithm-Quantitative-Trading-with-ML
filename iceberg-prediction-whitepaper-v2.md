@@ -15,11 +15,6 @@ abstract: |
   strategy that adapts to changing market conditions. The resulting system provides valuable 
   signals for algorithmic trading strategies, improving response to hidden liquidity, 
   identifying opportunistic entry/exit points, and reducing execution costs.
-exports:
-  - format: pdf
-    template: lapreprint-typst
-    output: exports/JLOSS-iceberg-prediction-whitepaper.pdf
-    id: iceberg-paper
 ---
 
 
