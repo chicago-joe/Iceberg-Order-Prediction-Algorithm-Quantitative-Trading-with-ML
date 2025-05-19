@@ -54,23 +54,29 @@ jobs:
             https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz
           tar -xf typst.tar.xz
           mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/
+          
       - name: Prepare Directories
         run: mkdir -p exports
 
-      # - name: Build PDF Assets (with execution)
-        # run: |
-          # myst build iceberg-prediction-whitepaper-v2.md --pdf --execute -d --site --html --md --all
-          # myst build index.md --pdf --execute -d --site --html --md --all
+      - name: Build PDF Assets (with execution)
+        run: |
+          myst build --pdf --execute -d --pdf 
+          
       - name: Build HTML Assets (with execution)
-        run: myst build --execute --html -d --md --site --all 
-
-      # - name: Ensure PDFs are in HTML output
-      #   run: |
-      #     mkdir -p _build/html/exports
-      #     cp exports/*.pdf _build/html/exports/
+        run: myst build --execute --html -d 
+        # run: myst build --execute --html -d --md --site --all 
+      
+      - name: Ensure PDFs are in HTML output
+        run: |
+          mkdir -p _build/html/exports
+          cp exports/*.pdf _build/html/exports/ || echo "No PDFs found to copy"
+          
+      - name: Copy custom CSS to build directory
+        run: cp custom.css _build/html/ || echo "custom.css file not found"
+          
       - name: Copy project assets into build output
-        run: cp -R assets _build/html/assets
-
+        run: cp -R assets _build/html/assets      
+  
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
