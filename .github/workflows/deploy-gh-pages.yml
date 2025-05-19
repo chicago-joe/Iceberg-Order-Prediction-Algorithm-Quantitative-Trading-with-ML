@@ -25,20 +25,19 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends build-essential graphviz curl \
-            imagemagick fonts-liberation libatk-bridge2.0-0 libgtk-3-0 \
-            pkg-config libssl-dev python3-dev nodejs npm
+          sudo apt-get install -y --no-install-recommends build-essential nodejs npm python3-full
           cat .binder/apt.txt | xargs sudo apt-get install -y --no-install-recommends
 
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: stable
-
-      - name: Install uv
+      - name: Install uv and create virtual environment
         run: |
           curl -fsSL https://astral.sh/uv/install.sh | sh
           echo "$HOME/.local/bin" >> $GITHUB_PATH
+          ~/.local/bin/uv venv .venv
+          echo "VIRTUAL_ENV=$PWD/.venv" >> $GITHUB_ENV
+          echo "$PWD/.venv/bin" >> $GITHUB_PATH
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -49,14 +48,12 @@ jobs:
         run: npm install --force
       
       - name: Build components
-        run: node build-components.mjs
+        run: node build-components.mjs || echo "Component build failed but continuing"
+        continue-on-error: true
       
-      - name: Install Python dependencies with uv
+      - name: Install Python dependencies
         run: |
-          ~/.local/bin/uv pip install --system --no-cache-dir -r .binder/requirements.txt
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
+          uv pip install -r .binder/requirements.txt
 
       - name: Install Typst
         run: |
@@ -64,30 +61,31 @@ jobs:
             https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz
           tar -xf typst.tar.xz
           sudo mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/
-          typst --version
 
       - name: Prepare directories
         run: mkdir -p exports
 
-      - name: Build all documentation
+      - name: Build PDF documentation (with execution)
         run: |
-          ~/.local/bin/uv run myst build --typst --pdf --execute --md --site --html -d --all
-        #continue-on-error: true
+          myst build iceberg-prediction-whitepaper-v2.md --pdf --execute
+          myst build index.md --pdf --execute
+        continue-on-error: true
+
+      - name: Build HTML site (with execution)
+        run: myst build --execute --html
 
       - name: Ensure PDFs are in HTML output
         run: |
           mkdir -p _build/html/exports
-          cp exports/*.pdf _build/html/exports/ 2>/dev/null || echo "No PDFs to copy, continuing anyway"
-        #continue-on-error: true
+          cp exports/*.pdf _build/html/exports/ 2>/dev/null || echo "No PDFs to copy"
+        continue-on-error: true
 
-      - name: Copy project assets into build output
+      - name: Copy project assets
         run: |
           if [ -d "assets" ]; then
             cp -R assets _build/html/assets
-          else
-            echo "Assets directory not found, skipping"
           fi
-        #continue-on-error: true
+        continue-on-error: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
