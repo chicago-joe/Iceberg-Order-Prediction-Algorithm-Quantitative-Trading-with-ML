@@ -16,9 +16,9 @@ project:
   jupyter:
     binder:
       url: https://mybinder.org/v2/gh/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/main
-      provider: github
-      repo: chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML
-      ref: main
+      #provider: github
+      #repo: chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML
+      #ref: main
     server:
       url: "http://localhost:9090"
       token: "1234"
@@ -42,11 +42,6 @@ project:
           file: LightGBM_hpo_report.md
         - title: XGBoost HPO Report
           file: XGBoost_hpo_report.md
-#  downloads:
-#  - url: exports/JLOSS-iceberg-prediction-whitepaper.pdf
-#    title: Iceberg Order Prediction (PDF)
-#  - url: exports/JLOSS-hyperparameter-tuning-whitepaper.pdf
-#    title: Hyperparameter Optimizaiton (PDF)
 
 site:
   template: book-theme
@@ -68,7 +63,6 @@ site:
   options:
     style: "custom.css"
     show_source: false
-#    hide_toc: true
     hide_outline: true
     hide_search: true
     numbered_headers: false
