@@ -5,6 +5,8 @@ on:
 
 env:
   BASE_URL: /${{ github.event.repository.name }}
+  JUPYTER_BASE_URL: "http://localhost:9090"
+  JUPYTER_TOKEN: "1234"
 
 permissions:
   contents: read
@@ -20,7 +22,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Install system dependencies
         run: |
@@ -46,11 +49,97 @@ jobs:
 
       - name: Install Node.js packages
         run: npm install --force
-      
+
       - name: Build components
-        run: node build-components.mjs || echo "Component build failed but continuing"
-        continue-on-error: true
-      
+        run: node build-components.mjs
+
+      # Create fix scripts
+      - name: Create component and markdown fix scripts
+        run: |
+          # Create fix-components.js
+          cat > fix-components.js << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          // Directory where the components are stored
+          const componentsDir = path.join(__dirname, '_components');
+
+          // Process each HTML file in the components directory
+          fs.readdirSync(componentsDir)
+            .filter(file => file.endsWith('.html'))
+            .forEach(file => {
+              const filePath = path.join(componentsDir, file);
+              console.log(`Processing ${filePath}...`);
+              
+              let content = fs.readFileSync(filePath, 'utf8');
+              
+              // 1. Fix asterisks in code and examples
+              // Replace *feature_name* patterns with <strong>feature_name</strong>
+              content = content.replace(/\*([^*\n]+)\*/g, '<strong>$1</strong>');
+              
+              // 2. Fix backslashes in code that cause Typst issues
+              content = content.replace(/\\(?![a-zA-Z])/g, '\\\\');
+              
+              // 3. Fix Example:* \ patterns
+              content = content.replace(/\*Example:\*\s*\\/g, '<strong>Example:</strong>');
+              
+              // 4. Ensure all code blocks have a language specified
+              content = content.replace(/<pre><code>/g, '<pre><code class="language-python">');
+              
+              // Write the fixed content back
+              fs.writeFileSync(filePath, content);
+              console.log(`Fixed ${filePath}`);
+            });
+
+          console.log('All components fixed!');
+          EOF
+
+          # Create fix-markdown.js
+          cat > fix-markdown.js << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          // Get the markdown files
+          const markdownFiles = [
+            'iceberg-prediction-whitepaper-v2.md',
+            'hyperparameter-optimization-whitepaper.md',
+            'index.md'
+          ];
+
+          markdownFiles.forEach(file => {
+            if (!fs.existsSync(file)) {
+              console.log(`File ${file} not found, skipping.`);
+              return;
+            }
+            
+            console.log(`Processing ${file}...`);
+            let content = fs.readFileSync(file, 'utf8');
+            
+            // Find code blocks with no language specified (```) and add python language
+            content = content.replace(/```\n/g, '```python\n');
+            
+            // Fix any ```(space) blocks
+            content = content.replace(/```\s+/g, '```python\n');
+            
+            // Fix special characters for Typst
+            content = content.replace(/\*([^*\n]+)\*/g, '**$1**'); // Double asterisks for bold
+            
+            // Write the fixed content back
+            fs.writeFileSync(file, content);
+            console.log(`Fixed ${file}`);
+          });
+
+          console.log('All markdown files fixed!');
+          EOF
+
+      - name: Fix components before processing
+        run: |
+          # Run the component fix script
+          node fix-components.js
+          
+          # Run the markdown fix script
+          node fix-markdown.js
+
       - name: Install Python dependencies
         run: |
           uv pip install -r .binder/requirements.txt
@@ -63,29 +152,59 @@ jobs:
           sudo mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/
 
       - name: Prepare directories
-        run: mkdir -p exports
-
-      - name: Build PDF documentation (with execution)
         run: |
-          myst build iceberg-prediction-whitepaper-v2.md --pdf --execute
-          myst build index.md --pdf --execute
-        continue-on-error: true
+          mkdir -p exports
 
-      - name: Build HTML site (with execution)
-        run: myst build --execute --html
+      - name: Start Jupyter server
+        run: |
+          # Start Jupyter server in background
+          jupyter-server --allow-root --ip 0.0.0.0 --port 9090 --IdentityProvider.token='1234' --ServerApp.allow_origin='*' &
+          
+          # Wait for server to start
+          sleep 10
+          
+          # Test if server is running
+          curl -s --head --request GET http://localhost:9090/api?token=1234 | head -n 1
+          
+          echo "JUPYTER_BASE_URL: $JUPYTER_BASE_URL"
+          echo "JUPYTER_TOKEN: $JUPYTER_TOKEN"
+        env:
+          JUPYTER_BASE_URL: "http://localhost:9090"
+          JUPYTER_TOKEN: "1234"
+
+      - name: Build documentation
+        run: |
+          # Build all formats with a single command
+          myst build --all --site --md --execute --html --pdf --typst -d
+        env:
+          JUPYTER_BASE_URL: "http://localhost:9090"
+          JUPYTER_TOKEN: "1234"
 
       - name: Ensure PDFs are in HTML output
         run: |
           mkdir -p _build/html/exports
-          cp exports/*.pdf _build/html/exports/ 2>/dev/null || echo "No PDFs to copy"
-        continue-on-error: true
-
-      - name: Copy project assets
-        run: |
-          if [ -d "assets" ]; then
-            cp -R assets _build/html/assets
+          
+          # Copy PDFs from exports if they exist
+          if [ -d "exports" ] && [ "$(ls -A exports 2>/dev/null)" ]; then
+            cp -v exports/*.pdf _build/html/exports/ 2>/dev/null || echo "No PDFs in exports directory"
           fi
-        continue-on-error: true
+          
+          # Also look for PDFs in _build directory
+          find _build -name "*.pdf" -exec cp -v {} _build/html/exports/ \; 2>/dev/null || echo "No PDFs in _build subdirectories"
+
+      - name: Copy assets to HTML output
+        run: |
+          # Copy assets directory if it exists
+          if [ -d "assets" ]; then
+            cp -Rv assets _build/html/assets
+          fi
+          
+          # Copy any other static directories
+          for dir in images img static js css fonts; do
+            if [ -d "$dir" ]; then
+              cp -Rv $dir _build/html/$dir
+            fi
+          done
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
