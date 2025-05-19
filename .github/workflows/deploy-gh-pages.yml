@@ -31,13 +31,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r .binder/requirements.txt
+
       - name: Install system dependencies from .binder/apt.txt
         run: |
           sudo apt-get update
           < .binder/apt.txt xargs sudo apt-get install -y
-      - name: Run Binder postBuild
-        run: bash .binder/postBuild
-
+      
       - name: Setup Pages
         uses: actions/configure-pages@v3
 
@@ -60,19 +59,22 @@ jobs:
 
       - name: Build PDF Assets (with execution)
         run: |
-          myst build --execute -d --pdf --site --html --md --all --typst
+          myst build iceberg-prediction-whitepaper-v2.md --pdf --execute
+          myst build index.md --pdf --execute
+          myst build hyperparameter-optimization-whitepaper.md --pdf --execute
           
       - name: Build HTML Assets (with execution)
-        run: myst build --execute -d --pdf --site --html --md --all --typst
-        # run: myst build --execute --html -d --md --site --all 
-      
+        run: myst build --execute -d --html
+              
       - name: Ensure PDFs are in HTML output
         run: |
           mkdir -p _build/html/exports
           cp exports/*.pdf _build/html/exports/ || echo "No PDFs found to copy"
           
       - name: Copy custom CSS to build directory
-        run: cp custom.css _build/html/ || echo "custom.css file not found"
+        run: |
+          cp custom.css _build/html/ || echo "custom.css file not found"
+          cp custom.css _build/html/assets/ || echo "custom.css file not found"
           
       - name: Copy project assets into build output
         run: cp -R assets _build/html/assets      
