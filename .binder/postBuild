@@ -24,8 +24,8 @@ apt-get update && apt-get install -y --no-install-recommends \
     imagemagick \
     && rm -rf /var/lib/apt/lists/*
 
-cat apt.txt | apt-get install --no-install-recommends -
-rm -rf /var/lib/apt/lists/*
+cat apt.txt | apt-get install -y --no-install-recommends -
+#rm -rf /var/lib/apt/lists/*
 
 # for pdf image exports
 #wget --output-document ~/.local/bin/magick.rpm https://imagemagick.org/archive/linux/CentOS/x86_64/ImageMagick-7.1.1-47.x86_64.rpm
@@ -88,7 +88,7 @@ else
 fi
 
 # install cargo packages
-cargo install --locked typst-cli gitui eza
+# cargo install --locked typst-cli gitui eza
 
 # Install npm packages in the repository directory
 echo "Installing npm packages"
