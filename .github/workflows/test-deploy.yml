@@ -1,0 +1,109 @@
+name: test deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]  # Optional: Auto-deploy on push to main
+
+env:
+  BASE_URL: /${{ github.event.repository.name }}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python and Jupyter
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install uv from Astral.sh
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+      - name: Install Python dependencies
+        run: |
+          uv pip install --upgrade pip
+          uv pip install -r .binder/requirements.txt
+          uv pip install jupyter-server
+
+      - name: Install system dependencies from .binder/apt.txt
+        run: |
+          sudo apt-get update
+          < .binder/apt.txt xargs sudo apt-get install -y
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+
+      - name: Install MyST Markdown CLI
+        run: npm install -g mystmd
+
+      - name: Install Typst
+        run: |
+          curl -L -o typst.tar.xz \
+            https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz
+          tar -xf typst.tar.xz
+          sudo mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/
+      
+      - name: Clean MyST cache
+        run: uv pip run myst clean --all
+          
+      - name: Prepare Directories
+        run: mkdir -p exports _build/html/exports
+
+      - name: Start Jupyter Server in Background
+        run: |
+          export JUPYTER_BASE_URL="http://localhost:9090"
+          export JUPYTER_TOKEN="github-actions-token"
+          
+          uv pip run jupyter-server --allow-root --ip 0.0.0.0 --port 9090 --IdentityProvider.token="${JUPYTER_TOKEN}" --ServerApp.allow_origin='*' &
+          echo "Started Jupyter server at $JUPYTER_BASE_URL"
+          # Wait for Jupyter to fully start
+          sleep 10
+          
+      - name: Build All Assets
+        run: |
+          export JUPYTER_BASE_URL="http://localhost:9090"
+          export JUPYTER_TOKEN="github-actions-token"
+          
+          uv pip run myst build --execute --all --typst --md --html --site --pdf -d
+          
+      - name: Ensure PDFs are in HTML output
+        run: |
+          cp exports/*.pdf _build/html/exports/ || echo "No PDFs found to copy"
+          
+      - name: Copy custom CSS to build directory
+        run: |
+          cp custom.css _build/html/ || echo "custom.css file not found"
+          cp custom.css _build/html/assets/ || echo "custom.css file not found for assets"
+          
+      - name: Copy project assets into build output
+        run: cp -R assets _build/html/assets || echo "assets directory not found"
+  
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _build/html
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          github_token: ${{ secrets.PAGES_TOKEN }}
