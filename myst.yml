@@ -21,7 +21,7 @@ project:
 #     server:
 #      url: "http://localhost:9090"
 #      token: "1234"
-#    kernelName: 'python3'
+    kernelName: 'python3'
   plugins:
     - type: javascript
       path: include-html.mjs
