@@ -18,6 +18,7 @@ abstract: |
 exports:
   - format: pdf
     template: lapreprint-typst
+    title: Iceberg Prediction Whitepaper
     output: exports/JLOSS-iceberg-prediction-whitepaper.pdf
     id: iceberg-paper
 ---
