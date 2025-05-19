@@ -5,8 +5,6 @@ on:
 
 env:
   BASE_URL: /${{ github.event.repository.name }}
-  JUPYTER_BASE_URL: "http://localhost:9090"
-  JUPYTER_TOKEN: "1234"
 
 permissions:
   contents: read
@@ -22,309 +20,56 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Install system dependencies
+      - name: Setup Python and Jupyter
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r .binder/requirements.txt
+      - name: Install system dependencies from .binder/apt.txt
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends build-essential nodejs npm python3-full
-          # Install Chrome dependencies that are available
-          sudo apt-get install -y --no-install-recommends ca-certificates fonts-liberation libasound2-dev libnss3 libx11-6 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 xdg-utils
-          cat .binder/apt.txt | xargs sudo apt-get install -y --no-install-recommends || true
-
-      - name: Install uv and create virtual environment
-        run: |
-          curl -fsSL https://astral.sh/uv/install.sh | sh
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
-          ~/.local/bin/uv venv .venv
-          echo "VIRTUAL_ENV=$PWD/.venv" >> $GITHUB_ENV
-          echo "$PWD/.venv/bin" >> $GITHUB_PATH
+          < .binder/apt.txt xargs sudo apt-get install -y
+      - name: Run Binder postBuild
+        run: bash .binder/postBuild
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 18.x
 
-      - name: Install Node.js packages
-        run: npm install --force
-
-      - name: Build components
-        run: node build-components.mjs
-
-      - name: Create HTML-to-PNG conversion script
-        run: |
-          cat > html-to-png.js << 'EOF'
-          const fs = require('fs');
-          const path = require('path');
-          const puppeteer = require('puppeteer');
-
-          // Directory where components are stored
-          const componentsDir = path.join(__dirname, '_components');
-          // Directory for PNG output
-          const pngDir = path.join(__dirname, 'assets/components');
-          
-          // Create PNG directory if it doesn't exist
-          if (!fs.existsSync(pngDir)) {
-            fs.mkdirSync(pngDir, { recursive: true });
-          }
-
-          async function convertHtmlToPng() {
-            console.log('Starting HTML to PNG conversion...');
-            
-            // Get all HTML files in components directory
-            const htmlFiles = fs.readdirSync(componentsDir)
-              .filter(file => file.endsWith('.html'));
-              
-            console.log(`Found ${htmlFiles.length} HTML components to convert`);
-            
-            // Launch a headless browser with minimal requirements
-            const browser = await puppeteer.launch({
-              headless: 'new',
-              args: [
-                '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-accelerated-2d-canvas',
-                '--no-first-run',
-                '--no-zygote',
-                '--single-process',
-                '--disable-gpu'
-              ]
-            });
-            
-            for (const file of htmlFiles) {
-              const htmlPath = path.join(componentsDir, file);
-              const componentName = file.replace('.html', '');
-              const pngPath = path.join(pngDir, `${componentName}.png`);
-              
-              console.log(`Converting ${file} to PNG...`);
-              
-              try {
-                // Read HTML content
-                const htmlContent = fs.readFileSync(htmlPath, 'utf8');
-                
-                // Create a new page
-                const page = await browser.newPage();
-                
-                // Set viewport size
-                await page.setViewport({
-                  width: 1200,
-                  height: 800,
-                  deviceScaleFactor: 2 // Higher resolution
-                });
-                
-                // Set content and wait for rendering
-                await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
-                
-                // Get content size
-                const dimensions = await page.evaluate(() => {
-                  const element = document.body;
-                  return {
-                    width: element.scrollWidth,
-                    height: element.scrollHeight
-                  };
-                });
-                
-                // Resize viewport to fit content
-                await page.setViewport({
-                  width: dimensions.width,
-                  height: dimensions.height,
-                  deviceScaleFactor: 2
-                });
-                
-                // Take screenshot
-                await page.screenshot({
-                  path: pngPath,
-                  fullPage: true,
-                  omitBackground: false
-                });
-                
-                console.log(`Created ${pngPath}`);
-                
-                // Close the page
-                await page.close();
-                
-              } catch (error) {
-                console.error(`Error converting ${file}:`, error);
-              }
-            }
-            
-            // Close the browser
-            await browser.close();
-            console.log('HTML to PNG conversion completed');
-          }
-
-          // Run the conversion
-          convertHtmlToPng().catch(error => {
-            console.error('Conversion failed:', error);
-            process.exit(1);
-          });
-          EOF
-
-      - name: Run HTML-to-PNG conversion
-        run: |
-          node html-to-png.js
-
-      - name: Create PDF-specific markdown files
-        run: |
-          cat > create-pdf-files.js << 'EOF'
-          const fs = require('fs');
-          const path = require('path');
-
-          // Directory for PDF-specific files
-          const pdfDir = path.join(__dirname, 'pdf-source');
-          
-          // Create PDF directory if it doesn't exist
-          if (!fs.existsSync(pdfDir)) {
-            fs.mkdirSync(pdfDir, { recursive: true });
-          }
-
-          // List of markdown files to process
-          const mdFiles = [
-            'iceberg-prediction-whitepaper-v2.md',
-            'hyperparameter-optimization-whitepaper.md'
-          ];
-
-          for (const mdFile of mdFiles) {
-            if (!fs.existsSync(mdFile)) {
-              console.log(`File ${mdFile} not found, skipping.`);
-              continue;
-            }
-
-            console.log(`Creating PDF-specific version of ${mdFile}...`);
-            const content = fs.readFileSync(mdFile, 'utf8');
-            
-            // Create PDF-specific filename
-            const pdfMdFile = path.join(pdfDir, path.basename(mdFile));
-            
-            // Copy original content
-            let pdfContent = content;
-            
-            // Replace include-html directives with PNG image references
-            const includeHtmlRegex = /```{include-html} ([A-Za-z0-9_]+)\n\n```/g;
-            let match;
-            
-            while ((match = includeHtmlRegex.exec(content)) !== null) {
-              const componentName = match[1];
-              const replacement = `![${componentName}](../assets/components/${componentName}.png)`;
-              
-              // Replace the directive with an image reference
-              pdfContent = pdfContent.replace(match[0], replacement);
-              console.log(`Replaced ${componentName} with PNG reference`);
-            }
-            
-            // Fix code blocks with no language specified
-            pdfContent = pdfContent.replace(/```\n/g, '```python\n');
-            pdfContent = pdfContent.replace(/```\s+/g, '```python\n');
-            
-            // Fix special characters for Typst
-            pdfContent = pdfContent.replace(/\*([^*\n]+)\*/g, '**$1**');
-            
-            // Write the PDF-specific content
-            fs.writeFileSync(pdfMdFile, pdfContent);
-            console.log(`Created ${pdfMdFile}`);
-          }
-
-          // Create a PDF-specific myst.yml file
-          const mystConfig = fs.readFileSync('myst.yml', 'utf8');
-          
-          // Modify the PDF exports to use the PDF-specific files
-          let pdfMystConfig = mystConfig.replace(
-            /(exports:[\s\S]*?format: pdf[\s\S]*?template: [^\n]*\n)/g,
-            (match) => {
-              return match + '    source: pdf-source\n';
-            }
-          );
-          
-          fs.writeFileSync(path.join(pdfDir, 'myst.yml'), pdfMystConfig);
-          console.log('Created PDF-specific myst.yml');
-          EOF
-
-          node create-pdf-files.js
-
-      - name: Install Python dependencies
-        run: |
-          uv pip install -r .binder/requirements.txt
+      - name: Install MyST Markdown CLI
+        run: npm install -g mystmd
 
       - name: Install Typst
         run: |
           curl -L -o typst.tar.xz \
             https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz
           tar -xf typst.tar.xz
-          sudo mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/
+          mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/
+      - name: Prepare Directories
+        run: mkdir -p exports
 
-      - name: Prepare directories
+      - name: Build PDF Assets (with execution)
         run: |
-          mkdir -p exports
-          mkdir -p _build/html/assets/components
-
-      - name: Start Jupyter server
-        run: |
-          # Start Jupyter server in background
-          jupyter-server --allow-root --ip 0.0.0.0 --port 9090 --IdentityProvider.token='1234' --ServerApp.allow_origin='*' &
-          
-          # Wait for server to start
-          sleep 10
-          
-          # Test if server is running
-          curl -s --head --request GET http://localhost:9090/api?token=1234 | head -n 1
-          
-          echo "JUPYTER_BASE_URL: $JUPYTER_BASE_URL"
-          echo "JUPYTER_TOKEN: $JUPYTER_TOKEN"
-        env:
-          JUPYTER_BASE_URL: "http://localhost:9090"
-          JUPYTER_TOKEN: "1234"
-
-      - name: Build HTML documentation
-        run: |
-          # Build HTML with the original files (include-html directives)
-          myst build --site --execute --html -d
-        env:
-          JUPYTER_BASE_URL: "http://localhost:9090"
-          JUPYTER_TOKEN: "1234"
-
-      - name: Build PDF documentation
-        run: |
-          # Build PDFs with the PDF-specific files (PNG images)
-          cd pdf-source
-          myst build --pdf --typst -d
-          cd ..
-          # Copy PDFs to exports directory
-          mkdir -p exports
-          cp -vf pdf-source/exports/*.pdf exports/ || echo "No PDFs found"
-        env:
-          JUPYTER_BASE_URL: "http://localhost:9090"
-          JUPYTER_TOKEN: "1234"
+          #myst build iceberg-prediction-whitepaper-v2.md --pdf --execute -d --site --html --md --all
+          #myst build index.md --pdf --execute -d --site --html --md --all
+      - name: Build HTML Assets (with execution)
+        run: myst build --execute --html -d --md --site --all 
 
       - name: Ensure PDFs are in HTML output
         run: |
           mkdir -p _build/html/exports
-          
-          # Copy PDFs from exports if they exist
-          if [ -d "exports" ] && [ "$(ls -A exports 2>/dev/null)" ]; then
-            cp -v exports/*.pdf _build/html/exports/ 2>/dev/null || echo "No PDFs in exports directory"
-          fi
-          
-          # Also look for PDFs in _build directory
-          find _build -name "*.pdf" -exec cp -v {} _build/html/exports/ \; 2>/dev/null || echo "No PDFs in _build subdirectories"
-
-      - name: Copy assets to HTML output
-        run: |
-          # Copy assets directory if it exists
-          if [ -d "assets" ]; then
-            cp -Rv assets _build/html/assets
-          fi
-          
-          # Copy any other static directories
-          for dir in images img static js css fonts; do
-            if [ -d "$dir" ]; then
-              cp -Rv $dir _build/html/$dir
-            fi
-          done
+          cp exports/*.pdf _build/html/exports/
+      - name: Copy project assets into build output
+        run: cp -R assets _build/html/assets
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -334,3 +79,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          github_token: ${{ secrets.PAGES_TOKEN }}
