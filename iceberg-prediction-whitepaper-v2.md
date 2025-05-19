@@ -88,7 +88,6 @@ The `status` field indicates the iceberg's current state:
 ![Iceberg Order Detection in MBO Environment](/assets/iceberg_detection.*)
 :::
 
-
 :::{admonition} IcebergSimulationResult
 :class: note
 
@@ -133,8 +132,6 @@ The simulation results contain:
 These data sources form the backbone of our machine learning pipeline, providing both the features and the target variable for our prediction model. Typically, we generate tens of thousands of simulation results from replaying about two months of historical market data.
 
 ## Data Pipeline Architecture
-
-Let me show you the overall architecture I designed:
 
 ### Data Collection & Simulation Infrastructure
 
@@ -436,7 +433,6 @@ There are several different categories of features:
 2. **Order dynamics features** including fill-to-display ratio and lean-over-hedge ratio, along with temporal features that capture market timing effects. These features help identify aggressive iceberg orders.
 3. **Side-relative transformations** for order book imbalance and support/resistance levels. These transformations create consistent features that work regardless of whether the order is a buy or sell.
 
-
 :::{.full-width}
 ```{include-html} FeatureEngineeringVisual
 
@@ -477,9 +473,6 @@ Measures of trading activity imbalance at different time windows.
 Time-based and momentum characteristics.
 
 ### Side-Relative Transformations
-
-A key innovation is converting raw market features into "side-relative" versions that have consistent meaning regardless of whether the order is a buy or sell, as illustrated in Image 6:
-
 
 ```python
 # Converting bid/ask imbalances to side-relative measures
@@ -552,7 +545,6 @@ For a trading system, model selection requires balancing multiple considerations
 
 ```
 :::
-
 
 #### Custom Evaluation Scoring Metric - Max Precision / Optimal (minimum required) Recall
 
@@ -895,7 +887,6 @@ The trials consistently show that a smaller training window (train_size = 2) per
 
 Interestingly, while tree-based models (XGBoost, LightGBM, Random Forest) performed well, Logistic Regression achieved the highest overall score, suggesting that many of the predictive relationships in the dataset may be effectively linear once the features are properly engineered.
 
-
 ### Model HPO Results
 
 :::{.full-width}
@@ -903,7 +894,6 @@ Interestingly, while tree-based models (XGBoost, LightGBM, Random Forest) perfor
 
 ```
 :::
-
 
 ### Precision-Recall and ROC Analysis
 
@@ -962,7 +952,6 @@ def get_model_hyperparameters(self, trial, model_name):
 
 *From machinelearning_final_modified.py, lines 75-89*
 
-
 #### Optimized XGBoost Model Configuration
 
 The table below contains the optimized XGBoost model configuration:
@@ -1012,34 +1001,27 @@ def calculate_mda(self, model, X_test, y_test, scoring=f1_score):
 ```
 *From machinelearning_final_modified.py, lines 717-732*
 
-
 :::{.full-width}
 ```{include-html} FeatureImportanceDiagram
 
 ```
 :::
 
-
 Three insights valuable for trading strategy development:
 
 1. **Price Position Dominance**: The distance from support/resistance levels is the strongest predictor - suggesting that order book positioning relative to key levels is crucial for execution prediction.
-
 2. **Imbalance Significance**: Trade imbalance metrics across different time windows show strong predictive power - confirming that order flow imbalance is a leading indicator of execution probability.
-
 3. **Temporal Sensitivity**: The model weights features from the state immediately before fill more heavily than earlier states - indicating that execution prediction becomes more accurate as we get closer to the fill event.
 
 ## From Prediction to Trading Decision
 
 The prediction model doesn't operate in isolation - it feeds into a sophisticated trading decision process, as shown in Image 3:
 
-
 :::{.full-width}
 ![Decision Flow: From Model Prediction to Trading Action](/assets/decision_flow_prediction_to_training.*)
 
 *Image 3: Decision flow diagram illustrating how model predictions drive trading decisions through confidence bands and feature analysis. This probabilistic approach allows for dynamic adaptation to market conditions.*
 :::
-
-
 
 ### Prediction Confidence Bands
 
@@ -1061,23 +1043,18 @@ This probability-driven approach allows for dynamic adaptation to changing marke
 
 The complete prediction flow, shown below, shows the full model architecture:
 
-
 :::{.full-width}
 ```{include-html} ModelArchitecture
 
 ```
 :::
 
-
-
 ## Evaluation & Trading Strategy Implications
 
 The evaluation metrics shown in Image 9 have several implications for trading strategy:
 
 1. **XGBoost Superiority**: XGBoost consistently outperformed other models, especially taking into account the speed in which it is able to make a prediction and the flexibility it has regarding parameter optimization. 
-
 2. **Feature Transferability**: The dominance of order book position and imbalance features suggests that these signals may transfer well to other instruments beyond the ones tested.
-
 3. **Execution Time Sensitivity**: The importance of "oneStateBeforeFill" features indicates that model prediction accuracy increases as the order approaches execution, suggesting a strategy that dynamically adjusts confidence thresholds based on order age.
 
 ## Business Impact and Performance Metrics
