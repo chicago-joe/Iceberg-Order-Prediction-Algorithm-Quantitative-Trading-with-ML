@@ -183,7 +183,7 @@ RUN /usr/local/bin/uv run --no-cache jupyter lab build --dev-build=False || echo
 WORKDIR ${HOME}
 
 # Ensure all tools are in path when container starts
-RUN echo 'source /etc/profile' >> /etc/zsh/zshenv
+#RUN echo 'source /etc/profile' >> /etc/zsh/zshenv
 
 # Command to run JupyterLab using uv
 CMD ["sh", "-c", "/usr/local/bin/uv run jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''"]
