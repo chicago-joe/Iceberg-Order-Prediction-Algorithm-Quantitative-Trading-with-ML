@@ -25,53 +25,48 @@ ENV ZSH="$HOME/.oh-my-zsh" \
 USER root
 
 # Install system dependencies from apt.txt and additional required packages
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    # Core build tools
-    build-essential \
-    gcc \
-    cmake \
-    # Development utilities
-    graphviz \
-    xclip \
+RUN apt-get update && apt-get install -y \
     ack \
-    ripgrep \
     alien \
-    # Documentation tools
-    texinfo \
     apt-utils \
-    pandoc \
-    # LaTeX and typesetting
-    texlive-xetex \
-    texlive-fonts-recommended \
-    texlive-plain-generic \
-    latexmk \
-    # Image processing
-    imagemagick \
-    webp \
-    inkscape \
-    # Package management
-    rpm \
-    # Web and display libraries
+    bat \
+    build-essential \
+    cargo \
+    cmake \
+    curl \
+    fzf \
     fonts-liberation \
+    gcc \
+    graphviz \
+    imagemagick \
+    inkscape \
+    jq \
+    latexmk \
     libatk-bridge2.0-0 \
     libgtk-3-0 \
+    libssl-dev \
     libx11-xcb1 \
     libxcomposite1 \
     libxdamage1 \
     libxrandr2 \
-    xdg-utils \
-    wkhtmltopdf \
-    # Shell and utilities
-    zsh \
-    curl \
-    # Rust dependencies
-    pkg-config \
-    libssl-dev \
-    # Python build dependencies
-    python3-dev \
-    # Node.js dependencies
+    nano \
     nodejs \
     npm \
+    pandoc \
+    pkg-config \
+    python3-dev \
+    ripgrep \
+    rpm \
+    texinfo \
+    texlive-fonts-recommended \
+    texlive-plain-generic \
+    texlive-xetex \
+    tldr \
+    webp \
+    wkhtmltopdf \
+    xclip \
+    xdg-utils \
+    zsh \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Rust using rustup (latest stable version)
