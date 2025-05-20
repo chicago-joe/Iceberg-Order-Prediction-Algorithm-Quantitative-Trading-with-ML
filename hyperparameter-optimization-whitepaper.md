@@ -108,7 +108,6 @@ fig.show()
 ```
 -->
 
-
 ## Introduction: Why Hyperparameter Optimization Matters in Trading
 
 In quantitative trading, model performance can directly impact profit and loss. When predicting iceberg order execution, even small improvements in precision and recall translate to meaningful trading advantages. This paper examines our systematic approach to hyperparameter optimization for machine learning models that predict whether detected iceberg orders will be filled or canceled.
@@ -122,11 +121,12 @@ Hyperparameters are configuration settings that govern the training process and 
 - **Computational Efficiency vs. Predictive Power**: Vital for real-time trading decisions
 :::
 
-
 ## Optimization Framework Architecture
 
+:::{.full-width}
 ![XGBoost Complete Workflow](/assets/XGBoostCompleteIcebergOrderSystem.*)
 *The complete system architecture showing data acquisition, preprocessing, model optimization, and trading integration.*
+:::
 
 Our hyperparameter optimization system consists of two key components:
 
@@ -224,7 +224,9 @@ fig.show()
 ```
 -->
 
+<!--#todo:
 *The optimization flow showing component interactions and data flow between ModelEvaluator and HyperparameterTuner classes.*
+-->
 
 ### Model Evaluator Design
 
@@ -333,7 +335,6 @@ The tuner performs several critical functions:
 3. **Optimization Coordination**: Manages the Optuna study for each model
 4. **Hyperparameter Logging**: Records all trial information for analysis
 
-
 ## Time Series Cross-Validation Strategy
 
 Financial data requires special handling to prevent look-ahead bias. Our system implements a time-series cross-validation approach that respects temporal boundaries:
@@ -356,7 +357,6 @@ This method:
 1. Creates rolling windows of specified length
 2. Trains on past data, tests on future data
 3. Prevents information leakage from future market states
-
 
 <!-- ```{code-cell} ipython3
 :tags: [remove-input]
@@ -460,9 +460,10 @@ fig.show()
 ```
 -->
 
-*Visualization of time series cross-validation showing rolling windows respecting temporal boundaries.*
+:::{.full-width}
 ![XGBoost TimeSeries CV](/assets/XGBoostTimeSeriesCV.*)
-
+*Visualization of time series cross-validation showing rolling windows respecting temporal boundaries.*
+:::
 
 ## Hyperparameter Search Spaces
 
@@ -498,8 +499,6 @@ Key design considerations for these search spaces include:
 4. **Training Configuration**: Includes both model hyperparameters and training setup parameters (like `train_size`)
 
 :::{note} Train Size as a Hyperparameter
-
-
 One innovative aspect of our approach is treating `train_size` as a hyperparameter:
 
 ```python
@@ -508,7 +507,6 @@ train_size = trial.suggest_categorical('train_size', [2, 3, 4, 5, 6, 7, 8, 9, 10
 
 This recognizes that in financial markets, more historical data isn't always better. Market regimes change, and different models may perform optimally with different historical windows. By optimizing this alongside model parameters, we find the ideal balance between historical data relevance and sample size.
 :::
-
 
 ## The Optimization Objective Function
 
@@ -561,13 +559,13 @@ This function:
 
 
 ## Optimization Results
-
 <!-- Our optimization process generated detailed results for each model type, which we can analyze and visualize. -->
-
 ### Parameter Optimization Analysis
 
 The optimization trials reveal patterns in parameter importance and model behavior:
+:::{.full-width}
 ![XGBoost HPO History](/assets/XGBoostOptimizationHistory.*)
+:::
 
 <!-- ```{code-cell} ipython3
 :tags: [remove-input]
@@ -709,7 +707,7 @@ fig.update_layout(
 fig.show()
 ```
 -->
-
+:::{.full-width}
 ![LightGBMParameterContours](/assets/LightGBMParameterContours.*)
 
 These visualizations reveal:
@@ -717,7 +715,7 @@ These visualizations reveal:
 1. **Convergence Patterns**: XGBoost optimization shows rapid improvement, achieving its best score of 0.6746 at trial 21
 2. **Parameter Interactions**: LightGBM performance depends on complex interactions between feature_fraction and min_data_in_leaf
 3. **Trade-offs**: Models with train_size=2 consistently outperform those with longer training windows
-
+:::
 
 ### Best Parameters by Model
 
@@ -792,7 +790,6 @@ Our optimization identified different optimal configurations for each model type
   - Strong feature selection (l1) with stability (l2); high regularization (C=0.01)
 :::
 
-
 :::{important} Pattern: Optimal Train Size = 2
 
 A striking result across all models was the consistent selection of a short training window (train_size = 2). This suggests:
@@ -804,11 +801,49 @@ A striking result across all models was the consistent selection of a short trai
 This has profound implications for trading system design, suggesting frequent retraining on recent data rather than accumulating larger historical datasets.
 :::
 
-
 ### Performance Comparison
 
 The optimization process improved all models significantly, with XGBoost showing the best overall performance:
+:::{list-table} Optimized Model Performance
+:header-rows: 1
 
+* - Model
+  - Best Score
+  - Best Trial
+  - Parameters
+  - Duration
+  - Train Size
+* - XGBoost
+  - 0.6746
+  - 21
+  - eval_metric=error@0.5, n_estimators=250
+  - 5:59.99
+  - 2
+* - Random Forest
+  - 0.6648
+  - 46
+  - n_estimators=500, max_depth=4
+  - 2:48.91
+  - 2
+* - LightGBM
+  - 0.6745
+  - 49
+  - objective=regression, n_estimators=100
+  - 0:34.48
+  - 2
+* - Logistic Regression
+  - 0.6899
+  - 26
+  - penalty=elasticnet, C=0.01
+  - 1:15.74
+  - 2
+:::
+
+Notably, while XGBoost, LightGBM, and Logistic Regression achieved similar best scores, they arrived at different parameter configurations, suggesting:
+
+1. Multiple local optima in the parameter space
+2. Different model strengths for different market patterns
+3. Potential for ensemble approaches combining complementary models
 
 <!-- ```{code-cell} ipython3
 :tags: [remove-input]
@@ -855,53 +890,19 @@ fig.show()
 ```
 -->
 
-
-:::{list-table} Optimized Model Performance
-:header-rows: 1
-
-* - Model
-  - Best Score
-  - Best Trial
-  - Parameters
-  - Duration
-  - Train Size
-* - XGBoost
-  - 0.6746
-  - 21
-  - eval_metric=error@0.5, n_estimators=250
-  - 5:59.99
-  - 2
-* - Random Forest
-  - 0.6648
-  - 46
-  - n_estimators=500, max_depth=4
-  - 2:48.91
-  - 2
-* - LightGBM
-  - 0.6745
-  - 49
-  - objective=regression, n_estimators=100
-  - 0:34.48
-  - 2
-* - Logistic Regression
-  - 0.6899
-  - 26
-  - penalty=elasticnet, C=0.01
-  - 1:15.74
-  - 2
-:::
-
-Notably, while XGBoost, LightGBM, and Logistic Regression achieved similar best scores, they arrived at different parameter configurations, suggesting:
-
-1. Multiple local optima in the parameter space
-2. Different model strengths for different market patterns
-3. Potential for ensemble approaches combining complementary models
-
-
 ## Parameter Importance Analysis
 
+:::{.full-width}
 To understand which parameters most significantly impact model performance, we analyze the parameter importance across optimization trials:
+
 ![XGBoost Parameter Importance](/assets/XGBoostParameterImportances.*)
+
+These visualizations provide crucial insights for trading system design:
+
+1. **Regularization Dominance**: Parameters controlling model complexity (like `min_child_weight` and `max_depth`) have high impact across models, emphasizing the importance of preventing overfitting to market noise
+2. **Evaluation Metric Sensitivity**: The choice of evaluation metric (`eval_metric`) has significant impact on XGBoost performance, suggesting careful selection of trading-relevant metrics
+3. **Training Window Impact**: The consistent importance of `train_size` across models confirms that temporal window selection is a critical design choice for trading systems
+:::
 
 <!-- ```{code-cell} ipython3
 :tags: [remove-input]
@@ -965,18 +966,19 @@ fig.show()
 ```
 -->
 
-These visualizations provide crucial insights for trading system design:
-
-1. **Regularization Dominance**: Parameters controlling model complexity (like `min_child_weight` and `max_depth`) have high impact across models, emphasizing the importance of preventing overfitting to market noise
-
-2. **Evaluation Metric Sensitivity**: The choice of evaluation metric (`eval_metric`) has significant impact on XGBoost performance, suggesting careful selection of trading-relevant metrics
-
-3. **Training Window Impact**: The consistent importance of `train_size` across models confirms that temporal window selection is a critical design choice for trading systems
-
-
 ## Parallel Coordinate Analysis
 
 To better understand parameter interactions, we analyze parallel coordinate plots showing the relationship between parameters and model performance:
+
+:::{.full-width}
+![XGBoost Parallel Coordinate Plot](/assets/xgboost_plot_parallel_coordinate.*)
+:::
+
+This visualization reveals:
+
+1. **Parameter Clustering**: High-performing configurations (scores >0.67) cluster in specific parameter regions
+2. **Interaction Patterns**: Certain parameter combinations consistently perform well, particularly when train_size=2
+3. **Sensitivity Variations**: Some parameters like learning_rate show wide variation in high-performing models, suggesting lower sensitivity
 
 <!-- ```{code-cell} ipython3
 :tags: [remove-input]
@@ -1056,15 +1058,6 @@ fig.update_layout(
 fig.show()
 ```
 -->
-
-![XGBoost Parallel Coordinate Plot](/assets/xgboost_plot_parallel_coordinate.*)
-
-This visualization reveals:
-
-1. **Parameter Clustering**: High-performing configurations (scores >0.67) cluster in specific parameter regions
-2. **Interaction Patterns**: Certain parameter combinations consistently perform well, particularly when train_size=2
-3. **Sensitivity Variations**: Some parameters like learning_rate show wide variation in high-performing models, suggesting lower sensitivity
-
 
 ## Hyperparameter Slice Analysis
 
@@ -1151,19 +1144,10 @@ fig.show()
 ```
 -->
 
-![XGBoost Parameter SliceParameter Importance](/assets/xgboost_plot_slice.*)
-
-
-Key insights from slice analysis:
-
-1. **Tree Ensemble Size**: Performance improves with n_estimators up to around 250 trees, after which returns diminish
-2. **Learning Rate Sweet Spot**: For XGBoost, learning rates around 0.03 consistently outperform both lower and higher values
-3. **Depth Limitations**: Performance decreases with max_depth values above 4, suggesting overfitting to market noise
-
-
 ## Time Series Evaluation
 
 After identifying optimal parameters, we evaluate model performance across time periods to assess temporal stability:
+
 ```markdown
 <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
 
@@ -1186,7 +1170,8 @@ xgb_performance = {
     "Trial 46": {"Score": 0.6691, "Train Size": 2, "Parameters": "error@0.5, n_estimators=250"}
 }
 ```
-*Performance of top XGBoost trials showing consistent scores with train_size=2.*
+
+*Performance of top XGBoost trials showing consistent scores with train_size = 2*
   </div>
 
   <div style="
@@ -1209,7 +1194,6 @@ lgbm_performance = {
 ```
 *LightGBM trial performance showing stability across different model configurations with train_size=2.*
   </div>
-
 </div>
 ```
 
@@ -1222,7 +1206,7 @@ The time series evaluation demonstrates:
 
 ## Implementation for Production
 
-To deploy optimized models in production trading systems, our framework provides several key capabilities:
+To deploy optimized models in production trading systems, our framework provides several key capabilities to version model parameter sets and configurations.
 
 ### Model Persistence and Versioning
 
@@ -1303,16 +1287,13 @@ This integration enables:
 
 From our experiments, we can extract several key strategies for optimizing trading models:
 
+:::{.full-width}
 1. **Favor Short Training Windows**: All models performed best with train_size=2, indicating that recent market data is more valuable than longer history
-
 2. **Focus on Regularization**: Parameters controlling model complexity (min_data_in_leaf=100 in LightGBM, C=0.01 in Logistic Regression) are critical for robust performance
-
 3. **Optimize for Trading Metrics**: Custom metrics like error@0.5 in XGBoost consistently outperform standard ML metrics
-
 4. **Parameter Boundaries Matter**: Constrained search spaces based on domain knowledge (like learning_rate between 0.01-0.05) lead to better performance
-
 5. **Monitor Across Trials**: Performance stability across trials indicates model robustness
-
+:::
 
 ## Conclusion and Future Directions
 
