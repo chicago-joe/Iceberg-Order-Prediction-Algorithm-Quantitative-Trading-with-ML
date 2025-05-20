@@ -9,6 +9,7 @@
   "dependencies": {
     "@myst-theme/providers": "*",
     "cwebp-bin": "*",
+    "mystmd": "*",
     "express": "*",
     "puppeteer": "*",
     "react": "*",
