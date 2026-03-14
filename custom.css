@@ -729,3 +729,194 @@ a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML"]::befo
   letter-spacing: 0.01em !important;
   display: inline !important;
 }
+
+
+/* =============================================================================
+   HEADER FIX v2 — Complete nav bar redesign
+   (Previous rules had wrong selectors; these override them)
+   ============================================================================= */
+
+/* --- 1. Un-break the home link (font-size: 0 was collapsing it) --- */
+a.myst-home-link,
+nav.myst-top-nav-bar a.myst-home-link {
+  font-size: inherit !important;
+  white-space: nowrap !important;
+}
+
+/* Hide "Made with MyST" span inside the top-nav home link only */
+nav.myst-top-nav-bar a.myst-home-link span {
+  font-size: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  width: 0 !important;
+  position: absolute !important;
+}
+
+/* Remove the duplicate ::before that was bleeding into TOC */
+a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/"]::before,
+a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML"]::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Undo old broken font-size: 0 on href selectors */
+a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/"],
+a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML"] {
+  font-size: unset !important;
+  color: unset !important;
+}
+
+/* Inject custom branding ONLY in the top nav bar home link */
+nav.myst-top-nav-bar a.myst-home-link::after {
+  content: "Joseph J. Loss  |  Quantitative Development Services" !important;
+  font-size: 0.875rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.03em !important;
+  display: inline-block !important;
+  visibility: visible !important;
+  line-height: 1.2 !important;
+}
+
+/* Remove any ::before on the myst-home-link (prevent duplicates) */
+nav.myst-top-nav-bar a.myst-home-link::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* --- 2. Nav bar: dark background and sticky positioning --- */
+nav.myst-top-nav-bar {
+  background: linear-gradient(135deg, #0f172a 0%, #1a2744 100%) !important;
+  border-bottom: 1px solid #2d4a7a !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35) !important;
+  padding: 0 1.5rem !important;
+  min-height: 60px !important;
+}
+
+/* --- 3. Nav link text colors on dark background --- */
+nav.myst-top-nav-bar a {
+  color: #e2e8f0 !important;
+  text-decoration: none !important;
+}
+
+nav.myst-top-nav-bar a:hover {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* --- 4. Nav items row: force horizontal flex --- */
+nav.myst-top-nav-bar div.flex-grow {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 0.25rem !important;
+}
+
+nav.myst-top-nav-bar .myst-top-nav-item {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+nav.myst-top-nav-bar .myst-top-nav-item a {
+  padding: 0.35rem 0.75rem !important;
+  border-radius: 6px !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  color: #cbd5e1 !important;
+  white-space: nowrap !important;
+  transition: background 0.15s, color 0.15s !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+nav.myst-top-nav-bar .myst-top-nav-item a:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+/* --- 5. GitHub icon — white on dark background --- */
+nav.myst-top-nav-bar a[href="https://github.com/chicago-joe"]::before {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* --- 6. Action buttons — properly styled on dark nav --- */
+/* Target by their actual Tailwind class (a.inline-block inside nav) */
+nav.myst-top-nav-bar a.inline-block {
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-radius: 8px !important;
+  padding: 0.4rem 1rem !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  color: #e2e8f0 !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  transition: all 0.15s ease !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+  letter-spacing: 0.01em !important;
+  margin: 0 2px !important;
+}
+
+nav.myst-top-nav-bar a.inline-block:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.38) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* PDF download buttons — blue gradient */
+nav.myst-top-nav-bar a.inline-block[href$=".pdf"] {
+  background: linear-gradient(135deg, #1a56db 0%, #1e3a8a 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 2px 10px rgba(26, 86, 219, 0.4) !important;
+}
+
+nav.myst-top-nav-bar a.inline-block[href$=".pdf"]:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%) !important;
+  box-shadow: 0 5px 18px rgba(26, 86, 219, 0.55) !important;
+  transform: translateY(-2px) !important;
+  color: #ffffff !important;
+}
+
+/* LinkedIn share button */
+nav.myst-top-nav-bar a.inline-block[href*="linkedin.com/shareArticle"] {
+  background: rgba(0, 119, 181, 0.25) !important;
+  border-color: rgba(0, 119, 181, 0.5) !important;
+  color: #93c5fd !important;
+}
+
+nav.myst-top-nav-bar a.inline-block[href*="linkedin.com/shareArticle"]:hover {
+  background: rgba(0, 119, 181, 0.45) !important;
+  color: #ffffff !important;
+}
+
+/* --- 7. Toggle theme button on dark nav --- */
+nav.myst-top-nav-bar button.myst-top-nav-menu-button,
+nav.myst-top-nav-bar button[class*="toggle"],
+nav.myst-top-nav-bar button[aria-label*="theme" i],
+nav.myst-top-nav-bar button[aria-label*="Toggle" i] {
+  color: #e2e8f0 !important;
+  border-radius: 6px !important;
+}
+
+nav.myst-top-nav-bar button:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* --- 8. TOC home link fix (remove branding text from sidebar) --- */
+nav[aria-label="Table of Contents"] a[href*="Iceberg-Order-Prediction"] {
+  font-size: inherit !important;
+  color: inherit !important;
+}
+
+nav[aria-label="Table of Contents"] a[href*="Iceberg-Order-Prediction"]::before,
+nav[aria-label="Table of Contents"] a[href*="Iceberg-Order-Prediction"]::after {
+  content: none !important;
+  display: none !important;
+}
