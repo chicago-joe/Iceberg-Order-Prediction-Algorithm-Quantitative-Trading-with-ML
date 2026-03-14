@@ -706,3 +706,26 @@ a[href*="made-with-myst"] {
 footer {
   font-size: 0.85rem !important;
 }
+
+/* =============================================================================
+   HOME/LOGO LINK: Replace "Made with MyST" with custom branding
+   ============================================================================= */
+
+/* Hide the original "Made with MyST" text in the home logo link */
+a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/"],
+a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML"] {
+  font-size: 0 !important;
+  color: transparent !important;
+  white-space: nowrap !important;
+}
+
+/* Inject custom branding text via ::before pseudo-element */
+a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/"]::before,
+a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML"]::before {
+  content: "Joseph J. Loss  |  Quantitative Development Services" !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  color: currentColor !important;
+  letter-spacing: 0.01em !important;
+  display: inline !important;
+}
