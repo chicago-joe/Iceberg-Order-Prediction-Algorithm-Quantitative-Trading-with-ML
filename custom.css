@@ -1,420 +1,491 @@
-/* Base font settings to match book-theme template */
+/* ============================================================
+   JOSEPH J. LOSS — ML RESEARCH SITE
+   MyST Book Theme Custom Styling
+
+   Strategy: Target .myst-top-nav (the sticky wrapper with Tailwind
+   bg-white/80 backdrop-blur) — NOT the inner nav.myst-top-nav-bar.
+   Use Google Fonts for cohesive academic aesthetic.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
 :root {
-  --book-font-size: 1rem;
-  --book-line-height: 1.6;
-  --book-paragraph-spacing: 1.25rem;
-  --book-heading-spacing: 2rem;
+  --brand-navy:     #0f172a;
+  --brand-navy-mid: #1e3a5f;
+  --brand-navy-lt:  #1d3461;
+  --brand-blue:     #3b82f6;
+  --brand-blue-lt:  #93c5fd;
+  --brand-slate:    #64748b;
+  --brand-paper:    #fafaf9;
+
+  --font-body:    'IBM Plex Serif', Georgia, serif;
+  --font-ui:      'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono:    'IBM Plex Mono', 'Fira Code', monospace;
 }
 
+/* ============================================================
+   GLOBAL BODY
+   ============================================================ */
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
-  font-size: var(--book-font-size);
-  line-height: var(--book-line-height);
-  max-width: 100%;
+  font-family: var(--font-body);
+  background-color: var(--brand-paper);
   overflow-x: hidden;
 }
 
-/* Main wrapper - ensure it can accommodate our wide elements */
 .myst-page {
-  max-width: 100% !important;
-  overflow-x: hidden !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  max-width: 100%;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
 }
 
-/* Typography scaling for the book theme */
+/* ============================================================
+   NAV BAR — Target .myst-top-nav (the outer sticky wrapper)
+   This is the element with Tailwind bg-white/80 backdrop-blur
+   ============================================================ */
+
+/* Override the Tailwind bg-white/80 on the wrapper */
+.myst-top-nav {
+  background: var(--brand-navy) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.45) !important;
+  border-bottom: 1px solid var(--brand-navy-mid) !important;
+}
+
+/* Inner nav — keep transparent, parent has the bg */
+nav.myst-top-nav-bar {
+  background: transparent !important;
+}
+
+/* --- HOME / BRANDING LINK --- */
+a.myst-home-link {
+  white-space: nowrap;
+}
+
+/* Hide "Made with MyST" generated span inside home link */
+nav.myst-top-nav-bar a.myst-home-link span {
+  font-size: 0 !important;
+  width: 0;
+  overflow: hidden;
+  position: absolute;
+  visibility: hidden;
+}
+
+/* Inject branding via ::after on the scoped home link */
+nav.myst-top-nav-bar a.myst-home-link::after {
+  content: "Joseph J. Loss  ·  Quantitative Research";
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  color: #e2e8f0;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+/* Clear stale ::before rules */
+nav.myst-top-nav-bar a.myst-home-link::before {
+  content: none;
+  display: none;
+}
+
+/* Clear any old href-based branding hacks */
+a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/"]::before,
+a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML"]::before {
+  content: none !important;
+  display: none !important;
+}
+a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/"],
+a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML"] {
+  font-size: unset;
+  color: unset;
+}
+
+/* --- NAV LINKS (Portfolio, LinkedIn, GitHub) --- */
+nav.myst-top-nav-bar a.inline-flex {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: #94a3b8;
+  transition: color 0.2s;
+}
+
+nav.myst-top-nav-bar a.inline-flex:hover {
+  color: #e2e8f0;
+}
+
+/* --- ACTION BUTTONS (Share on LinkedIn, Download) --- */
+nav.myst-top-nav-bar a.inline-block {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  border-color: #334155 !important;
+  color: #cbd5e1 !important;
+  background: transparent !important;
+  transition: all 0.2s;
+}
+
+nav.myst-top-nav-bar a.inline-block:hover {
+  background: rgba(59, 130, 246, 0.15) !important;
+  border-color: var(--brand-blue) !important;
+  color: #bfdbfe !important;
+}
+
+/* PDF download button — accent blue border */
+nav.myst-top-nav-bar a.inline-block[href$=".pdf"] {
+  border-color: rgba(59, 130, 246, 0.5) !important;
+  color: var(--brand-blue-lt) !important;
+}
+
+nav.myst-top-nav-bar a.inline-block[href$=".pdf"]:hover {
+  background: rgba(59, 130, 246, 0.2) !important;
+  border-color: var(--brand-blue) !important;
+  color: #ffffff !important;
+}
+
+/* Dark mode toggle — invert to white on dark bg */
+nav.myst-top-nav-bar button img {
+  filter: brightness(0) invert(1) opacity(0.7);
+}
+
+/* GitHub icon in nav */
+nav a[href="https://github.com/chicago-joe"],
+header a[href="https://github.com/chicago-joe"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+/* GitHub SVG icon (white on dark bg) */
+nav a[href="https://github.com/chicago-joe"] img,
+header a[href="https://github.com/chicago-joe"] img {
+  filter: brightness(0) invert(1) opacity(0.7);
+}
+
+/* --- TOC SIDEBAR: prevent branding leak --- */
+nav[aria-label="Table of Contents"] a::before,
+nav[aria-label="Table of Contents"] a::after,
+.myst-toc a::before,
+.myst-toc a::after {
+  content: none;
+}
+
+/* ============================================================
+   CONTENT TYPOGRAPHY
+   ============================================================ */
+.myst-content h1,
+.myst-content h2,
+.myst-content h3,
+.myst-content h4 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  color: var(--brand-navy);
+}
+
 .myst-content h1 {
-  font-size: 2.25rem !important;
-  margin-bottom: 1.75rem !important;
-  font-weight: 600 !important;
+  font-size: 2.2rem;
+  margin-bottom: 1.75rem;
 }
 
 .myst-content h2 {
-  font-size: 1.8rem !important;
-  margin-top: 2.5rem !important;
-  margin-bottom: 1.25rem !important;
-  font-weight: 600 !important;
+  font-size: 1.75rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .myst-content h3 {
-  font-size: 1.5rem !important;
-  margin-top: 2rem !important;
-  margin-bottom: 1rem !important;
-  font-weight: 600 !important;
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 .myst-content h4 {
-  font-size: 1.25rem !important;
-  margin-top: 1.75rem !important;
-  margin-bottom: 0.75rem !important;
-  font-weight: 600 !important;
+  font-size: 1.15rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
 }
 
-.myst-content p, 
+.myst-content p,
 .myst-content li {
-  font-size: 1.05rem !important;
-  margin-bottom: var(--book-paragraph-spacing) !important;
-  line-height: 1.6 !important;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #1e293b;
+  margin-bottom: 1.25rem;
 }
 
-.myst-content code, 
+.myst-content a {
+  color: #1d4ed8;
+}
+
+.myst-content code,
 .myst-content pre {
-  font-family: "SFMono-Regular", Menlo, Consolas, Monaco, "Liberation Mono", "Courier New", monospace !important;
-  font-size: 0.9rem !important;
-  line-height: 1.5 !important;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
-/* Make images larger */
+/* Inline code */
+.myst-content p code,
+.myst-content li code {
+  padding: 0.15rem 0.3rem;
+  border-radius: 3px;
+  background-color: #f1f5f9;
+}
+
+/* Block code */
+.myst-content pre {
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 6px;
+  background-color: #f1f5f9;
+  max-width: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ============================================================
+   IMAGES + FIGURES
+   ============================================================ */
 .myst-content img {
-  max-width: 100% !important;
-  width: 100% !important;
-  height: auto !important;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
   margin: 1.5rem 0;
 }
 
-/* For figures with captions */
 .myst-content figure {
-  max-width: 100% !important;
-  width: 100% !important;
+  max-width: 100%;
+  width: 100%;
   margin: 2rem 0;
 }
 
 .myst-content figcaption {
-  font-size: 0.9rem !important;
-  line-height: 1.4 !important;
-  margin-top: 0.75rem !important;
+  font-size: 0.875rem;
+  font-family: var(--font-ui);
+  color: var(--brand-slate);
+  margin-top: 0.75rem;
+  line-height: 1.4;
 }
 
-/* Component containers should be full width */
+/* ============================================================
+   HTML COMPONENTS (FeatureEngineeringVisual, timeseries, etc.)
+   ============================================================ */
 .component-container,
 .component-wrapper {
-  width: 100% !important;
-  max-width: 100% !important;
+  width: 100%;
+  max-width: 100%;
   margin: 2rem 0;
-  overflow-x: hidden !important; /* Prevent horizontal scrolling */
-  overflow-y: visible !important;
-  box-sizing: border-box !important;
+  overflow-x: hidden;
+  overflow-y: visible;
+  box-sizing: border-box;
 }
 
-/* Components inside full-width containers */
 .full-width .component-container,
 .full-width .component-wrapper,
 .full-width div[class*="html"] {
-  width: 100% !important;
-  max-width: 100% !important;
-  padding: 1.5rem !important;
-  font-size: 0.875rem !important; /* Smaller font size for rendered components */
-  line-height: 1.4 !important;
+  width: 100%;
+  max-width: 100%;
+  padding: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
 }
 
-/* Smaller text for all HTML components */
 .myst-content div[class*="html"] p,
 .myst-content div[class*="html"] li,
 .myst-content div[class*="html"] div,
 .myst-content div[class*="html"] span {
-  font-size: 0.875rem !important; /* 14px at default browser size */
-  line-height: 1.4 !important;
+  font-size: 0.875rem;
+  line-height: 1.4;
 }
 
-/* Feature Engineering Deep Dive specific styles */
-.myst-content div[class*="html"] h2[style] {
-  font-size: 1.6rem !important;
-  margin-bottom: 1rem !important;
-}
+.myst-content div[class*="html"] h2[style] { font-size: 1.6rem; margin-bottom: 1rem; }
+.myst-content div[class*="html"] h3[style] { font-size: 1.3rem; }
+.myst-content div[class*="html"] h4       { font-size: 1.1rem; margin-top: 1.25rem; margin-bottom: 0.75rem; }
 
-.myst-content div[class*="html"] h3[style] {
-  font-size: 1.3rem !important;
-}
-
-.myst-content div[class*="html"] h4 {
-  font-size: 1.1rem !important;
-  margin-top: 1.25rem !important;
-  margin-bottom: 0.75rem !important;
-}
-
-.myst-content div[class*="html"] table[style] {
-  font-size: 0.75rem !important;
-}
-
+.myst-content div[class*="html"] table[style]   { font-size: 0.75rem; }
 .myst-content div[class*="html"] td[style],
-.myst-content div[class*="html"] th[style] {
-  font-size: 0.75rem !important;
-  padding: 8px !important;
-}
+.myst-content div[class*="html"] th[style]      { font-size: 0.75rem; padding: 8px; }
 
-.myst-content div[class*="html"] div[style*="code"] {
-  font-size: 0.7rem !important;
-}
-
-.myst-content div[class*="html"] div[style*="exampleBox"] {
-  font-size: 0.75rem !important;
-}
-
-.myst-content div[class*="html"] div[style*="note"] {
-  font-size: 0.75rem !important;
-}
-
-.myst-content div[class*="html"] div[style*="importanceLabel"] {
-  font-size: 0.7rem !important;
-}
+.myst-content div[class*="html"] div[style*="code"]            { font-size: 0.7rem; }
+.myst-content div[class*="html"] div[style*="exampleBox"]      { font-size: 0.75rem; }
+.myst-content div[class*="html"] div[style*="note"]            { font-size: 0.75rem; }
+.myst-content div[class*="html"] div[style*="importanceLabel"] { font-size: 0.7rem; }
 
 .myst-content div[class*="html"] div[style*="transformation"] {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  align-items: stretch !important;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
 }
 
 .myst-content div[class*="html"] div[style*="transformStep"] {
-  flex: 1 1 0 !important;
-  min-width: 0 !important;
-  font-size: 0.75rem !important;
+  flex: 1 1 0;
+  min-width: 0;
+  font-size: 0.75rem;
 }
 
-/* Time Series CV Diagram styles */
-.myst-content div[class*="html"] div[style*="visualContainer"] {
-  width: 90% !important;
-  margin: 0 auto !important;
-}
+.myst-content div[class*="html"] div[style*="visualContainer"] { width: 90%; margin: 0 auto; }
+.myst-content div[class*="html"] div[style*="timeBlock"]       { height: 50px; }
+.myst-content div[class*="html"] div[style*="visualization"]   { margin: 0 auto; width: 90%; }
 
-.myst-content div[class*="html"] div[style*="timeBlock"] {
-  height: 50px !important;
-}
+.myst-content div[class*="html"] div[style*="barLabel"]     { width: 280px; font-size: 0.75rem; }
+.myst-content div[class*="html"] div[style*="barChart"]     { width: calc(100% - 20px); }
+.myst-content div[class*="html"] div[style*="barValue"]     { right: -55px; font-size: 0.75rem; }
+.myst-content div[class*="html"] div[style*="barContainer"] { width: 100%; }
 
-.myst-content div[class*="html"] div[style*="visualization"] {
-  margin: 0 auto !important;
-  width: 90% !important;
-}
-
-/* Feature Importance override styles */
-.myst-content div[class*="html"] div[style*="barLabel"] {
-  width: 280px !important; /* Wider label area */
-  font-size: 0.75rem !important;
-}
-
-.myst-content div[class*="html"] div[style*="barChart"] {
-  width: calc(100% - 20px) !important;
-}
-
-.myst-content div[class*="html"] div[style*="barValue"] {
-  right: -55px !important; /* Move values further right */
-  font-size: 0.75rem !important;
-}
-
-.myst-content div[class*="html"] div[style*="barContainer"] {
-  width: 100% !important;
-}
-
-/* Model Comparison override styles */
-.myst-content div[class*="html"] div[style*="th"] {
-  background-color: #4a90e2 !important;
-  color: white !important;
-  font-size: 0.8rem !important;
-}
-
+.myst-content div[class*="html"] div[style*="th"] { background-color: #4a90e2; color: white; font-size: 0.8rem; }
 .myst-content div[class*="html"] div[style*="td"] span[style*="parameter"] {
-  display: list-item !important;
-  margin-left: 20px !important;
-  list-style-type: disc !important;
-  font-size: 0.75rem !important;
+  display: list-item;
+  margin-left: 20px;
+  list-style-type: disc;
+  font-size: 0.75rem;
 }
+.myst-content div[class*="html"] div[style*="bar"]   { min-width: 100px; margin-right: 40px; }
+.myst-content div[class*="html"] div[style*="barLabel"] { font-size: 0.75rem; }
 
-.myst-content div[class*="html"] div[style*="barChart"] {
-  width: 100% !important;
-}
+.myst-content div[class*="html"] div[style*="matrixHeaderMain"] { font-size: 0.8rem; padding: 5px; }
+.myst-content div[class*="html"] div[style*="matrixHeader"]     { font-size: 0.8rem; padding: 5px; }
+.myst-content div[class*="html"] div[style*="matrixContainer"]  { margin: 0 auto; max-width: 400px; }
 
-.myst-content div[class*="html"] div[style*="bar"] {
-  min-width: 100px !important; /* Ensure bar minimum width */
-  margin-right: 40px !important; /* More space between bars */
-}
+.myst-content div[class*="html"] div[style*="lineChart"] svg text { font-size: 13px; }
 
-.myst-content div[class*="html"] div[style*="barLabel"] {
-  font-size: 0.75rem !important;
-}
+.myst-content div[class*="html"] div[style*="testBlock"]  { background-color: #e2984a; color: black; font-weight: bold; }
+.myst-content div[class*="html"] div[style*="trainBlock"] { background-color: #4a90e2; color: black; font-weight: bold; }
 
-/* Model Results override styles */
-.myst-content div[class*="html"] div[style*="matrixHeaderMain"] {
-  font-size: 0.8rem !important;
-  padding: 5px !important;
-}
+.myst-content div[class*="html"] div[style*="tableContainer"]   { width: 80%; margin: 0 auto; }
+.myst-content div[class*="html"] div[style*="comparisonTitle"]  { font-size: 0.9rem; text-align: center; }
 
-.myst-content div[class*="html"] div[style*="matrixHeader"] {
-  font-size: 0.8rem !important;
-  padding: 5px !important;
-}
-
-.myst-content div[class*="html"] div[style*="matrixContainer"] {
-  margin: 0 auto !important;
-  max-width: 400px !important;
-}
-
-.myst-content div[class*="html"] div[style*="lineChart"] svg text {
-  font-size: 13px !important;
-}
-
-.myst-content div[class*="html"] div[style*="testBlock"] {
-  background-color: #e2984a !important;
-  color: black !important;
-  font-weight: bold !important;
-}
-
-.myst-content div[class*="html"] div[style*="trainBlock"] {
-  background-color: #4a90e2 !important;
-  color: black !important;
-  font-weight: bold !important;
-}
-
-.myst-content div[class*="html"] div[style*="tableContainer"] {
-  width: 80% !important;
-  margin: 0 auto !important;
-}
-
-.myst-content div[class*="html"] div[style*="comparisonTitle"] {
-  font-size: 0.9rem !important;
-  text-align: center !important;
-}
-
-/* Headers in rendered components */
-.myst-content div[class*="html"] h1 {
-  font-size: 1.5rem !important;
-}
-
-.myst-content div[class*="html"] h2 {
-  font-size: 1.3rem !important;
-}
-
-.myst-content div[class*="html"] h3 {
-  font-size: 1.1rem !important;
-}
-
+.myst-content div[class*="html"] h1 { font-size: 1.5rem; }
+.myst-content div[class*="html"] h2 { font-size: 1.3rem; }
+.myst-content div[class*="html"] h3 { font-size: 1.1rem; }
 .myst-content div[class*="html"] h4,
 .myst-content div[class*="html"] h5,
-.myst-content div[class*="html"] h6 {
-  font-size: 1rem !important;
-}
+.myst-content div[class*="html"] h6 { font-size: 1rem; }
 
-/* Full-width class for MyST directives */
 .full-width {
-  width: calc(100% + 400px) !important; /* Extend to take up expanded right sidebar area */
-  position: relative !important;
-  margin-left: 0 !important;
-  margin-right: -400px !important; /* Extend further into right area */
-  box-sizing: border-box !important;
-  overflow-x: hidden !important;
-  padding: 0 !important;
-  background-color: #f9f9fc !important; /* Light background to visually separate */
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-  margin-top: 2rem !important;
-  margin-bottom: 2rem !important;
+  width: calc(100% + 400px);
+  position: relative;
+  margin-left: 0;
+  margin-right: -400px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  padding: 0;
+  background-color: #f9f9fc;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
-/* Ensure component content is properly contained */
 .component-wrapper {
-  display: block !important;
-  padding: 0 !important;
+  display: block;
+  padding: 0;
 }
 
-/* All HTML content should take full width */
 .myst-content div[class*="html"] {
-  width: 100% !important;
-  max-width: 100% !important;
-  overflow: visible !important;
-  box-sizing: border-box !important;
-  font-size: 0.875rem !important; /* Default smaller font size for all HTML components */
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+  box-sizing: border-box;
+  font-size: 0.875rem;
 }
 
-/* Adjust spacing in HTML components */
-.myst-content div[class*="html"] p {
-  margin-bottom: 0.75rem !important;
-}
+.myst-content div[class*="html"] p { margin-bottom: 0.75rem; }
 
-/* Buttons and controls in HTML components */
 .myst-content div[class*="html"] button,
 .myst-content div[class*="html"] input,
 .myst-content div[class*="html"] select {
-  font-size: 0.75rem !important;
-  padding: 0.25rem 0.5rem !important;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
 }
 
-/* Javascript components should fit viewport width */
 .myst-content .component-iframe,
 .myst-content iframe {
-  width: 100% !important;
-  min-width: 100% !important;
-  border: none !important;
-  overflow: hidden !important;
+  width: 100%;
+  min-width: 100%;
+  border: none;
+  overflow: hidden;
 }
 
-/* Ensure tables within components are responsive */
+.component-wrapper > div {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+table {
+  width: 100%;
+  max-width: 100%;
+  table-layout: fixed;
+  overflow-x: auto;
+  display: block;
+  font-size: 0.95rem;
+  margin: 1.75rem 0;
+  border-collapse: collapse;
+}
+
+table th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 2px solid #e2e8f0;
+  font-family: var(--font-ui);
+}
+
+table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
 .component-wrapper table,
 .myst-content div[class*="html"] table {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  font-size: 0.8rem !important; /* Even smaller for tables */
-  margin: 1rem 0 !important;
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  font-size: 0.8rem;
+  margin: 1rem 0;
 }
 
-/* Table headers and cells in components */
 .myst-content div[class*="html"] table th,
 .component-wrapper table th {
-  padding: 0.5rem !important;
-  font-weight: 600 !important;
-  background-color: #f5f7f9 !important;
-  text-align: left !important;
+  padding: 0.5rem;
+  font-weight: 600;
+  background-color: #f5f7f9;
+  text-align: left;
 }
 
 .myst-content div[class*="html"] table td,
 .component-wrapper table td {
-  padding: 0.4rem 0.5rem !important;
-  border-bottom: 1px solid #e5e7eb !important;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-/* Handle JS component containers */
-.component-wrapper > div {
-  width: 100% !important;
-  max-width: 100% !important;
-  overflow-x: hidden !important;
-  box-sizing: border-box !important;
-}
-
-/* Ensure code blocks and pre elements don't overflow */
-.myst-content pre,
-.myst-content code {
-  max-width: 100% !important;
-  white-space: pre-wrap !important;
-  word-break: break-word !important;
-  overflow-wrap: break-word !important;
-}
-
-/* Code blocks styling */
-.myst-content pre {
-  padding: 1rem !important;
-  margin: 1.5rem 0 !important;
-  border-radius: 4px !important;
-  background-color: #f5f7f9 !important;
-}
-
-/* Inline code styling */
-.myst-content p code,
-.myst-content li code {
-  padding: 0.15rem 0.3rem !important;
-  border-radius: 3px !important;
-  background-color: #f5f7f9 !important;
-}
-
-/* Layout for left TOC and main content */
+/* ============================================================
+   LAYOUT
+   ============================================================ */
 .myst-layout {
   display: grid;
-  grid-template-columns: 250px minmax(0, 1fr) 400px; /* Left TOC, content, increased right space */
+  grid-template-columns: 250px minmax(0, 1fr) 400px;
   grid-gap: 2rem;
   max-width: 100%;
   overflow-x: hidden;
 }
 
-/* TOC styling */
 .myst-toc {
   grid-column: 1;
   position: sticky;
@@ -422,37 +493,35 @@ body {
   max-height: calc(100vh - 4rem);
   overflow-y: auto;
   padding-right: 1rem;
-  font-size: 0.95rem !important;
-  line-height: 1.4 !important;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  font-family: var(--font-ui);
 }
 
 .myst-toc a {
-  color: #374151 !important;
-  text-decoration: none !important;
+  color: #374151;
+  text-decoration: none;
 }
 
 .myst-toc a:hover {
-  color: #1a56db !important;
-  text-decoration: underline !important;
+  color: #1a56db;
+  text-decoration: underline;
 }
 
-/* Main content area */
 .myst-content {
   grid-column: 2;
-  width: 100% !important;
-  max-width: 100% !important;
+  width: 100%;
+  max-width: 100%;
   padding-right: 1rem;
-  overflow-x: visible !important; /* Allow content to extend into right column */
+  overflow-x: visible;
 }
 
-/* Right sidebar area (for our full-width elements to expand into) */
 .myst-right-sidebar {
   grid-column: 3;
   width: 100%;
-  min-width: 400px; /* Ensure we have enough space */
+  min-width: 400px;
 }
 
-/* Ensure markdown content expands properly */
 .myst-content p,
 .myst-content h1,
 .myst-content h2,
@@ -462,117 +531,29 @@ body {
 .myst-content h6,
 .myst-content ul,
 .myst-content ol {
-  width: 100% !important;
-  max-width: 100% !important;
-  overflow-wrap: break-word !important;
-  word-wrap: break-word !important;
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
-/* Tables should be full width and scroll on overflow */
-table {
-  width: 100% !important;
-  max-width: 100% !important;
-  table-layout: fixed !important;
-  overflow-x: auto;
-  display: block;
-  font-size: 0.95rem !important;
-  margin: 1.75rem 0 !important;
-  border-collapse: collapse !important;
-}
-
-table th {
-  background-color: #f5f7f9 !important;
-  font-weight: 600 !important;
-  padding: 0.75rem !important;
-  text-align: left !important;
-  border-bottom: 2px solid #e5e7eb !important;
-}
-
-table td {
-  padding: 0.75rem !important;
-  border-bottom: 1px solid #e5e7eb !important;
-}
-
-/* Mobile responsiveness */
+/* ============================================================
+   MOBILE RESPONSIVE
+   ============================================================ */
 @media (max-width: 1024px) {
-  .myst-layout {
-    grid-template-columns: 1fr;
-  }
-  
-  .myst-toc {
-    grid-column: 1;
-    position: relative;
-    max-height: none;
-  }
-  
-  .myst-content {
-    grid-column: 1;
-    padding-right: 0;
-  }
-  
-  .myst-right-sidebar {
-    display: none;
-  }
-  
-  .full-width {
-    width: 100% !important;
-    margin-right: 0 !important;
-    margin-left: 0 !important;
-  }
-  
-  .myst-content h1 {
-    font-size: 1.75rem !important;
-  }
-  
-  .myst-content h2 {
-    font-size: 1.5rem !important;
-  }
-  
-  .myst-content h3 {
-    font-size: 1.3rem !important;
-  }
+  .myst-layout { grid-template-columns: 1fr; }
+  .myst-toc    { grid-column: 1; position: relative; max-height: none; }
+  .myst-content { grid-column: 1; padding-right: 0; }
+  .myst-right-sidebar { display: none; }
+  .full-width  { width: 100%; margin-right: 0; margin-left: 0; }
+  .myst-content h1 { font-size: 1.75rem; }
+  .myst-content h2 { font-size: 1.5rem; }
+  .myst-content h3 { font-size: 1.3rem; }
 }
 
-/* =============================================================================
-   NAVIGATION: GitHub icon with username
-   ============================================================================= */
-
-nav a[href="https://github.com/chicago-joe"],
-header a[href="https://github.com/chicago-joe"] {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 7px !important;
-  font-weight: 700 !important;
-  font-size: 1rem !important;
-}
-
-nav a[href="https://github.com/chicago-joe"]::before,
-header a[href="https://github.com/chicago-joe"]::before {
-  content: "" !important;
-  display: inline-block !important;
-  width: 22px !important;
-  height: 22px !important;
-  min-width: 22px !important;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='currentColor' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E") !important;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  vertical-align: middle !important;
-  /* Adapt to both light and dark nav bars */
-  filter: brightness(0) saturate(100%) !important;
-}
-
-/* When nav background is dark, invert to white */
-header nav a[href="https://github.com/chicago-joe"]::before,
-.navbar a[href="https://github.com/chicago-joe"]::before,
-nav.dark a[href="https://github.com/chicago-joe"]::before {
-  filter: brightness(0) invert(1) !important;
-}
-
-/* =============================================================================
-   ARTICLE TOOLBAR: Hide edit button
-   ============================================================================= */
-
+/* ============================================================
+   ARTICLE TOOLBAR: hide edit and source download icons
+   ============================================================ */
 a[href*="/edit/main/"],
 a[href*="/edit/master/"],
 a[aria-label*="edit" i],
@@ -584,10 +565,6 @@ button.edit {
   display: none !important;
 }
 
-/* =============================================================================
-   ARTICLE TOOLBAR: Hide default small download icon
-   ============================================================================= */
-
 .article-header-right [aria-label*="download" i],
 .article-header-right [title*="download" i],
 [data-testid="download-source"],
@@ -597,326 +574,105 @@ button.edit {
   display: none !important;
 }
 
-/* =============================================================================
-   PDF DOWNLOAD CARDS: Large card-style action buttons
-   ============================================================================= */
-
+/* ============================================================
+   PDF DOWNLOAD CARDS (article-level action buttons)
+   ============================================================ */
 .article-actions {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: wrap !important;
-  gap: 14px !important;
-  margin: 1.75rem 0 2rem !important;
-  padding: 0 !important;
-  list-style: none !important;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 1.75rem 0 2rem;
+  padding: 0;
+  list-style: none;
 }
 
-/* Base card style for all actions */
 .article-actions a {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 14px !important;
-  padding: 18px 26px !important;
-  border-radius: 14px !important;
-  text-decoration: none !important;
-  font-weight: 600 !important;
-  font-size: 0.975rem !important;
-  min-width: 230px !important;
-  border: none !important;
-  cursor: pointer !important;
-  letter-spacing: 0.01em !important;
-  transition: transform 0.18s ease, box-shadow 0.18s ease !important;
-  color: #ffffff !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 26px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.975rem;
+  min-width: 230px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  color: #ffffff;
 }
 
-/* PDF download cards — rich blue gradient */
 .article-actions a[href$=".pdf"] {
-  background: linear-gradient(135deg, #1a56db 0%, #1e3a8a 100%) !important;
-  box-shadow: 0 4px 20px rgba(26, 86, 219, 0.28) !important;
+  background: linear-gradient(135deg, #1a56db 0%, #1e3a8a 100%);
+  box-shadow: 0 4px 20px rgba(26, 86, 219, 0.28);
 }
 
 .article-actions a[href$=".pdf"]:hover {
-  transform: translateY(-3px) !important;
-  box-shadow: 0 10px 30px rgba(26, 86, 219, 0.42) !important;
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%) !important;
-  color: #ffffff !important;
-  text-decoration: none !important;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(26, 86, 219, 0.42);
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  color: #ffffff;
+  text-decoration: none;
 }
 
-/* PDF icon before download links */
 .article-actions a[href$=".pdf"]::before {
-  content: "" !important;
-  display: inline-block !important;
-  width: 34px !important;
-  height: 34px !important;
-  min-width: 34px !important;
-  flex-shrink: 0 !important;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z'/%3E%3C/svg%3E") !important;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
+  content: "";
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  flex-shrink: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-/* LinkedIn/Share action — LinkedIn blue */
 .article-actions a[href*="linkedin.com"] {
-  background: linear-gradient(135deg, #0077b5 0%, #005582 100%) !important;
-  box-shadow: 0 4px 20px rgba(0, 119, 181, 0.25) !important;
-  min-width: auto !important;
+  background: linear-gradient(135deg, #0077b5 0%, #005582 100%);
+  box-shadow: 0 4px 20px rgba(0, 119, 181, 0.25);
+  min-width: auto;
 }
 
 .article-actions a[href*="linkedin.com"]:hover {
-  transform: translateY(-3px) !important;
-  box-shadow: 0 10px 30px rgba(0, 119, 181, 0.4) !important;
-  background: linear-gradient(135deg, #0088cc 0%, #006699 100%) !important;
-  color: #ffffff !important;
-  text-decoration: none !important;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 119, 181, 0.4);
+  background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .article-actions a[href*="linkedin.com"]::before {
-  content: "" !important;
-  display: inline-block !important;
-  width: 28px !important;
-  height: 28px !important;
-  min-width: 28px !important;
-  flex-shrink: 0 !important;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'/%3E%3C/svg%3E") !important;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  flex-shrink: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
-/* =============================================================================
-   FOOTER: Hide "Made with MyST", show custom branding
-   ============================================================================= */
-
-/* Hide the Made with MyST attribution link */
+/* ============================================================
+   FOOTER: hide "Made with MyST" attribution
+   ============================================================ */
 a[href*="mystmd.org/made-with-myst"],
 a[href*="made-with-myst"] {
   display: none !important;
   visibility: hidden !important;
 }
 
-/* Hide the direct parent container of the Made with MyST link */
 *:has(> a[href*="mystmd.org/made-with-myst"]) {
   display: none !important;
 }
 
-/* Style the footer content (our custom parts.footer) */
 .footer,
 .site-footer,
 footer {
-  font-size: 0.85rem !important;
-}
-
-/* =============================================================================
-   HOME/LOGO LINK: Replace "Made with MyST" with custom branding
-   ============================================================================= */
-
-/* Hide the original "Made with MyST" text in the home logo link */
-a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/"],
-a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML"] {
-  font-size: 0 !important;
-  color: transparent !important;
-  white-space: nowrap !important;
-}
-
-/* Inject custom branding text via ::before pseudo-element */
-a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/"]::before,
-a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML"]::before {
-  content: "Joseph J. Loss  |  Quantitative Development Services" !important;
-  font-size: 0.95rem !important;
-  font-weight: 700 !important;
-  color: currentColor !important;
-  letter-spacing: 0.01em !important;
-  display: inline !important;
-}
-
-
-/* =============================================================================
-   HEADER FIX v2 — Complete nav bar redesign
-   (Previous rules had wrong selectors; these override them)
-   ============================================================================= */
-
-/* --- 1. Un-break the home link (font-size: 0 was collapsing it) --- */
-a.myst-home-link,
-nav.myst-top-nav-bar a.myst-home-link {
-  font-size: inherit !important;
-  white-space: nowrap !important;
-}
-
-/* Hide "Made with MyST" span inside the top-nav home link only */
-nav.myst-top-nav-bar a.myst-home-link span {
-  font-size: 0 !important;
-  visibility: hidden !important;
-  overflow: hidden !important;
-  width: 0 !important;
-  position: absolute !important;
-}
-
-/* Remove the duplicate ::before that was bleeding into TOC */
-a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/"]::before,
-a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML"]::before {
-  content: none !important;
-  display: none !important;
-}
-
-/* Undo old broken font-size: 0 on href selectors */
-a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/"],
-a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML"] {
-  font-size: unset !important;
-  color: unset !important;
-}
-
-/* Inject custom branding ONLY in the top nav bar home link */
-nav.myst-top-nav-bar a.myst-home-link::after {
-  content: "Joseph J. Loss  |  Quantitative Development Services" !important;
-  font-size: 0.875rem !important;
-  font-weight: 700 !important;
-  color: #ffffff !important;
-  white-space: nowrap !important;
-  letter-spacing: 0.03em !important;
-  display: inline-block !important;
-  visibility: visible !important;
-  line-height: 1.2 !important;
-}
-
-/* Remove any ::before on the myst-home-link (prevent duplicates) */
-nav.myst-top-nav-bar a.myst-home-link::before {
-  content: none !important;
-  display: none !important;
-}
-
-/* --- 2. Nav bar: dark background and sticky positioning --- */
-nav.myst-top-nav-bar {
-  background: linear-gradient(135deg, #0f172a 0%, #1a2744 100%) !important;
-  border-bottom: 1px solid #2d4a7a !important;
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 1000 !important;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35) !important;
-  padding: 0 1.5rem !important;
-  min-height: 60px !important;
-}
-
-/* --- 3. Nav link text colors on dark background --- */
-nav.myst-top-nav-bar a {
-  color: #e2e8f0 !important;
-  text-decoration: none !important;
-}
-
-nav.myst-top-nav-bar a:hover {
-  color: #ffffff !important;
-  text-decoration: none !important;
-}
-
-/* --- 4. Nav items row: force horizontal flex --- */
-nav.myst-top-nav-bar div.flex-grow {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  flex-wrap: nowrap !important;
-  gap: 0.25rem !important;
-}
-
-nav.myst-top-nav-bar .myst-top-nav-item {
-  display: inline-flex !important;
-  align-items: center !important;
-}
-
-nav.myst-top-nav-bar .myst-top-nav-item a {
-  padding: 0.35rem 0.75rem !important;
-  border-radius: 6px !important;
-  font-size: 0.875rem !important;
-  font-weight: 500 !important;
-  color: #cbd5e1 !important;
-  white-space: nowrap !important;
-  transition: background 0.15s, color 0.15s !important;
-  display: inline-flex !important;
-  align-items: center !important;
-}
-
-nav.myst-top-nav-bar .myst-top-nav-item a:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-  color: #ffffff !important;
-}
-
-/* --- 5. GitHub icon — white on dark background --- */
-nav.myst-top-nav-bar a[href="https://github.com/chicago-joe"]::before {
-  filter: brightness(0) invert(1) !important;
-}
-
-/* --- 6. Action buttons — properly styled on dark nav --- */
-/* Target by their actual Tailwind class (a.inline-block inside nav) */
-nav.myst-top-nav-bar a.inline-block {
-  border: 1px solid rgba(255, 255, 255, 0.22) !important;
-  border-radius: 8px !important;
-  padding: 0.4rem 1rem !important;
-  font-size: 0.8rem !important;
-  font-weight: 600 !important;
-  color: #e2e8f0 !important;
-  background: rgba(255, 255, 255, 0.08) !important;
-  transition: all 0.15s ease !important;
-  white-space: nowrap !important;
-  text-decoration: none !important;
-  letter-spacing: 0.01em !important;
-  margin: 0 2px !important;
-}
-
-nav.myst-top-nav-bar a.inline-block:hover {
-  background: rgba(255, 255, 255, 0.16) !important;
-  color: #ffffff !important;
-  border-color: rgba(255, 255, 255, 0.38) !important;
-  transform: translateY(-1px) !important;
-}
-
-/* PDF download buttons — blue gradient */
-nav.myst-top-nav-bar a.inline-block[href$=".pdf"] {
-  background: linear-gradient(135deg, #1a56db 0%, #1e3a8a 100%) !important;
-  color: #ffffff !important;
-  border-color: transparent !important;
-  box-shadow: 0 2px 10px rgba(26, 86, 219, 0.4) !important;
-}
-
-nav.myst-top-nav-bar a.inline-block[href$=".pdf"]:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%) !important;
-  box-shadow: 0 5px 18px rgba(26, 86, 219, 0.55) !important;
-  transform: translateY(-2px) !important;
-  color: #ffffff !important;
-}
-
-/* LinkedIn share button */
-nav.myst-top-nav-bar a.inline-block[href*="linkedin.com/shareArticle"] {
-  background: rgba(0, 119, 181, 0.25) !important;
-  border-color: rgba(0, 119, 181, 0.5) !important;
-  color: #93c5fd !important;
-}
-
-nav.myst-top-nav-bar a.inline-block[href*="linkedin.com/shareArticle"]:hover {
-  background: rgba(0, 119, 181, 0.45) !important;
-  color: #ffffff !important;
-}
-
-/* --- 7. Toggle theme button on dark nav --- */
-nav.myst-top-nav-bar button.myst-top-nav-menu-button,
-nav.myst-top-nav-bar button[class*="toggle"],
-nav.myst-top-nav-bar button[aria-label*="theme" i],
-nav.myst-top-nav-bar button[aria-label*="Toggle" i] {
-  color: #e2e8f0 !important;
-  border-radius: 6px !important;
-}
-
-nav.myst-top-nav-bar button:hover {
-  color: #ffffff !important;
-  background: rgba(255, 255, 255, 0.1) !important;
-}
-
-/* --- 8. TOC home link fix (remove branding text from sidebar) --- */
-nav[aria-label="Table of Contents"] a[href*="Iceberg-Order-Prediction"] {
-  font-size: inherit !important;
-  color: inherit !important;
-}
-
-nav[aria-label="Table of Contents"] a[href*="Iceberg-Order-Prediction"]::before,
-nav[aria-label="Table of Contents"] a[href*="Iceberg-Order-Prediction"]::after {
-  content: none !important;
-  display: none !important;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
 }
