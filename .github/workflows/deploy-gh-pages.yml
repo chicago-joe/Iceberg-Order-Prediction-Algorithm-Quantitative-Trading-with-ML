@@ -58,6 +58,8 @@ jobs:
         run: mkdir -p exports
 
       - name: Build PDF Assets (with execution)
+        env:
+          MYST_PDF_BUILD: "1"
         run: |
           myst build iceberg-prediction-whitepaper-v2.md --pdf || echo "Iceberg PDF build failed, continuing"
           myst build index.md --pdf || echo "Index PDF build failed, continuing"

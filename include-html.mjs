@@ -19,20 +19,25 @@ const includeHtmlDirective = {
     if (!filename) {
       return [{ type: 'paragraph', children: [{ type: 'text', value: 'Error: Filename required' }] }];
     }
-    
+
+    // Skip HTML component rendering during PDF/Typst builds to avoid Typst compilation errors
+    if (process.env.MYST_PDF_BUILD === '1') {
+      return [];
+    }
+
     try {
       let htmlContent = readFileSync(join(__dirname, '_components', `${filename}.html`), 'utf8');
-      
+
       // Add wrapper div for component styling and auto-sizing
       htmlContent = `<div class="component-wrapper" data-component="${filename}">
         ${htmlContent}
       </div>`;
-      
+
       return [{ type: 'html', value: htmlContent }];
     } catch (error) {
-      return [{ 
-        type: 'paragraph', 
-        children: [{ type: 'text', value: `Error loading HTML file: ${error.message}` }] 
+      return [{
+        type: 'paragraph',
+        children: [{ type: 'text', value: `Error loading HTML file: ${error.message}` }]
       }];
     }
   },
