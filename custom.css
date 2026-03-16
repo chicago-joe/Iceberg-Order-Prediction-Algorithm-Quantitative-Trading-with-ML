@@ -1,47 +1,90 @@
 /* ============================================================
    JOSEPH J. LOSS — ML RESEARCH SITE
-   Dark Academic Theme — MyST Book Theme
+   Adaptive Theme — MyST Book Theme
 
-   Strategy:
-   - scripts/dark-mode.js adds `dark` class to <html> at load
-     time, activating all Tailwind dark: variants built into
-     MyST's book-theme (nav, sidebar, buttons, etc.)
-   - CSS handles: body background, content colors, typography,
-     component sizing, and the few things Tailwind dark: misses
+   Architecture:
+   - Semantic CSS tokens defined in :root (light mode defaults)
+   - html.dark overrides tokens for dark mode
+   - MyST's built-in toggle (top-right sun/moon) switches the class
+   - No dark-mode.js needed — works cleanly with React hydration
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
 
 /* ============================================================
-   DESIGN TOKENS
+   DESIGN TOKENS — semantic, mode-aware
    ============================================================ */
 :root {
+  /* Color primitives */
   --navy-900: #0f172a;
   --navy-800: #1e293b;
   --navy-700: #334155;
   --navy-600: #475569;
+  --slate-500: #64748b;
   --slate-400: #94a3b8;
+  --slate-300: #cbd5e1;
   --slate-200: #e2e8f0;
   --slate-100: #f1f5f9;
+  --slate-50:  #f8fafc;
+  --blue-700:  #1d4ed8;
+  --blue-600:  #2563eb;
   --blue-500:  #3b82f6;
   --blue-400:  #60a5fa;
   --blue-300:  #93c5fd;
-  --font-body:    'IBM Plex Serif', Georgia, serif;
-  --font-ui:      'IBM Plex Sans', system-ui, sans-serif;
-  --font-mono:    'IBM Plex Mono', monospace;
+
+  /* Semantic tokens — LIGHT MODE defaults */
+  --bg:            #ffffff;
+  --bg-surface:    #f8fafc;
+  --bg-raised:     #f1f5f9;
+  --border:        #e2e8f0;
+  --border-strong: #cbd5e1;
+  --text:          #0f172a;
+  --text-body:     #1e293b;
+  --text-muted:    #64748b;
+  --text-faint:    #94a3b8;
+  --accent:        #2563eb;
+  --accent-hover:  #1d4ed8;
+  --accent-light:  #3b82f6;
+  --accent-dim:    #dbeafe;
+  --code-bg:       #f1f5f9;
+  --code-text:     #1e40af;
+
+  /* Fonts */
+  --font-body:  'IBM Plex Serif', Georgia, serif;
+  --font-ui:    'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono:  'IBM Plex Mono', monospace;
 }
 
 /* ============================================================
-   DARK BASE
+   DARK MODE TOKEN OVERRIDES
+   MyST book-theme adds class="dark" to <html> when toggled
    ============================================================ */
-html {
+html.dark {
   color-scheme: dark;
+  --bg:            #0f172a;
+  --bg-surface:    #1e293b;
+  --bg-raised:     #334155;
+  --border:        #334155;
+  --border-strong: #475569;
+  --text:          #f1f5f9;
+  --text-body:     #e2e8f0;
+  --text-muted:    #94a3b8;
+  --text-faint:    #475569;
+  --accent:        #60a5fa;
+  --accent-hover:  #93c5fd;
+  --accent-light:  #3b82f6;
+  --accent-dim:    rgba(59, 130, 246, 0.15);
+  --code-bg:       #1e293b;
+  --code-text:     #93c5fd;
 }
 
+/* ============================================================
+   BASE
+   ============================================================ */
 body {
   font-family: var(--font-body);
-  background-color: var(--navy-900);
-  color: var(--slate-200);
+  background-color: var(--bg);
+  color: var(--text-body);
   overflow-x: hidden;
 }
 
@@ -51,15 +94,18 @@ body {
 }
 
 /* ============================================================
-   NAV BAR — .myst-top-nav is the outer sticky wrapper
-   Tailwind dark:bg-stone-900/80 activates via .dark on html,
-   we just reinforce and refine it.
+   NAV BAR
    ============================================================ */
 .myst-top-nav {
-  background: var(--navy-900) !important;
+  background: var(--bg-surface) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  border-bottom: 1px solid var(--navy-700) !important;
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+html.dark .myst-top-nav {
+  background: var(--navy-900) !important;
   box-shadow: 0 1px 16px rgba(0, 0, 0, 0.5) !important;
 }
 
@@ -81,7 +127,7 @@ nav.myst-top-nav-bar a.myst-home-link::after {
   font-size: 0.85rem;
   font-weight: 600;
   font-family: var(--font-ui);
-  color: var(--slate-100);
+  color: var(--text);
   letter-spacing: 0.04em;
   white-space: nowrap;
   display: inline-block;
@@ -103,10 +149,10 @@ a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML"]::befo
 nav.myst-top-nav-bar a.inline-flex {
   font-family: var(--font-ui);
   font-size: 0.8rem;
-  color: var(--slate-400);
+  color: var(--text-muted);
   transition: color 0.15s;
 }
-nav.myst-top-nav-bar a.inline-flex:hover { color: var(--slate-100); }
+nav.myst-top-nav-bar a.inline-flex:hover { color: var(--text); }
 
 /* ACTION BUTTONS */
 nav.myst-top-nav-bar a.inline-block {
@@ -114,28 +160,35 @@ nav.myst-top-nav-bar a.inline-block {
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.03em;
-  border-color: var(--navy-700) !important;
-  color: var(--slate-400) !important;
+  border-color: var(--border) !important;
+  color: var(--text-muted) !important;
   background: transparent !important;
   transition: all 0.15s;
 }
 nav.myst-top-nav-bar a.inline-block:hover {
-  border-color: var(--blue-500) !important;
-  color: var(--blue-300) !important;
-  background: rgba(59, 130, 246, 0.1) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+  background: var(--accent-dim) !important;
 }
 nav.myst-top-nav-bar a.inline-block[href$=".pdf"] {
+  border-color: rgba(37, 99, 235, 0.4) !important;
+  color: var(--accent) !important;
+}
+html.dark nav.myst-top-nav-bar a.inline-block[href$=".pdf"] {
   border-color: rgba(96, 165, 250, 0.4) !important;
   color: var(--blue-300) !important;
 }
 nav.myst-top-nav-bar a.inline-block[href$=".pdf"]:hover {
-  background: rgba(59, 130, 246, 0.15) !important;
-  border-color: var(--blue-400) !important;
-  color: #ffffff !important;
+  background: var(--accent-dim) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent-hover) !important;
 }
 
-/* Dark mode toggle */
+/* Dark mode toggle icon */
 nav.myst-top-nav-bar button img {
+  filter: brightness(0.4);
+}
+html.dark nav.myst-top-nav-bar button img {
   filter: brightness(0) invert(1) opacity(0.6);
 }
 
@@ -150,15 +203,13 @@ nav[aria-label="Table of Contents"] a::after,
 /* ============================================================
    CONTENT — TEXT + TYPOGRAPHY
    ============================================================ */
-
-/* Main content text */
 .myst-content,
 .myst-content p,
 .myst-content li,
 .myst-content td,
 .myst-content th,
 .myst-content blockquote {
-  color: var(--slate-200);
+  color: var(--text-body);
 }
 
 /* Headings */
@@ -168,7 +219,7 @@ nav[aria-label="Table of Contents"] a::after,
 .myst-content h4 {
   font-family: var(--font-ui);
   font-weight: 600;
-  color: var(--slate-100);
+  color: var(--text);
 }
 .myst-content h1 { font-size: 2.2rem; margin-bottom: 1.75rem; }
 .myst-content h2 { font-size: 1.75rem; margin-top: 2.5rem; margin-bottom: 1.25rem; }
@@ -183,15 +234,17 @@ nav[aria-label="Table of Contents"] a::after,
 }
 
 /* Links */
-.myst-content a { color: var(--blue-400); }
-.myst-content a:hover { color: var(--blue-300); }
+.myst-content a { color: var(--accent); }
+.myst-content a:hover { color: var(--accent-hover); }
+html.dark .myst-content a { color: var(--blue-400); }
+html.dark .myst-content a:hover { color: var(--blue-300); }
 
 /* Keyword badges */
 .myst-content [class*="keyword"],
 .myst-content [class*="badge"] {
-  background: var(--navy-800);
-  color: var(--blue-300);
-  border-color: var(--navy-700);
+  background: var(--bg-raised);
+  color: var(--accent);
+  border-color: var(--border);
 }
 
 /* Abstract / blockquote box */
@@ -199,9 +252,9 @@ nav[aria-label="Table of Contents"] a::after,
 .myst-content [class*="abstract"],
 .myst-content [class*="admonition"],
 .myst-content [class*="callout"] {
-  background: var(--navy-800) !important;
-  border-color: var(--navy-700) !important;
-  color: var(--slate-200) !important;
+  background: var(--bg-surface) !important;
+  border-color: var(--border) !important;
+  color: var(--text-body) !important;
 }
 
 /* Code */
@@ -215,18 +268,18 @@ nav[aria-label="Table of Contents"] a::after,
 .myst-content li code {
   padding: 0.15rem 0.35rem;
   border-radius: 3px;
-  background: var(--navy-800);
-  color: var(--blue-300);
-  border: 1px solid var(--navy-700);
+  background: var(--code-bg);
+  color: var(--code-text);
+  border: 1px solid var(--border);
 }
 
 .myst-content pre {
   padding: 1rem;
   margin: 1.5rem 0;
   border-radius: 6px;
-  background: var(--navy-800) !important;
-  border: 1px solid var(--navy-700);
-  color: var(--slate-200);
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border);
+  color: var(--text-body);
   max-width: 100%;
   white-space: pre-wrap;
   word-break: break-word;
@@ -238,7 +291,7 @@ nav[aria-label="Table of Contents"] a::after,
    ============================================================ */
 [class*="frontmatter"],
 [class*="front-matter"] {
-  color: var(--slate-400);
+  color: var(--text-muted);
 }
 
 /* ============================================================
@@ -255,37 +308,54 @@ nav[aria-label="Table of Contents"] a::after,
 .myst-content figcaption {
   font-size: 0.875rem;
   font-family: var(--font-ui);
-  color: var(--slate-400);
+  color: var(--text-muted);
   margin-top: 0.75rem;
   line-height: 1.4;
 }
 
 /* ============================================================
-   TABLES
+   TABLES — readable in both light and dark modes
    ============================================================ */
 table {
   width: 100%;
   max-width: 100%;
-  table-layout: fixed;
+  table-layout: auto;
   overflow-x: auto;
   display: block;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   margin: 1.75rem 0;
   border-collapse: collapse;
+  border: 1px solid var(--border);
+  border-radius: 6px;
 }
+
 table th {
-  background: var(--navy-800) !important;
-  color: var(--slate-400) !important;
+  background: var(--bg-surface) !important;
+  color: var(--text-muted) !important;
   font-weight: 600;
   font-family: var(--font-ui);
-  padding: 0.75rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem;
   text-align: left;
-  border-bottom: 2px solid var(--navy-700) !important;
+  border-bottom: 2px solid var(--border-strong) !important;
 }
+
 table td {
-  padding: 0.75rem;
-  border-bottom: 1px solid var(--navy-700) !important;
-  color: var(--slate-200);
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--border) !important;
+  color: var(--text-body) !important;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+table tr:last-child td {
+  border-bottom: none !important;
+}
+
+table tr:hover td {
+  background: var(--bg-surface);
 }
 
 /* ============================================================
@@ -295,8 +365,8 @@ table td {
   font-family: var(--font-ui);
   font-size: 0.95rem;
 }
-.myst-toc a { color: var(--slate-400); text-decoration: none; }
-.myst-toc a:hover { color: var(--slate-100); }
+.myst-toc a { color: var(--text-muted); text-decoration: none; }
+.myst-toc a:hover { color: var(--text); }
 
 /* ============================================================
    FOOTER
@@ -305,22 +375,36 @@ table td {
 [class*="footer"] {
   font-family: var(--font-ui);
   font-size: 0.85rem;
-  color: var(--slate-400) !important;
-  border-top-color: var(--navy-700) !important;
+  color: var(--text-muted) !important;
+  border-top-color: var(--border) !important;
 }
 
 /* ============================================================
-   HTML COMPONENTS (FeatureEngineeringVisual, etc.)
+   HTML COMPONENTS (FeatureEngineeringVisual, ModelResults, etc.)
+   These use inline React/HTML styles with hardcoded light colors.
+   We wrap them with a light-mode surface so they always render
+   on a white background regardless of site theme.
+   In dark mode we add a subtle border to frame them.
    ============================================================ */
 .component-container,
 .component-wrapper {
   width: 100%;
   max-width: 100%;
   margin: 2rem 0;
-  overflow-x: hidden;
+  overflow-x: auto;
   overflow-y: visible;
   box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid var(--border);
 }
+
+html.dark .component-container,
+html.dark .component-wrapper {
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+}
+
 .full-width .component-container,
 .full-width .component-wrapper,
 .full-width div[class*="html"] {
@@ -330,6 +414,7 @@ table td {
   font-size: 0.875rem;
   line-height: 1.4;
 }
+
 .myst-content div[class*="html"] p,
 .myst-content div[class*="html"] li,
 .myst-content div[class*="html"] div,
@@ -337,6 +422,7 @@ table td {
   font-size: 0.875rem;
   line-height: 1.4;
 }
+
 .myst-content div[class*="html"] h2[style] { font-size: 1.6rem; margin-bottom: 1rem; }
 .myst-content div[class*="html"] h3[style] { font-size: 1.3rem; }
 .myst-content div[class*="html"] h4       { font-size: 1.1rem; margin-top: 1.25rem; margin-bottom: 0.75rem; }
@@ -390,12 +476,17 @@ table td {
   box-sizing: border-box;
   overflow-x: hidden;
   padding: 0;
-  background-color: var(--navy-800);
+  background-color: var(--bg-surface);
   border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border);
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+html.dark .full-width {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
 .component-wrapper { display: block; padding: 0; }
 .myst-content div[class*="html"] {
   width: 100%; max-width: 100%; overflow: visible; box-sizing: border-box; font-size: 0.875rem;
@@ -408,13 +499,35 @@ table td {
 .myst-content iframe { width: 100%; min-width: 100%; border: none; overflow: hidden; }
 .component-wrapper > div { width: 100%; max-width: 100%; overflow-x: hidden; box-sizing: border-box; }
 
-/* Component tables */
+/* Component tables — keep using hardcoded light styles since components are light-mode */
 .component-wrapper table,
 .myst-content div[class*="html"] table { width: 100%; max-width: 100%; font-size: 0.8rem; margin: 1rem 0; }
 .myst-content div[class*="html"] table th,
-.component-wrapper table th { padding: 0.5rem; font-weight: 600; background-color: var(--navy-800); text-align: left; }
+.component-wrapper table th { padding: 0.5rem; font-weight: 600; background-color: #f1f5f9; color: #334155; text-align: left; border-bottom: 2px solid #cbd5e1; }
 .myst-content div[class*="html"] table td,
-.component-wrapper table td { padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--navy-700); }
+.component-wrapper table td { padding: 0.4rem 0.5rem; border-bottom: 1px solid #e2e8f0; color: #1e293b; }
+
+/* ============================================================
+   PLOTLY CHARTS — ensure readable in both modes
+   Plotly renders with white bg by default; give them a framed
+   surface so they look intentional on the page.
+   ============================================================ */
+.myst-content .plotly-graph-div,
+.myst-content [class*="plotly"],
+.myst-content .js-plotly-plot {
+  background: #ffffff !important;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 8px;
+  margin: 1.5rem 0;
+}
+
+html.dark .myst-content .plotly-graph-div,
+html.dark .myst-content [class*="plotly"],
+html.dark .myst-content .js-plotly-plot {
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+}
 
 /* ============================================================
    LAYOUT
