@@ -60,6 +60,7 @@ site:
     numbered_headers: false
     folders: false
     scripts:
+      - scripts/theme-default.js
       - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
       - https://cdn.plot.ly/plotly-latest.min.js
       - scripts/html-autosize.js
