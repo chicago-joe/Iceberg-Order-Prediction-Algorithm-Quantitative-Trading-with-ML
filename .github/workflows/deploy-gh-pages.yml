@@ -1,6 +1,9 @@
 name: MyST GitHub Pages Deploy
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 env:
