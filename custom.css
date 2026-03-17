@@ -262,16 +262,6 @@ html.dark nav.myst-top-nav-bar a[href*="github.com/chicago-joe"]::before {
 }
 
 /* ============================================================
-   THEME TOGGLE — push to far right of nav bar
-   Parent is a flex container; order:999 sends it last
-   ============================================================ */
-button.myst-theme-button {
-  order: 999;
-  margin-left: 8px !important;
-  margin-right: 0 !important;
-}
-
-/* ============================================================
    CONTENT — TEXT + TYPOGRAPHY
    ============================================================ */
 .myst-content,
