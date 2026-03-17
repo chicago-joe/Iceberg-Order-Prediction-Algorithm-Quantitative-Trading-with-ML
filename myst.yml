@@ -7,21 +7,12 @@ project:
   authors:
     - name: Joseph Loss
       corresponding: true
-      email: contact@mail.chicagojoe.dev
+      email: noreply@chicagojoe.dev
       url: https://josephjloss.com
       github: chicago-joe
       linkedin: https://linkedin.com/in/josephjl
       note: MS Financial Engineering Alumni
   github: https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/
-  jupyter:
-    binder:
-      repo: chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML
-      ref: main
-      provider: github
-    server:
-      url: "http://localhost:9090"
-      token: "1234"
-    kernelName: 'python3'
   plugins:
     - type: javascript
       path: include-html.mjs
@@ -46,19 +37,17 @@ site:
   template: book-theme
   title: "Joseph Loss - ML Research"
   nav:
-    - title: "My Portfolio: chicagojoe.dev"
+    - title: "chicagojoe.dev"
       url: https://chicagojoe.dev
     - title: "Connect on LinkedIn"
       url: https://linkedin.com/in/josephjl
+      icon: linkedin
     - title: "chicago-joe"
       url: https://github.com/chicago-joe
+      icon: github
   actions:
     - title: Share on LinkedIn
       url: https://www.linkedin.com/shareArticle?mini=true&url=https://chicago-joe.github.io/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML&title=Machine%20Learning%20Research%20-%20Joseph%20Loss
-    - title: "Download Iceberg Paper"
-      url: exports/JLOSS-iceberg-prediction-whitepaper.pdf
-    - title: "Download HPO Study"
-      url: exports/JLOSS-hyperparameter-tuning-whitepaper.pdf
   options:
     style: ./custom.css
     show_source: false
