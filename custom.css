@@ -184,27 +184,20 @@ nav.myst-top-nav-bar a.inline-block[href$=".pdf"]:hover {
   color: var(--accent-hover) !important;
 }
 
-/* Move theme toggle to far left of nav bar */
-nav.myst-top-nav-bar {
-  position: relative;
-}
-
+/* Theme toggle — far right, smaller size */
 button.myst-theme-button {
-  position: absolute !important;
-  left: 0.75rem !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  margin: 0 !important;
-  z-index: 2 !important;
+  order: 999;
+  margin-left: 8px !important;
+  margin-right: 0 !important;
+  width: 1.6rem !important;
+  height: 1.6rem !important;
+  min-width: 1.6rem !important;
+  padding: 0 !important;
 }
 
-/* Shift branding right to clear the toggle (40px button + 12px left + 8px gap) */
-nav.myst-top-nav-bar a.myst-home-link {
-  margin-left: 3.5rem !important;
-}
-
-/* Dark mode toggle icon tinting */
 button.myst-theme-button svg {
+  width: 0.85rem !important;
+  height: 0.85rem !important;
   opacity: 0.7;
 }
 html.dark button.myst-theme-button svg {
