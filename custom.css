@@ -94,14 +94,14 @@ body {
 }
 
 /* ============================================================
-   NAV BAR
+   NAV BAR — always dark background in both light and dark mode
    ============================================================ */
 .myst-top-nav {
-  background: var(--bg-surface) !important;
+  background: var(--navy-900) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  border-bottom: 1px solid var(--border) !important;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  box-shadow: 0 1px 16px rgba(0, 0, 0, 0.4) !important;
 }
 
 html.dark .myst-top-nav {
@@ -111,6 +111,7 @@ html.dark .myst-top-nav {
 
 nav.myst-top-nav-bar {
   background: transparent !important;
+  position: relative !important;
 }
 
 /* HOME / BRANDING */
@@ -127,7 +128,7 @@ nav.myst-top-nav-bar a.myst-home-link::after {
   font-size: 0.85rem;
   font-weight: 600;
   font-family: var(--font-ui);
-  color: var(--text);
+  color: #e2e8f0;
   letter-spacing: 0.04em;
   white-space: nowrap;
   display: inline-block;
@@ -145,43 +146,43 @@ a[href="/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML"]::befo
   display: none !important;
 }
 
-/* NAV LINKS */
+/* NAV LINKS — always light text since nav is always dark */
 nav.myst-top-nav-bar a.inline-flex {
   font-family: var(--font-ui);
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: #94a3b8;
   transition: color 0.15s;
 }
-nav.myst-top-nav-bar a.inline-flex:hover { color: var(--text); }
+nav.myst-top-nav-bar a.inline-flex:hover { color: #e2e8f0; }
 
-/* ACTION BUTTONS */
+/* ACTION BUTTONS — light-mode friendly on dark nav */
 nav.myst-top-nav-bar a.inline-block {
   font-family: var(--font-ui);
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.03em;
-  border-color: var(--border) !important;
-  color: var(--text-muted) !important;
+  border-color: rgba(255,255,255,0.2) !important;
+  color: #94a3b8 !important;
   background: transparent !important;
   transition: all 0.15s;
 }
 nav.myst-top-nav-bar a.inline-block:hover {
-  border-color: var(--accent) !important;
-  color: var(--accent) !important;
-  background: var(--accent-dim) !important;
+  border-color: #60a5fa !important;
+  color: #60a5fa !important;
+  background: rgba(59,130,246,0.1) !important;
 }
 nav.myst-top-nav-bar a.inline-block[href$=".pdf"] {
-  border-color: rgba(37, 99, 235, 0.4) !important;
-  color: var(--accent) !important;
+  border-color: rgba(96, 165, 250, 0.4) !important;
+  color: #93c5fd !important;
 }
 html.dark nav.myst-top-nav-bar a.inline-block[href$=".pdf"] {
   border-color: rgba(96, 165, 250, 0.4) !important;
   color: var(--blue-300) !important;
 }
 nav.myst-top-nav-bar a.inline-block[href$=".pdf"]:hover {
-  background: var(--accent-dim) !important;
-  border-color: var(--accent) !important;
-  color: var(--accent-hover) !important;
+  background: rgba(59,130,246,0.1) !important;
+  border-color: #60a5fa !important;
+  color: #93c5fd !important;
 }
 
 /* Theme toggle — far right, smaller size */
@@ -210,6 +211,29 @@ nav[aria-label="Table of Contents"] a::after,
 .myst-toc a::before,
 .myst-toc a::after {
   content: none;
+}
+
+/* ============================================================
+   NAV — CENTER the chicagojoe.dev + icons group
+   The nav links live in a div.flex-grow.hidden.lg:block container
+   inside the right-side flex group. We position it absolutely
+   centered relative to the nav bar.
+   ============================================================ */
+nav.myst-top-nav-bar > div:nth-child(2) {
+  /* The right-side flex group — needs relative positioning
+     so the inner centered group can be absolute inside it */
+  position: static !important;
+}
+
+nav.myst-top-nav-bar > div:nth-child(2) > div.flex-grow {
+  /* The container holding [chicagojoe.dev, LinkedIn, GitHub] */
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  /* Don't flex-grow since we're taking it out of flow */
+  flex-grow: 0 !important;
+  /* Ensure it doesn't interfere with pointer events on siblings */
+  pointer-events: auto;
 }
 
 /* ============================================================
@@ -248,9 +272,9 @@ nav.myst-top-nav-bar a[href*="linkedin.com/in/"]::before {
 nav.myst-top-nav-bar a[href*="github.com/chicago-joe"]::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23475569'%3E%3Cpath d='M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z'/%3E%3C/svg%3E");
 }
-/* Dark mode — invert dark icons to appear light */
-html.dark nav.myst-top-nav-bar a[href*="linkedin.com/in/"]::before,
-html.dark nav.myst-top-nav-bar a[href*="github.com/chicago-joe"]::before {
+/* Always use light icon color since nav is always dark */
+nav.myst-top-nav-bar a[href*="linkedin.com/in/"]::before,
+nav.myst-top-nav-bar a[href*="github.com/chicago-joe"]::before {
   filter: brightness(0) invert(1) opacity(0.75);
 }
 
