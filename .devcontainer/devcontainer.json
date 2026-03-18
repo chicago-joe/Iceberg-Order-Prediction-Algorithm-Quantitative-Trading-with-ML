@@ -1,0 +1,82 @@
+{
+  "name": "Iceberg Order Prediction – Quantitative Trading with ML",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+
+  // ── Lifecycle scripts ──────────────────────────────────────────────────
+  // onCreateCommand  → runs during PREBUILD (cached in snapshot)
+  // postCreateCommand → runs after each codespace is created
+  "onCreateCommand": "bash .devcontainer/on-create.sh",
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+
+  // ── Ports ──────────────────────────────────────────────────────────────
+  "forwardPorts": [8888, 8080],
+  "portsAttributes": {
+    "8888": {
+      "label": "JupyterLab",
+      "onAutoForward": "openBrowser"
+    },
+    "8080": {
+      "label": "Web server",
+      "onAutoForward": "notify"
+    }
+  },
+
+  // ── VS Code customisations ─────────────────────────────────────────────
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-toolsai.jupyter-keymap",
+        "ms-toolsai.jupyter-renderers",
+        "ms-toolsai.vscode-jupyter-cell-tags",
+        "ms-toolsai.vscode-jupyter-slideshow",
+        "charliermarsh.ruff",
+        "ms-python.black-formatter",
+        "ms-python.isort",
+        "tamasfe.even-better-toml",
+        "yzhang.markdown-all-in-one",
+        "executablebookproject.myst-highlight",
+        "redhat.vscode-yaml",
+        "eamodio.gitlens",
+        "github.vscode-pull-request-github",
+        "github.copilot",
+        "github.copilot-chat",
+        "njpwerner.autodocstring",
+        "mechatroner.rainbow-csv",
+        "GrapeCity.gc-excelviewer"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.terminal.activateEnvironment": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.black-formatter"
+        },
+        "jupyter.notebookFileRoot": "${workspaceFolder}",
+        "jupyter.kernels.filter": [],
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": { "path": "/bin/zsh" }
+        }
+      }
+    }
+  },
+
+  // ── Container environment variables ───────────────────────────────────
+  "containerEnv": {
+    "PYTHONUNBUFFERED": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "UV_VENV": ".venv",
+    "UV_USE_PYPACKAGES": "1",
+    "PUPPETEER_EXECUTABLE_PATH": "/usr/bin/chromium"
+  },
+
+  // ── Run as non-root ────────────────────────────────────────────────────
+  "remoteUser": "vscode"
+}
