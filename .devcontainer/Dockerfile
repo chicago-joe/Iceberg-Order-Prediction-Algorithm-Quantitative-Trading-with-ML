@@ -1,11 +1,16 @@
-FROM mcr.microsoft.com/devcontainers/python:3.12-bullseye
+FROM mcr.microsoft.com/devcontainers/python:3.12-bookworm
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=OFF \
     PIP_DEFAULT_TIMEOUT=100 \
     MSYS_NO_PATHCONV=1 \
-    PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
+    PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium" \
+    DEBIAN_FRONTEND=noninteractive
+
+# All system-level installation must run as root.
+# The devcontainer base image ends with USER vscode, so we switch back explicitly.
+USER root
 
 # Install system dependencies (from .binder/apt.txt + Dockerfile extras)
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -14,7 +19,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-utils \
     bat \
     build-essential \
-    cargo \
     cmake \
     curl \
     fzf \
@@ -44,7 +48,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     texlive-fonts-recommended \
     texlive-plain-generic \
     texlive-xetex \
-    tldr \
     webp \
     wkhtmltopdf \
     xclip \
@@ -53,27 +56,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && ln -sf /usr/bin/batcat /usr/local/bin/bat \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Rust (latest stable) and make binaries available system-wide
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
-    export PATH="$HOME/.cargo/bin:$PATH" && \
-    . "$HOME/.cargo/env" && \
-    cargo install --locked gitui eza && \
-    cp -a "$HOME/.cargo/bin/"* /usr/local/bin/ && \
+# Install Rust (latest stable) and commonly-used CLI tools
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path && \
+    /root/.cargo/bin/cargo install --locked gitui eza tealdeer && \
+    cp -a /root/.cargo/bin/* /usr/local/bin/ && \
     chmod 755 /usr/local/bin/cargo
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 # Install uv and uvx
-RUN curl -fsSL https://astral.sh/uv/install.sh | sh && \
-    mv /root/.local/bin/uv /usr/local/bin/uv && \
-    mv /root/.local/bin/uvx /usr/local/bin/uvx && \
-    chmod 755 /usr/local/bin/uv /usr/local/bin/uvx
+RUN curl -fsSL https://astral.sh/uv/install.sh | UV_INSTALL_DIR=/usr/local/bin sh
 
-# Install Typst
-RUN curl -fsSL https://typst.community/typst-install/install.sh | sh && \
-    mkdir -p /usr/local/typst/bin && \
-    cp /root/.typst/bin/typst /usr/local/typst/bin/ && \
-    chmod -R 755 /usr/local/typst
-ENV PATH="/usr/local/typst/bin:${PATH}"
+# Install Typst via the official installer
+RUN curl -fsSL https://typst.community/typst-install/install.sh | TYPST_INSTALL_DIR=/usr/local/bin sh || \
+    ( curl -fsSL https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz \
+      | tar -xJf - --strip-components=1 -C /usr/local/bin typst-x86_64-unknown-linux-musl/typst \
+      && chmod 755 /usr/local/bin/typst )
 
 # Install Oh My Zsh + plugins for vscode user
 USER vscode

@@ -51,7 +51,7 @@
         "GrapeCity.gc-excelviewer"
       ],
       "settings": {
-        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
         "python.terminal.activateEnvironment": true,
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "ms-python.black-formatter",
