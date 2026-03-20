@@ -18,7 +18,20 @@ source .venv/bin/activate
 
 # ── Python dependencies ────────────────────────────────────────────────────
 echo "==> [on-create] Installing Python dependencies"
-uv pip install --no-cache-dir -r .binder/requirements.txt
+# Try bulk install first; fall back to per-package so one bad name doesn't
+# abort the entire install (e.g. lsp/json-lsp/yaml-lsp may not exist on PyPI).
+if ! uv pip install --no-cache-dir -r .binder/requirements.txt; then
+    echo "WARNING: bulk install failed – retrying package by package"
+    failed=()
+    while IFS= read -r pkg; do
+        [[ -z "$pkg" || "$pkg" =~ ^# ]] && continue
+        uv pip install --no-cache-dir "$pkg" || failed+=("$pkg")
+    done < .binder/requirements.txt
+    if [ ${#failed[@]} -gt 0 ]; then
+        echo "WARNING: the following packages could not be installed:"
+        printf '  - %s\n' "${failed[@]}"
+    fi
+fi
 
 # Register the venv kernel so JupyterLab can find it
 python -m ipykernel install --user --name iceberg-ml --display-name "Python 3 (Iceberg ML)"
