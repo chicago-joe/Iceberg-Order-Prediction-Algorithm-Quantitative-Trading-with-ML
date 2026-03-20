@@ -1,7 +1,7 @@
 # 📊 Machine Learning for Quantitative Trading: Iceberg Order Prediction
 
 [![View Live Site](https://img.shields.io/badge/Live%20Site-Visit-blue)](https://chicago-joe.github.io/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/) 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/main)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML)
 [![GitHub Stars](https://img.shields.io/github/stars/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML?style=social)](https://github.com/chicago-joe/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/stargazers)
 <!-- 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
@@ -55,7 +55,7 @@ Detailed optimization results for various algorithms:
 
 ## 🚀 Getting Started
 
-- Use the Binder links above to explore the notebooks interactively without local setup
+- Click **Open in GitHub Codespaces** above to explore the notebooks interactively without local setup — the environment comes pre-built with all dependencies installed
 - Visit the [full documentation site](https://chicago-joe.github.io/Iceberg-Order-Prediction-Algorithm-Quantitative-Trading-with-ML/) for comprehensive details
 
 ## 📈 Trading Implications
