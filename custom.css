@@ -111,7 +111,6 @@ html.dark .myst-top-nav {
 
 nav.myst-top-nav-bar {
   background: transparent !important;
-  position: relative !important;
 }
 
 /* HOME / BRANDING */
@@ -215,25 +214,16 @@ nav[aria-label="Table of Contents"] a::after,
 
 /* ============================================================
    NAV — CENTER the chicagojoe.dev + icons group
-   The nav links live in a div.flex-grow.hidden.lg:block container
-   inside the right-side flex group. We position it absolutely
-   centered relative to the nav bar.
+   flex-grow: 1 expands the links container to fill remaining
+   space, centering its contents and naturally pushing the
+   action buttons to the far right.
    ============================================================ */
-nav.myst-top-nav-bar > div:nth-child(2) {
-  /* The right-side flex group — needs relative positioning
-     so the inner centered group can be absolute inside it */
-  position: static !important;
-}
-
 nav.myst-top-nav-bar > div:nth-child(2) > div.flex-grow {
-  /* The container holding [chicagojoe.dev, LinkedIn, GitHub] */
-  position: absolute !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  /* Don't flex-grow since we're taking it out of flow */
-  flex-grow: 0 !important;
-  /* Ensure it doesn't interfere with pointer events on siblings */
-  pointer-events: auto;
+  flex-grow: 1 !important;
+  position: static !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 /* ============================================================
